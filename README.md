@@ -1,6 +1,6 @@
 # CLaMa - Class Manager
 
-## Requirements (in Romanian)
+## Cerințe
 >Se dorește realizarea unui utilitar pentru managementul unei grupe de studenți. Soluția Web trebuie să permită minimal:
 
 >Posibilitatea de a genera un cod ce va fi utilizat pentru a face prezența (cod ce va expira după o perioada de S secunde).
@@ -10,7 +10,7 @@
 >Profesorii vor avea posibilitatea de generare a unui catalog ce poate fi exportat în oricare dintre formatele CSV, HTML, PDF.
 >Aplicația trebuie să poată fi folosită simultan la diferite materii și în ani diferiți. Lista studenților și profesorilor se va importa/exporta (d)in format XML.
 
-## Maintainers
+## Echipa
 - Constantinescu George-Gabriel ([@iceeye7gabi](https://github.com/iceeye7gabi))
 - Bogatu Daniel-Marian ([@Leggacys](https://github.com/Leggacys))
 - Lupu Cezar-Justinian ([@cezaruss](https://github.com/cezaruss))
