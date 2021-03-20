@@ -1,0 +1,10 @@
+neaparat >>>>>>>>>>>>>>>>>>>>>>>>git pull origin main 
+verific ca sunt pe branchul meu: git checkout Cezarus
+-pentru push:
+				 git add .
+				 git commit -m"Am modificat fisierul x"
+				 git push
+
+- intru pe git pe web ca sa fac pull request
+
+ 
