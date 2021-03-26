@@ -1,0 +1,42 @@
+body {
+    background: linear-gradient(90deg, rgba(88,24,69,1) 0%, rgba(144,12,63,1) 51%, rgba(199,0,57,1) 100%, rgba(87,0,63,1) 100%);
+    background-size: cover;
+    font-family: 'Times New Roman', Times, serif;
+    color: white; /* this is for writting*/
+}
+
+ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none; /*no bullets*/
+}
+
+ul li {
+    float: left;
+    width: 200px;
+    height: 40px;
+    background-color: black;
+    opacity: 0.7;
+    line-height: 40px; /*set the distance between lines of text*/
+    text-align: center; /*sets the horizontal alignment of a block element*/
+    font-size: 20px;
+}
+
+ul li a{
+    text-decoration: none;
+    color: white;
+    display: block; /*sets whether an element is treated as a block*/
+}
+
+ul li a:hover{
+    background-color: green; /*cand cu sageata deasupra*/   
+}
+
+ul li ul li{
+    display: none; /* imi ascunde "subtipurile" */
+}
+
+ul li:hover ul li {
+    display: block; /*imi afiseaza subtipurile cand sunt cu mouse-ul pe el*/
+}
+
