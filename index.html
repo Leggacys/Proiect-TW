@@ -7,7 +7,16 @@
     <link rel="shortcut icon" type="image/svg" href="CLaMa.svg">
   </head>
   <body>
-
+     <div class="loading">
+         <div class="obj"></div>
+           <div class="obj"></div>
+             <div class="obj"></div>
+               <div class="obj"></div>
+                 <div class="obj"></div>
+                   <div class="obj"></div>
+                     <div class="obj"></div>
+                       <div class="obj"></div>
+     </div>
   <form action="DropDownMenu.html" class="login-form">
     <h1>Login</h1>
     <div class="txtb">
@@ -25,7 +34,12 @@
       <br>
       <a href="register.html">Sign Up!</a>
     </div>
-
+ <script>
+  window.addEventListener('load',function(){
+    const loader =document.querySelector(".loading");
+    loader.className+=" hidden";
+  })
+ </script>
 </form>
   <script src="scriptLogin.js"></script>
   </body>
