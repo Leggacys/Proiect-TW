@@ -1,0 +1,50 @@
+Loading
+	-ca sa arate bine ::: design
+
+Register
+	-ca sa inseram mai multe conturi in baza de date
+	Daca nu se respecta conditiile de la register -> pop cu eroare
+	incalcare conditii register:
+		nume utilizator: daca n-ai introdus
+				daca exista deja numele
+		parola: daca n-ai introdus
+			daca nu e aceeasi cu "confirma parola"
+		email: daca nu are @
+		       daca nu are extensie
+		       daca n-ai introdus
+		parola 2: daca n-ai introdus
+			  daca nu e aceeasi cu parola veche
+
+Login 
+	-sa ne logam cu un cont existent in baza de date
+	incalcare conditii login:
+			nu se gaseste contul in baza de date
+			parola nu coincide cu username-ul
+			parola nu e scrisa
+			username gresit-> recomanda "register"
+			
+
+Menu
+	-permite vizualizarea de functionaliti pentru  aplicatia de e-learning
+	-va aparea pe toate paginile, dupa ce ne-am logat, in partea stanga a ecranului
+	-functionalitatile afisate vor fi:
+				-GENERAL
+					alegere curs
+					alege an
+					alege clasa
+					importa/exporta lista de studenti/profesori in format XML
+					
+					
+				-PROFESOR
+					generare de cod - - codul expira dupa un timp dat de profesor
+					creare metoda de notare pentru un anumit curs(media)
+					asignare note studenti ( in aceasta pagina va fi lista de studenti, cele 3-4 note si un buton pentru calcularea mediei - cand va fi apasat, notele vor disparea si va fi afisat mesajul (ex: 4,35 respins ; 5,22 promovat) )		
+					accepta student in grupa
+					descarca catalog in format CSV, HTML si PDF
+					
+				-ELEVI
+					incarcarea temei - - ce va retine cursul la care a fost incarcata tema
+							 - - vezi daca s-a incarcat tema pe site
+							 - - vezi nota
+								
+	
