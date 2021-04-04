@@ -40,10 +40,13 @@
                                     <a href="#login"><span>4.2 </span>Componenta de login </a>
                                 </li>
                                 <li>
-                                    <a href="#meniu"><span>4.3 </span>Meniul </a>
+                                    <a href="#register"><span>4.3 </span>Componenta de înregistrare </a>
                                 </li>
                                 <li>
-                                    <a href="#clasa"><span>4.4 </span>Clasa</a>
+                                    <a href="#meniu"><span>4.4 </span>Meniul </a>
+                                </li>
+                                <li>
+                                    <a href="#clasa"><span>4.5 </span>Clasa/Cursul</a>
                                 </li>
                             </ol>
                     </li>
@@ -137,11 +140,37 @@
                 <p>
                     În această parte a documentului HTML vom prezenta funcționalitățile actuale ale aplicației și vom explica rolul și metoda de implementare pentru fiecare element în parte. 
                 </p>
-                <section typeof="sa:MaterialsAndMethods" id="loading" role="doc-chapter">
-                    <h3><span>4.1 </span>Loading screen</h3>
-                    <p>
-                    </p>
-                </section>
+                    <section typeof="sa:MaterialsAndMethods" id="meniu" role="doc-chapter">
+                        <h3><span>4.4 </span>Meniul</h3>
+                        <p>
+                            Ne dorim ca meniul aplicației web să apară întotdeauna în partea din stânga a ecranului, astfel încât să asigurăm faptul că în cazul unor ecrane mai mici, precum cele ale telefoanelor, aplicația va putea fi în continuare folosită. 
+                            Meniul este una dintre componentele de bază ale aplicației web întrucât el specifică toate acțiunile pe care administratorul/ profesorul/ elevul le poate întreprinde prin utilizarea aplicației noastre. Partea de front-end pentru meniu a fost implementată în <a href="#">HTML</a> și <a href="#">CSS</a>. 
+                            (Acesta este cel de-al doilea tip de meniu. Primul prototip de meniu a fost un dropdown menu și se găsește <a href="DropDownMenu.html">aici</a>.)
+                        </p>
+                    </section>
+
+                    <section typeof="sa:MaterialsAndMethods" id="clasa" role="doc-chapter">   
+                        <h3><span>4.5 </span>Clasa/Cursul</h3>
+                        <p>
+                            Adminul, profesorul și elevul vor putea accesa o anumită clasă/curs pentru a desfășura activitățile educaționale. 
+                        </p>
+                    </section>
             </section>
+
+            <section typeof="sa:ReferenceList" id="referinţe" role="doc-bibliography">
+                <h2><span>5. </span>Referinţe</h2>
+                <ol>
+                    <li property="schema:citation" role="doc-biblioentry" typeof="schema:ScholarlyArticle"  id="Scholarly-html"
+                    resource="https://w3c.github.io/scholarly-html/">
+                        <cite property="schema:name">
+                            <a href="https://w3c.github.io/scholarly-html/">Scholarly HTML</a>
+                        </cite>,
+                        <span property="schema:author" typeof="schema:Person">
+                            <span property="schema:name">Tzviya Siegman (Wiley)</span>&amp;
+                            <span property="schema:name">Robin Berjon</span>
+                        </span>
+                    </li>
+                </ol>
+            </section>     
     </body>
 </html>
