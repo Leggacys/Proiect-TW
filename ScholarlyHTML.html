@@ -56,7 +56,7 @@
                         </a>
                     </li>
                 </ol>
-                
+
                 <dl>
                     <dt>Autori</dt>
                     <dd>
@@ -68,7 +68,7 @@
                                 </a>
                                 <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
                                   <a property="schema:email" href="mailto:bogatu.daniel21@yahoo.com" title="send mail">Contact me! ☺</a>
-                                </sup>   
+                                </sup>
                               </li>
                               <li property="schema:author" typeof="sa:ContributorRole">
                                 <a property="schema:author" href="https://github.com/iceeye7gabi" typeof="schema:Person">
@@ -77,7 +77,7 @@
                                 </a>
                                 <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
                                   <a property="schema:email" href="mailto:iceeye7gabi@gmail.com" title="send mail">Contact me! ☺</a>
-                                </sup>   
+                                </sup>
                               </li>
                               <li property="schema:author" typeof="sa:ContributorRole">
                                 <a property="schema:author" href="https://github.com/cezaruss" typeof="schema:Person">
@@ -86,7 +86,7 @@
                                 </a>
                                 <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
                                   <a property="schema:email" href="mailto:cezarlupu2012@gmail.com" title="send mail">Contact me! ☺</a>
-                                </sup>   
+                                </sup>
                               </li>
                             </ol>
                     </dd>
@@ -111,23 +111,23 @@
                 <h2><span>2. </span>Introducere</h2>
                 <p>
                     Class Manager este proiectul nostru la materia Tehnologii Web. Acest utilitar pentru managementul grupelor de studenți va oferi următoarele funcționalități:
-                </p>    
+                </p>
                     <ul>
                         <li>Posibilitatea de a genera un cod ce va fi utilizat
-                        pentru a face prezența (cod ce va expira după o perioada de S secunde). 
+                        pentru a face prezența (cod ce va expira după o perioada de S secunde).
                         </li>
-                        <li>Posibilitatea de a pune un numar de note (același pentru toți studenții) și de a 
-                        folosi o formulă matematică ce utilizează operatori de bază (minimal: +, -, *, /, round, floor, ceil) 
-                        pentru a calcula o notă finală.</li> 
-                        <li>Studenții vor avea posibilitatea de încarcare a unor documente ce trebuie să fie 
+                        <li>Posibilitatea de a pune un numar de note (același pentru toți studenții) și de a
+                        folosi o formulă matematică ce utilizează operatori de bază (minimal: +, -, *, /, round, floor, ceil)
+                        pentru a calcula o notă finală.</li>
+                        <li>Studenții vor avea posibilitatea de încarcare a unor documente ce trebuie să fie
                         notate de către profesor și de a-și vedea notele propuse de acesta.</li>
-                        <li>Profesorii pot accepta studenții într-o anumita grupă sau pot revoca acest drept, 
+                        <li>Profesorii pot accepta studenții într-o anumita grupă sau pot revoca acest drept,
                         pot pune note asociate diverselor teme sau pentru ascultari.</li>
-                        <li>Profesorii vor avea posibilitatea de generare a unui catalog ce poate fi exportat 
+                        <li>Profesorii vor avea posibilitatea de generare a unui catalog ce poate fi exportat
                         în oricare dintre formatele CSV, HTML, PDF.</li>
-                        <li>Aplicația trebuie să poată fi folosită simultan la diferite materii și în ani diferiți. 
+                        <li>Aplicația trebuie să poată fi folosită simultan la diferite materii și în ani diferiți.
                             Lista studenților și profesorilor se va importa/exporta (d)in format XML.</li>
-                    </ul> 
+                    </ul>
             </section>
             <section typeof="sa:Motivation" id="motivatie" role="doc-prologue">
                 <h2><span>3. </span>Motivație</h2>
@@ -138,34 +138,41 @@
             <section typeof="sa:MaterialsAndMethods" id="functionalitati" role="doc-chapter">
                 <h2><span>4. </span>Funcționalitățile aplicației</h2>
                 <p>
-                    În această parte a documentului HTML vom prezenta funcționalitățile actuale ale aplicației și vom explica rolul și metoda de implementare pentru fiecare element în parte. 
+                    În această parte a documentului HTML vom prezenta funcționalitățile actuale ale aplicației și vom explica rolul și metoda de implementare pentru fiecare element în parte.
                 </p>
+                <section typeof="sa:MaterialsAndMethods" id="loading" role="doc-chapter">
+                        <h3><span>4.1 </span>Loading screen</h3>
+                        <p>
+                            În prima parte a aplicației, pentru estetica site-ului nostru, vom avea o animație de tip „loading”. Această aplicație a fost scrisă în <a href="loading.html">HTML</a> și <a href="styleLoadingScreen.css">CSS</a>,
+                            iar, pentru a fi legată de partea de login, ne-am folosit de un javascript ce face tranziția dintre cele două pagini.
+                        </p>
+                </section>
                     <section typeof="sa:MaterialsAndMethods" id="login" role="doc-chapter">
                         <h3><span>4.2 </span>Login</h3>
-                        <p>    
+                        <p>
                             Cea de-a doua componentă vizibilă utilizatorului va fi partea de login, implementatată, până acum printr-un <a href="index.html">HTML</a> și un <a href="index.css">CSS</a>. Prin partea de login, cei ce se vor în registra în baza noastră de date își vor putea folosi contul pentru a utiliza aplicația noastră. Vom avea 3 tipuri de conturi: admin, profesor și elev. Fiecare dintre aceste tipuri va avea funcționalități specifice, în acord cu ceea ce trebuie să ofere utilitarul nostru.
                         </p>
                     </section>
                     <section typeof="sa:MaterialsAndMethods" id="register" role="doc-chapter">
                         <h3><span>4.3 </span>Register</h3>
                         <p>
-                            În partea de register vom avea 4 câmpuri: username, email, parolă, confirmare parolă. Aceste date vor fi introduse în baza de date, dar nu înainte ca noi să realizăm o verificare dacă nu există deja un cont cu același username sau același email. La momentul actual, verificăm dacă aceste câmpuri sunt compeltate, dacă emailul are forma specifică ( @domainname) și dacă parola inițială se potrivește cu cea din câmpul de confirmare a parolei.     
+                            În partea de register vom avea 4 câmpuri: username, email, parolă, confirmare parolă. Aceste date vor fi introduse în baza de date, dar nu înainte ca noi să realizăm o verificare dacă nu există deja un cont cu același username sau același email. La momentul actual, verificăm dacă aceste câmpuri sunt compeltate, dacă emailul are forma specifică ( @domainname) și dacă parola inițială se potrivește cu cea din câmpul de confirmare a parolei.
                             În subsolul formularului, avem butonul de submit care va insera datele în baza de date, și butonul care ne duce la pagina de logare. Deocamdată, partea de front-end e implementată într-un <a href="register.html">HTML</a>, un <a href="register.css">CSS</a> și un <a href="scriptRegister.js">JavaScript</a>.
                         </p>
                     </section>
                     <section typeof="sa:MaterialsAndMethods" id="meniu" role="doc-chapter">
                         <h3><span>4.4 </span>Meniul</h3>
                         <p>
-                            Ne dorim ca meniul aplicației web să apară întotdeauna în partea din stânga a ecranului, astfel încât să asigurăm faptul că în cazul unor ecrane mai mici, precum cele ale telefoanelor, aplicația va putea fi în continuare folosită. 
-                            Meniul este una dintre componentele de bază ale aplicației web întrucât el specifică toate acțiunile pe care administratorul/ profesorul/ elevul le poate întreprinde prin utilizarea aplicației noastre. Partea de front-end pentru meniu a fost implementată în <a href="#">HTML</a> și <a href="#">CSS</a>. 
+                            Ne dorim ca meniul aplicației web să apară întotdeauna în partea din stânga a ecranului, astfel încât să asigurăm faptul că în cazul unor ecrane mai mici, precum cele ale telefoanelor, aplicația va putea fi în continuare folosită.
+                            Meniul este una dintre componentele de bază ale aplicației web întrucât el specifică toate acțiunile pe care administratorul/ profesorul/ elevul le poate întreprinde prin utilizarea aplicației noastre. Partea de front-end pentru meniu a fost implementată în <a href="#">HTML</a> și <a href="#">CSS</a>.
                             (Acesta este cel de-al doilea tip de meniu. Primul prototip de meniu a fost un dropdown menu și se găsește <a href="DropDownMenu.html">aici</a>.)
                         </p>
                     </section>
 
-                    <section typeof="sa:MaterialsAndMethods" id="clasa" role="doc-chapter">   
+                    <section typeof="sa:MaterialsAndMethods" id="clasa" role="doc-chapter">
                         <h3><span>4.5 </span>Clasa/Cursul</h3>
                         <p>
-                            Adminul, profesorul și elevul vor putea accesa o anumită clasă/curs pentru a desfășura activitățile educaționale. 
+                            Adminul, profesorul și elevul vor putea accesa o anumită clasă/curs pentru a desfășura activitățile educaționale.
                         </p>
                     </section>
             </section>
@@ -184,6 +191,6 @@
                         </span>
                     </li>
                 </ol>
-            </section>     
+            </section>
     </body>
 </html>
