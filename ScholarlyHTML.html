@@ -25,7 +25,7 @@
                     </li>
                     <li>
                         <a href="#motivatie">
-                            <span>3. </span>Motivatie
+                            <span>3. </span>Motivație
                         </a>
                     </li>
                     <li>
@@ -37,7 +37,16 @@
                                     <a href="#loading"><span>4.1 </span>Componenta de loading</a>
                                 </li>
                                 <li>
-                                    <a href="#login"><span>5.2 </span>Componenta de login </a>
+                                    <a href="#login"><span>4.2 </span>Componenta de login </a>
+                                </li>
+                                <li>
+                                    <a href="#register"><span>4.3 </span>Componenta de înregistrare </a>
+                                </li>
+                                <li>
+                                    <a href="#meniu"><span>4.4 </span>Meniul </a>
+                                </li>
+                                <li>
+                                    <a href="#clasa"><span>4.5 </span>Clasa/Cursul</a>
                                 </li>
                             </ol>
                     </li>
@@ -51,12 +60,35 @@
                 <dl>
                     <dt>Autori</dt>
                     <dd>
-                        <a href="https://github.com/cezaruss">Lupu Cezar-Justinian</a>
-                        &amp;
-                        <a href="https://github.com/Leggacys">Bogatu Daniel-Marian</a>
-                        &amp;
-                        <a href="https://github.com/iceeye7gabi">Constantinescu George-Gabriel</a>
-        
+                            <ol>
+                              <li property="schema:author" typeof="sa:ContributorRole">
+                                <a property="schema:author" href="https://github.com/Leggacys" typeof="schema:Person">
+                                    <span property="schema:familyName">Bogatu</span>
+                                    <span property="schema:givenName">Daniel-Marian</span>
+                                </a>
+                                <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+                                  <a property="schema:email" href="mailto:bogatu.daniel21@yahoo.com" title="send mail">Contact me! ☺</a>
+                                </sup>   
+                              </li>
+                              <li property="schema:author" typeof="sa:ContributorRole">
+                                <a property="schema:author" href="https://github.com/iceeye7gabi" typeof="schema:Person">
+                                    <span property="schema:familyName">Constantinescu</span>
+                                    <span property="schema:givenName">George-Gabriel</span>
+                                </a>
+                                <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+                                  <a property="schema:email" href="mailto:iceeye7gabi@gmail.com" title="send mail">Contact me! ☺</a>
+                                </sup>   
+                              </li>
+                              <li property="schema:author" typeof="sa:ContributorRole">
+                                <a property="schema:author" href="https://github.com/cezaruss" typeof="schema:Person">
+                                    <span property="schema:familyName">Lupu</span>
+                                    <span property="schema:givenName">Cezar-Justinian</span>
+                                </a>
+                                <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+                                  <a property="schema:email" href="mailto:cezarlupu2012@gmail.com" title="send mail">Contact me! ☺</a>
+                                </sup>   
+                              </li>
+                            </ol>
                     </dd>
                     <dt>Erori și recomandări</dt>
                     <dd>
@@ -75,5 +107,70 @@
                 </p>
             </section>
 
+            <section typeof="sa:Introduction" id="introducere" role="doc-introduction">
+                <h2><span>2. </span>Introducere</h2>
+                <p>
+                    Class Manager este proiectul nostru la materia Tehnologii Web. Acest utilitar pentru managementul grupelor de studenți va oferi următoarele funcționalități:
+                </p>    
+                    <ul>
+                        <li>Posibilitatea de a genera un cod ce va fi utilizat
+                        pentru a face prezența (cod ce va expira după o perioada de S secunde). 
+                        </li>
+                        <li>Posibilitatea de a pune un numar de note (același pentru toți studenții) și de a 
+                        folosi o formulă matematică ce utilizează operatori de bază (minimal: +, -, *, /, round, floor, ceil) 
+                        pentru a calcula o notă finală.</li> 
+                        <li>Studenții vor avea posibilitatea de încarcare a unor documente ce trebuie să fie 
+                        notate de către profesor și de a-și vedea notele propuse de acesta.</li>
+                        <li>Profesorii pot accepta studenții într-o anumita grupă sau pot revoca acest drept, 
+                        pot pune note asociate diverselor teme sau pentru ascultari.</li>
+                        <li>Profesorii vor avea posibilitatea de generare a unui catalog ce poate fi exportat 
+                        în oricare dintre formatele CSV, HTML, PDF.</li>
+                        <li>Aplicația trebuie să poată fi folosită simultan la diferite materii și în ani diferiți. 
+                            Lista studenților și profesorilor se va importa/exporta (d)in format XML.</li>
+                    </ul> 
+            </section>
+            <section typeof="sa:Motivation" id="motivatie" role="doc-prologue">
+                <h2><span>3. </span>Motivație</h2>
+                <p>
+                    Am realizat acest proiect întrucât dorim să aflăm ce înseamnă cu adevărat gestionarea virtuală a unui grup de elevi și de a afla provocările pe care le implică o astfel de sarcină.
+                </p>
+            </section>
+            <section typeof="sa:MaterialsAndMethods" id="functionalitati" role="doc-chapter">
+                <h2><span>4. </span>Funcționalitățile aplicației</h2>
+                <p>
+                    În această parte a documentului HTML vom prezenta funcționalitățile actuale ale aplicației și vom explica rolul și metoda de implementare pentru fiecare element în parte. 
+                </p>
+                    <section typeof="sa:MaterialsAndMethods" id="meniu" role="doc-chapter">
+                        <h3><span>4.4 </span>Meniul</h3>
+                        <p>
+                            Ne dorim ca meniul aplicației web să apară întotdeauna în partea din stânga a ecranului, astfel încât să asigurăm faptul că în cazul unor ecrane mai mici, precum cele ale telefoanelor, aplicația va putea fi în continuare folosită. 
+                            Meniul este una dintre componentele de bază ale aplicației web întrucât el specifică toate acțiunile pe care administratorul/ profesorul/ elevul le poate întreprinde prin utilizarea aplicației noastre. Partea de front-end pentru meniu a fost implementată în <a href="#">HTML</a> și <a href="#">CSS</a>. 
+                            (Acesta este cel de-al doilea tip de meniu. Primul prototip de meniu a fost un dropdown menu și se găsește <a href="DropDownMenu.html">aici</a>.)
+                        </p>
+                    </section>
+
+                    <section typeof="sa:MaterialsAndMethods" id="clasa" role="doc-chapter">   
+                        <h3><span>4.5 </span>Clasa/Cursul</h3>
+                        <p>
+                            Adminul, profesorul și elevul vor putea accesa o anumită clasă/curs pentru a desfășura activitățile educaționale. 
+                        </p>
+                    </section>
+            </section>
+
+            <section typeof="sa:ReferenceList" id="referinţe" role="doc-bibliography">
+                <h2><span>5. </span>Referinţe</h2>
+                <ol>
+                    <li property="schema:citation" role="doc-biblioentry" typeof="schema:ScholarlyArticle"  id="Scholarly-html"
+                    resource="https://w3c.github.io/scholarly-html/">
+                        <cite property="schema:name">
+                            <a href="https://w3c.github.io/scholarly-html/">Scholarly HTML</a>
+                        </cite>,
+                        <span property="schema:author" typeof="schema:Person">
+                            <span property="schema:name">Tzviya Siegman (Wiley)</span>&amp;
+                            <span property="schema:name">Robin Berjon</span>
+                        </span>
+                    </li>
+                </ol>
+            </section>     
     </body>
 </html>
