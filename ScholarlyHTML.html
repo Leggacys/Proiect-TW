@@ -34,9 +34,6 @@
                         </a>
                             <ol role="directory">
                                 <li>
-                                    <a href="#loading"><span>4.1 </span>Componenta de loading</a>
-                                </li>
-                                <li>
                                     <a href="#login"><span>4.2 </span>Componenta de login </a>
                                 </li>
                                 <li>
@@ -140,6 +137,19 @@
                 <p>
                     În această parte a documentului HTML vom prezenta funcționalitățile actuale ale aplicației și vom explica rolul și metoda de implementare pentru fiecare element în parte. 
                 </p>
+                    <section typeof="sa:MaterialsAndMethods" id="login" role="doc-chapter">
+                        <h3><span>4.2 </span>Login</h3>
+                        <p>    
+                            Cea de-a doua componentă vizibilă utilizatorului va fi partea de login, implementatată, până acum printr-un <a href="index.html">HTML</a> și un <a href="index.css">CSS</a>. Prin partea de login, cei ce se vor în registra în baza noastră de date își vor putea folosi contul pentru a utiliza aplicația noastră. Vom avea 3 tipuri de conturi: admin, profesor și elev. Fiecare dintre aceste tipuri va avea funcționalități specifice, în acord cu ceea ce trebuie să ofere utilitarul nostru.
+                        </p>
+                    </section>
+                    <section typeof="sa:MaterialsAndMethods" id="register" role="doc-chapter">
+                        <h3><span>4.3 </span>Register</h3>
+                        <p>
+                            În partea de register vom avea 4 câmpuri: username, email, parolă, confirmare parolă. Aceste date vor fi introduse în baza de date, dar nu înainte ca noi să realizăm o verificare dacă nu există deja un cont cu același username sau același email. La momentul actual, verificăm dacă aceste câmpuri sunt compeltate, dacă emailul are forma specifică ( @domainname) și dacă parola inițială se potrivește cu cea din câmpul de confirmare a parolei.     
+                            În subsolul formularului, avem butonul de submit care va insera datele în baza de date, și butonul care ne duce la pagina de logare. Deocamdată, partea de front-end e implementată într-un <a href="register.html">HTML</a>, un <a href="register.css">CSS</a> și un <a href="scriptRegister.js">JavaScript</a>.
+                        </p>
+                    </section>
                     <section typeof="sa:MaterialsAndMethods" id="meniu" role="doc-chapter">
                         <h3><span>4.4 </span>Meniul</h3>
                         <p>
