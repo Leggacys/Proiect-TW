@@ -108,5 +108,23 @@ label #sidebar_btn{
 }
 
 .welcomeContainer{
-  text-align: center;
+  background-color: rgb(231, 255, 10);
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  width: 400px;
+  max-width: 100%;
+  border-bottom: 1px solid #000000;
+  padding: 20px 40px;
+  display: block; margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  margin-left: 75px;
+  transition: 0.5s;
+}
+
+.welcomeContainer:hover{
+  background: white;
+  background-color: rgb(255, 145, 0);
 }
