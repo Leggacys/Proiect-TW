@@ -128,3 +128,63 @@ label #sidebar_btn{
   background: white;
   background-color: rgb(255, 145, 0);
 }
+
+.containerPresence {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15vh;
+  background-color: #ffc400;
+  margin-top: 205px;
+  margin-left: 325px;
+  border-radius: 5px;
+  width: 45vw;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.presenceform-group{
+  margin-bottom: 1em;
+  transition:all .3s;
+}
+
+.form-label{
+  font-size:1em;
+  color:rgb(0, 0, 0);
+  display: block;
+  opacity: 1;
+  transform: translateY(-1.25em);
+  transform-origin:0 0;
+  transition:all .3s;
+}
+
+.form-control{
+  box-shadow: none;
+  background-color: rgba(12, 9, 182, 0.02);
+  border-radius: 0px;
+  border-color: #ccc;
+  border-style: none none solid none;
+  width: 100%;
+  transition:all .5s;
+  padding:5px;
+}
+
+.form-control::placeholder{
+  color:transparent;
+}
+
+.form-control:focus{
+  box-shadow:none;
+  outline:none;
+  border-color:orange;
+}
+
+.form-control:focus + .form-label,
+.form-control:not(:placeholder-shown) + .form-label
+{
+  transform: translateY(-2.5em) scale(.8);
+}
+
+.presenceform-group:focus-within{
+  transform:scale(1.05, 1.05);
+}
