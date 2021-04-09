@@ -56,7 +56,7 @@ label #sidebar_btn{
   padding-top: 30px;
   position: fixed;
   left:0;
-  width: 250px;
+  width: 270px;
   height: 100%;
   align-items: center;
 }
@@ -66,13 +66,16 @@ label #sidebar_btn{
   height: 100px;
   border-radius: 100px;
   margin-bottom:10px;
+  display: block; margin-left: auto; margin-right: auto /* am centrat imaginea*/
 }
 
 .sidebar h4{
   color:#ccc;
   margin-top: 0;
   margin-bottom: 20px;
+  text-align: center; /* am centrat imaginea*/
 }
+
 
 .sidebar a{
   color:#fff;
@@ -80,7 +83,7 @@ label #sidebar_btn{
   width:100%;
   line-height: 60px;
   text-decoration: none;
-  padding-left: 40px;
+  padding-left: 25px;
   box-sizing: border-box;
   transition: background-color 1000ms linear;
 }
@@ -102,4 +105,8 @@ label #sidebar_btn{
   width:100%;
    background-image: linear-gradient(to right, #cc2b5e ,#753a88);
   background-position: center;
+}
+
+.welcomeContainer{
+  text-align: center;
 }
