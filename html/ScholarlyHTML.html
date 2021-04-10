@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
         <title>ClaMa - Scholarly HTML</title>
         <link rel="stylesheet" href="https://w3c.github.io/scholarly-html/css/scholarly.min.css">
-        <link rel="shortcut icon" type="image/svg" href="CLaMa.svg">
+        <link rel="shortcut icon" type="image/svg" href="../images/CLaMa.svg">
     </head>
     <body prefix="schema: http://schema.org" style="font-family: 'Times New Roman', Times, serif; font-size: 15pt;">
         <header>
@@ -143,29 +143,29 @@
                 <section typeof="sa:MaterialsAndMethods" id="loading" role="doc-chapter">
                         <h3><span>4.1 </span>Loading screen</h3>
                         <p>
-                            În prima parte a aplicației, pentru estetica site-ului nostru, vom avea o animație de tip „loading”. Această aplicație a fost scrisă în <a href="loading.html">HTML</a> și <a href="styleLoadingScreen.css">CSS</a>,
+                            În prima parte a aplicației, pentru estetica site-ului nostru, vom avea o animație de tip „loading”. Această aplicație a fost scrisă în <a href="loading.html">HTML</a> și <a href="../css/styleLoadingScreen.css">CSS</a>,
                             iar, pentru a fi legată de partea de login, ne-am folosit de un javascript ce face tranziția dintre cele două pagini.
                         </p>
                 </section>
                     <section typeof="sa:MaterialsAndMethods" id="login" role="doc-chapter">
                         <h3><span>4.2 </span>Login</h3>
                         <p>
-                            Cea de-a doua componentă vizibilă utilizatorului va fi partea de login, implementatată, până acum printr-un <a href="index.html">HTML</a> și un <a href="index.css">CSS</a>. Prin partea de login, cei ce se vor în registra în baza noastră de date își vor putea folosi contul pentru a utiliza aplicația noastră. Vom avea 3 tipuri de conturi: admin, profesor și elev. Fiecare dintre aceste tipuri va avea funcționalități specifice, în acord cu ceea ce trebuie să ofere utilitarul nostru.
+                            Cea de-a doua componentă vizibilă utilizatorului va fi partea de login, implementatată, până acum printr-un <a href="index.html">HTML</a> și un <a href="../css/index.css">CSS</a>. Prin partea de login, cei ce se vor în registra în baza noastră de date își vor putea folosi contul pentru a utiliza aplicația noastră. Vom avea 3 tipuri de conturi: admin, profesor și elev. Fiecare dintre aceste tipuri va avea funcționalități specifice, în acord cu ceea ce trebuie să ofere utilitarul nostru.
                         </p>
                     </section>
                     <section typeof="sa:MaterialsAndMethods" id="register" role="doc-chapter">
                         <h3><span>4.3 </span>Register</h3>
                         <p>
                             În partea de register vom avea 4 câmpuri: username, email, parolă, confirmare parolă. Aceste date vor fi introduse în baza de date, dar nu înainte ca noi să realizăm o verificare dacă nu există deja un cont cu același username sau același email. La momentul actual, verificăm dacă aceste câmpuri sunt compeltate, dacă emailul are forma specifică ( @domainname) și dacă parola inițială se potrivește cu cea din câmpul de confirmare a parolei.
-                            În subsolul formularului, avem butonul de submit care va insera datele în baza de date, și butonul care ne duce la pagina de logare. Deocamdată, partea de front-end e implementată într-un <a href="register.html">HTML</a>, un <a href="register.css">CSS</a> și un <a href="scriptRegister.js">JavaScript</a>.
+                            În subsolul formularului, avem butonul de submit care va insera datele în baza de date, și butonul care ne duce la pagina de logare. Deocamdată, partea de front-end e implementată într-un <a href="register.html">HTML</a>, un <a href="../css/register.css">CSS</a> și un <a href="../js/scriptRegister.js">JavaScript</a>.
                         </p>
                     </section>
                     <section typeof="sa:MaterialsAndMethods" id="meniu" role="doc-chapter">
                         <h3><span>4.4 </span>Meniul</h3>
                         <p>
                             Ne dorim ca meniul aplicației web să apară întotdeauna în partea din stânga a ecranului, astfel încât să asigurăm faptul că în cazul unor ecrane mai mici, precum cele ale telefoanelor, aplicația va putea fi în continuare folosită.
-                            Meniul este una dintre componentele de bază ale aplicației web întrucât el specifică toate acțiunile pe care administratorul/ profesorul/ elevul le poate întreprinde prin utilizarea aplicației noastre. Partea de front-end pentru meniu a fost implementată în <a href="#">HTML</a> și <a href="#">CSS</a>.
-                            (Acesta este cel de-al doilea tip de meniu. Primul prototip de meniu a fost un dropdown menu și se găsește <a href="DropDownMenu.html">aici</a>.)
+                            Meniul este una dintre componentele de bază ale aplicației web întrucât el specifică toate acțiunile pe care administratorul/ profesorul/ elevul le poate întreprinde prin utilizarea aplicației noastre. Partea de front-end pentru meniu a fost implementată în <a href="Menu.html">HTML</a> și <a href="../css/Menu.css">CSS</a>.
+                            (Acesta este cel de-al doilea tip de meniu. Primul prototip de meniu a fost un dropdown menu și se găsește <a href="unused/DropDownMenu.html">aici</a>.)
                         </p>
                     </section>
 
