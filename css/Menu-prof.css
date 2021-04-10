@@ -38,7 +38,6 @@ header{
   font-size: 15px;
   font-weight:600;
   color:#fff;
-  transition: 0.5s;
 }
 
 .logout_btn:hover{
@@ -55,10 +54,10 @@ header{
 
   margin-top: -30px;
   margin-right:40px;
-  border-radius:2px;
+  border-radius:10px;
   font-size: 15px;
-  font-weight:60px;
-  max-width: 33.3%;
+  font-weight:600;
+  max-width: 15%;
   color:#fff;
   transition: 0.5s;
   display: block;
@@ -135,4 +134,23 @@ label #sidebar_btn{
   width:100%;
    background-image: linear-gradient(to right, #cc2b5e ,#753a88);
   background-position: center;
+}
+
+@media(max-width:1000px) {
+  .left_area{
+      width: 50%;
+      float: left;
+  }
+  .logout_btn{
+    padding: 5px;
+    
+    margin-top: 0px;
+    border-radius:2px;
+    font-size: 15px;
+    color:#fff;
+  }
+  
+  #welcomeContainer{
+    display: none;
+  }
 }
