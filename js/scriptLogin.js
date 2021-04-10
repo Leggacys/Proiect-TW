@@ -33,11 +33,19 @@ function checkInputs() {
         ok2=1;
     }
 
-    if(ok1==1 && ok2==1)
+    if(ok1==1 && ok2==1 && usernameValue==='profesor'){
+        myFunction2();
+    }
+    else if(ok1==1 && ok2==1){
         myFunction();
+    }
 
     function myFunction() {
         location.replace("Menu.html");
+      }
+
+      function myFunction2() {
+        location.replace("Menu-prof.html");
       }
 
 }

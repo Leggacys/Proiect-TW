@@ -1,0 +1,222 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #56baab;
+  
+  }
+  
+  header{
+    position: fixed;
+    background: #22242A;
+    padding: 20px;
+    width:100%;
+    height: 30px;
+  }
+  
+  .left_area h3{
+   color: #fff;
+   margin:0;
+   text-transform: uppercase;
+   font-size: 22px;
+   font-weight: 900;
+  }
+  
+  
+  .left_area span{
+    color: #cc2b5e;
+  }
+  
+  .logout_btn{
+    padding: 5px;
+    background:linear-gradient(to right, #cc2b5e ,#753a88);
+    text-decoration: none;
+    float: right;
+    margin-top: -30px;
+    margin-right:40px;
+    border-radius:2px;
+    font-size: 15px;
+    font-weight:600;
+    color:#fff;
+    transition: 0.5s;
+  }
+  
+  .logout_btn:hover{
+    background: #0D9DBB;
+  }
+    
+  label #sidebar_btn{
+    z-index: 1;
+    color: #fff;
+  }
+  
+  .sidebar{
+    background: #2F323A;
+    margin-top: 70px;
+    padding-top: 30px;
+    position: fixed;
+    left:0;
+    width: 270px;
+    height: 100%;
+    align-items: center;
+    overflow-y: auto;
+  }
+  
+  .sidebar .profile_image{
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    margin-bottom:10px;
+    display: block; margin-left: auto; margin-right: auto /* am centrat imaginea*/
+  }
+  
+  .sidebar h4{
+    color:#ccc;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center; /* am centrat imaginea*/
+  }
+  
+  
+  .sidebar a{
+    color:#fff;
+    display: block;
+    width:100%;
+    line-height: 60px;
+    text-decoration: none;
+    padding-left: 25px;
+    box-sizing: border-box;
+    transition: background-color 1000ms linear;
+  }
+  
+  .sidebar a:hover{
+    background: #19B3D3;
+  }
+  
+  
+  .sidebar i{
+    padding-right: 10px;
+  }
+  
+  .content{
+    z-index: -99;
+    margin-top: 70px;
+    margin-left: 250px;
+    position: absolute;
+    height:100%;
+    width:100%;
+     background-image: linear-gradient(to right, #cc2b5e ,#753a88);
+    background-position: center;
+  }
+  
+  /* /* .presence{
+      position: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 15vh;
+      background-color: #ffc400;
+      margin-top: 30px;
+      margin-left: 50px;
+      border-radius: 5px;
+      width: 25vw;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  }
+  
+  .presenceform-group{
+    margin-bottom: 1em;
+    transition:all .3s;
+  }
+  
+  .form-label{
+    margin-left: 30px;
+    font-size:1em;
+    color:rgb(0, 0, 0);
+    display: inline-block;
+    opacity: 1;
+    transform: translateY(-1.25em);
+    transform-origin:0;
+    transition:all .3s;
+    margin:auto;
+  }
+  
+  .form-control{
+    box-shadow: none;
+    background-color: rgba(12, 9, 182, 0.02);
+    border-radius: 0px;
+    border-color: #ccc;
+    border-style: none none solid none;
+    width: 150%;
+    transition:all .5s;
+    padding:5px;
+  }
+  
+  .form-control::placeholder{
+    color:blue; */
+  
+    .container{
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        width: 400px;
+        max-width: 100%;
+      }
+
+
+      .header{
+        background-color: #f7f7f7;
+        border-bottom: 1px solid #f0f0f0;
+        padding: 20px 40px;
+      }
+      
+      .header h2 {
+        margin: 0;
+      }
+      
+      .form {
+        padding: 30px 40px;
+      }
+
+      .form-control {
+        margin-bottom: 10px;
+        padding-bottom: 20px;
+        position: relative;
+      }
+
+      .form-control label {
+        display : inline-block;
+        margin-bottom: 5px;
+      }
+
+      .form-control input {
+        border: 2px solid #f0f0f0;
+        border-radius: 4px;
+        display: block;
+        font-family: inherit;
+        font-size: 14px;
+        padding: 10px;
+        width: 100%;
+      }
+
+      .form button{
+        background: linear-gradient(90deg, rgba(88,24,69,1) 0%, rgba(144,12,63,1) 51%, rgba(199,0,57,1) 100%, rgba(87,0,63,1) 100%);
+        border: 2px solid linear-gradient(90deg, rgba(88,24,69,1) 0%, rgba(144,12,63,1) 51%, rgba(199,0,57,1) 100%, rgba(87,0,63,1) 100%);
+        border-radius: 4px;
+        color: #fff;
+        display: block;
+        font-family: inherit;
+        font-size: 16px;
+        padding: 10px;
+        width: 100%;
+        outline: none;
+        cursor: pointer;
+        transition: 0.5s;
+      }
+      
+      .form button:hover{
+        background: white;
+        background-color: purple;
+      }
+  
+  
+  
