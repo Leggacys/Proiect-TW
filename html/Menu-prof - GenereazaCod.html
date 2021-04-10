@@ -5,12 +5,12 @@
       function hidediv(){
         document.getElementById("welcomeContainer").style.visibility="hidden";
       }
-      setTimeout("hidediv()",5000);
+      setTimeout("hidediv()",1500);
     </script>
     <meta charset="utf-8">
-    <title>AcceptStudents </title>
+    <title>Cod prezenta </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="../css/Menu-prof - AcceptStudents.css">
+    <link rel="stylesheet" href="../css/Menu-prof - GenereazaCod.css">
     <link rel="shortcut icon" type="image/svg" href="../images/CLaMa.svg">
   </head>
   <body>
@@ -19,7 +19,6 @@
     <div class="left_area">
       <h3>Class <span>Manager</span> </h3>
     </div>
-    <div id="welcomeContainer"> Autentificare reușită</div>
     <div class="right_area">
       <a href="index.html" class="logout_btn">Logout</a>
     </div>
@@ -39,43 +38,34 @@
 </div>
 
 <div class="content">
-  <h1><span class="blue">&lt;</span>Request<span class="blue">&gt;</span> <span class="yellow">Table</pan></h1>
- <table class="container">
- 	<thead>
- 		<tr>
- 			<th><h1>Nume</h1></th>
-      <th><h1>Prenume</h1></th>
- 			<th><h1>Numar Matricol</h1></th>
-      <th><h1>AcceptTo</h1></th>
- 		</tr>
- 	</thead>
- 	<tbody>
- 		<tr>
- 			<td>Mandrila</td>
- 			<td>Dragos</td>
- 			<td>636912312</td>
-      <td>Matematica</td>
- 		</tr>
-    <tr>
- 			<td>Perca</td>
- 			<td>Iolanda</td>
- 			<td>636931231</td>
-      <td>Matematica</td>
- 		</tr>
-    <tr>
- 			<td>Dumea</td>
- 			<td>Paul</td>
- 			<td>636933423</td>
-      <td>Matematica</td>
- 		</tr>
-    <tr>
- 			<td>Dumea</td>
- 			<td>Madalina</td>
- 			<td>636934343</td>
-      <td>Matematica</td>
- 		</tr>
- 	</tbody>
- </table>
- </div>
+  
+  
+  <!-- <div class="presence">
+    <form action="" method="POST" class="form-presence">
+      <div class="presenceform-group">
+        <input type="text" class="form-control" placeholder="Introduceti codul pentru prezenta.">
+        <label for="cod" class="form-label"> </label>
+      </div>
+    </form>
+  
+  
+  </div> -->
+
+
+  <div class="container">
+    <div class="header">
+      <h2>Genereaza codul pentru prezenta.</h2>
+    </div>
+    <form class="form" id="form">
+      <div class="form-control">
+        <label>Codul pentru prezenta</label>
+      </div>
+      <button id="submit">Generate code</button>
+    </form>
+  </div>
+
+
+</div>
+<script src="../js/codPrezenta.js"></script>
   </body>
-</html>
+  </html>
