@@ -45,6 +45,34 @@ header{
   background: #0D9DBB;
 }
 
+
+#welcomeContainer{
+  padding: 5px;
+  background:linear-gradient(to right, #cc2b5e ,#753a88);
+  text-decoration: none;
+  float:none;
+  text-align: center;
+
+  margin-top: -30px;
+  margin-right:40px;
+  border-radius:2px;
+  font-size: 15px;
+  font-weight:60px;
+  max-width: 33.3%;
+  color:#fff;
+  transition: 0.5s;
+  display: block;
+  margin-left: auto;
+  margin-right: auto /* am centrat imaginea*/
+}
+
+#welcomeContainer:hover{
+  background: white;
+  background-color: #0D9DBB;
+}
+
+
+
 label #sidebar_btn{
   z-index: 1;
   color: #fff;
@@ -59,6 +87,7 @@ label #sidebar_btn{
   width: 270px;
   height: 100%;
   align-items: center;
+  overflow-y: auto;
 }
 
 .sidebar .profile_image{
@@ -92,6 +121,7 @@ label #sidebar_btn{
   background: #19B3D3;
 }
 
+
 .sidebar i{
   padding-right: 10px;
 }
@@ -107,40 +137,18 @@ label #sidebar_btn{
   background-position: center;
 }
 
-.welcomeContainer{
-  background-color: rgb(231, 255, 10);
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-  width: 400px;
-  max-width: 100%;
-  border-bottom: 1px solid #000000;
-  padding: 20px 40px;
-  display: block; margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 50px;
-  margin-left: 75px;
-  transition: 0.5s;
-}
-
-.welcomeContainer:hover{
-  background: white;
-  background-color: rgb(255, 145, 0);
-}
-
-.containerPresence {
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 15vh;
-  background-color: #ffc400;
-  margin-top: 205px;
-  margin-left: 325px;
-  border-radius: 5px;
-  width: 45vw;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+/* /* .presence{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15vh;
+    background-color: #ffc400;
+    margin-top: 30px;
+    margin-left: 50px;
+    border-radius: 5px;
+    width: 25vw;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
 .presenceform-group{
@@ -149,13 +157,15 @@ label #sidebar_btn{
 }
 
 .form-label{
+  margin-left: 30px;
   font-size:1em;
   color:rgb(0, 0, 0);
-  display: block;
+  display: inline-block;
   opacity: 1;
   transform: translateY(-1.25em);
-  transform-origin:0 0;
+  transform-origin:0;
   transition:all .3s;
+  margin:auto;
 }
 
 .form-control{
@@ -164,27 +174,14 @@ label #sidebar_btn{
   border-radius: 0px;
   border-color: #ccc;
   border-style: none none solid none;
-  width: 100%;
+  width: 150%;
   transition:all .5s;
   padding:5px;
 }
 
 .form-control::placeholder{
-  color:transparent;
-}
+  color:blue; */
 
-.form-control:focus{
-  box-shadow:none;
-  outline:none;
-  border-color:orange;
-}
 
-.form-control:focus + .form-label,
-.form-control:not(:placeholder-shown) + .form-label
-{
-  transform: translateY(-2.5em) scale(.8);
-}
 
-.presenceform-group:focus-within{
-  transform:scale(1.05, 1.05);
-}
+

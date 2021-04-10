@@ -38,7 +38,6 @@ background-image: linear-gradient(to right, #348aa7 ,#525174);
   font-size: 15px;
   font-weight:600;
   color:#fff;
-  transition: 0.5s;
 }
 
 .logout_btn:hover{
@@ -55,10 +54,10 @@ background-image: linear-gradient(to right, #348aa7 ,#525174);
 
   margin-top: -30px;
   margin-right:40px;
-  border-radius:2px;
+  border-radius:10px;
   font-size: 15px;
-  font-weight:60px;
-  max-width: 33.3%;
+  font-weight:600;
+  max-width: 15%;
   color:#fff;
   transition: 0.5s;
   display: block;
@@ -136,3 +135,25 @@ label #sidebar_btn{
    background-image: linear-gradient(to right, #348aa7 ,#525174);
   background-position: center;
 }
+<<<<<<< HEAD
+=======
+
+@media(max-width:1000px) {
+  .left_area{
+      width: 50%;
+      float: left;
+  }
+  .logout_btn{
+    padding: 5px;
+    
+    margin-top: 0px;
+    border-radius:2px;
+    font-size: 15px;
+    color:#fff;
+  }
+  
+  #welcomeContainer{
+    display: none;
+  }
+}
+>>>>>>> b6c8fb5929bc3622bedb77528b5097b63b90486e
