@@ -29,7 +29,7 @@ header{
 
 .logout_btn{
   padding: 5px;
-background-image: linear-gradient(to right, #348aa7 ,#525174);
+  background-image: linear-gradient(to right, #348aa7 ,#525174);
   text-decoration: none;
   float: right;
   margin-top: -30px;
