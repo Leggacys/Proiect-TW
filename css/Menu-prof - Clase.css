@@ -205,12 +205,15 @@ header{
         width: 250px;
         height: 500px;
         transition: 0.5s;
+        margin-left: 170px;
     }
 
-    @media(max-width:700px) {
+    @media(max-width:750px) {
+
+
         .mainul{
             width: 100%;
-            height: max-content;
+            height: 100%;
             padding: 20px;
             box-sizing: border-box;
         }
@@ -219,7 +222,9 @@ header{
             position: relative;
             width: 250px;
             height: 500px;
+            margin-left: 85px;
             transition: 0.5s;
+
         }
 
         .containerClase .boxGrupa{
@@ -233,6 +238,8 @@ header{
             overflow: hidden;
             border-radius: 10px;
         }
+
+        
     
     }
 }
