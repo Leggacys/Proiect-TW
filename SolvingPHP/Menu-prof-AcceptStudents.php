@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <title>AcceptStudents </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="../css/Menu-prof-AcceptStudents.css">
+    <link rel="stylesheet" href="Menu-prof-AcceptStudents.css">
     <link rel="shortcut icon" type="image/svg" href="../images/CLaMa.svg">
   </head>
   <body>
@@ -42,33 +42,34 @@
 <div class="content">
   <h1><span class="blue">&lt;</span>Request<span class="blue">&gt;</span> <span class="yellow">Table</span></h1>
  <table class="container">
- 	<thead>
  		<tr>
  			<th>Nume</th>
       <th>Prenume</th>
  			<th>Numar Matricol</th>
       <th>AcceptTo</th>
  		</tr>
- 	</thead>
- 	<?php
-  include "../.php/Menu-prof-AcceptStudents.php";
-  $records = mysqli_query($db,"select * from Users");
+  <?php
+  $conn = mysqli_connect("localhost","root","","studenti");
+  if($conn-> connect_error){
+    die("Connect failed");
+  }
 
-  while($data = mysqli_fetch_array($records))
-{
-?>
-  <tr>
-    <td><?php echo $data['Nume']; ?></td>
-    <td><?php echo $data['Prenume']; ?></td>
-    <td><?php echo $data['NumarMatricol']; ?></td>
-    <td><?php echo $data['AcceptTo']; ?></td>
-  </tr>
-<?php
-}
-  ?>
-<?php mysqli_close($db);  ?>
-
- </table>
+  $sql = "SELECT * FROM studenti";
+  $result = $conn -> query($sql);
+  if($result  -> num_rows >0)
+  {
+    while($row = $result -> fetch_assoc()){
+      echo "<tr><td>" . $row["Nume"] ."</td><td>" . $row["Prenume"] . "</td><td>" . $row["Numar Matricol"] .
+      "</td><td>" . $row["AcceptTo"] . "</tr></td>";
+    }
+    echo "</table>";
+  }else {
+    {
+      echo "0 results";
+    }
+  }
+  $conn-> close();
+   ?>
  </div>
   </body>
 </html>
