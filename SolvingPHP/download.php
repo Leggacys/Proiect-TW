@@ -5,7 +5,7 @@ include 'uploadConfig.php';
 $id = $_GET['id']; // Get id from URL
 
 if (!$id) {
-    header("Location: index.php");
+    header("Location: upload.php");
 }
 
 ?>
