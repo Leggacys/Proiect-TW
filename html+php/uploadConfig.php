@@ -12,6 +12,6 @@ if(!$conn){
     die("<script>alert('Connection failed!')</script>");
 }
 
-$base_url = "http://localhost/SolvingPHP/"; //website url 
+$base_url = "http://localhost/proiectTw/html+php/"; //website url 
 
 ?>
