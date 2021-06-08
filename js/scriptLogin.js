@@ -1,6 +1,6 @@
 const form = document.getElementById('form');
 const username = document.getElementById('username');
-const password = document.getElementById('password');
+const password = document.getElementById('parola');
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -10,43 +10,71 @@ form.addEventListener('submit', (e) => {
 function checkInputs() {
     const usernameValue = username.value.trim();
     const passwordValue = password.value.trim();
-    var ok1=1;
-    var ok2=1;
+    var ok1 = 1;
+    var ok2 = 1;
 
     if (usernameValue === '') {
         //show error
         //add error class
         alert("Username cannot be blank!");
-        ok1=0;
+        ok1 = 0;
     }
     else {
         //add success class
-        ok1=1;
+        ok1 = 1;
     }
 
 
     if (passwordValue === '') {
         alert("Password cannot be blank!");
-        ok2=0;
+        ok2 = 0;
     }
     else {
-        ok2=1;
+        ok2 = 1;
     }
 
-    if(ok1==1 && ok2==1 && usernameValue==='profesor'){
+    if (ok1 == 1 && ok2 == 1 && usernameValue === 'profesor') {
         myFunction2();
     }
-    else if(ok1==1 && ok2==1){
+    else if (ok1 == 1 && ok2 == 1) {
         myFunction();
     }
 
     function myFunction() {
-        location.replace("Menu.html");
-      }
+        var usernameValue = document.getElementById("username").value.trim();
+        var passwordValue = document.getElementById("parola").value.trim();
 
-      function myFunction2() {
+        var ajax = new XMLHttpRequest();
+        var method = "POST";
+        var url = "../api/login.php";
+        var async = true;
+        ajax.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+                var myResponse = this.responseText;
+                console.log(myResponse.jwt);
+                localStorage.setItem("jwt", this.responseText);
+            }
+            if (this.readyState == 4 && this.status == 401) {
+                alert("poc!");
+            }
+        };
+        ajax.open(method, url, async);
+        let obj = { "firstname": usernameValue, "password": passwordValue};
+        let json = JSON.stringify(obj);
+        //alert(json);
+        ajax.send(json);
+        setTimeout(() => {  window.location.replace("http://localhost/testingWeb/html+php/Menu.html"); }, 800);
+        return false;
+    }
+
+    function replaceLocation(){
+        location.replace("Menu.html");
+    }
+
+    function myFunction2() {
         location.replace("Menu-prof.html");
-      }
+    }
 
 }
 
