@@ -47,6 +47,8 @@
       <th>Prenume</th>
  			<th>Numar Matricol</th>
       <th>AcceptTo</th>
+      <th>Accepta</th>
+      <th>Respinge</th>
  		</tr>
   <?php
   $conn = mysqli_connect("localhost","root","","studenti");
@@ -59,8 +61,10 @@
   if($result  -> num_rows >0)
   {
     while($row = $result -> fetch_assoc()){
-      echo "<tr><td>" . $row["Nume"] ."</td><td>" . $row["Prenume"] . "</td><td>" . $row["Numar Matricol"] .
-      "</td><td>" . $row["AcceptTo"] . "</tr></td>";
+      echo "<tr><td>" . $row["Nume"] ."</td><td>" . $row["Prenume"] . "</td><td>" . $row["NumarMatricol"] .
+      "</td><td>" . $row["AcceptTo"] .  "</td><td><a href = 'accepta.php?numarMatricol=$row[NumarMatricol]&
+      class=$row[AcceptTo]&nume=$row[Nume]&prenume=$row[Prenume]'> Accepta</td>" . "<td>
+      <a href = 'respinge.php?rn=$row[NumarMatricol]'> Respinge</td>" . "</tr>";
     }
     echo "</table>";
   }else {

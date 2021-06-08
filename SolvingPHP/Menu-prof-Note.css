@@ -1,0 +1,260 @@
+body{
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #56baab;
+
+}
+
+header{
+  position: fixed;
+  background: #22242A;
+  padding: 20px;
+  width:100%;
+  height: 30px;
+}
+
+.left_area h3{
+ color: #fff;
+ margin:0;
+ text-transform: uppercase;
+ font-size: 22px;
+ font-weight: 900;
+}
+
+
+.left_area span{
+  color: #348aa7;
+}
+
+.logout_btn{
+  padding: 5px;
+  background-image: linear-gradient(to right, #348aa7 ,#525174);
+  text-decoration: none;
+  float: right;
+  margin-top: -30px;
+  margin-right:40px;
+  border-radius:2px;
+  font-size: 15px;
+  font-weight:600;
+  color:#fff;
+  transition: 0.5s;
+}
+
+.logout_btn:hover{
+  background: #0D9DBB;
+}
+
+
+#welcomeContainer{
+  padding: 5px;
+  background:linear-gradient(to right, #348aa7 ,#525174);
+  text-decoration: none;
+  float:none;
+  text-align: center;
+
+  margin-top: -30px;
+  margin-right:40px;
+  border-radius:2px;
+  font-size: 15px;
+  max-width: 33.3%;
+  color:#fff;
+  transition: 0.5s;
+  display: block;
+  margin-left: auto;
+  margin-right: auto /* am centrat imaginea*/
+}
+
+#welcomeContainer:hover{
+  background: white;
+  background-color: #0D9DBB;
+}
+
+
+
+label #sidebar_btn{
+  z-index: 1;
+  color: #fff;
+}
+
+.sidebar{
+  background: #2F323A;
+  margin-top: 70px;
+  padding-top: 30px;
+  position: fixed;
+  left:0;
+  width: 270px;
+  height: 100%;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.sidebar .profile_image{
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  margin-bottom:10px;
+  display: block; margin-left: auto; margin-right: auto /* am centrat imaginea*/
+}
+
+.sidebar h4{
+  color:#ccc;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center; /* am centrat imaginea*/
+}
+
+
+.sidebar a{
+  color:#fff;
+  display: block;
+  width:100%;
+  line-height: 60px;
+  text-decoration: none;
+  padding-left: 25px;
+  box-sizing: border-box;
+  transition: background-color 1000ms linear;
+}
+
+.sidebar a:hover{
+  background: #19B3D3;
+}
+
+
+.sidebar i{
+  padding-right: 10px;
+}
+
+.content{
+  z-index: -99;
+  margin-top: 70px;
+  margin-left: 250px;
+  position: absolute;
+  height:100%;
+  width:100%;
+   background-image: linear-gradient(to right, #348aa7 ,#525174);
+  background-position: center;
+}
+
+.styled-table {
+    position: relative;
+    border-collapse: collapse;
+    left: 125px;
+    top: 125px ;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+}
+
+.styled-table thead tr {
+    background-color: #114b5f;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #1a936f;
+}
+
+.styled-table tbody tr:nth-of-type(odd) {
+    background-color: #88d498;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    color: #88d498;
+    font-size: 16px;
+    border: 0.3em solid #1a936f;
+    border-radius: 0.5em;
+    width: 12em;
+    height: 3em;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: sans-serif;
+    letter-spacing: 0.1em;
+    text-align: center;
+    line-height: 3em;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: 0.5s;
+    margin: 1em;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    top: 120px;
+    margin: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+nav ul li span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #1a936f;
+    transform: translateY(150%);
+    border-radius: 50%;
+    left: 25%;
+    transition: 0.5s;
+    transition-delay: 0.1s;
+    z-index: -1;
+}
+
+nav ul li:hover {
+    color: black;
+}
+
+nav ul li:hover span {
+    transform: translateY(0) scale(2);
+}
+/* 
+nav ul li span:nth-child(1) {
+    --n: 1;
+}
+
+nav ul li span:nth-child(2) {
+    --n: 2;
+}
+
+nav ul li span:nth-child(3) {
+    --n: 3;
+}
+
+nav ul li span:nth-child(4) {
+    --n: 4;
+} */
