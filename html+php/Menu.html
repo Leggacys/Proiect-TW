@@ -9,9 +9,17 @@
     }
     setTimeout("hidediv()", 1500);
   </script>
+  <meta charset="utf-8">
+  <title>Menu </title>
   <script>
+
+    function delete_cookie(name) {
+      document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
     function logoutFunction() {
       localStorage.removeItem("jwt");
+      delete_cookie("jwt");
     }
 
     function startsWith ($string, $startString)
@@ -19,10 +27,7 @@
     $len = strlen($startString);
     return (substr($string, 0, $len) === $startString);
 }
-
   </script>
-  <meta charset="utf-8">
-  <title>Menu </title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="stylesheet" href="../css/Menu.css">
   <link rel="shortcut icon" type="image/svg" href="../images/CLaMa.svg">
@@ -80,13 +85,45 @@
     ajax.open(method, url, async);
     var jwt_stocat = window.localStorage.getItem("jwt");
     //alert(jwt_stocat.length);
+
+    function delete_cookie(name) {
+      document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+
+    function deleteAllCookies() {
+    var cookies = document.cookie.split(";");
+
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+}
+
+    alert(jwt_stocat);
     if (jwt_stocat == null) {
-      alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!")
+      alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!");
+      delete_cookie("jwt");
       window.location.replace("http://localhost/testingWeb/html+php/index.html");
     }
     else if (jwt_stocat == "  " || jwt_stocat == "   " || jwt_stocat.length==847) {
       //678 reprezinta cazul de eroare, in momentul in care numele utilizatorului nu e in baza de date
-      alert("Username sau parola gresita!")
+      //session_destroy();
+      alert("Username sau parola gresita!");
+      delete_cookie("jwt");
+      deleteAllCookies();
       window.localStorage.removeItem("jwt");
       window.location.replace("http://localhost/testingWeb/html+php/index.html");
     }
@@ -100,6 +137,10 @@
     }
   </script>
 </body>
+
+<script> 
+  if(getCookie("jwt") == "prof") deleteAllCookies();
+</script>
 
 </html>
 

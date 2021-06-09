@@ -1,9 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-
-    <script src="../js/jwtVerification.js"></script>
-
     <script>
       function hidediv(){
         document.getElementById("welcomeContainer").style.visibility="hidden";
@@ -11,7 +9,7 @@
       setTimeout("hidediv()",5000);
     </script>
 
-    <script>
+<script>
 
 function delete_cookie(name) {
       document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -30,10 +28,11 @@ function delete_cookie(name) {
   
     </script>
 
+
     <meta charset="utf-8">
-    <title>Menu </title>
+    <title>AcceptStudents </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="../css/Menu-prof.css">
+    <link rel="stylesheet" href="../css/Menu-prof-AcceptStudents.css">
     <link rel="shortcut icon" type="image/svg" href="../images/CLaMa.svg">
   </head>
   <body>
@@ -44,52 +43,66 @@ function delete_cookie(name) {
     </div>
     <div id="welcomeContainer"> Autentificare reușită</div>
     <div class="right_area">
-
       <a href="index.html" onclick="logoutFunction()" class="logout_btn">Logout</a>
-
     </div>
   </header>
 
 
   <div class="sidebar">
-      <img src="../images/male.png" class="profile_image" alt="dummy male photo">
-      <h4>Profesorul X</h4>
-      <a href="#"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
-      <a href="Menu-prof-Clase.html"><i class="fab fa-500px"></i><span>   Clase și cursuri</span></a>
-      <a href="Menu-prof-AcceptStudents.php"><i class="fab fa-500px"></i><span>   Primește studenți</span></a>
-      <a href="Menu-prof-GenereazaCod.html"><i class="fab fa-500px"></i><span>   Generează cod</span></a>
-      <a href="Menu-prof-Note.php"><i class="fab fa-500px"></i><span>   Notează studenții</span></a>
-      <a href="Menu-prof-Export.html"><i class="fab fa-500px"></i><span>   Descarcă lista de persoane</span></a>
-      <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
-  </div>
+    <img src="../images/male.png" class="profile_image" alt="dummy male photo">
+    <h4>Profesorul X</h4>
+    <a href="#"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
+    <a href="Menu-prof-Clase.html"><i class="fab fa-500px"></i><span>   Clase și cursuri</span></a>
+    <a href="Menu-prof-AcceptStudents.php"><i class="fab fa-500px"></i><span>   Primește studenți</span></a>
+    <a href="Menu-prof-GenereazaCod.html"><i class="fab fa-500px"></i><span>   Generează cod</span></a>
+    <a href="Menu-prof-Note.php"><i class="fab fa-500px"></i><span>   Notează studenții</span></a>
+    <a href="Menu-prof-Export.html"><i class="fab fa-500px"></i><span>   Descarcă lista de persoane</span></a>
+    <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
+</div>
 
 <div class="content">
+  <h1><span class="blue">&lt;</span>Request<span class="blue">&gt;</span> <span class="yellow">Table</span></h1>
+ <table class="container">
+ 		<tr>
+ 			<th>Nume</th>
+      <th>Prenume</th>
+ 			<th>Numar Matricol</th>
+      <th>AcceptTo</th>
+      <th>Accepta</th>
+      <th>Respinge</th>
+ 		</tr>
+  <?php
+  $conn = mysqli_connect("localhost","root","","api_db");
+  if($conn-> connect_error){
+    die("Connect failed");
+  }
 
+  $sql = "SELECT distinct u.id as id, u.firstname as firstname, u.lastname as lastname FROM users2 u  WHERE rol = 0;";
+  $result = $conn -> query($sql);
+  if($result  -> num_rows >0)
+  {
+    while($row = $result -> fetch_assoc()){
+      echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["id"] .
+      "</td><td>" . "1, 2, 3".  "</td><td><a href = 'accepta.php?id=$row[id]&
+      class=lastname=$row[lastname]&firstname=$row[firstname]'> Accepta</td>" . "<td>
+      <a href = 'respinge.php?rn=$row[id]'> Respinge</td>" . "</tr>";
+    }
+    echo "</table>";
+  }else {
+    {
+      echo "0 results";
+    }
+  }
+  $conn-> close();
+   ?>
  </div>
+  </body>
 
- <script>
-  var ajax = new XMLHttpRequest();
-  var url = "jwtVerification.php";
-  var async = true;
-  var method = "POST";
+  <script>
+    var jwt_stocat = window.localStorage.getItem("jwt");
+    alert(jwt_stocat);
 
-  ajax.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      //var myArr = JSON.parse(this.responseText);
-      //alert(this.responseText);
-      console.log(this.responseText);
-    }
-    if (this.readyState == 4 && this.status == 401) {
-      //alert(this.responseText);
-      //document.getElementById("mesajEroare").innerHTML="Utilizator inexistent sau parola gresita";
-    }
-  };
-
-  ajax.open(method, url, async);
-  var jwt_stocat = window.localStorage.getItem("jwt");
-  //alert(jwt_stocat.length);
-
-  function delete_cookie(name) {
+    function delete_cookie(name) {
       document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
 
@@ -104,6 +117,7 @@ function delete_cookie(name) {
         return null;
     }
 
+    
     function deleteAllCookies() {
     var cookies = document.cookie.split(";");
 
@@ -116,7 +130,7 @@ function delete_cookie(name) {
 }
 
 
-  if (jwt_stocat == null) {
+if (jwt_stocat == null) {
     alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!")
     window.location.replace("http://localhost/testingWeb/html+php/index.html");
     delete_cookie("prof");
@@ -131,15 +145,13 @@ function delete_cookie(name) {
   }
   else{
   //alert(jwt_stocat);
-  ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
-  ajax.send();
+  /* ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
+  ajax.send(); */
   }
-</script>
 
 
-  </body>
 
-  <script> 
-    if(getCookie("jwt") == "prof") deleteAllCookies();
   </script>
+
+
 </html>

@@ -54,6 +54,16 @@ function checkInputs() {
                 var myResponse = this.responseText;
                 console.log(myResponse.jwt);
                 localStorage.setItem("jwt", this.responseText);
+                setCookie('jwt',this.responseText,7);
+                //alert(getCookie('jwt'));
+                //alert(this.responseText);
+                //alert("salut!");
+                //alert(this.responseText.length);
+                //alert(getCookie('jwt'));
+                if(this.responseText.length>4000){
+                    alert("salut!");
+                    setCookie('prof', 1, 7);
+                }
             }
             if (this.readyState == 4 && this.status == 401) {
                 alert("poc!");
@@ -74,6 +84,27 @@ function checkInputs() {
 
     function myFunction2() {
         location.replace("Menu-prof.html");
+    }
+
+    function setCookie(name,value,days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+    }
+
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
     }
 
 }

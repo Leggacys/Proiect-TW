@@ -5,6 +5,7 @@ class User{
     // database connection and table name
     private $conn;
     private $table_name = "users";
+    private $table_name2 = "users2";
  
     // object properties
     public $id;
@@ -55,6 +56,70 @@ function create(){
     return false;
 }
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+function create2(){
+ 
+    // insert query
+    $query = "INSERT INTO " . $this->table_name2 . "
+            SET
+                firstname = :firstname,
+                lastname = :lastname,
+                email = :email,
+                parola = :parola";
+ 
+    // prepare the query
+    $stmt = $this->conn->prepare($query);
+ 
+    // sanitize
+    $this->firstname=htmlspecialchars(strip_tags($this->firstname));
+    $this->lastname=htmlspecialchars(strip_tags($this->lastname));
+    $this->email=htmlspecialchars(strip_tags($this->email));
+    $this->parola=htmlspecialchars(strip_tags($this->parola));
+ 
+    // bind the values
+    $stmt->bindParam(':firstname', $this->firstname);
+    $stmt->bindParam(':lastname', $this->lastname);
+    $stmt->bindParam(':email', $this->email);
+ 
+    // hash the password before saving to database
+    $password_hash = password_hash($this->parola, PASSWORD_BCRYPT);
+    $stmt->bindParam(':parola', $password_hash);
+ 
+    // execute the query, also check if query was successful
+    if($stmt->execute()){
+        return true;
+    }
+ 
+    return false;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // check if given email exist in the database
 function emailExists(){
  
