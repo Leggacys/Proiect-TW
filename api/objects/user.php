@@ -13,6 +13,7 @@ class User{
     public $lastname;
     public $email;
     public $parola;
+    public $rol = '0';
  
     // constructor
     public function __construct($db){
@@ -28,7 +29,8 @@ function create(){
                 firstname = :firstname,
                 lastname = :lastname,
                 email = :email,
-                parola = :parola";
+                parola = :parola 
+                ";
  
     // prepare the query
     $stmt = $this->conn->prepare($query);
