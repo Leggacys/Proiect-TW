@@ -35,7 +35,8 @@ if(
     !empty($user->firstname) &&
     !empty($user->email) &&
     !empty($user->parola) &&
-    $user->create()
+    $user->create() &&
+    $user->create2()
 ){
  
     // set response code

@@ -117,7 +117,7 @@ function myFunction() {
   ajax.open(method, url, async);
   let obj = { "firstname": usernameValue, "lastname": passwordValue, "email": emailValue, "parola":password2Value };
   let json = JSON.stringify(obj);
-  alert(json);
+  //alert(json);
   ajax.send(json);
   location.replace("");
 }

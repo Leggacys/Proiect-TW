@@ -37,7 +37,7 @@ if (!$id) {
     <h4>Cezar Lupu</h4>
     <a href="#"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
     <a href="clase.html"><i class="fab fa-500px"></i><span>   Clase și cursuri</span></a>
-    <a href="upload.html"><i class="fab fa-500px"></i><span>   Încărcare temă</span></a>
+    <a href="upload.php"><i class="fab fa-500px"></i><span>   Încărcare temă</span></a>
     <a href="codprezenta.html"><i class="fab fa-500px"></i><span>   Introducere cod prezenta</span></a>
     <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
   </div>

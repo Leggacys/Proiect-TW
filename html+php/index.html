@@ -51,5 +51,19 @@
   <script src="../js/scriptLogin.js"></script>
 </body>
 
+<script>
+
+var jwt_stocat = window.localStorage.getItem("jwt");
+if(jwt_stocat.length>2900){
+  alert("Sunteti deja logat profesore! Veti fi redirectionati la meniul corespunzator!");
+  setTimeout(() => {  window.location.replace("http://localhost/testingWeb/html+php/Menu.html"); }, 0.001);
+}
+else if(jwt_stocat.length>0 && jwt_stocat.length<2900){
+  alert("Sunteti deja logat studentule! Veti fi redirectionati la meniul corespunzator!");
+  setTimeout(() => {  window.location.replace("http://localhost/testingWeb/html+php/Menu.html"); }, 0.001);
+
+}
+</script>
+
 </html>
 
