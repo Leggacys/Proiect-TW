@@ -1,5 +1,5 @@
 <?php 
-include "configForCSV.php";
+include "configDB.php";
 ?>
 
 
@@ -11,7 +11,7 @@ include "configForCSV.php";
 <body>
         <div class="container">
         
-        <form method='post' action='descarcaCatalog.php'>
+        <form method='post' action='descarcaCatalogcsv.php'>
         <input type='submit' value='Export' name='Export'>
         
         <table>
