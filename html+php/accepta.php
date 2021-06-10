@@ -21,11 +21,13 @@ $queryInsert = "INSERT INTO note (id_stud, id_curs, valoare, valoare2, valoare3)
 VALUES ('$numarMatricol', '1', '0','0','0')";
 
 $data=mysqli_query($conn,$queryInsert);
+echo $data."salut";
+
 if($data)
 {
   //echo "Reusit";
 }else {
-  echo "Eroare";
+  echo "Eroare1";
 }
 
 $queryInsert2 = "INSERT INTO note (id_stud, id_curs, valoare, valoare2, valoare3)
@@ -36,7 +38,7 @@ if($data2)
 {
   //echo "Reusit";
 }else {
-  echo "Eroare";
+  echo "Eroare2";
 }
 
 
@@ -49,7 +51,7 @@ if($data3)
 {
   //echo "Reusit";
 }else {
-  echo "Eroare";
+  echo "Eroare3";
 } 
 
  $query = "DELETE FROM users2 WHERE id ='$numarMatricol'";
@@ -59,6 +61,6 @@ if($data4)
 {
   echo "Sters";
 }else {
-  echo "Eroare";
+  echo "Eroare4";
 }
 ?>

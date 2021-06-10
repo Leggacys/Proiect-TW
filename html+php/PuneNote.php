@@ -31,7 +31,7 @@ function delete_cookie(name) {
     <meta charset="utf-8">
     <title>Note</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="../css/Menu-prof-Note.css">
+    <link rel="stylesheet" href="../css/puneNote.css">
     <link rel="shortcut icon" type="image/svg" href="../images/CLaMa.svg">
   </head>
   <body>
@@ -66,11 +66,7 @@ function delete_cookie(name) {
               <th>Nr matricol</th>
               <th>Nume</th>
               <th>Prenume</th>
-              <th>Nota I</th>
-              <th>Nota II</th>
-              <th>Nota III</th>
-              <th>ID Curs</th>
-              <th>Media</th>
+              <th>Tema</th>
           </tr>
       </thead>
       <tbody>
@@ -81,13 +77,13 @@ function delete_cookie(name) {
             die("Connect failed");
           }
 
-          $sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, n.valoare AS note, n.valoare2 AS note2, n.valoare3 AS note3, n.id_curs AS curs, (n.valoare+n.valoare2+n.valoare3)/3 as media FROM users u JOIN note n ON u.id=n.id_stud WHERE u.rol=0";
+          $sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id) as paths FROM users u JOIN uploaded_files f ON u.id=f.id_stud WHERE u.rol=0";
           $result = $conn -> query($sql);
           if($result  -> num_rows >0)
           {
             while($row = $result -> fetch_assoc()){
               echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
-              "</td><td>" . $row["note"] .  "</td><td>" . $row["note2"]  . "</td><td>" . $row["note3"]  . "</td><td>" . $row["curs"]  . "</td><td>" . $row["media"]  . "</td></tr>";
+              "</td><td>" . $row["paths"] . "</td></tr>";
             }
             echo "</table>";
           }else {
@@ -97,7 +93,9 @@ function delete_cookie(name) {
           }
           $conn-> close();
            ?>
-
+  <nav>
+  
+</nav>
 
  </div>
 <script>

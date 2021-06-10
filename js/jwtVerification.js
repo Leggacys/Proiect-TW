@@ -7,14 +7,14 @@ function jwtVerif(){
 
     ajax.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            alert("salut2");
+            //alert("salut2");
             var myArr = JSON.parse(this.responseText);
             console.log(this.responseText);
             console.log(myArr);
         }
         if (this.readyState == 4 && this.status == 401) {
             //alert(this.responseText);
-            alert("salut!");
+            //alert("salut!");
             window.location.replace("http://localhost/testingWeb/html+php/index.html");
         }    
       };
