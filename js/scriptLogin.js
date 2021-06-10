@@ -61,12 +61,11 @@ function checkInputs() {
                 //alert(this.responseText.length);
                 //alert(getCookie('jwt'));
                 if(this.responseText.length>4000){
-                    alert("salut!");
                     setCookie('prof', 1, 7);
                 }
             }
             if (this.readyState == 4 && this.status == 401) {
-                alert("poc!");
+                //alert("poc!");
             }
         };
         ajax.open(method, url, async);

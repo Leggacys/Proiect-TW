@@ -173,11 +173,19 @@
             </section>
             <section typeof="sa:MaterialsAndMethods" id="functionalitati" role="doc-chapter">
                 <h2><span>4. </span>Funcționalitățile aplicației</h2>
+                <img src="../images/diagramaUML.png" alt="UML" width=100% height=100%>
                 <p>
-                    În această parte a documentului HTML vom prezenta funcționalitățile actuale ale aplicației și vom explica rolul și metoda de implementare pentru fiecare element în parte.
+                    În această parte a documentului HTML vom prezenta funcționalitățile actuale ale aplicației și vom explica rolul și metoda de implementare pentru fiecare element în parte. Însă, pentru început, demn de specificat este faptul că, pentru a păstra datele de autentificare ne folosim de facilitățile oferite de <strong>JWT</strong>, acest fapt ajutând mai ales la respectarea principiilor unui <strong>REST API</strong>.
+                </p>
+                <p>
+                    În ceea ce privește <strong>diminuarea riscurilor de SQL Injection</strong> ne folosim de funcția prepare() pentru a pregăti/procesa datele primite de la utilizator, pe care le vom executa. 
+                </p>
+                <p>
+                    În cele din urmă, vorbind despre <strong>prevenirea atacurilor de tip XSS</strong>, avem funcția htmlspecialchar() prin care se dorim să îndepărtăm nefericitele situații de HTML Injection document-creation-time.
                 </p>
                 <section typeof="sa:MaterialsAndMethods" id="loading" role="doc-chapter">
                         <h3><span>4.1 </span>Loading screen</h3>
+                        <img src="../images/loading.png" alt="LoadingPage" width=50% height=50%>
                         <p>
                             În prima parte a aplicației, pentru estetica site-ului nostru, vom avea o animație de tip „loading”. Această aplicație a fost scrisă în <a href="loading.html">HTML</a> și <a href="../css/styleLoadingScreen.css">CSS</a>,
                             iar, pentru a fi legată de partea de login, ne-am folosit de un javascript ce face tranziția dintre cele două pagini.
@@ -185,15 +193,23 @@
                 </section>
                     <section typeof="sa:MaterialsAndMethods" id="login" role="doc-chapter">
                         <h3><span>4.2 </span>Login</h3>
+                        <img src="../images/Login.png" alt="LoadingPage" width=50% height=50%>
                         <p>
-                            Cea de-a doua componentă vizibilă utilizatorului va fi partea de login, implementatată, până acum printr-un <a href="index.html">HTML</a> și un <a href="../css/index.css">CSS</a>. Prin partea de login, cei ce se vor în registra în baza noastră de date își vor putea folosi contul pentru a utiliza aplicația noastră. Vom avea 3 tipuri de conturi: admin, profesor și elev. Fiecare dintre aceste tipuri va avea funcționalități specifice, în acord cu ceea ce trebuie să ofere utilitarul nostru.
+                            Cea de-a doua componentă vizibilă utilizatorului va fi partea de login, implementatată, până acum printr-un <a href="index.html">HTML</a>, un <a href="../css/index.css">CSS</a>, o parte de JS și o parte de PHP. Prin partea de login, cei ce se vor în registra în baza noastră de date își vor putea folosi contul pentru a utiliza aplicația noastră. Vom avea 2 tipuri de conturi: profesor și elev.
                         </p>
+                        <p>
+                            Din partea de PHP, vom avea pentru toate conturile un <strong>JWT generat</strong> pe care îl putem decodifica pentru avea datele utilizatorului. JWT-ul se va păstra pe tot parcursul timpului în care utilizatorul îl va petrece pe paginili noastre. Pentru verificarea acestei informații despre JWT, se poate utiliza site-ul: <a href="https://jwt.io/">https://jwt.io/</a>.
+                        </p>
+                        <p>
+                            Tot aici este momentul în care decidem dacă este necesar un token. Astfel, dacă toate username-ul și parola sunt corecte, se va genera acest JWT. Pentru toate cazurile contrare, vom șterge JWT-ul generat și vom rămâne pe partea de login până când se vor introduce date valide.
+
                     </section>
                     <section typeof="sa:MaterialsAndMethods" id="register" role="doc-chapter">
                         <h3><span>4.3 </span>Register</h3>
+                        <img src="../images/register.png" alt="Register" width=50% height=50%>
                         <p>
                             În partea de register vom avea 4 câmpuri: username, email, parolă, confirmare parolă. Aceste date vor fi introduse în baza de date, dar nu înainte ca noi să realizăm o verificare dacă nu există deja un cont cu același username sau același email. La momentul actual, verificăm dacă aceste câmpuri sunt compeltate, dacă emailul are forma specifică ( @domainname) și dacă parola inițială se potrivește cu cea din câmpul de confirmare a parolei.
-                            În subsolul formularului, avem butonul de submit care va insera datele în baza de date, și butonul care ne duce la pagina de logare. Deocamdată, partea de front-end e implementată într-un <a href="register.html">HTML</a>, un <a href="../css/register.css">CSS</a> și un <a href="../js/scriptRegister.js">JavaScript</a>.
+                            În subsolul formularului, avem butonul de submit care va insera datele în baza de date, și butonul care ne duce la pagina de logare. Această parte e implementată într-un <a href="register.html">HTML</a>, un <a href="../css/register.css">CSS</a>, un <a href="../js/scriptRegister.js">JavaScript</a> și un PHP.
                         </p>
                     </section>
                     <section typeof="sa:MaterialsAndMethods" id="meniu" role="doc-chapter">
@@ -207,25 +223,33 @@
                             Meniul este constituit din două părți, una ce cuprinde funcționalitățile pentru <a href="Menu.html">student</a>, iar cealaltă cuprinzând funcționalitățile necesare unui <a href="Menu-prof.html">profesor</a>. În concordanță cu tipul de cont cu care se va loga utilizatorul, se va afișa și meniul dorit. De asemenea, partea de meniu va fi o componentă ce va putea fi vizualizată constant, ea fiind integrată în majoritatea celorlalte pagini create.
                         </p>
                         <p>
+                            Meniul se poate accesa doar daca exista JWT-ul.    
+                        </p>
+                        
+                        <p>
                             Meniul pentru student este implementat în <a href="Menu.html">HTML</a> și <a href="../css/Menu.css">CSS</a>
                         </p>
+                        <img src="../images/Menu.png" alt="Menu" width=50% height=50%>
                         <p>
                             Meniul pentru profesor este, de asemenea, implementat în <a href="Menu-prof.html">HTML</a> și <a href="../css/Menu-prof.css">CSS</a>.
                         </p>
+                        <img src="../images/Menu-prof.png" alt="Menu-prof" width=50% height=50%>
                     </section>
 
                     <section typeof="sa:MaterialsAndMethods" id="clasa" role="doc-chapter">
                         <h3><span>4.5 </span>Accesarea cursului/clasei</h3>
+                        <img src="../images/clase.png" alt="Menu-prof" width=50% height=50%>
                         <p>
                             Profesorul și elevul vor putea accesa componenta „Clase și cursuri” a meniului pentru a-și desfășura activitățile educaționale. Astfel, în interiorul paginii veți găsi, pentru început, trei exemple de cursuri. Pagina este responsive, lucru pe care îl puteți vedea minimalizând cât mai mult fereastra browserului.
                         </p>
                         <p>
-                            Această componentă a fost implementată în <a href="clase.html">HTML</a> și <a href="../css/clase.css">CSS</a>. Aceeași componentă, dar cu meniul pentru profesor, o puteți vizualiza <a href="Menu-prof-Clase.html">aici</a>.
+                            Această componentă a fost implementată în <a href="clase.html">HTML</a> și <a href="../css/clase.css">CSS</a>. Aceeași componentă, dar cu meniul pentru profesor, o puteți vizualiza <a href="Menu-prof-Clase.html">aici</a>, bineînțeles, dacă vă veți loga mai întâi 😊.
                         </p>
 
                     </section>
                     <section typeof="sa:MaterialsAndMethods" id="accept" role="doc-chapter">
                         <h3><span>4.6 </span>Acceptarea studenților </h3>
+                        <img src="../images/ACCEPTsTUDENTS.png" alt="Acceptare studenti" width=50% height=50%>
                         <p>
                           Profesorul are o componenta numita "Acceptare studenti" in care poate vedea studentii care vor sa faca parte din calsa lui.Acestia introduc un cod dupa care vor aparea intr-un tabel.
                         </p>
@@ -233,58 +257,66 @@
                           In acest tabel vor aparea studenti cu nume,prenume, grupa, numar_matricol si la ce materie vor sa faca parte. Profesorul apasand pe numele studentului il poate accepta sau respinge.
                         </p>
                         <p>
-                            Componenta a fost implementată în <a href="Menu-prof-AcceptStudents.html">HTML</a> și <a href="../css/Menu-prof-AcceptStudents.css">CSS</a>.
+                            Componenta a fost implementată în <a href="Menu-prof-AcceptStudents.php">HTML</a> și <a href="../css/Menu-prof-AcceptStudents.css">CSS</a>.
                         </p>
                     </section>
                     <section typeof="sa:MaterialsAndMethods" id="generare" role="doc-chapter">
                         <h3><span>4.7 </span>Generarea de cod pentru student </h3>
+                        <img src="../images/COD.png" alt="Generare cod" width=50% height=50%>
                         <p>
-                            Profesorul are posibilitatea de a genera un cod ce va fi utilizat pentru a face prezența, ulterior codul va expira dupa o perioadă de X secunde. După ce codul va fi generat, profesorul le va transmite codul studenților care sunt înscrisi in clasa respectivă.
-                        </p>
-
-                        <p>
-                            Această componentă a fost implementată în <a href="Menu-prof-GenereazaCod.html">HTML</a> și <a href="../css/Menu-prof-GenereazaCod.css">CSS</a>. Aceeași componentă, dar cu meniul pentru profesor, o puteți vizualiza <a href="Menu-prof-GenereazaCod.html">aici</a>.
+                            Profesorul are posibilitatea de a genera un cod ce va fi utilizat pentru a face prezența. După ce codul va fi generat, profesorul le va transmite codul studenților. In tabela cursuri vom lega acest cod de cursul pentru care este generat.
                         </p>
                     </section>
                     <section typeof="sa:MaterialsAndMethods" id="notare" role="doc-chapter">
                         <h3><span>4.8 </span>Notarea studenților</h3>
+                        <img src="../images/notare.png" alt="notare studenti" width=50% height=50%>
                         <p>
-                         Profesorul va avea un tabel(catalog) unde vor aparea toti studenti de la o anumita materie predata de el. In formatul nume,prenume, grupa, numar_matricol si cele trei note.
+                         Profesorul va avea un tabel(catalog) unde vor aparea toti studenti de la o anumita materie predata de el. In formatul id, nume,prenume, grupa, cele trei note si media.
                         </p>
                         <p>
-                          In acest tabel sunt studentii(nume, prenume..etc) dar si trei coloane in plus care reprezinta notele.El va putea sa calculeze media lor apasand un buton.
-                        </p>
-                        <p>
-                            Componenta a fost implementată în <a href="Menu-prof-Note.html">HTML</a> și <a href="../css/Menu-prof-Note.css">CSS</a>.
+                          In acest tabel sunt studentii(nume, prenume..etc) dar si trei coloane in plus care reprezinta notele. Media se va calcula automat, fiind media aritmetica a celor 3 note.
                         </p>
                     </section>
                     <section typeof="sa:MaterialsAndMethods" id="download" role="doc-chapter">
                         <h3><span>4.9 </span>Descărcarea listei de persoane </h3>
+                        <img src="../images/tip_export.png" alt="tip-export" width=50% height=50%>
                         <p>
-                         Componenta "Descarcarea listei de persoane" va vea ca functionalitate exportarea de catre profesor al unui file de extensie aleasa de catre profesor.
+                         Componenta "Descarcarea listei de persoane" va avea ca functionalitate exportarea de catre profesor al unui fisier de extensie aleasa de catre profesor. Astfel, vom avea urmatoarele cazuri:
                         </p>
                         <p>
-                            Componenta a fost implementată în <a href="Menu-prof-Export.html">HTML</a> și <a href="../css/upload.css">CSS</a>.
+                            PDF -> implementat cu ajutorul pachetului TCPDF;
                         </p>
+                        <img src="../images/export-pdff.png" alt="Acceptare studenti" width=50% height=50%>
+                        <p>
+                            CSV -> care se va accesa print-ul HTML intermediar
+                        </p>
+                        <img src="../images/CSV.png" alt="Acceptare studenti" width=50% height=50%>
+                        <p>
+                            XML -> la care avem atat functia de export, cat si cea de import.
+                        </p>
+                        <img src="../images/exoprt-xml.png" alt="Acceptare studenti" width=50% height=50%>
                     </section>
                     <section typeof="sa:MaterialsAndMethods" id="upload" role="doc-chapter">
                         <h3><span>4.10 </span>Încărcarea temei </h3>
                         <p>
-                            Încărcarea temei este o parte ce va fi utilizată în complementaritate cu clasa/cursul pe care îl vom accesa. Pentru această parte, am gândit atât utilizarea unei funcții de tip ”drag and drop” pentru fișierul care se dorește a fi încărcat, cât și posibilitatea de a naviga prin computer. Este o funcționalitate specifică studentului.
+                            Încărcarea temei este o parte ce va fi utilizată în complementaritate cu clasa/cursul pe care îl vom accesa. Pentru această parte, am gândit atât utilizarea unei funcții de tip ”drag and drop” pentru fișierul care se dorește a fi încărcat, cât și posibilitatea de a naviga prin computer. Este o funcționalitate specifică studentului. Exista doua parti:
                         </p>
                         <p>
-                            Componenta a fost implementată în <a href="upload.html">HTML</a> și <a href="../css/Menu-prof-Export.css">CSS</a>.
+                            Partea de upload: se incarca fisierul, se salveaza in baza de date si se genereaza un link.
                         </p>
+                        <img src="../images/upload.png" alt="Acceptare studenti" width=50% height=50%>
+                        <p>
+                            Partea de download: se acceseaza prin link-ul primit si permite descarcarea temei.
+                        </p>
+                        <img src="../images/download.png" alt="Acceptare studenti" width=50% height=50%>
                     </section>
                     <section typeof="sa:MaterialsAndMethods" id="cod-prezenta" role="doc-chapter">
                         <h3><span>4.11 </span>Introducerea codului de prezență</h3>
                         <p>
-                            Studentul are posibilitatea de a introduce codul generat de către profesor. Astfel, acesta este considerat prezent la cursul curent al profesorului, în spate fiind implementată o bază de date care stocheaza pe cei care "s-au trecut prezenti".
+                            Studentul are posibilitatea de a introduce codul generat de către profesor si, astfel, de a aparea in baza de date asignat cursului la care doreste sa participe.
                         </p>
+                        <img src="../images/introduceCod.png" alt="Acceptare studenti" width=50% height=50%>
 
-                        <p>
-                            Această componentă a fost implementată în <a href="codprezenta.html">HTML</a> și <a href="../css/codprezenta.css">CSS</a>. Aceeași componentă, dar cu meniul pentru profesor, o puteți vizualiza <a href="codprezenta.html">aici</a>.
-                        </p>
                     </section>
             </section>
 
@@ -302,7 +334,7 @@
                 <section typeof="sa:MaterialsAndMethods" id="contributiile" role="doc-chapter">
                     <h3><span>5.2 </span>Contribuții</h3>
                     <p>
-                        Toti membrii echipei au lucrat la acest proiect si fiecare a progresat mult cand vine vorba de partea de FrontEnd.
+                        Toti membrii echipei au lucrat la acest proiect si fiecare a avut contributii esentiale in realizarea functionalitatilor amintite mai sus.
                     </p>
                     <p>
                         Pentru gestionarea task-urilor am folosit Github. Astfel, noi am creat un project in care avem 3 coloane in care se vor regasi task-urile la care am lucrat : To do, In progress si Done.
@@ -313,7 +345,7 @@
             <section id="concluzii">
                 <h2><span>6. </span>Concluzii</h2>
                 <p>
-                    Dezvoltarea acestui utilitar ne-a invățat multe aspecte legate de partea de FrontEnd a unui site web și ne-a permis să lucrăm la ceva de care suntem pasionați, lucru care ne-a motivat pe parcurs. Am realizat că aplicațiile web pe partea de FrontEnd sunt tehnologii complexe, care necesită multă atenție în implementare dar si o gandire creative ca sa putem creea un design cat mai "friendly" si usor de folosit pentru utilizator.
+                    Dezvoltarea acestui utilitar ne-a invățat multe aspecte legate de crearea de la zero a unui site web și ne-a permis să lucrăm la ceva de care suntem pasionați, lucru care ne-a motivat pe parcurs. Am realizat că aplicațiile web sunt tehnologii complexe, care necesită multă atenție în implementare dar si o gandire creativa pentur a crea un design cat mai "friendly" si usor de folosit pentru utilizator.
                 </p>
             </section>
 

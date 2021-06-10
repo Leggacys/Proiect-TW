@@ -31,7 +31,7 @@ function delete_cookie(name) {
     <meta charset="utf-8">
     <title>Note</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="../css/Menu-prof-Note.css">
+    <link rel="stylesheet" href="../css/statisticaTW.css">
     <link rel="shortcut icon" type="image/svg" href="../images/CLaMa.svg">
   </head>
   <body>
@@ -48,15 +48,14 @@ function delete_cookie(name) {
 
 
   <div class="sidebar">
-      <img src="../images/male.png" class="profile_image" alt="dummy male photo">
-      <h4>Profesorul X</h4>
-      <a href="Menu-prof.html"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
-      <a href="PuneNote.php"><i class="fab fa-500px"></i><span>   Vizualizare Teme</span></a>
-      <a href="Menu-prof-AcceptStudents.php"><i class="fab fa-500px"></i><span>   Primește studenți</span></a>
-      <a href="Menu-prof-GenereazaCod.php"><i class="fab fa-500px"></i><span>   Generează cod</span></a>
-      <a href="Menu-prof-Note.php"><i class="fab fa-500px"></i><span>   Notează studenții</span></a>
-      <a href="Menu-prof-Export.html"><i class="fab fa-500px"></i><span>   Descarcă lista de persoane</span></a>
-      <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
+    <img src="../images/Cezar_pROFILE.png" class="profile_image" alt="profile image">
+    <h4>Cezar Lupu</h4>
+
+    <a href="#"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
+    <a href="clase.html"><i class="fab fa-500px"></i><span> Clase și cursuri</span></a>
+    <a href="upload.php"><i class="fab fa-500px"></i><span> Încărcare temă</span></a>
+    <a href="codprezenta.html"><i class="fab fa-500px"></i><span> Introducere cod prezenta</span></a>
+    <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
   </div>
 
 <div class="content">
@@ -76,12 +75,46 @@ function delete_cookie(name) {
       <tbody>
 
           <?php
+
+
+include_once '../api/config/database.php';
+include_once '../api/objects/user.php';
+include_once '../api/libs/jwt_params.php';
+include_once '../api/objects/user.php';
+include_once '../api/libs/php-jwt-master/src/BeforeValidException.php';
+include_once '../api/libs/php-jwt-master/src/ExpiredException.php';
+include_once '../api/libs/php-jwt-master/src/SignatureInvalidException.php';
+include_once '../api/libs/php-jwt-master/src/JWT.php';
+use \Firebase\JWT\JWT;
+if(!isset($_COOKIE["jwt"])){
+  //window.location.replace("http://localhost/testingWeb/html+php/index.html");
+  echo "Comportament nepermis! Logati-va ca student ca sa puteti incarca documente.";
+  return false;
+} 
+else {$jwt = $_COOKIE['jwt'];}
+
+try{    
+  $jwt_decodificat = JWT::decode($jwt, JWT_KEY, array('HS256'));
+  //print_r($jwt_decodificat);
+  //echo "\n\n\n\n";
+  $id_utilizator = $jwt_decodificat->data->id;
+  //echo $id_utilizator;
+  echo "\n\n\n\n";
+  //echo $rol;
+  echo "\n\n\n\n";
+
+  }catch (Exception $e){
+     echo json_encode(["message"=>$e->getMessage()]);
+     exit();
+ }
+
+
           $conn = mysqli_connect("localhost","root","","api_db");
           if($conn-> connect_error){
             die("Connect failed");
           }
 
-          $sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, n.valoare AS note, n.valoare2 AS note2, n.valoare3 AS note3, n.id_curs AS curs, (n.valoare+n.valoare2+n.valoare3)/3 as media FROM users u JOIN note n ON u.id=n.id_stud WHERE u.rol=0";
+          $sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, n.valoare AS note, n.valoare2 AS note2, n.valoare3 AS note3, n.id_curs AS curs, (n.valoare+n.valoare2+n.valoare3)/3 as media FROM users u JOIN note n ON u.id=n.id_stud WHERE u.rol=0 AND u.id = '$id_utilizator' AND n.id_curs = 2";
           $result = $conn -> query($sql);
           if($result  -> num_rows >0)
           {
@@ -97,7 +130,7 @@ function delete_cookie(name) {
           }
           $conn-> close();
            ?>
-
+  
 
  </div>
 <script>
@@ -116,7 +149,7 @@ document.getElementById("medie").innerHTML = secondGrade;
 
   <script>
     var jwt_stocat = window.localStorage.getItem("jwt");
-    //alert(jwt_stocat);
+    alert(jwt_stocat);
 
     function delete_cookie(name) {
       document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
