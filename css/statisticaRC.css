@@ -1,8 +1,8 @@
 body{
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #56baab;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  width:100%;
   
   }
   
@@ -12,6 +12,7 @@ body{
     padding: 20px;
     width:100%;
     height: 30px;
+    animation: transitionIn 0.15s;
   }
   
   .left_area h3{
@@ -20,6 +21,7 @@ body{
    text-transform: uppercase;
    font-size: 22px;
    font-weight: 900;
+   animation: transitionIn 0.15s;
   }
   
   
@@ -32,13 +34,13 @@ body{
     background:linear-gradient(to right, #cc2b5e ,#753a88);
     text-decoration: none;
     float: right;
-    margin-top: -30px;
-    margin-right:40px;
-    border-radius:2px;
-    font-size: 15px;
-    font-weight:600;
-    color:#fff;
-    transition: 0.5s;
+  margin-top: -30px;
+  margin-right:40px;
+  font-size: 20px;
+  font-weight:600;
+  color:#fff;
+  transition: 0.5s;
+  border-radius: 20px;
   }
   
   .logout_btn:hover{
@@ -87,6 +89,7 @@ body{
     height: 100%;
     align-items: center;
     overflow-y: auto;
+    animation: transitionIn 0.15s;
   }
   
   .sidebar .profile_image{
@@ -97,11 +100,12 @@ body{
     display: block; margin-left: auto; margin-right: auto /* am centrat imaginea*/
   }
   
-  .sidebar h4{
+  .sidebar h3{
     color:#ccc;
     margin-top: 0;
     margin-bottom: 20px;
     text-align: center; /* am centrat imaginea*/
+    animation: transitionIn 0.15s;
   }
   
   
@@ -114,6 +118,7 @@ body{
     padding-left: 25px;
     box-sizing: border-box;
     transition: background-color 1000ms linear;
+    animation: transitionIn 0.15s;
   }
   
   .sidebar a:hover{
@@ -127,8 +132,7 @@ body{
   
   .content{
     z-index: -99;
-    margin-top: 70px;
-    margin-left: 250px;
+
     position: absolute;
     height:100%;
     width:100%;
@@ -145,6 +149,9 @@ body{
       font-family: sans-serif;
       min-width: 400px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+      animation: transitionIn 0.15s;
+      left: 400px;
+      top: 150px;
   
   }
   
@@ -259,3 +266,14 @@ body{
       --n: 4;
   } */
   
+  @keyframes transitionIn{
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0px);
+  
+    }
+  }

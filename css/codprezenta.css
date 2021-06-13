@@ -2,7 +2,7 @@ body{
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #56baab;
+  width:100%;
 
 }
 
@@ -12,6 +12,7 @@ header{
   padding: 20px;
   width:100%;
   height: 30px;
+  animation: transitionIn 0.15s;
 }
 
 .left_area h3{
@@ -20,6 +21,7 @@ header{
  text-transform: uppercase;
  font-size: 22px;
  font-weight: 900;
+ animation: transitionIn 0.15s;
 }
 
 
@@ -34,11 +36,11 @@ header{
   float: right;
   margin-top: -30px;
   margin-right:40px;
-  border-radius:2px;
-  font-size: 15px;
+  font-size: 20px;
   font-weight:600;
   color:#fff;
   transition: 0.5s;
+  border-radius: 20px;
 }
 
 .logout_btn:hover{
@@ -60,6 +62,7 @@ label #sidebar_btn{
   height: 100%;
   align-items: center;
   overflow-y: auto;
+  animation: transitionIn 0.15s;
 }
 
 .sidebar .profile_image{
@@ -70,7 +73,7 @@ label #sidebar_btn{
   display: block; margin-left: auto; margin-right: auto /* am centrat imaginea*/
 }
 
-.sidebar h4{
+.sidebar h3{
   color:#ccc;
   margin-top: 0;
   margin-bottom: 20px;
@@ -100,8 +103,6 @@ label #sidebar_btn{
 
 .content{
   z-index: -99;
-  margin-top: 70px;
-  margin-left: 250px;
   position: absolute;
   height:100%;
   width:100%;
@@ -160,6 +161,7 @@ label #sidebar_btn{
       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
       width: 400px;
       max-width: 100%;
+      animation: transitionIn 0.15s;
     }
 
 
@@ -199,7 +201,8 @@ label #sidebar_btn{
     }
 
     .form button{
-      background: linear-gradient(90deg, rgba(88,24,69,1) 0%, rgba(144,12,63,1) 51%, rgba(199,0,57,1) 100%, rgba(87,0,63,1) 100%);
+      background:#2E8B57;;
+
       border-radius: 4px;
       color: #fff;
       display: block;
@@ -218,3 +221,97 @@ label #sidebar_btn{
     }
 
 
+
+
+
+
+    
+
+
+
+
+
+
+    .content .file__upload {
+      width: 400px;
+      height: 445px;
+      margin: 130px 350px ;
+      border-radius: 15px;
+      box-sizing: border-box;
+      box-shadow: 0 0 5px rgba(0,0,0,.3);
+      background-color: white;
+      animation: transitionIn 0.15s;
+  }
+  
+  .file__upload .header-box {
+      width: 100%;
+      height: 145px;
+      background: #2E8B57;;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+      border-radius: 5px 5px 0 0;
+  }
+  
+  .file__upload .header-box p {
+      color: #FFF;
+  }
+  
+  .file__upload .header-box p i.fa {
+      margin-right: 10px;
+  }
+  
+  .file__upload .header-box p span {
+      font-size: 2rem;
+      font-weight: 100;
+  }
+  
+  .file__upload .header-box p span span {
+      font-weight: 600;
+  }
+  
+  .file__upload .body-formular {
+      background: #FFF;
+      width: 100%;
+      height: calc(100% - 145px);
+      border-radius: 0 0 5px 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+  
+  }
+  
+  .file__upload .body-formular input[type="file"] {
+      opacity: 0;
+  }
+  
+  .file__upload .body-formular i.fa {
+      color: #d3d3d3;
+      margin-bottom: 20px;
+      cursor: pointer;
+  }
+  
+  .file__upload .body-formular p strong {
+      color: #4db6ac;
+  }
+  
+  .file__upload .body-formular p span {
+      color: #4db6ac;
+      text-decoration: underline;
+  }
+
+  @keyframes transitionIn{
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0px);
+  
+    }
+  }

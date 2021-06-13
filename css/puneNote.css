@@ -1,25 +1,27 @@
 body{
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #56baab;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  width:100%;
   
   }
   
   header{
     position: fixed;
-    background: #22242A;
-    padding: 20px;
-    width:100%;
-    height: 30px;
+  background: #22242A;
+  padding: 20px;
+  width:100%;
+  height: 30px;
+  animation: transitionIn 0.15s;
   }
   
   .left_area h3{
-   color: #fff;
-   margin:0;
-   text-transform: uppercase;
-   font-size: 22px;
-   font-weight: 900;
+    color: #fff;
+    margin:0;
+    text-transform: uppercase;
+    font-size: 22px;
+    font-weight: 900;
+    animation: transitionIn 0.15s;
   }
   
   
@@ -31,14 +33,14 @@ body{
     padding: 5px;
     background-image: linear-gradient(to right, #348aa7 ,#525174);
     text-decoration: none;
-    float: right;
-    margin-top: -30px;
-    margin-right:40px;
-    border-radius:2px;
-    font-size: 15px;
-    font-weight:600;
-    color:#fff;
-    transition: 0.5s;
+  float: right;
+  margin-top: -30px;
+  margin-right:40px;
+  font-size: 20px;
+  font-weight:600;
+  color:#fff;
+  transition: 0.5s;
+  border-radius: 20px;
   }
   
   .logout_btn:hover{
@@ -68,6 +70,7 @@ body{
   #welcomeContainer:hover{
     background: white;
     background-color: #0D9DBB;
+    animation: transitionIn 0.75s;
   }
   
   
@@ -87,6 +90,7 @@ body{
     height: 100%;
     align-items: center;
     overflow-y: auto;
+    animation: transitionIn 0.15s;
   }
   
   .sidebar .profile_image{
@@ -97,11 +101,12 @@ body{
     display: block; margin-left: auto; margin-right: auto /* am centrat imaginea*/
   }
   
-  .sidebar h4{
+  .sidebar h3{
     color:#ccc;
     margin-top: 0;
     margin-bottom: 20px;
     text-align: center; /* am centrat imaginea*/
+    animation: transitionIn 0.15s;
   }
   
   
@@ -114,6 +119,7 @@ body{
     padding-left: 25px;
     box-sizing: border-box;
     transition: background-color 1000ms linear;
+    animation: transitionIn 0.15s;
   }
   
   .sidebar a:hover{
@@ -127,8 +133,6 @@ body{
   
   .content{
     z-index: -99;
-    margin-top: 70px;
-    margin-left: 250px;
     position: absolute;
     height:100%;
     width:100%;
@@ -139,13 +143,13 @@ body{
   .styled-table {
       position: relative;
       border-collapse: collapse;
-      left: 125px;
-      top: 125px ;
       font-size: 0.9em;
       font-family: sans-serif;
       min-width: 400px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  
+      animation: transitionIn 0.15s;
+      left: 400px;
+      top: 150px;
   }
   
   .styled-table thead tr {
@@ -259,3 +263,14 @@ body{
       --n: 4;
   } */
   
+  @keyframes transitionIn{
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0px);
+  
+    }
+  }

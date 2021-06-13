@@ -128,6 +128,7 @@ if(isset($_POST['upload'])){ //if upload button isset or not
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="shortcut icon" type="image/svg" href="../images/CLaMa.svg">
@@ -169,8 +170,8 @@ if(isset($_POST['upload'])){ //if upload button isset or not
 
 
   <div class="sidebar">
-    <img src="../images/Cezar_pROFILE.png" class="profile_image" alt="profile image">
-    <h4>Cezar Lupu</h4>
+    <img src="../images/CLaMa.svg" class="profile_image" alt="profile image">
+    <h3>Cezar Lupu</h3>
     <a href="Menu.html"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
     <a href="clase.html"><i class="fab fa-500px"></i><span>   Clase și cursuri</span></a>
     <a href="upload.php"><i class="fab fa-500px"></i><span>   Încărcare temă</span></a>

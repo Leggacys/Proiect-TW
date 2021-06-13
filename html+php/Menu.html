@@ -3,6 +3,8 @@
 
 <head>
   <script src="../js/jwtVerification.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <script>
     function hidediv() {
       document.getElementById("welcomeContainer").style.visibility = "hidden";
@@ -10,11 +12,12 @@
     setTimeout("hidediv()", 1500);
   </script>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menu </title>
   <script>
 
     function delete_cookie(name) {
-      document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
 
     function logoutFunction() {
@@ -22,11 +25,10 @@
       delete_cookie("jwt");
     }
 
-    function startsWith ($string, $startString)
-{
-    $len = strlen($startString);
-    return (substr($string, 0, $len) === $startString);
-}
+    function startsWith($string, $startString) {
+      $len = strlen($startString);
+      return (substr($string, 0, $len) === $startString);
+    }
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="stylesheet" href="../css/Menu.css">
@@ -50,10 +52,10 @@
 
 
   <div class="sidebar">
-    <img src="../images/Cezar_pROFILE.png" class="profile_image" alt="profile image">
-    <h4>Cezar Lupu</h4>
+    <img src="../images/CLaMa.svg" class="profile_image" alt="profile image">
+    <h3>Cezar Lupu</h3>
 
-    <a href="#"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
+    <a href="Menu.html"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
     <a href="clase.html"><i class="fab fa-500px"></i><span> Clase și cursuri</span></a>
     <a href="upload.php"><i class="fab fa-500px"></i><span> Încărcare temă</span></a>
     <a href="codprezenta.php"><i class="fab fa-500px"></i><span> Introducere cod prezenta</span></a>
@@ -87,30 +89,30 @@
     //alert(jwt_stocat.length);
 
     function delete_cookie(name) {
-      document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
 
     function getCookie(name) {
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(';');
-        for(var i=0;i < ca.length;i++) {
-            var c = ca[i];
-            while (c.charAt(0)==' ') c = c.substring(1,c.length);
-            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-        }
-        return null;
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
     }
 
     function deleteAllCookies() {
-    var cookies = document.cookie.split(";");
+      var cookies = document.cookie.split(";");
 
-    for (var i = 0; i < cookies.length; i++) {
+      for (var i = 0; i < cookies.length; i++) {
         var cookie = cookies[i];
         var eqPos = cookie.indexOf("=");
         var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      }
     }
-}
 
     //alert(jwt_stocat);
     if (jwt_stocat == null) {
@@ -118,7 +120,7 @@
       delete_cookie("jwt");
       window.location.replace("http://localhost/testingWeb/html+php/index.html");
     }
-    else if (jwt_stocat == "  " || jwt_stocat == "   " || jwt_stocat.length==847) {
+    else if (jwt_stocat == "  " || jwt_stocat == "   " || jwt_stocat.length == 847) {
       //678 reprezinta cazul de eroare, in momentul in care numele utilizatorului nu e in baza de date
       //session_destroy();
       alert("Username sau parola gresita!");
@@ -127,20 +129,19 @@
       window.localStorage.removeItem("jwt");
       window.location.replace("http://localhost/testingWeb/html+php/index.html");
     }
-    else if (jwt_stocat.length>2900){
-      setTimeout(() => {  window.location.replace("http://localhost/testingWeb/html+php/Menu-prof.html"); }, 0.001);
+    else if (jwt_stocat.length > 2900) {
+      setTimeout(() => { window.location.replace("http://localhost/testingWeb/html+php/Menu-prof.html"); }, 0.001);
     }
-    else{
-    //alert(jwt_stocat);
-    ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
-    ajax.send();
+    else {
+      //alert(jwt_stocat);
+      ajax.setRequestHeader("Authorization", "Bearer " + jwt_stocat);
+      ajax.send();
     }
   </script>
 </body>
 
-<script> 
-  if(getCookie("jwt") == "prof") deleteAllCookies();
+<script>
+  if (getCookie("jwt") == "prof") deleteAllCookies();
 </script>
 
 </html>
-

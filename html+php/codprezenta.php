@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
+    <script>
+
+function delete_cookie(name) {
+  document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+function logoutFunction() {
+  localStorage.removeItem("jwt");
+  delete_cookie("jwt");
+}
+
+function startsWith($string, $startString) {
+  $len = strlen($startString);
+  return (substr($string, 0, $len) === $startString);
+}
+</script>
     <title>Cod prezenta </title>
     <link rel="stylesheet" href="../css/codprezenta.css">
     <link rel="shortcut icon" type="image/svg" href="../images/CLaMa.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
   </head>
   <body>
 
@@ -13,14 +33,14 @@
       <h3>Class <span>Manager</span> </h3>
     </div>
     <div class="right_area">
-      <a href="index.html" class="logout_btn">Logout</a>
+      <a href="index.html" onclick="logoutFunction()" class="logout_btn">Logout</a>
     </div>
   </header>
 
 
   <div class="sidebar">
-    <img src="../images/Cezar_pROFILE.png" class="profile_image" alt="profile image">
-    <h4>Cezar Lupu</h4>
+    <img src="../images/CLaMa.svg" class="profile_image" alt="profile image">
+    <h3>Cezar Lupu</h3>
     <a href="Menu.html"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
     <a href="clase.html"><i class="fab fa-500px"></i><span>   Clase și cursuri</span></a>
     <a href="upload.php"><i class="fab fa-500px"></i><span>   Încărcare temă</span></a>
@@ -31,10 +51,10 @@
 <div class="content">
 
 
-  <div class="container">
-    <div class="header">
-      <h2>Introduceti codul de prezenta.</h2>
-    </div>
+  <div class="file__upload">
+		<div class="header-box">
+			<p><i class="fa  fa-calendar fa-2x"></i><span><span>Introducere cod prezenta</span></span></p>			
+		</div>
     <form class="form" id="form">
       <div class="form-control">
         <label>Codul pentru prezenta</label>
@@ -42,7 +62,82 @@
       </div>
       <button id="submit" onclick="myFunction()">Submit</button>
     </form>
-  </div>
+	</div>
+
+  <script>
+    var ajax = new XMLHttpRequest();
+    var url = "jwtVerification.php";
+    var async = true;
+    var method = "POST";
+
+    ajax.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        //var myArr = JSON.parse(this.responseText);
+        //alert(this.responseText);
+        console.log(this.responseText);
+      }
+      if (this.readyState == 4 && this.status == 401) {
+        //alert(this.responseText);
+        //document.getElementById("mesajEroare").innerHTML="Utilizator inexistent sau parola gresita";
+      }
+    };
+
+    ajax.open(method, url, async);
+    var jwt_stocat = window.localStorage.getItem("jwt");
+    //alert(jwt_stocat.length);
+
+    function delete_cookie(name) {
+      document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
+    function getCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    function deleteAllCookies() {
+      var cookies = document.cookie.split(";");
+
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      }
+    }
+
+    //alert(jwt_stocat);
+    if (jwt_stocat == null) {
+      alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!");
+      delete_cookie("jwt");
+      window.location.replace("http://localhost/testingWeb/html+php/index.html");
+    }
+    else if (jwt_stocat == "  " || jwt_stocat == "   " || jwt_stocat.length == 847) {
+      //678 reprezinta cazul de eroare, in momentul in care numele utilizatorului nu e in baza de date
+      //session_destroy();
+      alert("Username sau parola gresita!");
+      delete_cookie("jwt");
+      deleteAllCookies();
+      window.localStorage.removeItem("jwt");
+      window.location.replace("http://localhost/testingWeb/html+php/index.html");
+    }
+    else if (jwt_stocat.length > 2900) {
+      setTimeout(() => { window.location.replace("http://localhost/testingWeb/html+php/Menu-prof.html"); }, 0.001);
+    }
+    else {
+      //alert(jwt_stocat);
+      ajax.setRequestHeader("Authorization", "Bearer " + jwt_stocat);
+      ajax.send();
+    }
+  </script>
+
+  
 
 <script>
 function myFunction(){
@@ -161,4 +256,7 @@ setcookie("codCurs", "", time() - 3600);
 
 </div>
   </body>
+  <script>
+  if (getCookie("jwt") == "prof") deleteAllCookies();
+</script>
   </html>

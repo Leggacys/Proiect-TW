@@ -17,12 +17,10 @@ $numarMatricol=$_GET['id'];
 
 
 
-$queryInsert = "INSERT INTO note (id_stud, id_curs, valoare, valoare2, valoare3)
-VALUES ('$numarMatricol', '1', '0','0','0')";
+$queryInsert = "INSERT INTO note (id_stud, id_curs, valoare, valoare2, valoare3) VALUES ('$numarMatricol', '1', '0','0','0')";
 
 $data=mysqli_query($conn,$queryInsert);
-echo $data."salut";
-
+echo $data;
 if($data)
 {
   //echo "Reusit";
