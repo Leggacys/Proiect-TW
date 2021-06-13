@@ -29,6 +29,7 @@ function delete_cookie(name) {
 
     
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Note</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../css/statisticaBD.css">
@@ -48,10 +49,10 @@ function delete_cookie(name) {
 
 
   <div class="sidebar">
-    <img src="../images/Cezar_pROFILE.png" class="profile_image" alt="profile image">
-    <h4>Cezar Lupu</h4>
+    <img src="../images/CLaMa.svg" class="profile_image" alt="profile image">
+    <h3>Cezar Lupu</h3>
 
-    <a href="#"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
+    <a href="Menu.html"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
     <a href="clase.html"><i class="fab fa-500px"></i><span> Clase și cursuri</span></a>
     <a href="upload.php"><i class="fab fa-500px"></i><span> Încărcare temă</span></a>
     <a href="codprezenta.html"><i class="fab fa-500px"></i><span> Introducere cod prezenta</span></a>
@@ -125,7 +126,7 @@ try{
             echo "</table>";
           }else {
             {
-              echo "0 results";
+              //echo "0 results";
             }
           }
           $conn-> close();
@@ -149,7 +150,7 @@ document.getElementById("medie").innerHTML = secondGrade;
 
   <script>
     var jwt_stocat = window.localStorage.getItem("jwt");
-    alert(jwt_stocat);
+    //alert(jwt_stocat);
 
     function delete_cookie(name) {
       document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';

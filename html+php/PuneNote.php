@@ -29,6 +29,7 @@ function delete_cookie(name) {
 
     
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Note</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../css/puneNote.css">
@@ -49,7 +50,7 @@ function delete_cookie(name) {
 
   <div class="sidebar">
       <img src="../images/male.png" class="profile_image" alt="dummy male photo">
-      <h4>Profesorul X</h4>
+      <h3>Profesorul X</h3>
       <a href="Menu-prof.html"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
       <a href="PuneNote.php"><i class="fab fa-500px"></i><span>   Vizualizare Teme</span></a>
       <a href="Menu-prof-AcceptStudents.php"><i class="fab fa-500px"></i><span>   Primește studenți</span></a>
