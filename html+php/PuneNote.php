@@ -10,6 +10,37 @@
 
 <script>
 
+
+function takeTheGradeFromDropdownMenu(row){
+  var nota = document.getElementById(row).value;
+  //var text = nota.options[e.selectedIndex].text;
+  return nota;
+}
+
+function insertIntoDB(row, id_tema){
+
+  if(row != null && id_tema != null){
+      var valoare = takeTheGradeFromDropdownMenu(row);
+      var id_temaaa = id_tema;
+      // alert(valoare);
+      // alert(id_temaaa);
+      //ajax call
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        //console.log(this.responseText);
+        location.reload(); 
+      }
+      };
+      xmlhttp.open("GET", "http://localhost/pune_note/salveazaNota.php?id=" + row + "&idtema=" + id_tema + "&nota=" + valoare, true);
+      xmlhttp.send();
+  return 1;
+  }
+  return 0;
+}
+
+
+
 function delete_cookie(name) {
       document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
@@ -42,6 +73,7 @@ function delete_cookie(name) {
       <h3>Class <span>Manager</span> </h3>
     </div>
     <div id="welcomeContainer"> Salut. Ai fost autentificat cu succes in aplicatie!</div>
+
     <div class="right_area">
       <a href="index.html" onclick="logoutFunction()" class="logout_btn">Logout</a>
     </div>
@@ -51,6 +83,7 @@ function delete_cookie(name) {
   <div class="sidebar">
       <img src="../images/male.png" class="profile_image" alt="dummy male photo">
       <h3>Profesorul X</h3>
+
       <a href="Menu-prof.html"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
       <a href="PuneNote.php"><i class="fab fa-500px"></i><span>   Vizualizare Teme</span></a>
       <a href="Menu-prof-AcceptStudents.php"><i class="fab fa-500px"></i><span>   Primește studenți</span></a>
@@ -68,26 +101,66 @@ function delete_cookie(name) {
               <th>Nume</th>
               <th>Prenume</th>
               <th>Tema</th>
+              <th>Noteaza</th>
+              <th>Submit</th>
           </tr>
       </thead>
       <tbody>
 
           <?php
           $conn = mysqli_connect("localhost","root","","api_db");
+
           if($conn-> connect_error){
             die("Connect failed");
           }
 
-          $sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id) as paths FROM users u JOIN uploaded_files f ON u.id=f.id_stud WHERE u.rol=0";
+          //paths = CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id)
+          $sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, f.name AS nume_tema, CONCAT('http://localhost/pune_note/download.php?id=',f.id) as paths, f.new_name AS new_name, nota, f.id AS id_tema FROM users u JOIN uploaded_files f ON u.id=f.id_stud WHERE u.rol=0";
           $result = $conn -> query($sql);
+          $counter_row = 1;
           if($result  -> num_rows >0)
           {
             while($row = $result -> fetch_assoc()){
-              echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
-              "</td><td>" . $row["paths"] . "</td></tr>";
+              $link_to_hw = "http://localhost/pune_note/uploads/" . $row["new_name"];
+              $nota = $row["nota"];
+              $id_tema = $row["id_tema"];
+
+              if($nota != 0){
+                    echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
+                    "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td align=\"center\"> ". $nota. "</td><td  align=\"center\"> ". "Submitted" ."</td></tr>";
+              }else{
+                ?>
+
+
+                <?php
+
+                echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
+                "</td><td><a href = '" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td >   
+                <td align=\"center\">
+                   <select id=\"$counter_row\">
+                        <option>--</option>        
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                   </select>"  ."</td><td>" . "<input type=\"submit\" value=\"Submit\" id = \"$counter_row\" onclick=\"insertIntoDB($counter_row, $id_tema)\">". "</td><tr>" ;
+                    // if(insertIntoDB($ids, $id_tema) == 1){
+
+                    // }
+                   $counter_row++;
+
+              } 
             }
+            echo "</tbody>";
             echo "</table>";
-          }else {
+          }else 
+          {
             {
               echo "0 results";
             }
@@ -143,6 +216,7 @@ document.getElementById("medie").innerHTML = secondGrade;
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
 }
+
 
 
 if (jwt_stocat == null) {

@@ -1,6 +1,7 @@
 <?php
 
 include 'uploadConfig.php';
+
 //include 'jwtVerificationUpload.php';
 
 
@@ -77,21 +78,19 @@ try{
  }
 
 
+
 $link = "";
 $link_status = "display: none;";
 
 
 date_default_timezone_set('UTC');
 
-
-
-
 if(isset($_POST['upload'])){ //if upload button isset or not
   //declaring variables
   $space =" ";
   $location = "uploads/";
   $file_name = $_FILES["file"]["name"]; //get uploaded file
-  $file_new_name = date("Y-m-d-H-i-s") . $space . $file_name; //new and unique name
+  $file_new_name = date("Y-m-d-H-i-s") . $file_name; //new and unique name
   $file_temp = $_FILES["file"]["tmp_name"]; //get uploded file temp
   $file_size = $_FILES["file"]["size"]; //get upload file size
 
@@ -99,8 +98,8 @@ if(isset($_POST['upload'])){ //if upload button isset or not
     echo "<script>alert('Whoops! I don't have the permission to upload homework that have the size greater than 10MB.')</script>";
   }else{
 
-    $sql = "INSERT INTO uploaded_files (name, new_name, course, id_stud)
-    VALUES('$file_name', '$file_new_name', 'unknown' , '$id_utilizator')";
+    $sql = "INSERT INTO uploaded_files (name, new_name, course)
+            VALUES('$file_name', '$file_new_name', 'unknown')";
     $result = mysqli_query($conn, $sql);
 
     if($result){
@@ -133,29 +132,8 @@ if(isset($_POST['upload'])){ //if upload button isset or not
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="shortcut icon" type="image/svg" href="../images/CLaMa.svg">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  	<link rel="stylesheet" type="text/css" href="../css/upload.css"> 
+  	<link rel="stylesheet" type="text/css" href="upload.css"> 
 	<title>Încarcă document</title>
-  <script>
-
-      function delete_cookie(name) {
-        document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-      }
-
-      function logoutFunction() {
-        localStorage.removeItem("jwt");
-        delete_cookie("jwt");
-      }
-  
-      function startsWith ($string, $startString)
-  {
-      $len = strlen($startString);
-      return (substr($string, 0, $len) === $startString);
-  }
-
-  
-    </script>
-    
-
   </head>
   <body>
 
@@ -164,12 +142,15 @@ if(isset($_POST['upload'])){ //if upload button isset or not
       <h3>Class <span>Manager</span> </h3>
     </div>
     <div class="right_area">
+
     <a href="JWTf.php" onclick="logoutFunction()" class="logout_btn">Logout</a>
+
     </div>
   </header>
 
 
   <div class="sidebar">
+
     <img src="../images/CLaMa.svg" class="profile_image" alt="profile image">
     <h3>
       <?php
@@ -217,6 +198,7 @@ if(isset($_POST['upload'])){ //if upload button isset or not
     <a href="clase.php"><i class="fab fa-500px"></i><span>   Clase și cursuri</span></a>
     <a href="upload.php"><i class="fab fa-500px"></i><span>   Încărcare temă</span></a>
     <a href="codprezenta.php"><i class="fab fa-500px"></i><span>   Introducere cod prezenta</span></a>
+
     <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
   </div>
 
@@ -250,6 +232,7 @@ if(isset($_POST['upload'])){ //if upload button isset or not
         window.history.replaceState( null, null, window.location.href );
     }
 </script>
+
 
 
 
@@ -308,6 +291,7 @@ if(isset($_POST['upload'])){ //if upload button isset or not
     ajax.send();
    // }
   </script>
+
 
 
   </body>

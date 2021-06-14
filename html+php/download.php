@@ -17,8 +17,8 @@ if (!$id) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="shortcut icon" type="image/svg" href="../images/CLaMa.svg">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  	<link rel="stylesheet" type="text/css" href="../css/upload.css"> 
-	<title>Descarcă document</title>
+  	<link rel="stylesheet" type="text/css" href="upload.css"> 
+	<title>Încarcă document</title>
   </head>
   <body>
 
@@ -37,7 +37,7 @@ if (!$id) {
     <h4>Cezar Lupu</h4>
     <a href="#"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
     <a href="clase.html"><i class="fab fa-500px"></i><span>   Clase și cursuri</span></a>
-    <a href="upload.php"><i class="fab fa-500px"></i><span>   Încărcare temă</span></a>
+    <a href="upload.html"><i class="fab fa-500px"></i><span>   Încărcare temă</span></a>
     <a href="codprezenta.html"><i class="fab fa-500px"></i><span>   Introducere cod prezenta</span></a>
     <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
   </div>
