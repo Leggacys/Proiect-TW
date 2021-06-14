@@ -1,3 +1,11 @@
+<?php
+if(isset($_COOKIE["jwt"])){
+  header("Location: http://localhost/testingWeb/html+php/Menu.php");
+  return false;
+  } 
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -115,7 +123,7 @@
       <div class="bottomtext">
         Wanna go back to login?
         <br>
-        <a href="index.html">Click here!</a>
+        <a href="index.php">Click here!</a>
       </div>
     </form>
   </div>
@@ -134,7 +142,7 @@
 
 </body>
 
-<script>
+<!-- <script>
 
   var jwt_stocat = window.localStorage.getItem("jwt");
   if(jwt_stocat.length>2900){
@@ -145,8 +153,8 @@
     alert("Sunteti deja logat studentule! Veti fi redirectionati la meniul corespunzator!");
     setTimeout(() => {  window.location.replace("http://localhost/testingWeb/html+php/Menu.html"); }, 0.001);
   
-  }
-  </script>
+  }                                                      CE PUTEM SCOATE
+  </script> --> 
   <script>
 function show() {
     var x = document.getElementById("stud-info");

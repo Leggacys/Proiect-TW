@@ -1,3 +1,11 @@
+<?php
+if(isset($_COOKIE["jwt"])){
+  header("Location: http://localhost/testingWeb/html+php/Menu.php");
+  return false;
+  } 
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -57,13 +65,13 @@
 
 var jwt_stocat = window.localStorage.getItem("jwt");
   if(jwt_stocat != null){
- if(jwt_stocat.length>0 && jwt_stocat.length<2900){
+ /* if(jwt_stocat.length>0 && jwt_stocat.length<2900){
   alert("Sunteti deja logat studentule! Veti fi redirectionati la meniul corespunzator!");
-  setTimeout(() => {  window.location.replace("http://localhost/testingWeb/html+php/Menu.html"); }, 0.001);
+  setTimeout(() => {  window.location.replace("http://localhost/testingWeb/html+php/Menu.php"); }, 0.001);
 }else{
   alert("Sunteti deja logat profesore! Veti fi redirectionati la meniul corespunzator!");
-  setTimeout(() => {  window.location.replace("http://localhost/testingWeb/html+php/Menu.html"); }, 0.001);
-}
+  setTimeout(() => {  window.location.replace("http://localhost/testingWeb/html+php/Menu.php"); }, 0.001);
+} */
   }
 </script>
 

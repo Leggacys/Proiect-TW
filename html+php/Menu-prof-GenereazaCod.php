@@ -77,6 +77,9 @@
 
 <script>
 
+
+
+
 window.onbeforeunload = function() {
         return "Dude, are you sure you want to leave? Think of the kittens!";
     }
@@ -165,16 +168,14 @@ function myFunction() {
 createCookie("durata",durata,1);
 createCookie("cursId",idCurs,1);
 createCookie("codCurs",text,1);
-
 location.reload();
-
 }
 
 function createCookie(cookiName, value, days) {
     var expires;
     if (days) {
         var date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        date.setTime(date.getTime() + (days * 2000*60));
         expires = "; expires=" + date.toGMTString();
     }
     else {
@@ -199,16 +200,21 @@ $idCurs=$_COOKIE['cursId'];
 $cod=$_COOKIE['codCurs'];
 $durataCod=$_COOKIE['durata'];
 
-$query = "INSERT INTO cursuri (cod_prezenta,Insert_date,durata,Id_curs)
-VALUES ('$cod','$time','$durataCod','$idCurs')";
-$data=mysqli_query($conn,$query);
-if($data)
+if($idCurs!=21)
 {
-  echo "Sters";
-}else {
-  echo "Eroare";
+  $query = "INSERT INTO cursuri2 (cod_prezenta,Insert_date,durata,Id_curs)
+  VALUES ('$cod','$time','$durataCod','$idCurs')";
+  $data=mysqli_query($conn,$query);
+  if($data)
+  {
+    echo "Sters";
+  }else {
+    echo "Eroare";
+  }
+    $conn-> close();
 }
-  $conn-> close();
+
+
 
  ?>
   </body>
