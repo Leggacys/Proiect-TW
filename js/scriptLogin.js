@@ -73,7 +73,7 @@ function checkInputs() {
         let json = JSON.stringify(obj);
         //alert(json);
         ajax.send(json);
-        setTimeout(() => {  window.location.replace("http://localhost/testingWeb/html+php/Menu.html"); }, 800);
+        setTimeout(() => {  window.location.replace("http://localhost/testingWeb/html+php/jwtVerifLogin.php"); }, 800);
         return false;
     }
 
