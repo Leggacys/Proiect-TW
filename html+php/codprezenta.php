@@ -72,15 +72,29 @@ function startsWith($string, $startString) {
 
       try{    
         $jwt_decodificat = JWT::decode($jwt, JWT_KEY, array('HS256'));
+        $rol = $jwt_decodificat->data->rol;
+        if($rol != "student"){
+          header("Location: http://localhost/testingWeb/html+php/Menu-prof.php");
+        }
         //print_r($jwt_decodificat);
         //echo "\n\n\n\n";
         $id_utilizator = $jwt_decodificat->data->id;
         $nume = $jwt_decodificat->data->lastname;
         $prenume = $jwt_decodificat->data->firstname;
+        $id_utilizator = $jwt_decodificat->data->id;
+        $nume = $jwt_decodificat->data->lastname;
+        $prenume = $jwt_decodificat->data->firstname;
+        $rol = $jwt_decodificat->data->rol;
+        $an = $jwt_decodificat->data->year;
+        $semian = $jwt_decodificat->data->semian;
+        $grupa = $jwt_decodificat->data->grup;
         //echo $id_utilizator;
         echo $nume . " ";
         //echo $rol;
-        echo $prenume;
+        echo $prenume . "\n";
+        echo $an . $semian . $grupa;
+        echo "\r\n";
+        echo $rol;
       
         }catch (Exception $e){
            echo json_encode(["message"=>$e->getMessage()]);

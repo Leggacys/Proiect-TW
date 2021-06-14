@@ -38,7 +38,7 @@ try{
   $id_utilizator = $jwt_decodificat->data->id;
   $rol = $jwt_decodificat->data->rol;
   if($rol == "teacher"){
-    header("Location: http://localhost/testingWeb/html+php/Menu-prof.html");
+    header("Location: http://localhost/testingWeb/html+php/Menu-prof.php");
     exit();
   }
   else if($rol == "student"){
@@ -52,10 +52,6 @@ try{
     setcookie($cookie_name1, $cookie_value1, time() - (86400 * 8), "/");
     setcookie($cookie_name2, $cookie_value2, time() - (86400 * 8), "/");
     setcookie($cookie_name3, $cookie_value3, time() - (86400 * 8), "/");
-    if($jwt == '<br />'){
-      setcookie('jwt', '', 1, '/');
-      header("Location: http://localhost/testingWeb/html+php/index.php");
-    }
     header("Location: http://localhost/testingWeb/html+php/Menu.php");
     exit();
   }

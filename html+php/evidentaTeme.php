@@ -1,11 +1,3 @@
-<?php
-if(!isset($_COOKIE["jwt"])){
-  header("Location: http://localhost/testingWeb/html+php/index.php");
-  return false;
-  } 
-
-?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -17,6 +9,35 @@ if(!isset($_COOKIE["jwt"])){
     </script>
 
 <script>
+
+function takeTheGradeFromDropdownMenu(row){
+  var nota = document.getElementById(row).value;
+  //var text = nota.options[e.selectedIndex].text;
+  return nota;
+}
+
+function insertIntoDB(row, id_tema){
+
+  if(row != null && id_tema != null){
+      var valoare = takeTheGradeFromDropdownMenu(row);
+      var id_temaaa = id_tema;
+      // alert(valoare);
+      // alert(id_temaaa);
+      //ajax call
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        //console.log(this.responseText);
+        location.reload(); 
+      }
+      };
+      xmlhttp.open("GET", "http://localhost/TestingWeb/html+php/salveazaNota.php?id=" + row + "&idtema=" + id_tema + "&nota=" + valoare, true);
+      xmlhttp.send();
+  return 1;
+  }
+  return 0;
+}
+
 
 function delete_cookie(name) {
       document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -40,7 +61,7 @@ function delete_cookie(name) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Note</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="../css/statisticaTW.css">
+    <link rel="stylesheet" href="../css/evidentaTeme.css">
     <link rel="shortcut icon" type="image/svg" href="../images/CLaMa.svg">
   </head>
   <body>
@@ -49,7 +70,6 @@ function delete_cookie(name) {
     <div class="left_area">
       <h3>Class <span>Manager</span> </h3>
     </div>
-    <div id="welcomeContainer"> Salut. Ai fost autentificat cu succes in aplicatie!</div>
     <div class="right_area">
       <a href="JWTf.php" onclick="logoutFunction()" class="logout_btn">Logout</a>
     </div>
@@ -57,8 +77,8 @@ function delete_cookie(name) {
 
 
   <div class="sidebar">
-    <img src="../images/CLaMa.svg" class="profile_image" alt="profile image">
-    <h3>
+      <img src="../images/admin.svg" class="profile_image" alt="dummy male photo">
+      <h3>
       <?php
       
       include_once '../api/config/database.php';
@@ -82,29 +102,15 @@ function delete_cookie(name) {
 
       try{    
         $jwt_decodificat = JWT::decode($jwt, JWT_KEY, array('HS256'));
-        $rol = $jwt_decodificat->data->rol;
-        if($rol != "student"){
-          header("Location: http://localhost/testingWeb/html+php/Menu-prof.php");
-        }
         //print_r($jwt_decodificat);
         //echo "\n\n\n\n";
         $id_utilizator = $jwt_decodificat->data->id;
         $nume = $jwt_decodificat->data->lastname;
         $prenume = $jwt_decodificat->data->firstname;
-        $id_utilizator = $jwt_decodificat->data->id;
-        $nume = $jwt_decodificat->data->lastname;
-        $prenume = $jwt_decodificat->data->firstname;
-        $rol = $jwt_decodificat->data->rol;
-        $an = $jwt_decodificat->data->year;
-        $semian = $jwt_decodificat->data->semian;
-        $grupa = $jwt_decodificat->data->grup;
         //echo $id_utilizator;
         echo $nume . " ";
         //echo $rol;
-        echo $prenume . "\n";
-        echo $an . $semian . $grupa;
-        echo "\r\n";
-        echo $rol;
+        echo $prenume . " \n" . "Administrator";
       
         }catch (Exception $e){
            echo json_encode(["message"=>$e->getMessage()]);
@@ -114,11 +120,11 @@ function delete_cookie(name) {
 
       ?>
     </h3>
-
-    <a href="Menu.php"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
-    <a href="clase.php"><i class="fab fa-500px"></i><span> Clase și cursuri</span></a>
-    <a href="upload.php"><i class="fab fa-500px"></i><span> Încărcare temă</span></a>
-    <a href="codprezenta.php"><i class="fab fa-500px"></i><span> Introducere cod prezenta</span></a>
+      <a href="MenuAdmin.php"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
+    <a href="utilizatoriInregistrati.php"><i class="fab fa-500px"></i><span> Utilizatori inregistrati</span></a>
+    <a href="upload.php"><i class="fab fa-500px"></i><span> Catalog</span></a>
+    <a href="evidentaTeme.php"><i class="fab fa-500px"></i><span> Evidenta teme</span></a>
+    <a href="acceptProfi.php"><i class="fab fa-500px"></i><span> Lista asteptare profesori</span></a>
     <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
   </div>
 
@@ -129,72 +135,48 @@ function delete_cookie(name) {
               <th>Nr matricol</th>
               <th>Nume</th>
               <th>Prenume</th>
-              <th>Nota I</th>
-              <th>Nota II</th>
-              <th>Nota III</th>
-              <th>ID Curs</th>
-              <th>Media</th>
+              <th>Tema</th>
+              <th>Nota</th>
+              <th>Data notare
           </tr>
       </thead>
       <tbody>
 
           <?php
-
-
-include_once '../api/config/database.php';
-include_once '../api/objects/user.php';
-include_once '../api/libs/jwt_params.php';
-include_once '../api/objects/user.php';
-include_once '../api/libs/php-jwt-master/src/BeforeValidException.php';
-include_once '../api/libs/php-jwt-master/src/ExpiredException.php';
-include_once '../api/libs/php-jwt-master/src/SignatureInvalidException.php';
-include_once '../api/libs/php-jwt-master/src/JWT.php';
-//use \Firebase\JWT\JWT;
-if(!isset($_COOKIE["jwt"])){
-  //window.location.replace("http://localhost/testingWeb/html+php/index.html");
-  echo "Comportament nepermis! Logati-va ca student ca sa puteti incarca documente.";
-  return false;
-} 
-else {$jwt = $_COOKIE['jwt'];}
-
-try{    
-  $jwt_decodificat = JWT::decode($jwt, JWT_KEY, array('HS256'));
-  //print_r($jwt_decodificat);
-  //echo "\n\n\n\n";
-  $id_utilizator = $jwt_decodificat->data->id;
-  //echo $id_utilizator;
-  echo "\n\n\n\n";
-  //echo $rol;
-  echo "\n\n\n\n";
-
-  }catch (Exception $e){
-     echo json_encode(["message"=>$e->getMessage()]);
-     exit();
- }
-
-
           $conn = mysqli_connect("localhost","root","","api_db");
           if($conn-> connect_error){
             die("Connect failed");
           }
 
-          $sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, n.valoare AS note, n.valoare2 AS note2, n.valoare3 AS note3, n.id_curs AS curs, (n.valoare+n.valoare2+n.valoare3)/3 as media FROM users u JOIN note n ON u.id=n.id_stud WHERE u.rol=0 AND u.id = '$id_utilizator' AND n.id_curs = 2";
+          //paths = CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id)
+          $sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, f.name AS nume_tema, CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id) as paths, f.new_name AS new_name, f.nota AS nota, f.id AS id_tema, f.uploaded_at AS dataNotare FROM users u JOIN uploaded_files f ON u.id=f.id_stud WHERE u.rol=0";
           $result = $conn -> query($sql);
+          $counter_row = 1;
           if($result  -> num_rows >0)
           {
             while($row = $result -> fetch_assoc()){
-              echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
-              "</td><td>" . $row["note"] .  "</td><td>" . $row["note2"]  . "</td><td>" . $row["note3"]  . "</td><td>" . $row["curs"]  . "</td><td>" . $row["media"]  . "</td></tr>";
+              $link_to_hw = "http://localhost/TestingWeb/html+php/uploads/" . $row["new_name"];
+              $nota = $row["nota"];
+              $id_tema = $row["id_tema"];
+
+              if($nota != 0){
+                    echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
+                    "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td align=\"center\"> ". $row["nota"]. "</td><td align=\"center\"> ". $row["dataNotare"]. "</td></tr>";
+              }
             }
+            echo "</tbody>";
             echo "</table>";
-          }else {
+          }else 
+          {
             {
-              //echo "0 results";
+              echo "0 results";
             }
           }
           $conn-> close();
-           ?>
+           ?> 
+  <nav>
   
+</nav>
 
  </div>
 <script>
@@ -243,24 +225,24 @@ document.getElementById("medie").innerHTML = secondGrade;
 }
 
 
-if (jwt_stocat == null) {
-    alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!")
-    window.location.replace("http://localhost/testingWeb/html+php/index.html");
-    delete_cookie("prof");
-  }
-  else if (jwt_stocat == "  " || jwt_stocat == "   " || jwt_stocat.length==847) {
-    //678 reprezinta cazul de eroare, in momentul in care numele utilizatorului nu e in baza de date
-    alert("Username sau parola gresita!")
-    delete_cookie("jwt");
-    deleteAllCookies();
-    window.localStorage.removeItem("jwt");
-    window.location.replace("http://localhost/testingWeb/html+php/index.html");
-  }
-  else{
-  //alert(jwt_stocat);
-  /* ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
-  ajax.send(); */
-  }
+// if (jwt_stocat == null) {
+//     alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!")
+//     window.location.replace("http://localhost/testingWeb/html+php/index.html");
+//     delete_cookie("prof");
+//   }
+//   else if (jwt_stocat == "  " || jwt_stocat == "   " || jwt_stocat.length==847) {
+//     //678 reprezinta cazul de eroare, in momentul in care numele utilizatorului nu e in baza de date
+//     alert("Username sau parola gresita!")
+//     delete_cookie("jwt");
+//     deleteAllCookies();
+//     window.localStorage.removeItem("jwt");
+//     window.location.replace("http://localhost/testingWeb/html+php/index.html");
+//   }
+//   else{
+//   //alert(jwt_stocat);
+//   /* ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
+//   ajax.send(); */
+//   }
 
 
 

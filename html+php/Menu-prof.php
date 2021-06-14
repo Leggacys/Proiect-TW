@@ -78,12 +78,18 @@ function delete_cookie(name) {
   
         try{    
           $jwt_decodificat = JWT::decode($jwt, JWT_KEY, array('HS256'));
+          $rol = $jwt_decodificat->data->rol;
+        if($rol != "teacher"){
+          header("Location: http://localhost/testingWeb/html+php/Menu.php");
+        }
           //print_r($jwt_decodificat);
           //echo "\n\n\n\n";
           $id_utilizator = $jwt_decodificat->data->id;
           $nume = $jwt_decodificat->data->lastname;
           $prenume = $jwt_decodificat->data->firstname;
+          $rol = $jwt_decodificat->data->rol;
           //echo $id_utilizator;
+          echo $rol . " ";
           echo $nume . " ";
           //echo $rol;
           echo $prenume;
@@ -96,12 +102,12 @@ function delete_cookie(name) {
   
         ?>
       </h3>
-      <a href="Menu-prof.html"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
+      <a href="Menu-prof.php"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
       <a href="PuneNote.php"><i class="fab fa-500px"></i><span>   Vizualizare Teme</span></a>
       <a href="Menu-prof-AcceptStudents.php"><i class="fab fa-500px"></i><span>   Primește studenți</span></a>
       <a href="Menu-prof-GenereazaCod.php"><i class="fab fa-500px"></i><span>   Generează cod</span></a>
       <a href="Menu-prof-Note.php"><i class="fab fa-500px"></i><span>   Notează studenții</span></a>
-      <a href="Menu-prof-Export.html"><i class="fab fa-500px"></i><span>   Descarcă lista de persoane</span></a>
+      <a href="Menu-prof-Export.php"><i class="fab fa-500px"></i><span>   Descarcă lista de persoane</span></a>
       <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
   </div>
 
