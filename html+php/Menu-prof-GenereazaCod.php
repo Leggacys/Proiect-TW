@@ -51,28 +51,35 @@
 
 <div class="content">
     <div class="header">
-      <h2>Genereaza codul pentru prezenta.</h2>
     </div>
+
     <div class="container">
       <div class="dropdown">
-        <button id ="materii" class="dropbtn">Materii</button>
+        <button id ="materii" class="dropbtn">Materii Disponibile</button>
         <div class="dropdown-content">
         <a href="#" onclick="BazeDeDate()">Baze De Date</a>
         <a href="#" onclick="ReteleDeCalculatoare()">Retele De calculatoare</a>
         <a href="#" onclick="TehnologiiWeb()">Tehnologii Web</a>
         </div>
       </div>
+        <input type="text" STYLE="color: #FFFFFF; font-family: Verdana; font-weight: bold; font-size: 12px; background-color: #72A4D2;" size="5" maxlength="5" type="text" name="field[]" class="Durata"
+         id="Durata" />
     <form class="form" id="form">
       <div class="form-control">
         <label id="COD">Codul pentru prezenta</label>
       </div>
       <button onclick="myFunction()" >Generate code</button>
     </form>
+
   </div>
 
 </div>
 
 <script>
+
+window.onbeforeunload = function() {
+        return "Dude, are you sure you want to leave? Think of the kittens!";
+    }
 
 function delete_cookie(name) {
       document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -89,7 +96,7 @@ function delete_cookie(name) {
       return null;
     }
 
-    function deleteAllCookies() {
+  /*  function deleteAllCookies() {
       var cookies = document.cookie.split(";");
 
       for (var i = 0; i < cookies.length; i++) {
@@ -98,7 +105,7 @@ function delete_cookie(name) {
         var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
       }
-    }
+    }*/
 
     var jwt_stocat = window.localStorage.getItem("jwt");
 
@@ -119,11 +126,11 @@ function delete_cookie(name) {
     /* else if (jwt_stocat.length > 2900) {
       setTimeout(() => { window.location.replace("http://localhost/testingWeb/html+php/Menu-prof.html"); }, 0.001);
     } */
-    else {
+  /*  else {
       //alert(jwt_stocat);
       ajax.setRequestHeader("Authorization", "Bearer " + jwt_stocat);
       ajax.send();
-    }
+    }*/
 
 function BazeDeDate(){
    document.getElementById("materii").innerHTML = "Baze de Date";
@@ -143,7 +150,8 @@ function myFunction() {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
     document.getElementById("COD").textContent = text;
     var idCurs;
-    switch (  document.getElementById("materii").textContent) {
+    var durata=document.getElementById("Durata").value;
+    switch (document.getElementById("materii").textContent) {
   case "Baze de Date":
     idCurs = 1;
     break;
@@ -154,9 +162,12 @@ function myFunction() {
        idCurs = 3;
     break;
 }
-
+createCookie("durata",durata,1);
 createCookie("cursId",idCurs,1);
 createCookie("codCurs",text,1);
+
+location.reload();
+
 }
 
 function createCookie(cookiName, value, days) {
@@ -182,12 +193,14 @@ if($conn-> connect_error){
   die("Connect failed");
 }
 
+date_default_timezone_set("Europe/Chisinau");
+$time=date('H:i:s');
 $idCurs=$_COOKIE['cursId'];
 $cod=$_COOKIE['codCurs'];
+$durataCod=$_COOKIE['durata'];
 
-$query = "INSERT INTO cursuri (id_curs, cod_prezenta)
-VALUES ('$idCurs', '$cod')";
-
+$query = "INSERT INTO cursuri (cod_prezenta,Insert_date,durata,Id_curs)
+VALUES ('$cod','$time','$durataCod','$idCurs')";
 $data=mysqli_query($conn,$query);
 if($data)
 {

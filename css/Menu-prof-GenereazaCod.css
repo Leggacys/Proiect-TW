@@ -237,7 +237,7 @@ label #sidebar_btn{
   /* The container <div> - needed to position the dropdown content */
   .dropdown {
     position: relative;
-    margin-left: 100px;
+
     display: inline-block;
   }
 
@@ -281,6 +281,6 @@ label #sidebar_btn{
     to {
       opacity: 1;
       transform: translateY(0px);
-  
+
     }
   }

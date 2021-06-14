@@ -50,7 +50,7 @@ if($data3)
   //echo "Reusit";
 }else {
   echo "Eroare3";
-} 
+}
 
  $query = "DELETE FROM users2 WHERE id ='$numarMatricol'";
 
@@ -61,4 +61,6 @@ if($data4)
 }else {
   echo "Eroare4";
 }
+
+header("Refresh:0; url=http://localhost/testingWeb/html+php/Menu-prof-AcceptStudents.php");
 ?>

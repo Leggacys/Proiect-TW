@@ -140,6 +140,10 @@ label #sidebar_btn{
   background-position: center;
 }
 
+.content h1{
+  padding-top: 100px;
+}
+
 
 @media(max-width:1000px) {
   .left_area{
@@ -203,10 +207,11 @@ h2 a {
 
 .container {
 	  overflow: hidden;
-	  width: 100%;
+	  width: 80%;
 	  margin: auto;
   display: table;
-  padding: 0 0 8em 0;
+ padding-left: 200px;
+ padding-top: 50px;
   animation: transitionIn 0.15s;
 }
 

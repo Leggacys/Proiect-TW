@@ -24,7 +24,7 @@ function startsWith($string, $startString) {
     <link rel="shortcut icon" type="image/svg" href="../images/CLaMa.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  
+
   </head>
   <body>
 
@@ -53,7 +53,7 @@ function startsWith($string, $startString) {
 
   <div class="file__upload">
 		<div class="header-box">
-			<p><i class="fa  fa-calendar fa-2x"></i><span><span>Introducere cod prezenta</span></span></p>			
+			<p><i class="fa  fa-calendar fa-2x"></i><span><span>Introducere cod prezenta</span></span></p>
 		</div>
     <form class="form" id="form">
       <div class="form-control">
@@ -137,7 +137,7 @@ function startsWith($string, $startString) {
     }
   </script>
 
-  
+
 
 <script>
 function myFunction(){
@@ -182,7 +182,7 @@ function getCookie(name) {
 }
 if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
-    } 
+    }
 </script>
 <?php
 error_reporting(0);
@@ -201,7 +201,7 @@ if(!isset($_COOKIE["jwt"])){
   return false;
 } else {$jwt = $_COOKIE['jwt'];}
 
-try{    
+try{
   $jwt_decodificat = JWT::decode($jwt, JWT_KEY, array('HS256'));
   //print_r($jwt_decodificat);
   //echo "\n\n\n\n";
@@ -223,10 +223,21 @@ if($conn-> connect_error){
   die("Connect failed");
 }
 
-  $cod=$_COOKIE['codPrezenta'];
+
+$sql = "delete from cursuri where DATE_ADD(Insert_date, INTERVAL durata MINUTE) < CURRENT_TIME";
+
+$date=mysqli_query($conn,$sql);
+
+if($date)
+{
+  debug_to_console("succes");
+}
+else {
+  debug_log_console("eroare");
+}
 
 
-
+$cod=$_COOKIE['codPrezenta'];
 
 $queryCheckCode = "SELECT distinct * FROM cursuri c WHERE c.cod_prezenta = '$cod' ";
 
