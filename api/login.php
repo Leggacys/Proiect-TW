@@ -32,7 +32,7 @@ $data = json_decode(file_get_contents('php://input'));
 $user->firstname = $data->firstname;
 $user->parola = $data->password;
 
-$interogare = "SELECT id, firstname, lastname, email, parola, rol FROM users WHERE firstname=:username";
+$interogare = "SELECT id, firstname, lastname, email, parola, rol, username, year, semian, grup FROM users WHERE username=:username";
     $stmt = $db->prepare($interogare);
     $stmt->execute(["username" => $data->firstname]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -51,9 +51,14 @@ if(
     $myUser = array(
         "id"=>$row['id'],
         "firstname"=>$row['firstname'],
+        "lastname"=>$row['lastname'],
         "email"=>$row['email'],
         "parola"=>$row['parola'],
-        "rol"=>$row['rol']
+        "rol"=>$row['rol'],
+        "year"=>$row['year'],
+        "semian"=>$row['semian'],
+        "grup"=>$row['grup'],
+        "username"=>$row['username']
     );
 
     if (password_verify($data->password, $myUser["parola"])){
@@ -66,7 +71,12 @@ if(
                 "id"=>$myUser["id"],
                 "email"=>$myUser["email"],
                 "firstname"=>$myUser["firstname"],
-                "rol"=>$myUser["rol"]
+                "lastname"=>$row['lastname'],
+                "rol"=>$myUser["rol"],
+                "year"=>$row['year'],
+                "semian"=>$row['semian'],
+                "grup"=>$row['grup'],
+                "username"=>$row['username']  
             )
             );
             $jwt = JWT::encode($token, JWT_KEY);
