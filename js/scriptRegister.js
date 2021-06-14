@@ -184,8 +184,10 @@ function myFunction() {
     //alert(stringGroup);
     
   }else if(document.getElementById('teacher').checked) {
-    rolValue = document.getElementById('teacher').value.trim();
+    rolValueX = document.getElementById('teacher').value.trim();
     //alert("profesor");
+    rolValue = rolValueX.concat('2');
+    alert(rolValue);
   }
 
   

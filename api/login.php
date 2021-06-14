@@ -23,6 +23,9 @@ use \Firebase\JWT\JWT;
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
+/* $name = "salut";
+$value = "ce faci";
+setcookie( $name, $value,time()+600, httponly:true ); */
  
 $user = new User($db);
  
@@ -35,12 +38,11 @@ $user->parola = $data->password;
 $interogare = "SELECT id, firstname, lastname, email, parola, rol, username, year, semian, grup FROM users WHERE username=:username";
     $stmt = $db->prepare($interogare);
     $stmt->execute(["username" => $data->firstname]);
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if(
     !empty($user->firstname) &&
     !empty($user->parola) && 
-    ($row != "   ")
+    ($stmt->rowCount())
 ){
 
    /*  $interogare = "SELECT id, firstname, lastname, email, parola FROM users WHERE firstname=:username";
@@ -48,6 +50,8 @@ if(
     $stmt->execute(["username" => $data->firstname]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC); */
     //echo $row;
+
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
     $myUser = array(
         "id"=>$row['id'],
         "firstname"=>$row['firstname'],
@@ -81,10 +85,12 @@ if(
             );
             $jwt = JWT::encode($token, JWT_KEY);
             echo $jwt;
+            http_response_code(200);
+    }
+    else{
+        http_response_code(400);
     }
     //W$cerere = oci_parse($db, $interogare);
-
-    http_response_code(200);
 } else
     {   http_response_code(400);
         echo json_encode(

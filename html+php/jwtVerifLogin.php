@@ -18,8 +18,18 @@ include_once '../api/libs/php-jwt-master/src/SignatureInvalidException.php';
 include_once '../api/libs/php-jwt-master/src/JWT.php';
 
 use \Firebase\JWT\JWT;
+if(isset($_COOKIE['jwt'])){
 $jwt = $_COOKIE['jwt'];
+}
+else{
+  header("Location: http://localhost/testingWeb/html+php/index.php");
+  exit();
+}
+setcookie('jwt', '', 1, '/');
 //echo $jwt;
+setcookie( "jwt", $jwt,time()+3600000,httponly:true);
+//setcookie( "hey", "",time()-700, httponly:true );
+
 
 try{    
   $jwt_decodificat = JWT::decode($jwt, JWT_KEY, array('HS256'));
@@ -32,7 +42,25 @@ try{
     exit();
   }
   else if($rol == "student"){
-    header("Location: http://localhost/testingWeb/html+php/Menu.html");
+    $cookie_name1 = "cursId";
+    $cookie_value1 = "21";
+    $cookie_name2 = "codCurs";
+    $cookie_value2 = "1";
+    $cookie_name3 = "durata";
+    $cookie_value3 = "1";
+
+    setcookie($cookie_name1, $cookie_value1, time() - (86400 * 8), "/");
+    setcookie($cookie_name2, $cookie_value2, time() - (86400 * 8), "/");
+    setcookie($cookie_name3, $cookie_value3, time() - (86400 * 8), "/");
+    if($jwt == '<br />'){
+      setcookie('jwt', '', 1, '/');
+      header("Location: http://localhost/testingWeb/html+php/index.php");
+    }
+    header("Location: http://localhost/testingWeb/html+php/Menu.php");
+    exit();
+  }
+  else if($rol = "admin"){
+    header("Location: http://localhost/testingWeb/html+php/MenuAdmin.php");
     exit();
   }
 
