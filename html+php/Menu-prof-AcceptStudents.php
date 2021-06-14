@@ -19,13 +19,13 @@ function delete_cookie(name) {
         localStorage.removeItem("jwt");
         delete_cookie("prof");
       }
-  
+
       function startsWith ($string, $startString)
   {
       $len = strlen($startString);
       return (substr($string, 0, $len) === $startString);
   }
-  
+
     </script>
 
 
@@ -118,7 +118,7 @@ function delete_cookie(name) {
         return null;
     }
 
-    
+
     function deleteAllCookies() {
     var cookies = document.cookie.split(";");
 

@@ -17,5 +17,5 @@ if($data)
 }else {
   echo "Eroare";
 }
-
+header("Refresh:0; url=http://localhost/testingWeb/html+php/Menu-prof-AcceptStudents.php");
 ?>
