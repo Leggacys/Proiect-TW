@@ -29,6 +29,7 @@ function delete_cookie(name) {
 
     
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Note</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../css/Menu-prof-Note.css">
@@ -48,16 +49,16 @@ function delete_cookie(name) {
 
 
   <div class="sidebar">
-    <img src="../images/male.png" class="profile_image" alt="dummy male photo">
-    <h4>Profesorul X</h4>
-    <a href="#"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
-    <a href="Menu-prof-Clase.html"><i class="fab fa-500px"></i><span>   Clase și cursuri</span></a>
-    <a href="Menu-prof-AcceptStudents.php"><i class="fab fa-500px"></i><span>   Primește studenți</span></a>
-    <a href="Menu-prof-GenereazaCod.html"><i class="fab fa-500px"></i><span>   Generează cod</span></a>
-    <a href="Menu-prof-Note.php"><i class="fab fa-500px"></i><span>   Notează studenții</span></a>
-    <a href="Menu-prof-Export.html"><i class="fab fa-500px"></i><span>   Descarcă lista de persoane</span></a>
-    <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
-</div>
+      <img src="../images/male.png" class="profile_image" alt="dummy male photo">
+      <h3>Profesorul X</h3>
+      <a href="Menu-prof.html"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
+      <a href="PuneNote.php"><i class="fab fa-500px"></i><span>   Vizualizare Teme</span></a>
+      <a href="Menu-prof-AcceptStudents.php"><i class="fab fa-500px"></i><span>   Primește studenți</span></a>
+      <a href="Menu-prof-GenereazaCod.php"><i class="fab fa-500px"></i><span>   Generează cod</span></a>
+      <a href="Menu-prof-Note.php"><i class="fab fa-500px"></i><span>   Notează studenții</span></a>
+      <a href="Menu-prof-Export.html"><i class="fab fa-500px"></i><span>   Descarcă lista de persoane</span></a>
+      <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
+  </div>
 
 <div class="content">
   <table class="styled-table">
@@ -97,14 +98,7 @@ function delete_cookie(name) {
           }
           $conn-> close();
            ?>
-  <nav>
-  <ul id="medie">
-    <li onclick="myFunction()" >
-      Calculeaza Media
-      <span></span><span></span><span></span><span></span>
-    </li>
-  </ul>
-</nav>
+
 
  </div>
 <script>
@@ -123,7 +117,7 @@ document.getElementById("medie").innerHTML = secondGrade;
 
   <script>
     var jwt_stocat = window.localStorage.getItem("jwt");
-    alert(jwt_stocat);
+    //alert(jwt_stocat);
 
     function delete_cookie(name) {
       document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';

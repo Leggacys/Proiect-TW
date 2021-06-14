@@ -54,19 +54,20 @@ function checkInputs() {
                 var myResponse = this.responseText;
                 console.log(myResponse.jwt);
                 localStorage.setItem("jwt", this.responseText);
+                //alert(this.responseText);
                 setCookie('jwt',this.responseText,7);
+                //alert(this.responseText.length);
+                
                 //alert(getCookie('jwt'));
                 //alert(this.responseText);
                 //alert("salut!");
                 //alert(this.responseText.length);
                 //alert(getCookie('jwt'));
-                if(this.responseText.length>4000){
-                    alert("salut!");
-                    setCookie('prof', 1, 7);
-                }
             }
-            if (this.readyState == 4 && this.status == 401) {
-                alert("poc!");
+            if (this.readyState == 4 && this.status == 400) {
+                alert("Nume sau parola gresita!");
+              // window.location.replace("http://localhost/testingWeb/html+php/index.php");
+               return false;
             }
         };
         ajax.open(method, url, async);
@@ -74,7 +75,7 @@ function checkInputs() {
         let json = JSON.stringify(obj);
         //alert(json);
         ajax.send(json);
-        setTimeout(() => {  window.location.replace("http://localhost/testingWeb/html+php/Menu.html"); }, 800);
+        setTimeout(() => {  window.location.replace("http://localhost/testingWeb/html+php/jwtVerifLogin.php"); }, 800);
         return false;
     }
 

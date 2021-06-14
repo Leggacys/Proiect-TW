@@ -19,17 +19,18 @@ function delete_cookie(name) {
         localStorage.removeItem("jwt");
         delete_cookie("prof");
       }
-  
+
       function startsWith ($string, $startString)
   {
       $len = strlen($startString);
       return (substr($string, 0, $len) === $startString);
   }
-  
+
     </script>
 
 
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AcceptStudents </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../css/Menu-prof-AcceptStudents.css">
@@ -49,16 +50,16 @@ function delete_cookie(name) {
 
 
   <div class="sidebar">
-    <img src="../images/male.png" class="profile_image" alt="dummy male photo">
-    <h4>Profesorul X</h4>
-    <a href="#"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
-    <a href="Menu-prof-Clase.html"><i class="fab fa-500px"></i><span>   Clase și cursuri</span></a>
-    <a href="Menu-prof-AcceptStudents.php"><i class="fab fa-500px"></i><span>   Primește studenți</span></a>
-    <a href="Menu-prof-GenereazaCod.html"><i class="fab fa-500px"></i><span>   Generează cod</span></a>
-    <a href="Menu-prof-Note.php"><i class="fab fa-500px"></i><span>   Notează studenții</span></a>
-    <a href="Menu-prof-Export.html"><i class="fab fa-500px"></i><span>   Descarcă lista de persoane</span></a>
-    <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
-</div>
+      <img src="../images/male.png" class="profile_image" alt="dummy male photo">
+      <h3>Profesorul X</h3>
+      <a href="Menu-prof.html"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
+      <a href="PuneNote.php"><i class="fab fa-500px"></i><span>   Vizualizare Teme</span></a>
+      <a href="Menu-prof-AcceptStudents.php"><i class="fab fa-500px"></i><span>   Primește studenți</span></a>
+      <a href="Menu-prof-GenereazaCod.php"><i class="fab fa-500px"></i><span>   Generează cod</span></a>
+      <a href="Menu-prof-Note.php"><i class="fab fa-500px"></i><span>   Notează studenții</span></a>
+      <a href="Menu-prof-Export.html"><i class="fab fa-500px"></i><span>   Descarcă lista de persoane</span></a>
+      <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
+  </div>
 
 <div class="content">
   <h1><span class="blue">&lt;</span>Request<span class="blue">&gt;</span> <span class="yellow">Table</span></h1>
@@ -77,7 +78,7 @@ function delete_cookie(name) {
     die("Connect failed");
   }
 
-  $sql = "SELECT distinct u.id as id, u.firstname as firstname, u.lastname as lastname FROM users2 u  WHERE rol = 0;";
+  $sql = "SELECT distinct u.id as id, u.firstname as firstname, u.lastname as lastname FROM users2 u ;";
   $result = $conn -> query($sql);
   if($result  -> num_rows >0)
   {
@@ -100,7 +101,7 @@ function delete_cookie(name) {
 
   <script>
     var jwt_stocat = window.localStorage.getItem("jwt");
-    alert(jwt_stocat);
+    //alert(jwt_stocat);
 
     function delete_cookie(name) {
       document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -117,7 +118,7 @@ function delete_cookie(name) {
         return null;
     }
 
-    
+
     function deleteAllCookies() {
     var cookies = document.cookie.split(";");
 

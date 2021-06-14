@@ -10,6 +10,7 @@
 
 <script>
 
+
 function takeTheGradeFromDropdownMenu(row){
   var nota = document.getElementById(row).value;
   //var text = nota.options[e.selectedIndex].text;
@@ -39,6 +40,7 @@ function insertIntoDB(row, id_tema){
 }
 
 
+
 function delete_cookie(name) {
       document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
@@ -61,7 +63,7 @@ function delete_cookie(name) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Note</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="css/puneNote.css">
+    <link rel="stylesheet" href="../css/puneNote.css">
     <link rel="shortcut icon" type="image/svg" href="../images/CLaMa.svg">
   </head>
   <body>
@@ -70,6 +72,8 @@ function delete_cookie(name) {
     <div class="left_area">
       <h3>Class <span>Manager</span> </h3>
     </div>
+    <div id="welcomeContainer"> Salut. Ai fost autentificat cu succes in aplicatie!</div>
+
     <div class="right_area">
       <a href="index.html" onclick="logoutFunction()" class="logout_btn">Logout</a>
     </div>
@@ -78,7 +82,8 @@ function delete_cookie(name) {
 
   <div class="sidebar">
       <img src="../images/male.png" class="profile_image" alt="dummy male photo">
-      <h3>Profesor Utilizator</h3>
+      <h3>Profesorul X</h3>
+
       <a href="Menu-prof.html"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
       <a href="PuneNote.php"><i class="fab fa-500px"></i><span>   Vizualizare Teme</span></a>
       <a href="Menu-prof-AcceptStudents.php"><i class="fab fa-500px"></i><span>   Primește studenți</span></a>
@@ -103,7 +108,8 @@ function delete_cookie(name) {
       <tbody>
 
           <?php
-          $conn = mysqli_connect("localhost","root","","vechi_api_db");
+          $conn = mysqli_connect("localhost","root","","api_db");
+
           if($conn-> connect_error){
             die("Connect failed");
           }
@@ -212,24 +218,25 @@ document.getElementById("medie").innerHTML = secondGrade;
 }
 
 
-// if (jwt_stocat == null) {
-//     alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!")
-//     window.location.replace("http://localhost/testingWeb/html+php/index.html");
-//     delete_cookie("prof");
-//   }
-//   else if (jwt_stocat == "  " || jwt_stocat == "   " || jwt_stocat.length==847) {
-//     //678 reprezinta cazul de eroare, in momentul in care numele utilizatorului nu e in baza de date
-//     alert("Username sau parola gresita!")
-//     delete_cookie("jwt");
-//     deleteAllCookies();
-//     window.localStorage.removeItem("jwt");
-//     window.location.replace("http://localhost/testingWeb/html+php/index.html");
-//   }
-//   else{
-//   //alert(jwt_stocat);
-//   /* ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
-//   ajax.send(); */
-//   }
+
+if (jwt_stocat == null) {
+    alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!")
+    window.location.replace("http://localhost/testingWeb/html+php/index.html");
+    delete_cookie("prof");
+  }
+  else if (jwt_stocat == "  " || jwt_stocat == "   " || jwt_stocat.length==847) {
+    //678 reprezinta cazul de eroare, in momentul in care numele utilizatorului nu e in baza de date
+    alert("Username sau parola gresita!")
+    delete_cookie("jwt");
+    deleteAllCookies();
+    window.localStorage.removeItem("jwt");
+    window.location.replace("http://localhost/testingWeb/html+php/index.html");
+  }
+  else{
+  //alert(jwt_stocat);
+  /* ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
+  ajax.send(); */
+  }
 
 
 
