@@ -1,11 +1,3 @@
-<?php
-if(!isset($_COOKIE["jwt"])){
-  header("Location: http://localhost/testingWeb/html+php/index.php");
-  return false;
-  } 
-
-?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -51,60 +43,19 @@ function delete_cookie(name) {
     </div>
     <div id="welcomeContainer"> Salut. Ai fost autentificat cu succes in aplicatie!</div>
     <div class="right_area">
-      <a href="JWTf.php" onclick="logoutFunction()" class="logout_btn">Logout</a>
+      <a href="index.html" onclick="logoutFunction()" class="logout_btn">Logout</a>
     </div>
   </header>
 
 
   <div class="sidebar">
     <img src="../images/CLaMa.svg" class="profile_image" alt="profile image">
-    <h3>
-      <?php
-      
-      include_once '../api/config/database.php';
-      include_once '../api/objects/user.php';
-      include_once '../api/libs/jwt_params.php';
-      include_once '../api/objects/user.php';
-      include_once '../api/libs/php-jwt-master/src/BeforeValidException.php';
-      include_once '../api/libs/php-jwt-master/src/ExpiredException.php';
-      include_once '../api/libs/php-jwt-master/src/SignatureInvalidException.php';
-      include_once '../api/libs/php-jwt-master/src/JWT.php';
-      use \Firebase\JWT\JWT;
-      if(!isset($_COOKIE["jwt"])){
-      header("Location: http://localhost/testingWeb/html+php/index.php");
-      echo "Comportament nepermis! Logati-va ca student ca sa puteti incarca documente.";
-      return false;
-      } 
-      else {$jwt = $_COOKIE['jwt'];}
+    <h3>Cezar Lupu</h3>
 
-      //echo $jwt;
-
-
-      try{    
-        $jwt_decodificat = JWT::decode($jwt, JWT_KEY, array('HS256'));
-        //print_r($jwt_decodificat);
-        //echo "\n\n\n\n";
-        $id_utilizator = $jwt_decodificat->data->id;
-        $nume = $jwt_decodificat->data->lastname;
-        $prenume = $jwt_decodificat->data->firstname;
-        //echo $id_utilizator;
-        echo $nume . " ";
-        //echo $rol;
-        echo $prenume;
-      
-        }catch (Exception $e){
-           echo json_encode(["message"=>$e->getMessage()]);
-           exit();
-       }
-
-
-      ?>
-    </h3>
-
-    <a href="Menu.php"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
-    <a href="clase.php"><i class="fab fa-500px"></i><span> Clase și cursuri</span></a>
+    <a href="Menu.html"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
+    <a href="clase.html"><i class="fab fa-500px"></i><span> Clase și cursuri</span></a>
     <a href="upload.php"><i class="fab fa-500px"></i><span> Încărcare temă</span></a>
-    <a href="codprezenta.php"><i class="fab fa-500px"></i><span> Introducere cod prezenta</span></a>
+    <a href="codprezenta.html"><i class="fab fa-500px"></i><span> Introducere cod prezenta</span></a>
     <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
   </div>
 
@@ -135,7 +86,7 @@ include_once '../api/libs/php-jwt-master/src/BeforeValidException.php';
 include_once '../api/libs/php-jwt-master/src/ExpiredException.php';
 include_once '../api/libs/php-jwt-master/src/SignatureInvalidException.php';
 include_once '../api/libs/php-jwt-master/src/JWT.php';
-//use \Firebase\JWT\JWT;
+use \Firebase\JWT\JWT;
 if(!isset($_COOKIE["jwt"])){
   //window.location.replace("http://localhost/testingWeb/html+php/index.html");
   echo "Comportament nepermis! Logati-va ca student ca sa puteti incarca documente.";

@@ -23,9 +23,6 @@ use \Firebase\JWT\JWT;
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
-/* $name = "salut";
-$value = "ce faci";
-setcookie( $name, $value,time()+600, httponly:true ); */
  
 $user = new User($db);
  
@@ -35,14 +32,15 @@ $data = json_decode(file_get_contents('php://input'));
 $user->firstname = $data->firstname;
 $user->parola = $data->password;
 
-$interogare = "SELECT id, firstname, lastname, email, parola, rol, username, year, semian, grup FROM users WHERE username=:username";
+$interogare = "SELECT id, firstname, lastname, email, parola, rol FROM users WHERE firstname=:username";
     $stmt = $db->prepare($interogare);
     $stmt->execute(["username" => $data->firstname]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if(
     !empty($user->firstname) &&
     !empty($user->parola) && 
-    ($stmt->rowCount())
+    ($row != "   ")
 ){
 
    /*  $interogare = "SELECT id, firstname, lastname, email, parola FROM users WHERE firstname=:username";
@@ -50,19 +48,12 @@ if(
     $stmt->execute(["username" => $data->firstname]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC); */
     //echo $row;
-
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
     $myUser = array(
         "id"=>$row['id'],
         "firstname"=>$row['firstname'],
-        "lastname"=>$row['lastname'],
         "email"=>$row['email'],
         "parola"=>$row['parola'],
-        "rol"=>$row['rol'],
-        "year"=>$row['year'],
-        "semian"=>$row['semian'],
-        "grup"=>$row['grup'],
-        "username"=>$row['username']
+        "rol"=>$row['rol']
     );
 
     if (password_verify($data->password, $myUser["parola"])){
@@ -75,22 +66,15 @@ if(
                 "id"=>$myUser["id"],
                 "email"=>$myUser["email"],
                 "firstname"=>$myUser["firstname"],
-                "lastname"=>$row['lastname'],
-                "rol"=>$myUser["rol"],
-                "year"=>$row['year'],
-                "semian"=>$row['semian'],
-                "grup"=>$row['grup'],
-                "username"=>$row['username']  
+                "rol"=>$myUser["rol"]
             )
             );
             $jwt = JWT::encode($token, JWT_KEY);
             echo $jwt;
-            http_response_code(200);
-    }
-    else{
-        http_response_code(400);
     }
     //W$cerere = oci_parse($db, $interogare);
+
+    http_response_code(200);
 } else
     {   http_response_code(400);
         echo json_encode(
