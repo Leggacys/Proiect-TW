@@ -52,16 +52,35 @@
 <div class="content">
     <div class="header">
     </div>
-
     <div class="container">
+      <select  id="saptamani">
+        <option value="0" >Alege Saptamana</option>
+       <option >1</option>
+       <option >2</option>
+       <option >3</option>
+       <option >4</option>
+       <option >5</option>
+       <option >6</option>
+       <option >7</option>
+       <option >8</option>
+       <option >9</option>
+       <option >10</option>
+       <option >11</option>
+       <option >12</option>
+       <option >13</option>
+     </select>
+
       <div class="dropdown">
         <button id ="materii" class="dropbtn">Materii Disponibile</button>
         <div class="dropdown-content">
         <a href="#" onclick="BazeDeDate()">Baze De Date</a>
-        <a href="#" onclick="ReteleDeCalculatoare()">Retele De calculatoare</a>
+        <a href="#" onclick="ReteleDeCalculatoare()">Retele</a>
         <a href="#" onclick="TehnologiiWeb()">Tehnologii Web</a>
         </div>
       </div>
+      <p size="5px">
+        Durata
+      </p>
         <input type="text" STYLE="color: #FFFFFF; font-family: Verdana; font-weight: bold; font-size: 12px; background-color: #72A4D2;" size="5" maxlength="5" type="text" name="field[]" class="Durata"
          id="Durata" />
     <form class="form" id="form">
@@ -76,13 +95,6 @@
 </div>
 
 <script>
-
-
-
-
-window.onbeforeunload = function() {
-        return "Dude, are you sure you want to leave? Think of the kittens!";
-    }
 
 function delete_cookie(name) {
       document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -139,12 +151,11 @@ function BazeDeDate(){
    document.getElementById("materii").innerHTML = "Baze de Date";
 }
 function ReteleDeCalculatoare(){
-   document.getElementById("materii").innerHTML = "Retele de Calculatoare";
+   document.getElementById("materii").innerHTML = "Retele";
 }
 function TehnologiiWeb(){
    document.getElementById("materii").innerHTML = "Tehnologii Web";
 }
-
 function myFunction() {
   var text = "";
   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -154,6 +165,7 @@ function myFunction() {
     document.getElementById("COD").textContent = text;
     var idCurs;
     var durata=document.getElementById("Durata").value;
+    var saptamana = document.getElementById("saptamani").value;
     switch (document.getElementById("materii").textContent) {
   case "Baze de Date":
     idCurs = 1;
@@ -165,57 +177,20 @@ function myFunction() {
        idCurs = 3;
     break;
 }
-createCookie("durata",durata,1);
-createCookie("cursId",idCurs,1);
-createCookie("codCurs",text,1);
-location.reload();
-}
 
-function createCookie(cookiName, value, days) {
-    var expires;
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days * 2000*60));
-        expires = "; expires=" + date.toGMTString();
-    }
-    else {
-        expires = "";
-    }
-    document.cookie = escape(cookiName) + "=" +
-        escape(value) + expires + "; path=/";
-      console.log(cookiName);
-}
+console.log(saptamana.value);
 
+var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+      }
+      };
+      xmlhttp.open("GET", "http://localhost/testingWeb/html+php/insertCode.php?id=" + idCurs + "&cod=" + text + "&durata=" + durata + "&saptamana=" + saptamana, true);
+      xmlhttp.send();
+  return 1;
+}
 </script>
 
-<?php
-$conn = mysqli_connect("localhost","root","","api_db");
-if($conn-> connect_error){
-  die("Connect failed");
-}
-
-date_default_timezone_set("Europe/Chisinau");
-$time=date('H:i:s');
-$idCurs=$_COOKIE['cursId'];
-$cod=$_COOKIE['codCurs'];
-$durataCod=$_COOKIE['durata'];
-
-if($idCurs!=21)
-{
-  $query = "INSERT INTO cursuri2 (cod_prezenta,Insert_date,durata,Id_curs)
-  VALUES ('$cod','$time','$durataCod','$idCurs')";
-  $data=mysqli_query($conn,$query);
-  if($data)
-  {
-    echo "Sters";
-  }else {
-    echo "Eroare";
-  }
-    $conn-> close();
-}
-
-
-
- ?>
   </body>
   </html>

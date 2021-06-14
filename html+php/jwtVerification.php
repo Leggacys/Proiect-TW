@@ -55,12 +55,12 @@ if (isset($_SERVER['HTTP_AUTHORIZATION']))
      try{    
      $jwt_decodificat = JWT::decode($JWT_receptionat, JWT_KEY, array('HS256'));
      print_r($jwt_decodificat);
-     /* echo "\n\n\n\n";
+     echo "\n\n\n\n";
      $id_utilizator = $jwt_decodificat->data->id;
      $rol = $jwt_decodificat->data->rol;
      echo($id_utilizator);
      echo "\n\n\n\n";
-     echo($rol); */
+     echo($rol);
 
 
      }catch (Exception $e){
