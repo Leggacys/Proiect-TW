@@ -10,7 +10,6 @@
 
 <script>
 
-
 function takeTheGradeFromDropdownMenu(row){
   var nota = document.getElementById(row).value;
   //var text = nota.options[e.selectedIndex].text;
@@ -32,13 +31,12 @@ function insertIntoDB(row, id_tema){
         location.reload(); 
       }
       };
-      xmlhttp.open("GET", "http://localhost/pune_note/salveazaNota.php?id=" + row + "&idtema=" + id_tema + "&nota=" + valoare, true);
+      xmlhttp.open("GET", "http://localhost/TestingWeb/html+php/salveazaNota.php?id=" + row + "&idtema=" + id_tema + "&nota=" + valoare, true);
       xmlhttp.send();
   return 1;
   }
   return 0;
 }
-
 
 
 function delete_cookie(name) {
@@ -72,8 +70,6 @@ function delete_cookie(name) {
     <div class="left_area">
       <h3>Class <span>Manager</span> </h3>
     </div>
-    <div id="welcomeContainer"> Salut. Ai fost autentificat cu succes in aplicatie!</div>
-
     <div class="right_area">
       <a href="index.html" onclick="logoutFunction()" class="logout_btn">Logout</a>
     </div>
@@ -82,8 +78,7 @@ function delete_cookie(name) {
 
   <div class="sidebar">
       <img src="../images/male.png" class="profile_image" alt="dummy male photo">
-      <h3>Profesorul X</h3>
-
+      <h3>Profesor Utilizator</h3>
       <a href="Menu-prof.html"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
       <a href="PuneNote.php"><i class="fab fa-500px"></i><span>   Vizualizare Teme</span></a>
       <a href="Menu-prof-AcceptStudents.php"><i class="fab fa-500px"></i><span>   Primește studenți</span></a>
@@ -109,19 +104,18 @@ function delete_cookie(name) {
 
           <?php
           $conn = mysqli_connect("localhost","root","","api_db");
-
           if($conn-> connect_error){
             die("Connect failed");
           }
 
           //paths = CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id)
-          $sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, f.name AS nume_tema, CONCAT('http://localhost/pune_note/download.php?id=',f.id) as paths, f.new_name AS new_name, nota, f.id AS id_tema FROM users u JOIN uploaded_files f ON u.id=f.id_stud WHERE u.rol=0";
+          $sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, f.name AS nume_tema, CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id) as paths, f.new_name AS new_name, nota, f.id AS id_tema FROM users u JOIN uploaded_files f ON u.id=f.id_stud WHERE u.rol=0";
           $result = $conn -> query($sql);
           $counter_row = 1;
           if($result  -> num_rows >0)
           {
             while($row = $result -> fetch_assoc()){
-              $link_to_hw = "http://localhost/pune_note/uploads/" . $row["new_name"];
+              $link_to_hw = "http://localhost/TestingWeb/html+php/uploads/" . $row["new_name"];
               $nota = $row["nota"];
               $id_tema = $row["id_tema"];
 
@@ -218,25 +212,24 @@ document.getElementById("medie").innerHTML = secondGrade;
 }
 
 
-
-if (jwt_stocat == null) {
-    alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!")
-    window.location.replace("http://localhost/testingWeb/html+php/index.html");
-    delete_cookie("prof");
-  }
-  else if (jwt_stocat == "  " || jwt_stocat == "   " || jwt_stocat.length==847) {
-    //678 reprezinta cazul de eroare, in momentul in care numele utilizatorului nu e in baza de date
-    alert("Username sau parola gresita!")
-    delete_cookie("jwt");
-    deleteAllCookies();
-    window.localStorage.removeItem("jwt");
-    window.location.replace("http://localhost/testingWeb/html+php/index.html");
-  }
-  else{
-  //alert(jwt_stocat);
-  /* ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
-  ajax.send(); */
-  }
+// if (jwt_stocat == null) {
+//     alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!")
+//     window.location.replace("http://localhost/testingWeb/html+php/index.html");
+//     delete_cookie("prof");
+//   }
+//   else if (jwt_stocat == "  " || jwt_stocat == "   " || jwt_stocat.length==847) {
+//     //678 reprezinta cazul de eroare, in momentul in care numele utilizatorului nu e in baza de date
+//     alert("Username sau parola gresita!")
+//     delete_cookie("jwt");
+//     deleteAllCookies();
+//     window.localStorage.removeItem("jwt");
+//     window.location.replace("http://localhost/testingWeb/html+php/index.html");
+//   }
+//   else{
+//   //alert(jwt_stocat);
+//   /* ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
+//   ajax.send(); */
+//   }
 
 
 

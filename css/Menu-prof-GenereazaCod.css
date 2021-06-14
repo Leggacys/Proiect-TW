@@ -237,6 +237,7 @@ label #sidebar_btn{
   /* The container <div> - needed to position the dropdown content */
   .dropdown {
     position: relative;
+
     display: inline-block;
   }
 
@@ -257,7 +258,6 @@ label #sidebar_btn{
     text-decoration: none;
     display: block;
   }
-
 
   /* Change color of dropdown links on hover */
   .dropdown-content a:hover {background-color: #f1f1f1}

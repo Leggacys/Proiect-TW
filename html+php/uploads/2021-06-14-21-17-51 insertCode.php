@@ -12,7 +12,7 @@
         $idCurs = $_GET['id'];
         $cod = $_GET['cod'];
         $saptamana=$_GET['saptamana'];
-        $sql = "INSERT INTO cursuri2 (cod_prezenta,insert_date,durata,Id_curs,nr_saptamana)
+        $sql = "INSERT INTO cursuri (cod_prezenta,insert_date,durata,Id_curs,nr_saptamana)
         VALUES ('$cod','$time','$durata','$idCurs','$saptamana')";
         $result = $conn -> query($sql);
         echo "test";

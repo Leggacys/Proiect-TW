@@ -40,11 +40,11 @@
   <div class="sidebar">
       <img src="../images/male.png" class="profile_image" alt="dummy male photo">
       <h3>Profesorul X</h3>
-      <a href="Menu-prof.html"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
-      <a href="PuneNote.php"><i class="fab fa-500px"></i><span>   Vizualizare Teme</span></a>
+      <a href="clase.php"><i class="fab fa-500px"></i><span>Clase</span></a>
+      <a href="PuneNote.php"><i class="fab fa-500px"></i><span>   Noteaza Teme </span></a>
       <a href="Menu-prof-AcceptStudents.php"><i class="fab fa-500px"></i><span>   Primește studenți</span></a>
       <a href="Menu-prof-GenereazaCod.php"><i class="fab fa-500px"></i><span>   Generează cod</span></a>
-      <a href="Menu-prof-Note.php"><i class="fab fa-500px"></i><span>   Notează studenții</span></a>
+      <a href="Menu-prof-Note.php"><i class="fab fa-500px"></i><span>Vizualizare Note</span></a>
       <a href="Menu-prof-Export.html"><i class="fab fa-500px"></i><span>   Descarcă lista de persoane</span></a>
       <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
   </div>
