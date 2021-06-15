@@ -185,7 +185,7 @@ if(!isset($_COOKIE["jwt"])){
                     <div class="iconCurs"><i class="fa fa-database" aria-hidden="true"></i></div>
                     <div class="content">
                         <h3>
-                            <a href="statisticaBD.php">
+                            <a href="linkingBD.php">
                             Baze de date
                             </a>
                         </h3>
@@ -193,22 +193,22 @@ if(!isset($_COOKIE["jwt"])){
                     </div>
                 </div>
                 <div class="boxGrupa">
-                    <div class="iconCurs" id="TW" ><i class="fa fa-code"></i></div>
+                    <div class="iconCurs" id="TW" ><i class="fa fa-linux"></i></div>
                         <div class="content">
                             <h3>
-                                <a href="statisticaTW.php">
-                            Tehnologii web
+                                <a href="linkingRC.php">
+                                Retele de calculatoare
                             </a>
                             </h3>
                             <p>Haideti sa ne facem propriul nostru site si sa intelegem ce se intampla in spatele framework-urilor</p>
                     </div>
                 </div>
                 <div class="boxGrupa">
-                    <div class="iconCurs" id="RC"><i class="fa fa-linux"></i></div>
+                    <div class="iconCurs" id="RC"><i class="fa fa-code"></i></div>
                         <div class="content">
                             <h3>
-                                <a href="statisticaRC.php">
-                            Retele de calculatoare
+                                <a href="linkingTW.php">
+                            Tehnologii web
                             </a>
                             </h3>
                             <p>Haideti sa ne jucam de-a serverul si de-a clientul, folosindu-ne de sistemul de operare Linux.</p>

@@ -8,7 +8,7 @@ if($conn-> connect_error){
 $rollno=$_GET['rn'];
 
 
-$query = "UPDATE users SET rol = 'teacher' WHERE id ='$rollno'";
+$query = "UPDATE users SET rol = 'teacher2' WHERE id ='$rollno'";
 
 $data=mysqli_query($conn,$query);
 if($data)

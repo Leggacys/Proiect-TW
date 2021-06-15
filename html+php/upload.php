@@ -98,8 +98,8 @@ if(isset($_POST['upload'])){ //if upload button isset or not
     echo "<script>alert('Whoops! I don't have the permission to upload homework that have the size greater than 10MB.')</script>";
   }else{
 
-    $sql = "INSERT INTO uploaded_files (name, new_name, course, id_stud)
-    VALUES('$file_name', '$file_new_name', 'unknown' , '$id_utilizator')";
+    $sql = "INSERT INTO uploaded_files (name, new_name, course, id_stud, nota)
+    VALUES('$file_name', '$file_new_name', 'unknown' , '$id_utilizator', 0)";
     $result = mysqli_query($conn, $sql);
 
     if($result){
