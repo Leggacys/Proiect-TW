@@ -105,12 +105,14 @@ function delete_cookie(name) {
   <h1><span class="blue">&lt;</span>Accepta<span class="blue">&gt;</span> <span class="yellow">Profesori</span></h1>
  <table class="container">
  		<tr>
- 			<th>Nume</th>
-      <th>Prenume</th>
+ 			<th>Nume profesor</th>
+      <th>Prenume profesor</th>
  			<th>Email</th>
-      <th>Rol</th>
-      <th>StergeProfesor</th>
-      <th>Accepta</th>
+      <th>Rolul utilizatorului</th>
+      <th>Sterge Profesor</th>
+      <th>Accepta curs BD</th>
+      <th>Accepta curs RC</th>
+      <th>Accepta curs TW</th>
  		</tr>
   <?php
   $conn = mysqli_connect("localhost","root","","api_db");
@@ -118,14 +120,14 @@ function delete_cookie(name) {
     die("Connect failed");
   }
 
-  $sql = "SELECT distinct u.id as id, u.email as email, u.firstname as firstname, u.lastname as lastname, u.rol as rolul FROM users u WHERE rol ='teacher2' ORDER BY rolul DESC;";
+  $sql = "SELECT distinct u.id as id, u.email as email, u.firstname as firstname, u.lastname as lastname, u.rol as rolul FROM users u WHERE rol ='teacher4' ORDER BY rolul DESC;";
   $result = $conn -> query($sql);
   if($result  -> num_rows >0)
   {
     while($row = $result -> fetch_assoc()){
       echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["email"] .
-      "</td><td>" . $row["rolul"]  . "<td> <a href = 'stergeProfesor.php?rn=$row[id]'> Sterge Profesor</td>" .
-      "<td> <a href = 'upgradeProf.php?rn=$row[id]'> Accepta Profesor</td>" . "</tr>";
+      "</td><td>" . "Profesor"  . "<td> <a href = 'stergeProfesor.php?rn=$row[id]'> Sterge Profesor</td>" .
+      "<td> <a href = 'upgradeProfBd.php?rn=$row[id]'> Accepta Profesor</td>" . "<td> <a href = 'upgradeProfRc.php?rn=$row[id]'> Accepta Profesor</td>" . "<td> <a href = 'upgradeProfTw.php?rn=$row[id]'> Accepta Profesor</td>" . "</tr>";
     }
     echo "</table>";
   }else {

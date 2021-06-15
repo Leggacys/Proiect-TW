@@ -8,7 +8,7 @@ if($conn-> connect_error){
 $rollno=$_GET['rn'];
 
 
-$query = "DELETE FROM users2 WHERE id ='$rollno'";
+$query = "UPDATE users SET rol = 'teacher1' WHERE id ='$rollno'";
 
 $data=mysqli_query($conn,$query);
 if($data)
@@ -17,5 +17,5 @@ if($data)
 }else {
   echo "Eroare";
 }
-header("Refresh:0; url=http://localhost/testingWeb/html+php/Menu-prof-AcceptStudents.php");
+header("Refresh:0; url=http://localhost/testingWeb/html+php/acceptProfi.php");
 ?>
