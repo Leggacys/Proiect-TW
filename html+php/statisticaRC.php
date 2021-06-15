@@ -1,4 +1,6 @@
 <?php
+include 'uploadConfig.php';
+
 if(!isset($_COOKIE["jwt"])){
   header("Location: http://localhost/testingWeb/html+php/index.php");
   return false;
@@ -129,10 +131,10 @@ function delete_cookie(name) {
               <th>Nr matricol</th>
               <th>Nume</th>
               <th>Prenume</th>
+              <th>Prezente</th>
               <th>Nota I</th>
               <th>Nota II</th>
               <th>Nota III</th>
-              <th>ID Curs</th>
               <th>Media</th>
           </tr>
       </thead>
@@ -178,13 +180,14 @@ try{
             die("Connect failed");
           }
 
-          $sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, n.valoare AS note, n.valoare2 AS note2, n.valoare3 AS note3, n.id_curs AS curs, (n.valoare+n.valoare2+n.valoare3)/3 as media FROM users u JOIN note n ON u.id=n.id_stud WHERE u.rol=0 AND u.id = '$id_utilizator' AND n.id_curs = 3";
+          $sql = "SELECT id_student, nume, prenume, prezente, nota1, nota2, nota3, (nota1+nota2+nota3)/3 as media, titlu_curs FROM medie_ascultari WHERE '$id_utilizator' = id_student AND titlu_curs='RC'; ";
           $result = $conn -> query($sql);
+          echo "<br/>";
           if($result  -> num_rows >0)
           {
             while($row = $result -> fetch_assoc()){
-              echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
-              "</td><td>" . $row["note"] .  "</td><td>" . $row["note2"]  . "</td><td>" . $row["note3"]  . "</td><td>" . $row["curs"]  . "</td><td>" . $row["media"]  . "</td></tr>";
+              echo "<tr><td>" . $row["id_student"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
+              "</td><td>" . $row["prezente"] .  "</td><td>" . $row["nota1"]  . "</td><td>" . $row["nota2"]  . "</td><td>" . $row["nota3"]  . "</td><td>" . $row["media"]  . "</td></tr>";
             }
             echo "</table>";
           }else {
@@ -194,9 +197,144 @@ try{
           }
           $conn-> close();
            ?>
-  
+
+        </br></br></br></br>
+
+  <table class="styled-table2">
+      <thead>
+          <tr>
+              <th>Data incarcarii</th>
+              <th>Nume tema</th>
+              <th>Link catre tema</th>
+              <th>Nota</th>
+          </tr>
+      </thead>
+      <tbody>
+
+          <?php
+
+
+          $conn = mysqli_connect("localhost","root","","api_db");
+          if($conn-> connect_error){
+            die("Connect failed");
+          }
+
+          $sql = "SELECT f.uploaded_at AS data, f.name AS nume_tema, f.new_name AS new_name, CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id) as paths, f.nota AS nota, u.id AS id, f.course as titlu_curs FROM users u JOIN uploaded_files f ON u.id=f.id_stud WHERE '$id_utilizator' = u.id AND f.course='RC'";
+          $result = $conn -> query($sql);
+          if($result  -> num_rows >0)
+          {
+            while($row = $result -> fetch_assoc()){
+              if($row["nota"] != null){
+                $link_to_hw = "uploads/" . $row["new_name"];
+              echo "<tr><td>" . $row["data"] ."</td><td>" . $row["nume_tema"] . "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td align=\"center\"> " . $row["nota"]  . "</td></tr>";
+              }else{
+                $link_to_hw = "uploads/" . $row["new_name"];
+                echo "<tr><td>" . $row["data"] ."</td><td>" . $row["nume_tema"] . "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td align=\"center\"> " . "Not marked yet"  . "</td></tr>";
+              }
+            }
+            echo "</table>";
+          }else {
+            {
+              //echo "0 results";
+            }
+          }
+          $conn-> close();
+           ?>
+
+<?php
+
+$link_status = "display: none;";
+
+
+date_default_timezone_set('UTC');
+
+
+
+
+if(isset($_POST['upload'])){ //if upload button isset or not
+  //declaring variables
+  $location = "uploads/";
+  $file_name = $_FILES["file"]["name"]; //get uploaded file
+  $file_new_name = date("Y-m-d-H-i-s") . $file_name; //new and unique name
+  $file_temp = $_FILES["file"]["tmp_name"]; //get uploded file temp
+  $file_size = $_FILES["file"]["size"]; //get upload file size
+
+  if($file_size > 11000000){ //check if is greater than aprox 10MB
+    echo "<script>alert('Whoops! I don't have the permission to upload homework that have the size greater than 10MB.')</script>";
+  }else{
+
+  $server = "localhost";
+  $dbuser = "root";
+  $dbpass = "";
+
+  $database = "api_db";
+
+
+  $conn = mysqli_connect($server, $dbuser, $dbpass, $database);
+
+  if(!$conn){
+      die("<script>alert('Connection failed!')</script>");
+  }
+
+
+  $base_url = "http://localhost/TestingWeb/html+php/"; //website url 
+
+
+
+    $sql = "INSERT INTO uploaded_files (name, new_name, course, id_stud)
+    VALUES('$file_name', '$file_new_name', 'RC' , '$id_utilizator')";
+    $result = mysqli_query($conn, $sql);
+
+    if($result){
+      move_uploaded_file($file_temp, $location . $file_new_name);
+      echo "<script>alert('File upload succeded')</script>";
+      //take data from DB
+
+      $sql = "SELECT id FROM uploaded_files ORDER BY id DESC";
+      $result = mysqli_query($conn, $sql);
+
+      if($row = mysqli_fetch_assoc($result)){
+        $link = $base_url . "download.php?id=" . $row["id"];
+        $link_status = "display: block;";
+      }
+
+    }else{
+        echo "<script>alert('Please try again')</script>";
+    }
+ 
+  }
+}
+?>
+
+<!--html for upload-->
+
+<div class="file__upload">
+		<div class="header-box">
+			<p><i class="fa fa-cloud-upload fa-2x"></i><span><span>HW</span> upload</span></p>			
+		</div>
+		<form action="" method="POST" enctype="multipart/form-data" class="body-formular">
+    <!-- SHARABLE PART-->
+    <input type="checkbox" id="link_checkbox">
+    <input type="text" value="<?php echo $link; ?>" id="link" readonly >
+    <label for="link_checkbox" style="<?php echo $link_status; ?>"> Copiază link </label>
+
+			<input type="file" name="file" id="upload" required>
+			<label for="upload">
+				<i class="fa fa-file-text-o fa-3x"></i>
+                <br>
+					Poți trage fișierul direct aici.
+                <br>
+                    Îl poți căuta și de <span><strong>aici</strong></span>.
+			</label>
+      <button name="upload" class="btn">Încarcă</button>
+		</form>
+	</div>
+
+
+
 
  </div>
+
 <script>
 function myFunction() {
 
@@ -262,7 +400,13 @@ if (jwt_stocat == null) {
   ajax.send(); */
   }
 
+</script>
+
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
 
 
-  </script>
 </html>

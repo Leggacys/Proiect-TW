@@ -1,6 +1,6 @@
 <?php
 if(!isset($_COOKIE["jwt"])){
-  header("Location: http://localhost/testingWeb/html+php/index.php");
+  header("Location: http://localhost/TestingWeb/html+php/index.php");
   return false;
   } 
 
@@ -48,17 +48,18 @@ if(!isset($_COOKIE["jwt"])){
     <h3>
       <?php
       
-      include_once '../api/config/database.php';
-      include_once '../api/objects/user.php';
-      include_once '../api/libs/jwt_params.php';
-      include_once '../api/objects/user.php';
-      include_once '../api/libs/php-jwt-master/src/BeforeValidException.php';
-      include_once '../api/libs/php-jwt-master/src/ExpiredException.php';
-      include_once '../api/libs/php-jwt-master/src/SignatureInvalidException.php';
-      include_once '../api/libs/php-jwt-master/src/JWT.php';
-      use \Firebase\JWT\JWT;
+      include_once './api/config/database.php';
+      include_once './api/objects/user.php';
+      include_once './api/libs/jwt_params.php';
+      include_once './api/objects/user.php';
+      include_once './api/libs/php-jwt-master/src/BeforeValidException.php';
+      include_once './api/libs/php-jwt-master/src/ExpiredException.php';
+      include_once './api/libs/php-jwt-master/src/SignatureInvalidException.php';
+      include_once './api/libs/php-jwt-master/src/JWT.php';
+      use Firebase\JWT\JWT;
+
       if(!isset($_COOKIE["jwt"])){
-      header("Location: http://localhost/testingWeb/html+php/index.php");
+      header("Location: http://localhost/TestingWeb/html+php/index.php");
       echo "Comportament nepermis! Logati-va ca student ca sa puteti incarca documente.";
       return false;
       } 
@@ -185,7 +186,7 @@ if(!isset($_COOKIE["jwt"])){
                     <div class="iconCurs"><i class="fa fa-database" aria-hidden="true"></i></div>
                     <div class="content">
                         <h3>
-                            <a href="linkingBD.php">
+                            <a href="statisticaBD.php">
                             Baze de date
                             </a>
                         </h3>
@@ -193,22 +194,22 @@ if(!isset($_COOKIE["jwt"])){
                     </div>
                 </div>
                 <div class="boxGrupa">
-                    <div class="iconCurs" id="TW" ><i class="fa fa-linux"></i></div>
+                    <div class="iconCurs" id="TW" ><i class="fa fa-code"></i></div>
                         <div class="content">
                             <h3>
-                                <a href="linkingRC.php">
-                                Retele de calculatoare
+                                <a href="statisticaTW.php">
+                            Tehnologii web
                             </a>
                             </h3>
                             <p>Haideti sa ne facem propriul nostru site si sa intelegem ce se intampla in spatele framework-urilor</p>
                     </div>
                 </div>
                 <div class="boxGrupa">
-                    <div class="iconCurs" id="RC"><i class="fa fa-code"></i></div>
+                    <div class="iconCurs" id="RC"><i class="fa fa-linux"></i></div>
                         <div class="content">
                             <h3>
-                                <a href="linkingTW.php">
-                            Tehnologii web
+                                <a href="statisticaRC.php">
+                            Retele de calculatoare
                             </a>
                             </h3>
                             <p>Haideti sa ne jucam de-a serverul si de-a clientul, folosindu-ne de sistemul de operare Linux.</p>
