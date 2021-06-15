@@ -96,7 +96,7 @@ function delete_cookie(name) {
     <a href="MenuAdmin.php"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
     <a href="utilizatoriInregistrati.php"><i class="fab fa-500px"></i><span> Utilizatori inregistrati</span></a>
     <a href="upload.php"><i class="fab fa-500px"></i><span> Catalog</span></a>
-    <a href="codprezenta.php"><i class="fab fa-500px"></i><span> Evidenta teme</span></a>
+    <a href="evidentaTeme.php"><i class="fab fa-500px"></i><span> Evidenta teme</span></a>
     <a href="acceptProfi.php"><i class="fab fa-500px"></i><span> Lista asteptare profesori</span></a>
     <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
   </div>

@@ -25,6 +25,13 @@ $user->firstname = $data->firstname;
 $user->lastname = $data->lastname;
 $user->email = $data->email;
 $user->parola = $data->parola;
+$user->username = $data->username;
+$user->rol = $data->rol;
+$user->year = $data->year;
+$user->semian = $data->semian;
+$user->grup = $data->grup;
+
+
 
 
  
@@ -35,6 +42,7 @@ if(
     !empty($user->firstname) &&
     !empty($user->email) &&
     !empty($user->parola) &&
+    !empty($user->username) &&
     $user->create() &&
     $user->create2()
 ){

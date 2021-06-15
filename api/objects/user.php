@@ -9,11 +9,15 @@ class User{
  
     // object properties
     public $id;
+    public $username;
     public $firstname;
     public $lastname;
     public $email;
     public $parola;
-    public $rol = '0';
+    public $rol;
+    public $year;
+    public $semian;
+    public $grup;
  
     // constructor
     public function __construct($db){
@@ -29,7 +33,12 @@ function create(){
                 firstname = :firstname,
                 lastname = :lastname,
                 email = :email,
-                parola = :parola 
+                parola = :parola,
+                username = :username,
+                rol = :rol,
+                year = :year,
+                semian = :semian,
+                grup = :grup
                 ";
  
     // prepare the query
@@ -40,11 +49,21 @@ function create(){
     $this->lastname=htmlspecialchars(strip_tags($this->lastname));
     $this->email=htmlspecialchars(strip_tags($this->email));
     $this->parola=htmlspecialchars(strip_tags($this->parola));
- 
+    $this->username=htmlspecialchars(strip_tags($this->username));
+    $this->rol=htmlspecialchars(strip_tags($this->rol));
+    $this->year=htmlspecialchars(strip_tags($this->year));
+    $this->semian=htmlspecialchars(strip_tags($this->semian));
+    $this->grup=htmlspecialchars(strip_tags($this->grup));
+    
     // bind the values
     $stmt->bindParam(':firstname', $this->firstname);
     $stmt->bindParam(':lastname', $this->lastname);
     $stmt->bindParam(':email', $this->email);
+    $stmt->bindParam(':username', $this->username);
+    $stmt->bindParam(':rol', $this->rol);
+    $stmt->bindParam(':year', $this->year);
+    $stmt->bindParam(':semian', $this->semian);
+    $stmt->bindParam(':grup', $this->grup);
  
     // hash the password before saving to database
     $password_hash = password_hash($this->parola, PASSWORD_BCRYPT);

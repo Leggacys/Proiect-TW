@@ -1,6 +1,6 @@
 <?php
 
-    $conn = mysqli_connect("localhost","root","","vechi_api_db");
+    $conn = mysqli_connect("localhost","root","","api_db");
     if($conn-> connect_error){
             die("Connect failed");
     }
