@@ -76,12 +76,9 @@ function delete_cookie(name) {
         try{    
           $jwt_decodificat = JWT::decode($jwt, JWT_KEY, array('HS256'));
           $rol = $jwt_decodificat->data->rol;
-          if($rol == "student"){
-            header("Location: http://localhost/testingWeb/html+php/Menu.php");
-          }
-          else if($rol == "admin"){
-            header("Location: http://localhost/testingWeb/html+php/MenuAdmin.php");
-          }
+        if($rol != "teacher"){
+          header("Location: http://localhost/testingWeb/html+php/Menu.php");
+        }
           //print_r($jwt_decodificat);
           //echo "\n\n\n\n";
           $id_utilizator = $jwt_decodificat->data->id;
@@ -128,37 +125,15 @@ function delete_cookie(name) {
     die("Connect failed");
   }
 
-  if($rol == "teacher1"){
-      $sql = "SELECT distinct u.id_stud as id, u.nume as firstname, u.prenume as lastname, u.id_curs as curs, u.an as an, u.semian as semian, u.grupa as grupa  FROM studentiAcceptare u WHERE id_curs='1';";
-  }
-  else if($rol == "teacher2"){
-    $sql = "SELECT distinct u.id_stud as id, u.nume as firstname, u.prenume as lastname, u.id_curs as curs, u.an as an, u.semian as semian, u.grupa as grupa  FROM studentiAcceptare u WHERE id_curs='2';";
-  }
-  else if($rol == "teacher3"){
-    $sql = "SELECT distinct u.id_stud as id, u.nume as firstname, u.prenume as lastname, u.id_curs as curs, u.an as an, u.semian as semian, u.grupa as grupa  FROM studentiAcceptare u WHERE id_curs='3';";
-}
+  $sql = "SELECT distinct u.id as id, u.firstname as firstname, u.lastname as lastname FROM users2 u ;";
   $result = $conn -> query($sql);
   if($result  -> num_rows >0)
   {
     while($row = $result -> fetch_assoc()){
-      if($row['curs']==1){
-        echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["id"] .
-        "</td><td>" . "1, 2, 3".  "</td><td><a href = 'acceptaBD.php?id=$row[id]&
-        class=lastname=$row[lastname]&firstname=$row[firstname]&curs=$row[curs]'> Accepta</td>" . "<td>
-        <a href = 'respingeBD.php?rn=$row[id]&curs=$row[curs]'> Respinge</td>" . "</tr>";
-      }
-      else if($row['curs']==2){
-        echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["id"] .
-        "</td><td>" . "1, 2, 3".  "</td><td><a href = 'acceptaRC.php?id=$row[id]&
-        class=lastname=$row[lastname]&firstname=$row[firstname]&curs=$row[curs]'> Accepta</td>" . "<td>
-        <a href = 'respingeRC.php?rn=$row[id]&curs=$row[curs]'> Respinge</td>" . "</tr>";
-      }
-      else if($row['curs']==3){
-        echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["id"] .
-        "</td><td>" . "1, 2, 3".  "</td><td><a href = 'acceptaTW.php?id=$row[id]&
-        class=lastname=$row[lastname]&firstname=$row[firstname]&curs=$row[curs]'> Accepta</td>" . "<td>
-        <a href = 'respingeTW.php?rn=$row[id]&curs=$row[curs]'> Respinge</td>" . "</tr>";
-      }
+      echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["id"] .
+      "</td><td>" . "1, 2, 3".  "</td><td><a href = 'accepta.php?id=$row[id]&
+      class=lastname=$row[lastname]&firstname=$row[firstname]'> Accepta</td>" . "<td>
+      <a href = 'respinge.php?rn=$row[id]'> Respinge</td>" . "</tr>";
     }
     echo "</table>";
   }else {

@@ -117,7 +117,7 @@ function delete_cookie(name) {
               <th>Nota I</th>
               <th>Nota II</th>
               <th>Nota III</th>
-              <th>ID Curs</th>
+              <th>Titlu curs</th>
               <th>Media</th>
           </tr>
       </thead>

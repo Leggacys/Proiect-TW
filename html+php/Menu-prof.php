@@ -79,11 +79,8 @@ function delete_cookie(name) {
         try{    
           $jwt_decodificat = JWT::decode($jwt, JWT_KEY, array('HS256'));
           $rol = $jwt_decodificat->data->rol;
-        if($rol == "student"){
+        if($rol != "teacher"){
           header("Location: http://localhost/testingWeb/html+php/Menu.php");
-        }
-        else if($rol == "admin"){
-          header("Location: http://localhost/testingWeb/html+php/MenuAdmin.php");
         }
           //print_r($jwt_decodificat);
           //echo "\n\n\n\n";
@@ -92,20 +89,11 @@ function delete_cookie(name) {
           $prenume = $jwt_decodificat->data->firstname;
           $rol = $jwt_decodificat->data->rol;
           //echo $id_utilizator;
-          echo "Profesor ";
+          echo $rol . " ";
           echo $nume . " ";
-          echo $prenume . " ";
-          echo "<br/> ";
-          if($rol == "teacher1"){
-            echo "Baze de date";
-          }
-          else if($rol == "teacher2"){
-            echo "Retele de calculatoare";
-          }
-          else if($rol == "teacher3"){
-            echo "Tehnologii Web";
-          }
-            
+          //echo $rol;
+          echo $prenume;
+        
           }catch (Exception $e){
              echo json_encode(["message"=>$e->getMessage()]);
              exit();
