@@ -33,44 +33,6 @@ try{
   echo "\n\n\n\n";
   
 
-
- /*  if(isset($_POST['upload'])){ //if upload button isset or not
-    //declaring variables
-    $space =" ";
-    $location = "uploads/";
-    $file_name = $_FILES["file"]["name"]; //get uploaded file
-    $file_new_name = date("Y-m-d-H-i-s") . $space . $file_name; //new and unique name
-    $file_temp = $_FILES["file"]["tmp_name"]; //get uploded file temp
-    $file_size = $_FILES["file"]["size"]; //get upload file size
-  
-    if($file_size > 11000000){ //check if is greater than aprox 10MB
-      echo "<script>alert('Whoops! I don't have the permission to upload homework that have the size greater than 10MB.')</script>";
-    }else{
-  
-      $sql = "INSERT INTO uploaded_files (name, new_name, course, id_stud)
-              VALUES('$file_name', '$file_new_name', 'unknown' , '$id_utilizator')";
-      $result = mysqli_query($conn, $sql);
-  
-      if($result){
-        move_uploaded_file($file_temp, $location . $file_new_name);
-        echo "<script>alert('File upload succeded')</script>";
-        //take data from DB
-  
-        $sql = "SELECT id FROM uploaded_files ORDER BY id DESC";
-        $result = mysqli_query($conn, $sql);
-  
-        if($row = mysqli_fetch_assoc($result)){
-          $link = $base_url . "download.php?id=" . $row["id"];
-          $link_status = "display: block;";
-        }
-  
-      }else{
-          echo "<script>alert('Please try again')</script>";
-      }
-   
-    }
-  } */
-
   }catch (Exception $e){
      echo json_encode(["message"=>$e->getMessage()]);
      exit();
@@ -98,8 +60,8 @@ if(isset($_POST['upload'])){ //if upload button isset or not
     echo "<script>alert('Whoops! I don't have the permission to upload homework that have the size greater than 10MB.')</script>";
   }else{
 
-    $sql = "INSERT INTO uploaded_files (name, new_name, course, id_stud, nota)
-    VALUES('$file_name', '$file_new_name', 'unknown' , '$id_utilizator', 0)";
+    $sql = "INSERT INTO uploaded_files (name, new_name, course, id_stud)
+    VALUES('$file_name', '$file_new_name', 'unknown' , '$id_utilizator')";
     $result = mysqli_query($conn, $sql);
 
     if($result){
@@ -233,7 +195,7 @@ if(isset($_POST['upload'])){ //if upload button isset or not
     <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
   </div>
 
-<div class="content">
+<div class="content3">
   <div class="file__upload">
 		<div class="header-box">
 			<p><i class="fa fa-cloud-upload fa-2x"></i><span><span>HW</span> upload</span></p>			

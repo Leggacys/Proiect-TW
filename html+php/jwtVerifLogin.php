@@ -37,15 +37,21 @@ try{
   //echo "\n\n\n\n";
   $id_utilizator = $jwt_decodificat->data->id;
   $rol = $jwt_decodificat->data->rol;
-  if($rol == "teacher4"){
-    header("Location: http://localhost/testingWeb/html+php/JWTf.php");
-    exit();
-  }
-  if($rol = "teacher1"){
+  if($rol == "teacher"){
     header("Location: http://localhost/testingWeb/html+php/Menu-prof.php");
     exit();
   }
   else if($rol == "student"){
+    $cookie_name1 = "cursId";
+    $cookie_value1 = "21";
+    $cookie_name2 = "codCurs";
+    $cookie_value2 = "1";
+    $cookie_name3 = "durata";
+    $cookie_value3 = "1";
+
+    setcookie($cookie_name1, $cookie_value1, time() - (86400 * 8), "/");
+    setcookie($cookie_name2, $cookie_value2, time() - (86400 * 8), "/");
+    setcookie($cookie_name3, $cookie_value3, time() - (86400 * 8), "/");
     header("Location: http://localhost/testingWeb/html+php/Menu.php");
     exit();
   }

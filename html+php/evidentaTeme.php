@@ -137,7 +137,7 @@ function delete_cookie(name) {
               <th>Prenume</th>
               <th>Tema</th>
               <th>Nota</th>
-              <th>Data incarcare
+              <th>Data notare
           </tr>
       </thead>
       <tbody>
@@ -149,7 +149,7 @@ function delete_cookie(name) {
           }
 
           //paths = CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id)
-          $sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, f.name AS nume_tema, CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id) as paths, f.new_name AS new_name, nota, f.id AS id_tema, f.uploaded_at AS dataNotare FROM users u JOIN uploaded_files f ON u.id=f.id_stud WHERE u.rol=0";
+          $sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, f.name AS nume_tema, CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id) as paths, f.new_name AS new_name, f.nota AS nota, f.id AS id_tema, f.uploaded_at AS dataNotare FROM users u JOIN uploaded_files f ON u.id=f.id_stud WHERE u.rol=0";
           $result = $conn -> query($sql);
           $counter_row = 1;
           if($result  -> num_rows >0)
@@ -162,10 +162,6 @@ function delete_cookie(name) {
               if($nota != 0){
                     echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
                     "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td align=\"center\"> ". $row["nota"]. "</td><td align=\"center\"> ". $row["dataNotare"]. "</td></tr>";
-              }
-              else{
-                echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
-                    "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td align=\"center\"> "."Not marked yet.". "</td><td align=\"center\"> ". $row["dataNotare"]. "</td></tr>";
               }
             }
             echo "</tbody>";

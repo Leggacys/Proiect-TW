@@ -128,8 +128,10 @@ function delete_cookie(name) {
   <table class="styled-table">
       <thead>
           <tr>
+
               <th>Nr saptamana</th>
               <th>Status</th>
+
           </tr>
       </thead>
       <tbody>
@@ -219,11 +221,14 @@ try{
             die("Connect failed");
           }
 
+
           $sql = "SELECT f.uploaded_at AS data, f.name AS nume_tema, f.new_name AS new_name, CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id) as paths, f.nota AS nota, u.id AS id, f.course as titlu_curs FROM users u JOIN uploaded_files f ON u.id=f.id_stud WHERE '$id_utilizator' = u.id AND f.course='TW'";
+
           $result = $conn -> query($sql);
           if($result  -> num_rows >0)
           {
             while($row = $result -> fetch_assoc()){
+
               if($row["nota"] != null){
                 $link_to_hw = "uploads/" . $row["new_name"];
               echo "<tr><td>" . $row["data"] ."</td><td>" . $row["nume_tema"] . "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td align=\"center\"> " . $row["nota"]  . "</td></tr>";
@@ -231,6 +236,7 @@ try{
                 $link_to_hw = "uploads/" . $row["new_name"];
                 echo "<tr><td>" . $row["data"] ."</td><td>" . $row["nume_tema"] . "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td align=\"center\"> " . "Not marked yet"  . "</td></tr>";
               }
+
             }
             echo "</table>";
           }else {
@@ -240,6 +246,8 @@ try{
           }
           $conn-> close();
            ?>
+
+
 
 <?php
 

@@ -180,7 +180,9 @@ try{
             die("Connect failed");
           }
 
+
           $sql = "SELECT id_student, nume, prenume, prezente, nota1, nota2, nota3, (nota1+nota2+nota3)/3 as media, id_curs FROM medie_ascultari WHERE '$id_utilizator' = id_student AND id_curs='2'; ";
+
           $result = $conn -> query($sql);
           echo "<br/>";
           if($result  -> num_rows >0)

@@ -235,9 +235,11 @@ else if($rol == 'teacher3'){
               <th>Nr matricol</th>
               <th>Nume</th>
               <th>Prenume</th>
+
               <th>Note curente</th>
               <th>Noteaza</th>
               <th>Submit</th>
+
           </tr>
       </thead>
       <tbody>
