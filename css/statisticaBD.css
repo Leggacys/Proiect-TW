@@ -131,14 +131,166 @@ body{
   }
   
   .content{
-    z-index: -99;
-
     position: absolute;
+    z-index: -99;
     height:100%;
     width:100%;
-     background:linear-gradient(to right, #cc2b5e ,#753a88);
+    background:linear-gradient(to right, #cc2b5e ,#753a88);
     background-position: center;
   }
+
+ .file__upload {
+  display:inline-block;
+  position: relative;
+  border-collapse: collapse;
+  left: 125px;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 350px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  animation: transitionIn 0.15s;
+  left: 400px;
+}
+
+.file__upload .header-box {
+    width: 100%;
+    height: 45px;
+    background: #2E8B57;;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border-radius: 5px 5px 0 0;
+}
+
+.file__upload .header-box p {
+    color: #FFF;
+}
+
+.file__upload .header-box p i.fa {
+    margin-right: 10px;
+}
+
+.file__upload .header-box p span {
+    font-size: 2rem;
+    font-weight: 100;
+}
+
+.file__upload .header-box p span span {
+    font-weight: 600;
+}
+
+.file__upload .body-formular {
+    background: #FFF;
+    width: 100%;
+    height: calc(100% - 5px);
+    border-radius: 0 0 5px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+
+}
+
+.file__upload .body-formular input[type="file"] {
+    opacity: 0;
+}
+
+.file__upload .body-formular i.fa {
+    color: #d3d3d3;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.file__upload .body-formular p strong {
+    color: #4db6ac;
+}
+
+.file__upload .body-formular p span {
+    color: #4db6ac;
+    text-decoration: underline;
+}
+  
+.btn{
+  background: #2E8B57;
+  border: none;
+  outline: none;
+  margin: 20px 0;
+  padding: .7rem 2rem;
+  font-size: 1.3rem;
+  color: #FFF;
+  border-radius: 3px;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.btn:hover{
+  opacity: 1;
+}
+
+#link_checkbox {
+  display: none;
+}
+
+#link{
+  border: 1px solid;
+  color: #2E8B57;
+  background: none;
+  width: calc( 100% - 30px);
+  border-radius: 0;
+  outline: none;
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 4px;
+  display: none;
+}
+
+#link_checkbox:checked ~ #link{
+  display: block;
+}
+
+label[for="link_checkbox"] {
+  padding: 2px 2px;
+  background: #2E8B57;
+  color: #FFF;
+  outline: none;
+  cursor: pointer;
+}
+
+
+.download .download_link {
+  text-decoration: none;
+  color: #FFF;
+  background: #2E8B57;
+  padding: .5rem 2rem;
+  border-radius: 3px;
+  opacity: .8;
+  transition: .3s;
+  margin: 40% 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.download .download_link:hover {
+  opacity: 1;
+}
+
+
+@keyframes transitionIn{
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+
+  }
+}
   
   .styled-table {
       position: relative;
@@ -154,16 +306,72 @@ body{
       top: 150px;
   
   }
-  
+
+  .styled-table2 {
+    display:inline-block;
+    position: relative;
+    border-collapse: collapse;
+    left: 125px;
+    top: 125px ;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    animation: transitionIn 0.15s;
+    left: 400px;
+    top: 150px;
+
+}
+
+
+          .styled-table2 thead tr {
+            text-align: center;
+            background-color: #114b5f;
+            color: #ffffff;
+            align-content: center;
+          }
+
+          .styled-table2 th,
+          .styled-table2 td {
+            align-content: center;
+            padding: 12px 15px;
+          }
+
+          .styled-table2 tbody tr {
+            border-bottom: 1px solid #dddddd;
+          }
+
+          .styled-table2 tbody tr:nth-of-type(even) {
+            background-color: #1a936f;
+          }
+
+          .styled-table2 tbody tr:nth-of-type(odd) {
+            background-color: #88d498;
+          }
+
+          .styled-table2 tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+          }
+
+          .styled-table2 tbody tr.active-row {
+            font-weight: bold;
+            color: #009879;
+          }
+
+
+
   .styled-table thead tr {
       background-color: #114b5f;
       color: #ffffff;
-      text-align: left;
+      text-align: center;
+      align-content: center;
   }
   
   .styled-table th,
   .styled-table td {
       padding: 12px 15px;
+      text-align: center;
+      align-content: center;
   }
   
   .styled-table tbody tr {

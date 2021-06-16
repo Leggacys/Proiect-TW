@@ -118,14 +118,52 @@ function startsWith($string, $startString) {
 		<div class="header-box">
 			<p><i class="fa  fa-calendar fa-2x"></i><span><span>Introducere cod prezenta</span></span></p>
 		</div>
-    <form class="form" id="form">
+    <form class="form" action="" method="get" id="form">
       <div class="form-control">
         <label>Codul pentru prezenta</label>
-        <input type="text" placeholder="Cod" id="cod">
+        <input type="text" placeholder="Cod" name="cod" id="cod">
       </div>
-      <button id="submit" onclick="myFunction()">Submit</button>
+      <button id="submit" >Submit</button>
     </form>
 	</div>
+
+  <?php
+  error_reporting(0);
+    if(isset($_GET['cod'])){
+    $code = $_GET['cod'];
+
+    $conn = mysqli_connect("localhost","root","","api_db");
+    if($conn-> connect_error){
+        die("Connect failed");
+    }
+
+    $sql = "SELECT id_curs, nr_saptamana FROM cursuri2 WHERE cod_prezenta = '$code'";
+    $result = $conn -> query($sql);
+    $row = $result -> fetch_assoc();
+    if($row['id_curs'] == NULL){
+      //echo "<script>alert('E null')</script>";
+      header("Location: http://localhost/testingWeb/html+php/codprezenta.php");
+    }
+    else {
+      //echo "<script>alert('Nu e null')</script>";
+      $cursul = $row['id_curs'];
+      $saptamana = $row['nr_saptamana'];
+      $queryInsert = "INSERT INTO coduri_studenti (id_stud, cod, id_curs,nr_saptamana) VALUES ('$id_utilizator', '$code', '$cursul', '$saptamana')";
+      $data=mysqli_query($conn,$queryInsert);
+      echo $data;
+      if($data)
+        {
+          //echo "Reusit";
+          header("Location: http://localhost/testingWeb/html+php/codprezenta.php");
+        }else {
+          echo "Eroare1";
+          header("Location: http://localhost/testingWeb/html+php/codprezenta.php");
+        }
+    }
+  
+    }
+    
+  ?>
 
   <script>
     var ajax = new XMLHttpRequest();
@@ -201,23 +239,8 @@ function startsWith($string, $startString) {
 
 <script>
 function myFunction(){
-   var input =document.getElementById("cod").value;
-   createCookie("codPrezenta",input,1);
-}
+   var input = document.getElementById("cod").value;
 
-function createCookie(cookiName, value, days) {
-    var expires;
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toGMTString();
-    }
-    else {
-        expires = "";
-    }
-    document.cookie = escape(cookiName) + "=" +
-        escape(value) + expires + "; path=/";
-      console.log(cookiName);
 }
 
 function getCookie(name) {
@@ -285,7 +308,7 @@ if($conn-> connect_error){
 }
 
 
-$sql = "delete from cursuri2 where DATE_ADD(Insert_date, INTERVAL durata MINUTE) < CURRENT_TIME";
+$sql = "delete from cursuri2 where DATE_ADD(Insert_date, INTERVAL durata SECOND) < CURRENT_TIME";
 
 $date=mysqli_query($conn,$sql);
 
@@ -297,32 +320,6 @@ else {
   debug_log_console("eroare");
 }
 
-
-$cod=$_COOKIE['codPrezenta'];
-
-$queryCheckCode = "SELECT distinct * FROM cursuri c WHERE c.cod_prezenta = '$cod' ";
-
-
-$data=mysqli_query($conn,$queryCheckCode);
-
-if($data)
-{
-  $query = "INSERT INTO statistica (id, nume, statusP)
-  VALUES ('$id_utilizator', '$nume', 'PREZENT' )";
-  $data2=mysqli_query($conn,$query);
-  if($data2){
-    echo "S";
-    setcookie("codCurs", "", time() - 3600);
-  }
-  else{
-    echo "Eroare";
-  }
-
-}else {
-  echo "Eroare";
-}
-setcookie("codCurs", "", time() - 3600);
-  $conn-> close();
 
  ?>
 
