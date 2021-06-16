@@ -64,9 +64,12 @@
         try{    
           $jwt_decodificat = JWT::decode($jwt, JWT_KEY, array('HS256'));
           $rol = $jwt_decodificat->data->rol;
-        if($rol != "teacher"){
-          header("Location: http://localhost/testingWeb/html+php/Menu.php");
-        }
+          if($rol == "student"){
+            header("Location: http://localhost/testingWeb/html+php/Menu.php");
+          }
+          else if($rol == "admin"){
+            header("Location: http://localhost/testingWeb/html+php/MenuAdmin.php");
+          }
           //print_r($jwt_decodificat);
           //echo "\n\n\n\n";
           $id_utilizator = $jwt_decodificat->data->id;
@@ -217,7 +220,7 @@ function myFunction() {
   case "Baze de Date":
     idCurs = 1;
     break;
-  case "Retele de Calculatoare":
+  case "Retele":
       idCurs = 2;
     break;
   case "Tehnologii Web":

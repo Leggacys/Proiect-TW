@@ -128,21 +128,17 @@ function delete_cookie(name) {
   <table class="styled-table">
       <thead>
           <tr>
-              <th>Nr matricol</th>
-              <th>Nume</th>
-              <th>Prenume</th>
-              <th>Prezente</th>
-              <th>Nota I</th>
-              <th>Nota II</th>
-              <th>Nota III</th>
-              <th>Media</th>
+
+              <th>Nr saptamana</th>
+              <th>Status</th>
+
           </tr>
       </thead>
       <tbody>
 
           <?php
 
-
+error_reporting(0);
 include_once '../api/config/database.php';
 include_once '../api/objects/user.php';
 include_once '../api/libs/jwt_params.php';
@@ -179,15 +175,22 @@ try{
           if($conn-> connect_error){
             die("Connect failed");
           }
-
-          $sql = "SELECT id_student, nume, prenume, prezente, nota1, nota2, nota3, (nota1+nota2+nota3)/3 as media, titlu_curs FROM medie_ascultari WHERE '$id_utilizator' = id_student AND titlu_curs='TW'; ";
+          
+          $sql = "SELECT nr_saptamana, id_stud FROM coduri_studenti WHERE id_stud = '$id_utilizator' ORDER BY nr_saptamana";
+          //$sql = "SELECT id_student, nume, prenume, prezente, nota1, nota2, nota3, (nota1+nota2+nota3)/3 as media, id_curs FROM medie_ascultari WHERE '$id_utilizator' = id_student AND id_curs='3'; ";
           $result = $conn -> query($sql);
-          if($result  -> num_rows >0)
-          {
-            while($row = $result -> fetch_assoc()){
-              echo "<tr><td>" . $row["id_student"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
-              "</td><td>" . $row["prezente"] .  "</td><td>" . $row["nota1"]  . "</td><td>" . $row["nota2"]  . "</td><td>" . $row["nota3"]  . "</td><td>" . $row["media"]  . "</td></tr>";
+          if($result  -> num_rows >0) 
+          { $row = $result -> fetch_assoc();
+
+            for($i=1; $i <= 13; $i++){
+              if($i == $row['nr_saptamana']){
+                    echo "<tr><td>".$i."</td><td>PREZENT</td></tr>";
+                    $row = $result -> fetch_assoc();       
+            }else{
+                    echo "<tr><td>".$i."</td><td>ABSENT</td></tr>";
             }
+          }
+            
             echo "</table>";
           }else {
             {
@@ -218,11 +221,14 @@ try{
             die("Connect failed");
           }
 
+
           $sql = "SELECT f.uploaded_at AS data, f.name AS nume_tema, f.new_name AS new_name, CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id) as paths, f.nota AS nota, u.id AS id, f.course as titlu_curs FROM users u JOIN uploaded_files f ON u.id=f.id_stud WHERE '$id_utilizator' = u.id AND f.course='TW'";
+
           $result = $conn -> query($sql);
           if($result  -> num_rows >0)
           {
             while($row = $result -> fetch_assoc()){
+
               if($row["nota"] != null){
                 $link_to_hw = "uploads/" . $row["new_name"];
               echo "<tr><td>" . $row["data"] ."</td><td>" . $row["nume_tema"] . "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td align=\"center\"> " . $row["nota"]  . "</td></tr>";
@@ -230,6 +236,7 @@ try{
                 $link_to_hw = "uploads/" . $row["new_name"];
                 echo "<tr><td>" . $row["data"] ."</td><td>" . $row["nume_tema"] . "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td align=\"center\"> " . "Not marked yet"  . "</td></tr>";
               }
+
             }
             echo "</table>";
           }else {
@@ -239,6 +246,8 @@ try{
           }
           $conn-> close();
            ?>
+
+
 
 <?php
 

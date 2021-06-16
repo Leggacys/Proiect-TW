@@ -39,7 +39,6 @@ function insertIntoDB(row, id_tema){
 }
 
 
-
 function delete_cookie(name) {
       document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
@@ -104,12 +103,9 @@ function delete_cookie(name) {
         try{    
           $jwt_decodificat = JWT::decode($jwt, JWT_KEY, array('HS256'));
           $rol = $jwt_decodificat->data->rol;
-          if($rol == "student"){
-            header("Location: http://localhost/testingWeb/html+php/Menu.php");
-          }
-          else if($rol == "admin"){
-            header("Location: http://localhost/testingWeb/html+php/MenuAdmin.php");
-          }
+        if($rol != "teacher"){
+          header("Location: http://localhost/testingWeb/html+php/Menu.php");
+        }
           //print_r($jwt_decodificat);
           //echo "\n\n\n\n";
           $id_utilizator = $jwt_decodificat->data->id;

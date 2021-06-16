@@ -24,6 +24,38 @@ function delete_cookie(name) {
       $len = strlen($startString);
       return (substr($string, 0, $len) === $startString);
   }
+
+  function takeTheGradeFromDropdownMenu(row){
+  var nota = document.getElementById(row).value;
+  //var text = nota.options[e.selectedIndex].text;
+  return nota;
+}
+
+  
+function insertIntoDBNormal(row,id_student,curs){
+  //alert("salut");
+if(row != null){
+    var valoare = takeTheGradeFromDropdownMenu(row);
+    // alert(valoare);
+    // alert(id_temaaa);
+    //ajax call
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      //console.log(this.responseText);
+      location.reload(); 
+    }
+    else if (this.readyState == 4 && this.status == 400) {
+          alert("Numar de note depasit!");
+          location.reload();
+      }
+    };
+    xmlhttp.open("GET", "http://localhost/TestingWeb/html+php/puneNotaNormal.php?id=" + row + "&idstudent=" + id_student + "&nota=" + valoare + "&curs=" + curs, true);
+    xmlhttp.send();
+return 1;
+}
+return 0;
+}
   
     </script>
 
@@ -33,6 +65,7 @@ function delete_cookie(name) {
     <title>Note</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../css/Menu-prof-Note.css">
+    <link rel="stylesheet" href="../css/Menu-prof-GenereazaCod.css">
     <link rel="shortcut icon" type="image/svg" href="../images/CLaMa.svg">
   </head>
   <body>
@@ -75,9 +108,12 @@ function delete_cookie(name) {
         try{    
           $jwt_decodificat = JWT::decode($jwt, JWT_KEY, array('HS256'));
           $rol = $jwt_decodificat->data->rol;
-        if($rol != "teacher"){
-          header("Location: http://localhost/testingWeb/html+php/Menu.php");
-        }
+          if($rol == "student"){
+            header("Location: http://localhost/testingWeb/html+php/Menu.php");
+          }
+          else if($rol == "admin"){
+            header("Location: http://localhost/testingWeb/html+php/MenuAdmin.php");
+          }
           //print_r($jwt_decodificat);
           //echo "\n\n\n\n";
           $id_utilizator = $jwt_decodificat->data->id;
@@ -108,17 +144,102 @@ function delete_cookie(name) {
   </div>
 
 <div class="content">
+<div class="container">
+      <select  id="saptamani">
+        <option value="0" >Alege Saptamana</option>
+       <option >1</option>
+       <option >2</option>
+       <option >3</option>
+       <option >4</option>
+       <option >5</option>
+       <option >6</option>
+       <option >7</option>
+       <option >8</option>
+       <option >9</option>
+       <option >10</option>
+       <option >11</option>
+       <option >12</option>
+       <option >13</option>
+     </select>
+
+      
+      <p size="5px">
+        Numar maxim de note
+      </p>
+      <form class="form" id="form" action="" method="get">
+        <input type="text" STYLE="color: #FFFFFF; font-family: Verdana; font-weight: bold; font-size: 12px; background-color: #72A4D2;" size="5" maxlength="5" type="text" class="Durata"
+        placeholder="Nr_note" name="Nr_note" id="Nr_note" />
+      <div class="form-control">
+      </div>
+      <button id="submit" >Submit</button>
+
+    </form>
+
+    <?php
+    error_reporting(0);
+    if(isset($_GET['Nr_note'])){
+    $numar_note = $_GET['Nr_note'];
+    $conn = mysqli_connect("localhost","root","","api_db");
+    if($conn-> connect_error){
+        die("Connect failed");
+    }
+
+    if($rol == 'teacher1'){
+      $queryInsert = "UPDATE stabileste_note_cursuri SET nr_note = '$numar_note' WHERE id_curs = '1'";
+
+      $data=mysqli_query($conn,$queryInsert);
+      //echo $data;
+      if($data)
+      {header("Location: http://localhost/testingWeb/html+php/Menu-prof-Note.php");
+        //echo "Reusit";
+      }else {
+        echo "Eroare1";
+      }
+      header("Location: http://localhost/testingWeb/html+php/Menu-prof-Note.php");
+  }
+  else if($rol == 'teacher2'){
+    $queryInsert = "UPDATE stabileste_note_cursuri SET nr_note = '$numar_note' WHERE id_curs = '2'";
+
+    $data=mysqli_query($conn,$queryInsert);
+    echo $data;
+    if($data)
+    {header("Location: http://localhost/testingWeb/html+php/Menu-prof-Note.php");
+      //echo "Reusit";
+    }else {
+      echo "Eroare1";
+    }
+    header("Location: http://localhost/testingWeb/html+php/Menu-prof-Note.php");
+}
+
+else if($rol == 'teacher3'){
+  $queryInsert = "UPDATE stabileste_note_cursuri SET nr_note = '$numar_note' WHERE id_curs = '3'";
+
+  $data=mysqli_query($conn,$queryInsert);
+  echo $data;
+  if($data)
+  {header("Location: http://localhost/testingWeb/html+php/Menu-prof-Note.php");
+    //echo "Reusit";
+  }else {
+    echo "Eroare1";
+  }
+  header("Location: http://localhost/testingWeb/html+php/Menu-prof-Note.php");
+}
+  }
+    ?>
+
+  </div>
+  
   <table class="styled-table">
       <thead>
           <tr>
               <th>Nr matricol</th>
               <th>Nume</th>
               <th>Prenume</th>
-              <th>Nota I</th>
-              <th>Nota II</th>
-              <th>Nota III</th>
-              <th>Titlu curs</th>
-              <th>Media</th>
+
+              <th>Note curente</th>
+              <th>Noteaza</th>
+              <th>Submit</th>
+
           </tr>
       </thead>
       <tbody>
@@ -129,23 +250,92 @@ function delete_cookie(name) {
             die("Connect failed");
           }
 
-          $sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, n.valoare AS note, n.valoare2 AS note2, n.valoare3 AS note3, n.id_curs AS curs, (n.valoare+n.valoare2+n.valoare3)/3 as media FROM users u JOIN note n ON u.id=n.id_stud WHERE u.rol=0";
-          $result = $conn -> query($sql);
-          if($result  -> num_rows >0)
+          //paths = CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id)
+          //$sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, f.name AS nume_tema, CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id) as paths, f.new_name AS new_name, nota, f.id AS id_tema FROM users u JOIN uploaded_files f ON u.id=f.id_stud WHERE u.rol=0";
+          
+          $conn2 = mysqli_connect("localhost","root","","api_db");
+          if($conn2-> connect_error){
+          die("Connect failed");
+          }
+          if($rol == "teacher1"){
+            $sql = "SELECT s.id_stud as nrmatricol, s.nume as nume, s.prenume as prenume from studenti s WHERE id_curs='1';";
+            $result = $conn -> query($sql);
+            $counter_row = 1;
+
+
+            if($result  -> num_rows >0)
           {
             while($row = $result -> fetch_assoc()){
-              echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
-              "</td><td>" . $row["note"] .  "</td><td>" . $row["note2"]  . "</td><td>" . $row["note3"]  . "</td><td>" . $row["curs"]  . "</td><td>" . $row["media"]  . "</td></tr>";
+
+              $id_student = $row['nrmatricol'];
+              $id_curs = '1';
+              $id_student_curs = $id_student . " " .$id_curs; 
+
+              
+              
+              $sqlGetNote = "SELECT GROUP_CONCAT(valoare) as val 
+              FROM note WHERE id_stud = '$id_student' and id_curs='1';";
+              $resultGetNote = $conn2 -> query($sqlGetNote);
+              $row2 = $resultGetNote -> fetch_assoc();
+              //echo $row['val'];
+              //echo $resultGetNote;
+              //echo $sqlGetNote;
+              //echo $id_student;
+
+                echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] . "</td><td>" . $row2['val'] .
+                 
+                
+                "</td>   
+                <td align=\"center\">
+                   <select id=\"$counter_row\">
+                        <option>--</option>        
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        </select>"  ."</td><td>" . "<input type=\"submit\" value=\"Submit\" id = \"$counter_row\" onclick=\"insertIntoDBNormal($counter_row, $id_student, $id_curs)\">". "</td><tr>" ;
+                    // if(insertIntoDB($ids, $id_tema) == 1){
+                      
+                    // }
+                   $counter_row++;
+
+               
             }
+            echo "</tbody>";
             echo "</table>";
-          }else {
+          }else 
+          {
             {
               echo "0 results";
             }
           }
+
+
+
+
+
+
+
+
+
+
+
+          }
+          else if($rol == "teacher2"){
+
+          }
+          else if($rol == "teacher3"){
+
+          }
+
           $conn-> close();
            ?>
-
 
  </div>
 <script>

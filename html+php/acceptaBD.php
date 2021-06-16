@@ -45,6 +45,19 @@ if($data)
   echo "Eroare1";
 }
 
+$queryInsert2 = "INSERT INTO medie_ascultari (id_student, nume, prenume, prezente, nota1, nota2, nota3, id_curs) VALUES ('$id_stud', '$nume', '$prenume', '0', '', '', '', '$course')";
+
+$data2=mysqli_query($conn,$queryInsert2);
+echo $data2;
+if($data2)
+{
+  //echo "Reusit";
+}else {
+  echo "Eroare1";
+}
+
+
+
 
 $query = "DELETE FROM studentiacceptare WHERE id_stud ='$id_stud' AND id_curs='$course' ";
 
