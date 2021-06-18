@@ -123,9 +123,9 @@
       <div class="dropdown">
         <button id ="materii" class="dropbtn">Materii Disponibile</button>
         <div class="dropdown-content">
-        <a href="#" onclick="BazeDeDate()">Baze De Date</a>
-        <a href="#" onclick="ReteleDeCalculatoare()">Retele</a>
-        <a href="#" onclick="TehnologiiWeb()">Tehnologii Web</a>
+        <a  onclick="BazeDeDate()">Baze De Date</a>
+        <a  onclick="ReteleDeCalculatoare()">Retele</a>
+        <a  onclick="TehnologiiWeb()">Tehnologii Web</a>
         </div>
       </div>
       <p size="5px">
@@ -137,7 +137,7 @@
       <div class="form-control">
         <label id="COD">Codul pentru prezenta</label>
       </div>
-      <button onclick="myFunction()" >Generate code</button>
+      <a href="#"  onclick="myFunction()" >Generate code</a>
     </form>
 
   </div>

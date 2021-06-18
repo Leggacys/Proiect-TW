@@ -1,40 +1,48 @@
+html{
+    background-color: #753a88;
+    background-image: -webkit-linear-gradient(left, #cc2b5e ,#753a88);
+}
 body{
-    margin: 0;
-    padding: 0;
+
     font-family: Arial, Helvetica, sans-serif;
-    background:linear-gradient(to right, #cc2b5e ,#753a88);
-  
+    overflow: hidden;
   }
   
 header{
+    top:0%;
+    left: 0%;
     position: fixed;
     background: #22242A;
     padding: 20px;
     width:100%;
-    height: 30px;
-    animation: transitionIn 0.15s;
+    height: 5vh;
 }
   
-.left_area h3{
-   color: #fff;
-   margin:0;
-   text-transform: uppercase;
-   font-size: 22px;
-   font-weight: 900;
+header .left_area h3{
+    color: #fff;
+    margin:0;
+    text-transform: uppercase;
+    font-size: 22px;
+    font-weight: 900;
+    float: left;
 }
   
   
-.left_area span{
+header .left_area span{
     color: #cc2b5e;
 }
-  
-.logout_btn{
-    padding: 5px;
+
+header .right_area{
+    margin-top: -2.5vh;
+    margin-bottom: auto;
+}
+
+header .right_area .logout_btn{
+  padding: 3px;
   background:linear-gradient(to right, #cc2b5e ,#753a88);
   text-decoration: none;
   float: right;
-  margin-top: -30px;
-  margin-right:40px;
+  margin-right: 25px;
   font-size: 20px;
   font-weight:600;
   color:#fff;
@@ -42,30 +50,25 @@ header{
   border-radius: 20px;
 }
   
-.logout_btn:hover{
-    background: #0D9DBB;
+header .right_area .logout_btn:hover{
+    background: #753a88;
 }
   
-  
-  label #sidebar_btn{
-    z-index: 1;
-    color: #fff;
-  }
-  
-.sidebar{
-    background: #2F323A;
-    margin-top: 70px;
+
+body .sidebar{
+    background: #22242A;
+    margin-top: 60px;
     padding-top: 30px;
     position: fixed;
     left:0;
-    width: 270px;
     height: 100%;
+    width: 270px;
     align-items: center;
     overflow-y: auto;
-    animation: transitionIn 0.15s;
 }
   
 .sidebar .profile_image{
+    animation: transitionIn 0.15s;
     width: 100px;
     height: 100px;
     border-radius: 100px;
@@ -107,7 +110,6 @@ header{
     position: absolute;
     height:100%;
     width:100%;
-    background:linear-gradient(to right, #cc2b5e ,#753a88);
     background-position: center;
 }
   
@@ -129,8 +131,8 @@ header{
     box-sizing: border-box;
     overflow: hidden;
     border-radius: 30px;
-    left:450px;
-    top: 200px;
+    left: 280px;
+    top: 20%;
 }
 
 .containerClase .boxGrupa .iconCurs{
@@ -139,7 +141,7 @@ header{
     left: 0;
     width: 100%;
     height: 100%;
-    background: #2E8B57;
+    background: #3A8855;
     transition: 0.5s;
     z-index: 1;
 }
@@ -202,6 +204,16 @@ header{
 
 
 @media(max-width:1500px) {
+
+    html{
+        background-color: #753a88;
+        background-image: unset;
+    }
+
+    body{
+        overflow: visible;
+    }
+
     .mainul{
         width: 100%;
         height: max-content;
@@ -213,46 +225,117 @@ header{
         position: relative;
         width: 250px;
         height: 500px;
-        transition: 0.5s;
-        margin-left: 170px;
-    }
-
-    @media(max-width:750px) {
-
-
-        .mainul{
-            width: 100%;
-            height: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-            background:linear-gradient(to right, #cc2b5e ,#753a88);
-        }
-    
-        .containerClase{
-            position: relative;
-            width: 250px;
-            height: 500px;
-            margin-left: 85px;
-            transition: 0.5s;
-
-        }
-
-        .containerClase .boxGrupa{
-            position: relative;
-            width: calc(200px - 15px);
-            height: calc(120px - 15px);
-            background: #000;
-            float:none;
-            margin: 50px;
-            box-sizing: border-box;
-            overflow: hidden;
-            border-radius: 10px;
-        }
-
-        
-    
+        margin-left: 90px;
+        margin-top: 20px;
     }
 }
+
+@media(max-width:670px) {
+
+
+    .mainul{
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        
+    }
+
+    .containerClase{
+        position: relative;
+        width: 250px;
+        height: 500px;
+        margin-left: 70px;
+        transition: 0.5s;
+        margin-left: -70px;
+        margin-top: 10px;
+
+    }
+
+    
+
+}
+
+
+
+
+
+@media screen and (max-width: 850px) {
+   body .sidebar {
+      height: auto;
+      width: 100vmax;
+      position: inherit;
+      margin-left: -10px;
+      margin-right: 30px;
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+
+    .mainul{
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        
+    }
+
+    .containerClase .boxGrupa{
+        position: relative;
+        width: calc(400px - 30px);
+        height: calc(300px - 30px);
+        background: #000;
+        float: left;
+        margin: 15px;
+        box-sizing: border-box;
+        overflow: hidden;
+        border-radius: 30px;
+        left: 13vw;
+        top: 20%;
+    }
+
+  }
+  
+  @media screen and (max-width: 670px) {
+    .sidebar a {
+        
+      text-align: left;
+      float: none;
+
+    }
+    .sidebar .profile_image{
+        width: 100px;
+        height: 100px;
+        border-radius: 100px;
+        margin-bottom:10px;
+        margin-left: 30px;
+        align-self: left;
+        margin-right: auto /* am centrat imaginea*/
+    }
+      
+    .sidebar h3{
+        color:#ccc;
+        margin-top: 0;
+        margin-bottom: 20px;
+        margin-left: 20px;
+        text-align: left; /* am centrat imaginea*/
+        animation: transitionIn 0.15s;
+    }
+
+    .containerClase .boxGrupa{
+        position: relative;
+        width: 225px;
+        height: 150px;
+        background: #000;
+        float: left;
+        margin: 15px;
+        box-sizing: border-box;
+
+        border-radius: 30px;
+        margin-left: 13px;
+        top: 10%;
+    }
+
+  }
 
 @keyframes transitionIn{
     from {
