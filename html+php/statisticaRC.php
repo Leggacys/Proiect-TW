@@ -11,12 +11,7 @@ if(!isset($_COOKIE["jwt"])){
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <script>
-      function hidediv(){
-        document.getElementById("welcomeContainer").style.visibility="hidden";
-      }
-      setTimeout("hidediv()",1500);
-    </script>
+  <meta name="description" content="Class Manager - Statistica RC.">
 
 <script>
 
@@ -51,7 +46,6 @@ function delete_cookie(name) {
     <div class="left_area">
       <h3>Class <span>Manager</span> </h3>
     </div>
-    <div id="welcomeContainer"> Salut. Ai fost autentificat cu succes in aplicatie!</div>
     <div class="right_area">
       <a href="JWTf.php" onclick="logoutFunction()" class="logout_btn">Logout</a>
     </div>
@@ -128,21 +122,15 @@ function delete_cookie(name) {
   <table class="styled-table">
       <thead>
           <tr>
-              <th>Nr matricol</th>
-              <th>Nume</th>
-              <th>Prenume</th>
-              <th>Prezente</th>
-              <th>Nota I</th>
-              <th>Nota II</th>
-              <th>Nota III</th>
-              <th>Media</th>
+              <th>Nr saptamana</th>
+              <th>Status</th>
           </tr>
       </thead>
       <tbody>
 
           <?php
 
-
+error_reporting(0);
 include_once '../api/config/database.php';
 include_once '../api/objects/user.php';
 include_once '../api/libs/jwt_params.php';
@@ -175,30 +163,36 @@ try{
  }
 
 
-          $conn = mysqli_connect("localhost","root","","api_db");
-          if($conn-> connect_error){
-            die("Connect failed");
-          }
+    $conn = mysqli_connect("localhost","root","","api_db");
+    if($conn-> connect_error){
+      die("Connect failed");
+    }
+    
+    $sql = "SELECT distinct nr_saptamana, id_stud FROM coduri_studenti WHERE id_stud = '$id_utilizator' AND id_curs='2' ORDER BY nr_saptamana";
+    //$sql = "SELECT id_student, nume, prenume, prezente, nota1, nota2, nota3, (nota1+nota2+nota3)/3 as media, id_curs FROM medie_ascultari WHERE '$id_utilizator' = id_student AND id_curs='3'; ";
+    $result = $conn -> query($sql);
+    if($result  -> num_rows >0 || $result -> num_rows == NULL) 
+    { $row = $result -> fetch_assoc();
 
-          $sql = "SELECT id_student, nume, prenume, prezente, nota1, nota2, nota3, (nota1+nota2+nota3)/3 as media, id_curs FROM medie_ascultari WHERE '$id_utilizator' = id_student AND id_curs='2'; ";
-          $result = $conn -> query($sql);
-          echo "<br/>";
-          if($result  -> num_rows >0)
-          {
-            while($row = $result -> fetch_assoc()){
-              echo "<tr><td>" . $row["id_student"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
-              "</td><td>" . $row["prezente"] .  "</td><td>" . $row["nota1"]  . "</td><td>" . $row["nota2"]  . "</td><td>" . $row["nota3"]  . "</td><td>" . $row["media"]  . "</td></tr>";
-            }
-            echo "</table>";
-          }else {
-            {
-              //echo "0 results";
-            }
-          }
-          $conn-> close();
-           ?>
+      for($i=1; $i <= 13; $i++){
+        if($i == $row['nr_saptamana']){
+              echo "<tr><td>".$i."</td><td>PREZENT</td></tr>";
+              $row = $result -> fetch_assoc();       
+      }else{
+              echo "<tr><td>".$i."</td><td>ABSENT</td></tr>";
+      }
+    }
+      
+      echo "</table>";
+    }else {
+      for($i=1; $i <= 13; $i++){
+        echo "<tr><td>".$i."</td><td>ABSENT</td></tr>";
+      }
+    }
+    $conn-> close();
+      ?>
 
-        </br></br></br></br>
+        <br/><br/><br/><br/>
 
   <table class="styled-table2">
       <thead>
@@ -213,8 +207,7 @@ try{
 
           <?php
 
-
-          $conn = mysqli_connect("localhost","root","","api_db");
+$conn = mysqli_connect("localhost","root","","api_db");
           if($conn-> connect_error){
             die("Connect failed");
           }
@@ -224,12 +217,35 @@ try{
           if($result  -> num_rows >0)
           {
             while($row = $result -> fetch_assoc()){
+              $querySelect1 = "SELECT count(id_stud) as counter1 FROM note WHERE id_curs = '2' AND id_stud = '$id_utilizator';";
+              $result1 = $conn -> query($querySelect1);
+              $row1 = $result1 -> fetch_assoc();
+              $nb_note=$row1['counter1'];
+
+              $querySelect2 = "SELECT nr_note as counter2 FROM stabileste_note_cursuri WHERE id_curs = '2';";
+              $result2 = $conn -> query($querySelect2);
+              $row2 = $result2 -> fetch_assoc();
+              $nb_note_max=$row2['counter2'];
+
+              if($nb_note < $nb_note_max){
+                $ok = 1;
+          }
+            else {
+              $ok = 0;
+            }
+
               if($row["nota"] != null){
-                $link_to_hw = "uploads/" . $row["new_name"];
-              echo "<tr><td>" . $row["data"] ."</td><td>" . $row["nume_tema"] . "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td align=\"center\"> " . $row["nota"]  . "</td></tr>";
+              $link_to_hw = "uploads/" . $row["new_name"];
+              if($row["nota"] == -1)
+                echo "<tr><td>" . $row["data"] ."</td><td>" . $row["nume_tema"] . "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td> " . "Note destule"  . "</td></tr>";
+              else
+                echo "<tr><td>" . $row["data"] ."</td><td>" . $row["nume_tema"] . "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td> " . $row["nota"]  . "</td></tr>";    
               }else{
                 $link_to_hw = "uploads/" . $row["new_name"];
-                echo "<tr><td>" . $row["data"] ."</td><td>" . $row["nume_tema"] . "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td align=\"center\"> " . "Not marked yet"  . "</td></tr>";
+                if($ok == 0)
+                echo "<tr><td>" . $row["data"] ."</td><td>" . $row["nume_tema"] . "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td> " . "Note destule"  . "</td></tr>";
+                else
+                echo "<tr><td>" . $row["data"] ."</td><td>" . $row["nume_tema"] . "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td> " . "Not marked yet"  . "</td></tr>";
               }
             }
             echo "</table>";
@@ -312,7 +328,7 @@ if(isset($_POST['upload'])){ //if upload button isset or not
 		<div class="header-box">
 			<p><i class="fa fa-cloud-upload fa-2x"></i><span><span>HW</span> upload</span></p>			
 		</div>
-		<form action="" method="POST" enctype="multipart/form-data" class="body-formular">
+		<form action="#" method="POST" enctype="multipart/form-data" class="body-formular">
     <!-- SHARABLE PART-->
     <input type="checkbox" id="link_checkbox">
     <input type="text" value="<?php echo $link; ?>" id="link" readonly >
@@ -347,9 +363,9 @@ soum=soum/3;
 document.getElementById("medie").innerHTML = secondGrade;
 }
 </script>
-  </body>
+  
 
-  <script>
+<script>
     var jwt_stocat = window.localStorage.getItem("jwt");
     //alert(jwt_stocat);
 
@@ -380,33 +396,17 @@ document.getElementById("medie").innerHTML = secondGrade;
     }
 }
 
-
-if (jwt_stocat == null) {
-    alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!")
-    window.location.replace("http://localhost/testingWeb/html+php/index.html");
-    delete_cookie("prof");
-  }
-  else if (jwt_stocat == "  " || jwt_stocat == "   " || jwt_stocat.length==847) {
-    //678 reprezinta cazul de eroare, in momentul in care numele utilizatorului nu e in baza de date
-    alert("Username sau parola gresita!")
-    delete_cookie("jwt");
-    deleteAllCookies();
-    window.localStorage.removeItem("jwt");
-    window.location.replace("http://localhost/testingWeb/html+php/index.html");
-  }
-  else{
-  //alert(jwt_stocat);
-  /* ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
-  ajax.send(); */
-  }
-
-</script>
-
-<script>
-    if ( window.history.replaceState ) {
+if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
     }
+
 </script>
+
+</body>
+
+  
+
+
 
 
 </html>

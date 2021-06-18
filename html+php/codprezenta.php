@@ -9,6 +9,7 @@ if(!isset($_COOKIE["jwt"])){
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+  <meta name="description" content="Class Manager - Cod Prezenta.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <script>
@@ -92,8 +93,7 @@ function startsWith($string, $startString) {
         echo $nume . " ";
         //echo $rol;
         echo $prenume . "\n";
-        echo $an . $semian . $grupa;
-        echo "\r\n";
+        echo "<br/>";
         echo $rol;
       
         }catch (Exception $e){
@@ -104,11 +104,10 @@ function startsWith($string, $startString) {
 
       ?>
     </h3> 
-    <a href="Menu.php"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
-    <a href="clase.php"><i class="fab fa-500px"></i><span>   Clase și cursuri</span></a>
-    <a href="upload.php"><i class="fab fa-500px"></i><span>   Încărcare temă</span></a>
-    <a href="codprezenta.php"><i class="fab fa-500px"></i><span>   Introducere cod prezenta</span></a>
-    <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
+    <a href="Menu.php"><i class="far fa-user-circle" ></i><span> Profilul meu</span></a>
+    <a href="clase.php"><i class="fas fa-pen-alt"></i><span> Clase si cursuri</span></a>
+    <a href="codprezenta.php"><i class="fas fa-clipboard-check"></i><span> Introducere cod prezenta</span></a>
+    <a href="ScholarlyHTML.html"><i class="fas fa-book"></i><span> ScholarlyHTML </span></a>
   </div>
 
 <div class="content">
@@ -118,7 +117,7 @@ function startsWith($string, $startString) {
 		<div class="header-box">
 			<p><i class="fa  fa-calendar fa-2x"></i><span><span>Introducere cod prezenta</span></span></p>
 		</div>
-    <form class="form" action="" method="get" id="form">
+    <form class="form" action="#" method="get" id="form">
       <div class="form-control">
         <label>Codul pentru prezenta</label>
         <input type="text" placeholder="Cod" name="cod" id="cod">
@@ -126,6 +125,7 @@ function startsWith($string, $startString) {
       <button id="submit" >Submit</button>
     </form>
 	</div>
+</div>
 
   <?php
   error_reporting(0);
@@ -319,13 +319,9 @@ if($date)
 else {
   debug_log_console("eroare");
 }
-
-
  ?>
-
-</div>
   </body>
   <script>
   if (getCookie("jwt") == "prof") deleteAllCookies();
 </script>
-  </html>
+</html>

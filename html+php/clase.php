@@ -9,6 +9,7 @@ if(!isset($_COOKIE["jwt"])){
 <!DOCTYPE html>
 <html lang="ro">
     <head>
+    <meta name="description" content="Class Manager.">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Clase si cursuri</title>
         <script>
@@ -86,8 +87,7 @@ if(!isset($_COOKIE["jwt"])){
         echo $nume . " ";
         //echo $rol;
         echo $prenume . "\n";
-        echo $an . $semian . $grupa;
-        echo "\r\n";
+        echo "<br/>";
         echo $rol;
       
         }catch (Exception $e){
@@ -99,11 +99,10 @@ if(!isset($_COOKIE["jwt"])){
       ?>
     </h3>
 
-    <a href="Menu.php"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
-    <a href="clase.php"><i class="fab fa-500px"></i><span> Clase si cursuri</span></a>
-    <a href="upload.php"><i class="fab fa-500px"></i><span> Incarcare tema</span></a>
-    <a href="codprezenta.php"><i class="fab fa-500px"></i><span> Introducere cod prezenta</span></a>
-    <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
+    <a href="Menu.php"><i class="far fa-user-circle" ></i><span> Profilul meu</span></a>
+    <a href="clase.php"><i class="fas fa-pen-alt"></i><span> Clase si cursuri</span></a>
+    <a href="codprezenta.php"><i class="fas fa-clipboard-check"></i><span> Introducere cod prezenta</span></a>
+    <a href="ScholarlyHTML.html"><i class="fas fa-book"></i><span> ScholarlyHTML </span></a>
   </div>
   <script>
     var ajax = new XMLHttpRequest();
@@ -197,7 +196,7 @@ if(!isset($_COOKIE["jwt"])){
                         <div class="content">
                             <h3>
                                 <a href="linkingRC.php">
-                                Retele de calculatoare
+                                Retele <br/> de calculatoare
                             </a>
                             </h3>
                             <p>Haideti sa ne facem propriul nostru site si sa intelegem ce se intampla in spatele framework-urilor</p>

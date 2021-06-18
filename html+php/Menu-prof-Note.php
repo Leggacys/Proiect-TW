@@ -256,6 +256,8 @@ else if($rol == 'teacher3'){
           die("Connect failed");
           }
           if($rol == "teacher1"){
+
+
             $sql = "SELECT s.id_stud as nrmatricol, s.nume as nume, s.prenume as prenume from studenti s WHERE id_curs='1';";
             $result = $conn -> query($sql);
             $counter_row = 1;
@@ -327,8 +329,239 @@ else if($rol == 'teacher3'){
           }
           else if($rol == "teacher2"){
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            $sql = "SELECT s.id_stud as nrmatricol, s.nume as nume, s.prenume as prenume from studenti s WHERE id_curs='2';";
+            $result = $conn -> query($sql);
+            $counter_row = 1;
+
+
+            if($result  -> num_rows >0)
+          {
+            while($row = $result -> fetch_assoc()){
+
+              $id_student = $row['nrmatricol'];
+              $id_curs = '2';
+              $id_student_curs = $id_student . " " .$id_curs; 
+
+              
+              
+              $sqlGetNote = "SELECT GROUP_CONCAT(valoare) as val 
+              FROM note WHERE id_stud = '$id_student' and id_curs='2';";
+              $resultGetNote = $conn2 -> query($sqlGetNote);
+              $row2 = $resultGetNote -> fetch_assoc();
+              //echo $row['val'];
+              //echo $resultGetNote;
+              //echo $sqlGetNote;
+              //echo $id_student;
+
+                echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] . "</td><td>" . $row2['val'] .
+                 
+                
+                "</td>   
+                <td align=\"center\">
+                   <select id=\"$counter_row\">
+                        <option>--</option>        
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        </select>"  ."</td><td>" . "<input type=\"submit\" value=\"Submit\" id = \"$counter_row\" onclick=\"insertIntoDBNormal($counter_row, $id_student, $id_curs)\">". "</td><tr>" ;
+                    // if(insertIntoDB($ids, $id_tema) == 1){
+                      
+                    // }
+                   $counter_row++;
+
+               
+            }
+            echo "</tbody>";
+            echo "</table>";
+          }else 
+          {
+            {
+              echo "0 results";
+            }
+          }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           }
           else if($rol == "teacher3"){
+
+
+
+
+
+
+            $sql = "SELECT s.id_stud as nrmatricol, s.nume as nume, s.prenume as prenume from studenti s WHERE id_curs='3';";
+            $result = $conn -> query($sql);
+            $counter_row = 1;
+
+
+            if($result  -> num_rows >0)
+          {
+            while($row = $result -> fetch_assoc()){
+
+              $id_student = $row['nrmatricol'];
+              $id_curs = '3';
+              $id_student_curs = $id_student . " " .$id_curs; 
+
+              
+              
+              $sqlGetNote = "SELECT GROUP_CONCAT(valoare) as val 
+              FROM note WHERE id_stud = '$id_student' and id_curs='3';";
+              $resultGetNote = $conn2 -> query($sqlGetNote);
+              $row2 = $resultGetNote -> fetch_assoc();
+              //echo $row['val'];
+              //echo $resultGetNote;
+              //echo $sqlGetNote;
+              //echo $id_student;
+
+                echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] . "</td><td>" . $row2['val'] .
+                 
+                
+                "</td>   
+                <td align=\"center\">
+                   <select id=\"$counter_row\">
+                        <option>--</option>        
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        </select>"  ."</td><td>" . "<input type=\"submit\" value=\"Submit\" id = \"$counter_row\" onclick=\"insertIntoDBNormal($counter_row, $id_student, $id_curs)\">". "</td><tr>" ;
+                    // if(insertIntoDB($ids, $id_tema) == 1){
+                      
+                    // }
+                   $counter_row++;
+
+               
+            }
+            echo "</tbody>";
+            echo "</table>";
+          }else 
+          {
+            {
+              echo "0 results";
+            }
+          }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           }
 
