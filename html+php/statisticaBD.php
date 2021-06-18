@@ -119,7 +119,26 @@ function delete_cookie(name) {
   </div>
 
   <div class="content">
-  <table class="styled-table">
+  <h2>Baze de date</h2>
+  <h3> Ai urmatoarele note din ascultari si teme: 
+       <?php
+
+    $conn_noteStud = mysqli_connect("localhost","root","","api_db");
+    if($conn_noteStud-> connect_error){
+      die("Connect failed");
+    }
+    $sqlGetNote = "SELECT GROUP_CONCAT(valoare) as val 
+    FROM note WHERE id_stud = '$id_utilizator' and id_curs='1';";
+    $resultGetNote = $conn_noteStud -> query($sqlGetNote);
+    $row2 = $resultGetNote -> fetch_assoc();
+    echo $row2['val'];
+
+?>
+
+
+  </h3>
+  <h3>Lista personala de prezente</h3>
+  <table class="tabel-prezenta">
       <thead>
           <tr>
               <th>Nr saptamana</th>
@@ -195,8 +214,9 @@ try{
       ?>
 
         <br/><br/><br/><br/>
-
-  <table class="styled-table2">
+  
+  <h3 class = "la-note">Note la teme</h3>
+  <table class="tabel-note-teme">
       <thead>
           <tr>
               <th>Data incarcarii</th>
@@ -229,8 +249,6 @@ try{
               $result2 = $conn -> query($querySelect2);
               $row2 = $result2 -> fetch_assoc();
               $nb_note_max=$row2['counter2'];
-              echo $nb_note;
-              //echo $nb_note_max;
               if($nb_note < $nb_note_max){
                 $ok = 1;
             }
@@ -325,6 +343,7 @@ if(isset($_POST['upload'])){ //if upload button isset or not
 
 <!--html for upload-->
 
+<h3>Incarcare teme</h3>
 <div class="file__upload">
 		<div class="header-box">
 			<p><i class="fa fa-cloud-upload fa-2x"></i><span><span>HW</span> upload</span></p>			

@@ -111,15 +111,30 @@ function delete_cookie(name) {
       ?>
     </h3>
 
-    <a href="Menu.php"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
-    <a href="clase.php"><i class="fab fa-500px"></i><span> Clase și cursuri</span></a>
-    <a href="upload.php"><i class="fab fa-500px"></i><span> Încărcare temă</span></a>
-    <a href="codprezenta.php"><i class="fab fa-500px"></i><span> Introducere cod prezenta</span></a>
-    <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
+    <a href="Menu.php"><i class="far fa-user-circle" ></i><span> Profilul meu</span></a>
+    <a href="clase.php"><i class="fas fa-pen-alt"></i><span> Clase si cursuri</span></a>
+    <a href="codprezenta.php"><i class="fas fa-clipboard-check"></i><span> Introducere cod prezenta</span></a>
+    <a href="ScholarlyHTML.html"><i class="fas fa-book"></i><span> ScholarlyHTML </span></a>
   </div>
-
+      
 <div class="content">
-  <table class="styled-table">
+  <h2>Tehnologii Web</h2>
+  <h3> Ai urmatoarele note din ascultari si teme: 
+       <?php
+
+    $conn_noteStud = mysqli_connect("localhost","root","","api_db");
+    if($conn_noteStud-> connect_error){
+      die("Connect failed");
+    }
+    $sqlGetNote = "SELECT GROUP_CONCAT(valoare) as val 
+    FROM note WHERE id_stud = '$id_utilizator' and id_curs='3';";
+    $resultGetNote = $conn_noteStud -> query($sqlGetNote);
+    $row2 = $resultGetNote -> fetch_assoc();
+    echo $row2['val'];
+
+?>
+  <h3>Lista personala de prezente</h3>
+  <table class="tabel-prezenta">
       <thead>
           <tr>
               <th>Nr saptamana</th>
@@ -196,7 +211,8 @@ try{
 
         <br/><br/><br/><br/>
 
-  <table class="styled-table2">
+  <h3 class = "la-note">Note la teme</h3>
+  <table class="tabel-note-teme">
       <thead>
           <tr>
               <th>Data incarcarii</th>
@@ -329,6 +345,7 @@ if(isset($_POST['upload'])){ //if upload button isset or not
 
 <!--html for upload-->
 
+<h3>Incarcare teme</h3>
 <div class="file__upload">
 		<div class="header-box">
 			<p><i class="fa fa-cloud-upload fa-2x"></i><span><span>HW</span> upload</span></p>			
