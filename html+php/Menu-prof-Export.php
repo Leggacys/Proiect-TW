@@ -75,8 +75,11 @@
       try{    
         $jwt_decodificat = JWT::decode($jwt, JWT_KEY, array('HS256'));
         $rol = $jwt_decodificat->data->rol;
-        if($rol != "teacher"){
+        if($rol == "student"){
           header("Location: http://localhost/testingWeb/html+php/Menu.php");
+        }
+        else if($rol == "admin"){
+          header("Location: http://localhost/testingWeb/html+php/MenuAdmin.php");
         }
         //print_r($jwt_decodificat);
         //echo "\n\n\n\n";
@@ -178,24 +181,7 @@ function XML(){
     }
 }
 
-if (jwt_stocat == null) {
-    alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!")
-    window.location.replace("http://localhost/testingWeb/html+php/index.html");
-    delete_cookie("prof");
-  }
-  else if (jwt_stocat == "  " || jwt_stocat == "   " || jwt_stocat.length==847) {
-    //678 reprezinta cazul de eroare, in momentul in care numele utilizatorului nu e in baza de date
-    alert("Username sau parola gresita!")
-    delete_cookie("jwt");
-    deleteAllCookies();
-    window.localStorage.removeItem("jwt");
-    window.location.replace("http://localhost/testingWeb/html+php/index.html");
-  }
-  else{
-  //alert(jwt_stocat);
-  /* ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
-  ajax.send(); */
-  }
+
 
 </script>
 </html>

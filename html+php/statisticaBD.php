@@ -213,9 +213,30 @@ try{
     $conn-> close();
       ?>
 
-        <br/><br/><br/><br/>
+  </br></br>
   
-  <h3 class = "la-note">Note la teme</h3>
+  
+    <?php
+    
+    $conn_noteStud = mysqli_connect("localhost","root","","api_db");
+      if($conn_noteStud-> connect_error){
+        die("Connect failed");
+      }
+
+
+    $sql = "SELECT count(id) as mycounter 
+      FROM uploaded_files WHERE id_stud = '$id_utilizator';";
+      $result1 = $conn_noteStud -> query($sql);
+      $row2 = $result1 -> fetch_assoc();
+      if($row2['mycounter'] == 0){
+
+      }
+      else{
+        echo "<h3>Lista personala de teme</h3>";
+      }
+
+    ?>
+
   <table class="tabel-note-teme">
       <thead>
           <tr>
@@ -345,6 +366,7 @@ if(isset($_POST['upload'])){ //if upload button isset or not
 
 <h3>Incarcare teme</h3>
 <div class="file__upload">
+  <div class="need-white">
 		<div class="header-box">
 			<p><i class="fa fa-cloud-upload fa-2x"></i><span><span>HW</span> upload</span></p>			
 		</div>
@@ -364,6 +386,7 @@ if(isset($_POST['upload'])){ //if upload button isset or not
 			</label>
       <button name="upload" class="btn">Încarcă</button>
 		</form>
+    </div>
 	</div>
 
 

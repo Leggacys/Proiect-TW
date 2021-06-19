@@ -182,6 +182,7 @@ body .sidebar{
   font-size: 0.9em;
   font-family: sans-serif;
   animation: transitionIn 0.15s;
+  
 }
 
 .file__upload .header-box {
@@ -200,6 +201,11 @@ body .sidebar{
 
 .file__upload .header-box p i.fa {
     margin-right: 10px;
+}
+
+.need-white{
+  background-color:#fff;
+  text-align: center;
 }
 
 .file__upload .header-box p span {
@@ -221,8 +227,11 @@ body .sidebar{
 
 }
 
+
+
 .file__upload .body-formular input[type="file"] {
     opacity: 0;
+    word-break: break-all;
 }
 
 .file__upload .body-formular i.fa {
@@ -277,6 +286,11 @@ body .sidebar{
 
 #link_checkbox:checked ~ #link{
   display: block;
+}
+
+
+.input [id="upload"] {
+  display: inline-block;
 }
 
 label[for="link_checkbox"] {
@@ -406,7 +420,7 @@ label[for="link_checkbox"] {
 
   .tabel-prezenta {
     margin-left: 15px;
-    float: left;
+    display: inline;
     border-collapse: collapse;
     font-size: 0.9em;
     font-family: sans-serif;
@@ -418,14 +432,14 @@ label[for="link_checkbox"] {
   h3.la-note{
     color: #fff;
     margin-left: 15px;
-    margin-top: 650px;
-    position: absolute;
+    display: none;
   }
 
   .tabel-note-teme {
     margin-top: 730px;
     margin-left: 15px;
     width: 30vw;
+    display: inline;
     height: fit-content;
     border-collapse: collapse;
     font-size: 0.9em;
@@ -439,7 +453,7 @@ label[for="link_checkbox"] {
    
     padding-bottom: 70px;
     margin-left: 15px;
-    width: 170px;
+    width: 300px;
     height: fit-content;
     border-collapse: collapse;
     font-size: 0.9em;
@@ -449,7 +463,14 @@ label[for="link_checkbox"] {
   
 }
 
-@media(max-width:700px) {
+@media (max-width: 1000px){
+  .tabel-note-teme {
+      padding-bottom: 50px;
+      box-shadow: none;
+  }
+}
+
+@media(max-width:500px) {
 
   .tabel-note-teme{
     box-shadow: none;
@@ -460,7 +481,7 @@ label[for="link_checkbox"] {
 
 	.tabel-note-teme, .tabel-note-teme tbody, .tabel-note-teme tr, .tabel-note-teme td{
 		display: block;
-		width: 250px;
+		width: 150px;
 	}
 	.tabel-note-teme tr{
 		margin-bottom:15px;
@@ -482,9 +503,12 @@ label[for="link_checkbox"] {
 		text-align: left;
 	}
 
+  .file__upload{
+    margin-top: 60px;
+    width: 280px;
+  }
+
 }
-
-
 
 
 @keyframes transitionIn{
