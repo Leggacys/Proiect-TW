@@ -261,13 +261,13 @@ body .sidebar{
 
 
 @media screen and (max-width: 850px) {
-   body .sidebar {
-      height: auto;
-      width: 100vmax;
-      position: inherit;
-      margin-left: -10px;
-      margin-right: 30px;
-    }
+    body .sidebar {
+        height: auto;
+        width: 120vw;
+        position: inherit;
+        margin-left: -10px;
+        margin-right: -50px;
+      }
     .sidebar a {float: left;}
     div.content {margin-left: 0;}
 
@@ -335,6 +335,18 @@ body .sidebar{
         top: 10%;
     }
 
+  }
+
+
+  @media(max-width:300px){
+    body .sidebar {
+      height: auto;
+      width: 500px;
+      position: inherit;
+      margin-left: -10px;
+      margin-right: -50px;
+    }
+    
   }
 
 @keyframes transitionIn{

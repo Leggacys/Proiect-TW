@@ -78,6 +78,7 @@
         $an = $jwt_decodificat->data->year;
         $semian = $jwt_decodificat->data->semian;
         $grupa = $jwt_decodificat->data->grup;
+        $mail = $jwt_decodificat->data->email;
         //echo $id_utilizator;
         echo $nume . " ";
         //echo $rol;
@@ -102,6 +103,137 @@
   </div>
 
   <div class="content">
+  
+
+  <h2 class="student_info">
+
+       <?php 
+      
+      echo "Salut studentule! Vei regasi mai jos mai multe informatii:";
+
+      ?>
+      </h2>
+
+  <h2 class="student_info">
+
+      <?php 
+      $conn_noteStud = mysqli_connect("localhost","root","","api_db");
+      if($conn_noteStud-> connect_error){
+        die("Connect failed");
+      }
+
+
+      $sqlIsBDStudent = "SELECT nume as identificator 
+      FROM studenti WHERE id_stud = '$id_utilizator' and id_curs='1';";
+      $resultIsBDStudent = $conn_noteStud -> query($sqlIsBDStudent);
+      $row2isBDStudent = $resultIsBDStudent -> fetch_assoc();
+
+      $sqlIsRCStudent = "SELECT nume as identificator 
+      FROM studenti WHERE id_stud = '$id_utilizator' and id_curs='2';";
+      $resultIsRCStudent = $conn_noteStud -> query($sqlIsRCStudent);
+      $row2isRCStudent = $resultIsRCStudent -> fetch_assoc();
+
+      $sqlIsTWStudent = "SELECT nume as identificator 
+      FROM studenti WHERE id_stud = '$id_utilizator' and id_curs='3';";
+      $resultIsTWStudent = $conn_noteStud -> query($sqlIsTWStudent);
+      $row2isTWStudent = $resultIsTWStudent -> fetch_assoc();
+      
+      
+
+
+      echo "Nume: " .$nume . "</br>";
+      echo "Prenume: " .$prenume . "</br>";
+      echo "Email: " . $mail . "</br>";
+      echo "Numar matricol: " .$id_utilizator . "</br>";
+      
+      if($row2isBDStudent!=NULL){
+      $sqlGetNoteBD = "SELECT GROUP_CONCAT(valoare) as val 
+      FROM note WHERE id_stud = '$id_utilizator' and id_curs='1';";
+      $resultGetNoteBD = $conn_noteStud -> query($sqlGetNoteBD);
+      $row2BD = $resultGetNoteBD -> fetch_assoc();
+      echo "Note la Baze de Date: " . $row2BD['val'] . ". </br>";
+      }
+      else{
+        echo "Inca nu esti inregistrat/nu ai fost acceptat la cursul Baze de Date. </br>";
+      }
+
+      if($row2isRCStudent!=NULL){
+      $sqlGetNoteRC = "SELECT GROUP_CONCAT(valoare) as val 
+      FROM note WHERE id_stud = '$id_utilizator' and id_curs='2';";
+      $resultGetNoteRC = $conn_noteStud -> query($sqlGetNoteRC);
+      $row2RC = $resultGetNoteRC -> fetch_assoc();
+      echo "Note la Retele de calculatoare: " . $row2RC['val'] . ". </br>";
+      }
+      else{
+        echo "Inca nu esti inregistrat/nu ai fost acceptat la cursul Retele de calculatoare. </br>";
+      }
+
+      if($row2isTWStudent!=NULL){
+      $sqlGetNoteTW = "SELECT GROUP_CONCAT(valoare) as val 
+      FROM note WHERE id_stud = '$id_utilizator' and id_curs='3';";
+      $resultGetNoteTW = $conn_noteStud -> query($sqlGetNoteTW);
+      $row2TW = $resultGetNoteTW -> fetch_assoc();
+      echo "Note la Tehnologii Web: " . $row2TW['val'] . ". </br>";
+      }
+      else{
+        echo "Inca nu esti inregistrat/nu ai fost acceptat la cursul Tehnologii WEB. </br>";
+      }
+
+
+      $sqlGetNumarTeme = "SELECT count(id_stud) as nrNote 
+      FROM uploaded_files WHERE id_stud = '$id_utilizator';";
+      $resultGetNumarTeme = $conn_noteStud -> query($sqlGetNumarTeme);
+      $row2NrTeme = $resultGetNumarTeme -> fetch_assoc();
+      
+      $sqlGetNumarTemeNotate = "SELECT count(id_stud) as nrNote2 
+      FROM uploaded_files WHERE id_stud = '$id_utilizator' and nota is NULL;";
+      $resultGetNumarTemeNotate = $conn_noteStud -> query($sqlGetNumarTemeNotate);
+      $row2NrTemeNotate = $resultGetNumarTemeNotate -> fetch_assoc();
+      echo "Numar de teme inregistrate: " . $row2NrTeme['nrNote'] . ", dintre care " . $row2NrTemeNotate['nrNote2'] . " nu au fost notate. </br>";
+
+
+ 
+      ?>
+</h2>
+
+
+
+  <div class="card">
+        <div class="card-header">
+            <img src="../images/student.jpg" alt="Profile Image" class="profile-img">
+        </div>
+        <div class="card-body">
+            <p class="name">
+
+            <?php
+              echo $nume . " " . $prenume;
+            ?>
+
+            </p>
+            <a href="#" class="mail">
+              
+            <?php
+              echo $mail;
+            ?>
+
+            </a>
+            <p class="job"> <?php
+              echo "Numar matricol : " . $id_utilizator;
+            ?></p>
+        </div>
+
+        
+
+        <div class="card-footer">
+            <p class="count">
+
+            <?php
+              echo "Student | FII";
+            ?>
+
+            </p>
+        </div>
+    </div>
 
 
   </div>

@@ -91,6 +91,7 @@ function delete_cookie(name) {
           $nume = $jwt_decodificat->data->lastname;
           $prenume = $jwt_decodificat->data->firstname;
           $rol = $jwt_decodificat->data->rol;
+          $mail = $jwt_decodificat->data->email;
           //echo $id_utilizator;
           echo "Profesor ";
           echo $nume . " ";
@@ -124,6 +125,157 @@ function delete_cookie(name) {
   </div>
 
 <div class="content">
+         <h2 class="student_info">
+
+       <?php 
+      
+      echo "Salut profesore! Vei regasi mai jos mai multe informatii:";
+
+      ?>
+      </h2>
+
+  <h2 class="student_info">
+
+      <?php 
+      $conn_noteStud = mysqli_connect("localhost","root","","api_db");
+      if($conn_noteStud-> connect_error){
+        die("Connect failed");
+      }
+
+
+
+      echo "Nume: " .$nume . ".</br>";
+      echo "Prenume: " .$prenume . ".</br>";
+      echo "Email: " . $mail . ".</br>";
+      if($rol == "teacher1"){
+        $materie = "Baze de Date";
+        echo "Materie predata: $materie . </br>"; 
+
+        $conn_noteStud = mysqli_connect("localhost","root","","api_db");
+        if($conn_noteStud-> connect_error){
+        die("Connect failed");
+        }
+        
+        $sql = "SELECT count(id_stud) as nr_stud 
+        FROM studenti WHERE id_curs='1';";
+        $resultSql = $conn_noteStud -> query($sql);
+        $row2 = $resultSql -> fetch_assoc();
+
+        echo "Numarul de studenti inscrisi la cursul dumneavoastra: " . $row2['nr_stud'] . "</br>";
+        
+        
+
+      $sqlGetNumarTeme = "SELECT count(id) as nrTeme 
+      FROM uploaded_files WHERE course = 'BD';";
+      $resultGetNumarTeme = $conn_noteStud -> query($sqlGetNumarTeme);
+      $row2NrTeme = $resultGetNumarTeme -> fetch_assoc();
+      
+      $sqlGetNumarTemeNotate = "SELECT count(id) as nrTeme2 
+      FROM uploaded_files WHERE course = 'BD' and nota is NULL;";
+      $resultGetNumarTemeNotate = $conn_noteStud -> query($sqlGetNumarTemeNotate);
+      $row2NrTemeNotate = $resultGetNumarTemeNotate -> fetch_assoc();
+
+      echo "Numar de teme inregistrate: " . $row2NrTeme['nrTeme'] . ", dintre care " . $row2NrTemeNotate['nrTeme2'] . " nu au fost verificate. </br>";
+
+      }
+      else if($rol == "teacher2"){
+        $materie = "Retele de calculatoare";
+        echo "Materie predata: $materie . </br>"; 
+        
+        $conn_noteStud = mysqli_connect("localhost","root","","api_db");
+        if($conn_noteStud-> connect_error){
+        die("Connect failed");
+        }
+        
+        $sql = "SELECT count(id_stud) as nr_stud 
+        FROM studenti WHERE id_curs='2';";
+        $resultSql = $conn_noteStud -> query($sql);
+        $row2 = $resultSql -> fetch_assoc();
+
+        echo "Numarul de studenti inscrisi la cursul dumneavoastra: " . $row2['nr_stud'] . "</br>";
+        
+        $sqlGetNumarTeme = "SELECT count(id) as nrTeme 
+      FROM uploaded_files WHERE course = 'RC';";
+      $resultGetNumarTeme = $conn_noteStud -> query($sqlGetNumarTeme);
+      $row2NrTeme = $resultGetNumarTeme -> fetch_assoc();
+      
+      $sqlGetNumarTemeNotate = "SELECT count(id) as nrTeme2 
+      FROM uploaded_files WHERE course = 'RC' and nota is NULL;";
+      $resultGetNumarTemeNotate = $conn_noteStud -> query($sqlGetNumarTemeNotate);
+      $row2NrTemeNotate = $resultGetNumarTemeNotate -> fetch_assoc();
+
+      echo "Numar de teme inregistrate: " . $row2NrTeme['nrTeme'] . ", dintre care " . $row2NrTemeNotate['nrTeme2'] . " nu au fost verificate. </br>";
+      }
+      else if($rol == "teacher3"){
+        $materie = "Tehnologii WEB";
+        echo "Materie predata: $materie . </br>"; 
+        
+        $conn_noteStud = mysqli_connect("localhost","root","","api_db");
+        if($conn_noteStud-> connect_error){
+        die("Connect failed");
+        }
+        
+        $sql = "SELECT count(id_stud) as nr_stud 
+        FROM studenti WHERE id_curs='3';";
+        $resultSql = $conn_noteStud -> query($sql);
+        $row2 = $resultSql -> fetch_assoc();
+
+        echo "Numarul de studenti inscrisi la cursul dumneavoastra: " . $row2['nr_stud'] . "</br>";
+        
+        $sqlGetNumarTeme = "SELECT count(id) as nrTeme 
+      FROM uploaded_files WHERE course = 'TW';";
+      $resultGetNumarTeme = $conn_noteStud -> query($sqlGetNumarTeme);
+      $row2NrTeme = $resultGetNumarTeme -> fetch_assoc();
+      
+      $sqlGetNumarTemeNotate = "SELECT count(id) as nrTeme2 
+      FROM uploaded_files WHERE course = 'TW' and nota is NULL;";
+      $resultGetNumarTemeNotate = $conn_noteStud -> query($sqlGetNumarTemeNotate);
+      $row2NrTemeNotate = $resultGetNumarTemeNotate -> fetch_assoc();
+
+      echo "Numar de teme inregistrate: " . $row2NrTeme['nrTeme'] . ", dintre care " . $row2NrTemeNotate['nrTeme2'] . " nu au fost verificate. </br>";
+      }
+      else if($rol == "teacher4"){
+        echo "Inca nu ai fost acceptat ca profesor la un curs </br>";
+        echo "Asteapta raspunsul administratorului";
+      }
+        
+     
+      ?>
+</h2>
+
+<div class="card">
+        <div class="card-header">
+            <img src="../images/student.jpg" alt="Profile Image" class="profile-img">
+        </div>
+        <div class="card-body">
+            <p class="name">
+
+            <?php
+              echo $nume . " " . $prenume;
+            ?>
+
+            </p>
+            <a href="#" class="mail">
+              
+            <?php
+              echo $mail;
+            ?>
+
+            </a>
+            <p class="job"> <?php
+              echo "Profesor : " . $materie;
+            ?></p>
+        </div>
+        <div class="card-footer">
+            <p class="count">
+
+            <?php
+              echo "Profesor | FII";
+            ?>
+
+            </p>
+        </div>
+
 
  </div>
 

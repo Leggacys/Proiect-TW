@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+  <meta name="description" content="Class Manager - Pune Note Pe Teme Profesor.">
     <script>
       function hidediv(){
         document.getElementById("welcomeContainer").style.visibility="hidden";
@@ -175,7 +176,7 @@ function delete_cookie(name) {
 
 
           //paths = CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id)
-          $sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, f.name AS nume_tema, CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id) as paths, f.new_name AS new_name, nota, f.id AS id_tema FROM users u JOIN uploaded_files f ON u.id=f.id_stud WHERE u.rol=0 AND course='$course'";
+          $sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, f.name AS nume_tema, CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id) as paths, f.new_name AS new_name, nota, f.id AS id_tema FROM users u JOIN uploaded_files f ON u.id=f.id_stud WHERE u.rol=0 AND course='$course' ORDER BY nota ASC";
           $result = $conn -> query($sql);
           $counter_row = 1;
           if($result  -> num_rows >0)
@@ -238,6 +239,7 @@ function delete_cookie(name) {
             }
             echo "</tbody>";
             echo "</table>";
+            echo "</br></br>";
           }else 
           {
             {
