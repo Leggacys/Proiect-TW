@@ -30,6 +30,7 @@ function delete_cookie(name) {
 
 
     <meta charset="utf-8">
+    <meta name="description" content="Class Manager - AcceptaProfesori.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evidenta persoane </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -42,7 +43,6 @@ function delete_cookie(name) {
     <div class="left_area">
       <h3>Class <span>Manager</span> </h3>
     </div>
-    <div id="welcomeContainer"> Autentificare reușită</div>
     <div class="right_area">
       <a href="JWTf.php" onclick="logoutFunction()" class="logout_btn">Logout</a>
     </div>
@@ -95,15 +95,15 @@ function delete_cookie(name) {
     </h3>
     <a href="MenuAdmin.php"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
     <a href="utilizatoriInregistrati.php"><i class="fab fa-500px"></i><span> Utilizatori inregistrati</span></a>
-    <a href="upload.php"><i class="fab fa-500px"></i><span> Catalog</span></a>
+    <a href="catalogAdmin.php"><i class="fab fa-500px"></i><span> Catalog</span></a>
     <a href="evidentaTeme.php"><i class="fab fa-500px"></i><span> Evidenta teme</span></a>
     <a href="acceptProfi.php"><i class="fab fa-500px"></i><span> Lista asteptare profesori</span></a>
-    <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
-  </div>
+    <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a></div>
 
 <div class="content">
   <h1><span class="blue">&lt;</span>Accepta<span class="blue">&gt;</span> <span class="yellow">Profesori</span></h1>
  <table class="container">
+   <thead>
  		<tr>
  			<th>Nume profesor</th>
       <th>Prenume profesor</th>
@@ -114,6 +114,7 @@ function delete_cookie(name) {
       <th>Accepta curs RC</th>
       <th>Accepta curs TW</th>
  		</tr>
+      </thead>
   <?php
   $conn = mysqli_connect("localhost","root","","api_db");
   if($conn-> connect_error){

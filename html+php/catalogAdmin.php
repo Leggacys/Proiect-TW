@@ -30,9 +30,10 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Class Manager - AdminExport.">
     <title>Export </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="../css/Menu-prof-Export.css">
+    <link rel="stylesheet" href="../css/catalogAdmin.css">
     <link rel="shortcut icon" type="image/svg" href="../images/CLaMa.svg">
   </head>
   <body>
@@ -41,7 +42,6 @@
     <div class="left_area">
       <h3>Class <span>Manager</span> </h3>
     </div>
-    <div id="welcomeContainer"> Salut. Ai fost autentificat cu succes in aplicatie!</div>
     <div class="right_area">
       <a href="JWTf.php" onclick="logoutFunction()" class="logout_btn">Logout</a>
     </div>
@@ -49,8 +49,9 @@
 
 
   <div class="sidebar">
-    <img src="../images/male.png" class="profile_image" alt="dummy male photo">
-    <h3>
+  <img src="../images/admin.svg" class="profile_image" alt="profile image">
+  
+  <h3>
       <?php
       
       include_once '../api/config/database.php';

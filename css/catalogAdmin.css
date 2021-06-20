@@ -1,0 +1,462 @@
+html{
+    background-color: #753a88;
+    background-image: -webkit-linear-gradient(right, #3a1c71   ,#d76d77, #ffaf7b);
+  
+  }
+  body{
+  
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: visible;
+  }
+  
+  header{
+    top:0%;
+    left: 0%;
+    position: fixed;
+    background: #22242A;
+    padding: 20px;
+    width:100%;
+    height: 3.75vh;
+  }
+  
+  header .left_area h3{
+    color: #fff;
+    margin:0;
+    text-transform: uppercase;
+    font-size: 22px;
+    font-weight: 900;
+    float: left;
+  }
+  
+  
+  header .left_area span{
+    color: #d76d77;
+  }
+  
+  header .right_area{
+    margin-top: -2.5vh;
+    margin-bottom: auto;
+  }
+  
+  header .right_area .logout_btn{
+  padding: 3px;
+  background:linear-gradient(to right, #3a1c71   ,#d76d77, #ffaf7b);
+  text-decoration: none;
+  float: right;
+  margin-left: 2px;
+  margin-right: 25px;
+  font-size: 20px;
+  font-weight:600;
+  color:#fff;
+  transition: 0.5s;
+  border-radius: 20px;
+  }
+  
+  header .right_area .logout_btn:hover{
+    background: #d76d77;
+  }
+  
+  
+  body .sidebar{
+    background: #22242A;
+    margin-top: 60px;
+    padding-top: 30px;
+    position: fixed;
+    left:0;
+    height: 100%;
+    width: 270px;
+    align-items: center;
+    overflow-y: auto;
+  }
+  
+  .sidebar .profile_image{
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    margin-bottom:10px;
+    display: block; margin-left: auto; margin-right: auto /* am centrat imaginea*/
+  }
+  
+  .sidebar h3{
+    color:#ccc;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center; /* am centrat imaginea*/
+    animation: transitionIn 0.15s;
+  }
+  
+  .sidebar a{
+    color:#fff;
+    display: block;
+    width:100%;
+    line-height: 60px;
+    text-decoration: none;
+    padding-left: 25px;
+    box-sizing: border-box;
+    transition: background-color 1000ms linear;
+    animation: transitionIn 0.15s;
+  }
+  
+  .sidebar a:hover{
+    background: #19B3D3;
+  }
+  
+  
+  .sidebar i{
+    padding-right: 10px;
+  }
+  
+  .content{
+    
+    z-index: -99;
+      height:100%;
+    width:100%;
+    background-position: center;
+    overflow: visible;
+  }
+  
+  
+  .card {
+    background: #FF957B;
+    border-radius: 10px;
+    display: inline-block;
+    height: 500px;
+    margin: 2rem;
+    position: relative;
+    max-width: 500px;
+    animation: transitionIn 0.15s;
+    left: 250px;
+    top: 50px;
+  }
+  
+  .card-1 {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  
+  }
+  
+  .card-1 h3{
+    margin: 100px;
+  }
+  
+  
+  nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+  }
+  
+  nav ul li {
+  
+      color: #88d498;
+      font-size: 16px;
+      border: 0.3em solid #1a936f;
+      border-radius: 0.5em;
+      width: 12em;
+      height: 3em;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-family: sans-serif;
+      letter-spacing: 0.1em;
+      text-align: center;
+      line-height: 3em;
+      position: relative;
+      z-index: 1;
+      transition: 0.5s;
+      margin: 1em;
+  }
+  
+  nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+  }
+  
+  nav {
+      margin: 20px;
+  }
+  
+  
+  
+  nav ul li span {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: #1a936f;
+      transform: translateY(150%);
+      border-radius: 50%;
+      left: 25%;
+      transition: 0.5s;
+      transition-delay: 0.1s;
+      z-index: -1;
+  }
+  
+  nav ul li:hover {
+      color: black;
+  }
+  
+  nav ul li:hover span {
+      transform: translateY(0) scale(2);
+  }
+  .container{
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    width: 400px;
+    max-width: 100%;
+  }
+  
+  
+  .header{
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 20px 40px;
+  }
+  
+  .header h2 {
+    margin: 0;
+  }
+  
+  .form {
+    padding: 30px 40px;
+  }
+  
+  .form-control {
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    position: relative;
+  }
+  
+  .form-control label {
+    display : inline-block;
+    margin-bottom: 5px;
+  }
+  
+  .form-control input {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  .form button{
+    background-image: linear-gradient(to right, #348aa7 ,#525174);
+    border-radius: 4px;
+    color: #fff;
+    display: block;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+    outline: none;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+  
+  .form button:hover{
+    background: white;
+    background-color: rgb(0, 162, 255);
+  }
+  
+  .dropbtn {
+  background-color: #d76d77;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: 20px;
+  cursor: pointer;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+  position: relative;
+  margin-left: 100px;
+  display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #f1f1f1}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+  display: block;
+  }
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {
+  background-color: #FF957B;
+  }
+  
+  
+  @media(max-width:1000px) {
+    html{
+      background-color: #d76d77;
+      background-image: unset;
+  }
+  
+  body{
+      overflow: visible;
+  }
+  
+  .content{
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    
+  }
+  
+  body .sidebar {
+    height: auto;
+    width: 150vw;
+    position: inherit;
+    margin-left: -10px;
+    margin-right: -50px;
+  }
+  .sidebar a {
+    float: left;
+    text-align: left;
+    float: none;
+  }
+  div.content {margin-left: 0;}
+  
+  .sidebar .profile_image{
+      width: 100px;
+      height: 100px;
+      border-radius: 100px;
+      margin-bottom:10px;
+      margin-left: 30px;
+      align-self: left;
+      margin-right: auto /* am centrat imaginea*/
+  }
+    
+  .sidebar h3{
+      color:#ccc;
+      margin-top: 0;
+      margin-bottom: 20px;
+      margin-left: 20px;
+      text-align: left; /* am centrat imaginea*/
+      animation: transitionIn 0.15s;
+  }
+  
+  .content h1{
+    padding-top: 10px;
+  }
+  
+  h1 {
+    font-size:3em;
+    font-weight: 300;
+    line-height:1em;
+    text-align: left;
+    color: #d76d77;
+  }
+  
+  .container {
+    overflow: visible;
+    width: 80vw;
+    display: table;
+    padding-left: 5px;
+    margin-left: 0px;
+    animation: transitionIn 0.15s;
+    align-items: center;
+  }
+  
+  .card {
+    background: #ffaf7b;
+    border-radius: 10px;
+    display: inline-block;
+    height: 500px;
+    margin: 2rem;
+    position: initial;
+    width: 350px;
+    animation: transitionIn 0.15s;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+  
+  }
+  
+  @media(max-width:550px) {
+  
+    .container{
+      box-shadow: none;
+    }
+    .container thead{
+          display: none;
+      }
+  
+      .container, .container tbody, .container tr, .container td{
+          display: block;
+          width: 150px;
+      }
+      .container tr{
+          margin-bottom:15px;
+      }
+      .container td{
+          text-align: right;
+          padding-left: 5%;
+          text-align: right;
+          position: relative;
+      }
+      .container td::before{
+          content: attr(data-label);
+          position: absolute;
+          left:0;
+          width: 50%;
+          padding-left:15px;
+          font-size:15px;
+          font-weight: bold;
+          text-align: left;
+      }
+  
+  
+  }
+  
+  @media(max-width:550px){
+    body .sidebar {
+      height: auto;
+      width: 600px;
+      position: inherit;
+    }
+  
+    h1{
+      text-align: center;
+    }
+    
+  }
+  
+  
+  
+  @keyframes transitionIn{
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0px);
+  
+    }
+  }
+  

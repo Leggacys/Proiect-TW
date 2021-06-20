@@ -1,10 +1,12 @@
 html{
+  background-color: #753a88;
   background-image: -webkit-linear-gradient(left, #cc2b5e ,#753a88);
+
 }
 body{
 
-  overflow: hidden;
   font-family: Arial, Helvetica, sans-serif;
+  overflow: visible;
 }
 
 header{
@@ -50,7 +52,7 @@ border-radius: 20px;
 }
 
 header .right_area .logout_btn:hover{
-  background: #753a88;
+  background: #348aa7;
 }
 
 
@@ -67,7 +69,6 @@ body .sidebar{
 }
 
 .sidebar .profile_image{
-  animation: transitionIn 0.15s;
   width: 100px;
   height: 100px;
   border-radius: 100px;
@@ -96,7 +97,7 @@ body .sidebar{
 }
 
 .sidebar a:hover{
-  background: #19B3D3;
+  background: #cc2b5e;
 }
 
 
@@ -104,171 +105,27 @@ body .sidebar{
   padding-right: 10px;
 }
 
-.mainul{
-  z-index: -99;
-  position: absolute;
-  height:100%;
-  width:100%;
-  background-position: center;
-}
-
-
 .content{
+  
   z-index: -99;
   position: absolute;
   height:100%;
-  width:100%;
+  width:90%;
   background-position: center;
 }
 
-@media(max-width:1500px) {
 
-  html{
-        background-color: #753a88;
-        background-image: unset;
-  }
-
-  .mainul{
-      width: 100%;
-      height: max-content;
-      padding: 20px;
-      box-sizing: border-box;
-  }
-
-  .containerClase{
-      position: relative;
-      width: 250px;
-      height: 500px;
-      margin-left: 90px;
-      margin-top: 20px;
-  }
+h2.student_info{
+  color: #fff;
+  margin-top: 100px;
+  margin-left: 300px;
+  animation: transitionIn 0.15s
 }
-
-@media(max-width:670px) {
-
-  html{
-    background-color: #753a88;
-    background-image: unset;
-}
-
-
-  .mainul{
-      width: 100%;
-      height: 100%;
-      padding: 20px;
-      box-sizing: border-box;
-      
-  }
-
-  .containerClase{
-      position: relative;
-      width: 250px;
-      height: 500px;
-      margin-left: 70px;
-      transition: 0.5s;
-      margin-left: -70px;
-      margin-top: 10px;
-
-  }
-
-  
-
-}
-
-
-
-
-
-@media screen and (max-width: 850px) {
- body .sidebar {
-    height: auto;
-    width: 100vmax;
-    position: inherit;
-    margin-left: -10px;
-    margin-right: 30px;
-  }
-  .sidebar a {float: left;}
-  div.content {margin-left: 0;}
-
-  .mainul{
-      width: 100%;
-      height: 100%;
-      padding: 20px;
-      box-sizing: border-box;
-      
-  }
-
-
-}
-
-@media screen and (max-width: 670px) {
-  .sidebar a {
-      
-    text-align: left;
-    float: none;
-
-  }
-  .sidebar .profile_image{
-      width: 100px;
-      height: 100px;
-      border-radius: 100px;
-      margin-bottom:10px;
-      margin-left: 30px;
-      align-self: left;
-      margin-right: auto /* am centrat imaginea*/
-  }
-    
-  .sidebar h3{
-      color:#ccc;
-      margin-top: 0;
-      margin-bottom: 20px;
-      margin-left: 20px;
-      text-align: left; /* am centrat imaginea*/
-      animation: transitionIn 0.15s;
-  }
-
-}
-
-
-@keyframes transitionIn{
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0px);
-
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 .card {
   max-width: 250px;
-  margin: 150px auto 0;
+  margin: 150px 300px 0;
   background-color: #42515a;
   box-shadow: 0 10px 90px #00000024;
   text-align: center;
@@ -290,14 +147,14 @@ body .sidebar{
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 8px solid #c74385;
+  border: 8px solid #cc2b5e;
   box-shadow: 0 0 20px #00000033;
 }
 
 .card .card-header .profile-img:hover {
   width: 180px;
   height: 180px;
-  border: 8px solid #d885af;
+  border: 8px solid #cc2b5e;
 }
 
 
@@ -309,13 +166,13 @@ body .sidebar{
   margin-top: 30px;
   font-size: 22px;
   font-weight: bold;
-  color: #c74385;
+  color: #cc2b5e;
 }
 
 .card .card-body .name:hover {
   margin-top: 30px;
   font-size: 24px;
-  color: #d885af;
+  color: #cc2b5e;
 }
 
 .card .card-body .mail {
@@ -360,7 +217,7 @@ body .sidebar{
 }
 
 .card .social-links .social-icon:hover {
-  background-color: #d885af;
+  background-color: #cc2b5e;
   height: 50px;
   width: 50px;
   text-decoration: none;
@@ -368,7 +225,7 @@ body .sidebar{
 
 
 .card .card-footer {
-  background-color: #c74385;
+  background-color: #cc2b5e;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   padding: 20px 0 20px 0;
@@ -378,6 +235,61 @@ body .sidebar{
   font-size: 14px;
 }
 
+
+
+
+@media(max-width:1000px) {
+  .left_area{
+      width: 50%;
+      float: left;
+  }
+  .logout_btn{
+    padding: 5px;
+
+    margin-top: 0px;
+    border-radius:2px;
+    font-size: 15px;
+    color:#fff;
+  }
+
+  #welcomeContainer{
+    display: none;
+  }
+
+  h2.student_info{
+    color: #fff;
+    margin-top: 15px;
+    margin-left: 15px;
+    animation: transitionIn 0.15s
+  }
+
+  .card {
+    max-width: 250px;
+    margin: 150px auto 0;
+    padding-top: 10px;
+    background-color: #42515a;
+    box-shadow: 0 10px 90px #00000024;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 15px;
+    animation: transitionIn 0.15s;
+    margin-top: 70px;
+  }
+  
+  
+}
+
+@keyframes transitionIn{
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+
+  }
+}
 
 @media screen and (max-width: 575px) {
   .card {
@@ -389,9 +301,94 @@ body .sidebar{
   }
 }
 
-h2.student_info{
-  color: #fff;
-  margin-top: 100px;
-  margin-left: 300px;
-  animation: transitionIn 0.15s
+
+@media(max-width:1000px) {
+  html{
+    background-color: #cc2b5e;
+    background-image: unset;
+}
+
+body{
+    overflow: visible;
+}
+
+.content{
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  
+}
+
+body .sidebar {
+  height: auto;
+  width: 150vw;
+  position: inherit;
+  margin-left: -10px;
+  margin-right: -50px;
+}
+.sidebar a {
+  float: left;
+  text-align: left;
+  float: none;
+}
+div.content {margin-left: 0;}
+
+.sidebar .profile_image{
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    margin-bottom:10px;
+    margin-left: 30px;
+    align-self: left;
+    margin-right: auto /* am centrat imaginea*/
+}
+  
+.sidebar h3{
+    color:#ccc;
+    margin-top: 0;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    text-align: left; /* am centrat imaginea*/
+    animation: transitionIn 0.15s;
+}
+
+.content h1{
+  padding-top: 10px;
+}
+
+h1 {
+  font-size:3em;
+  font-weight: 300;
+  line-height:1em;
+  text-align: left;
+  color: #cc2b5e;
+}
+
+.container {
+  overflow: visible;
+  width: 80vw;
+  display: table;
+  padding-left: 5px;
+  margin-left: 0px;
+  animation: transitionIn 0.15s;
+  align-items: center;
+}
+
+}
+
+  
+@media(max-width:300px){
+  body .sidebar {
+    height: auto;
+    width: 500px;
+    position: inherit;
+    margin-left: -10px;
+    margin-right: -50px;
+  }
+
+  .card{
+    position: fixed;
+  }
+  
 }

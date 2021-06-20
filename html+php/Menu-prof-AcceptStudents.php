@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+  <meta name="description" content="Class Manager - AcceptStudents.">
     <script>
       function hidediv(){
         document.getElementById("welcomeContainer").style.visibility="hidden";
@@ -42,7 +43,6 @@ function delete_cookie(name) {
     <div class="left_area">
       <h3>Class <span>Manager</span> </h3>
     </div>
-    <div id="welcomeContainer"> Autentificare reușită</div>
     <div class="right_area">
       <a href="JWTf.php" onclick="logoutFunction()" class="logout_btn">Logout</a>
     </div>
@@ -114,6 +114,7 @@ function delete_cookie(name) {
 <div class="content">
   <h1><span class="blue">&lt;</span>Request<span class="blue">&gt;</span> <span class="yellow">Table</span></h1>
  <table class="container">
+   <thead>
  		<tr>
  			<th>Nume</th>
       <th>Prenume</th>
@@ -122,6 +123,7 @@ function delete_cookie(name) {
       <th>Accepta</th>
       <th>Respinge</th>
  		</tr>
+        </thead>
   <?php
   $conn = mysqli_connect("localhost","root","","api_db");
   if($conn-> connect_error){
