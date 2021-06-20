@@ -78,7 +78,7 @@
         if($rol == "student"){
           header("Location: http://localhost/testingWeb/html+php/Menu.php");
         }
-        else if($rol == "admin"){
+        else if($rol == "teacher1" || $rol == "teacher2" ||  $rol =="teacher3"){
           header("Location: http://localhost/testingWeb/html+php/MenuAdmin.php");
         }
         //print_r($jwt_decodificat);
@@ -101,13 +101,12 @@
 
       ?>
     </h3>
-    <a href="Menu-prof.php"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
-      <a href="PuneNote.php"><i class="fab fa-500px"></i><span>   Vizualizare Teme</span></a>
-      <a href="Menu-prof-AcceptStudents.php"><i class="fab fa-500px"></i><span>   Primește studenți</span></a>
-      <a href="Menu-prof-GenereazaCod.php"><i class="fab fa-500px"></i><span>   Generează cod</span></a>
-      <a href="Menu-prof-Note.php"><i class="fab fa-500px"></i><span>   Notează studenții</span></a>
-      <a href="Menu-prof-Export.php"><i class="fab fa-500px"></i><span>   Descarcă lista de persoane</span></a>
-      <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a> 
+    <a href="MenuAdmin.php"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
+    <a href="utilizatoriInregistrati.php"><i class="fab fa-500px"></i><span> Utilizatori inregistrati</span></a>
+    <a href="catalogAdmin.php"><i class="fab fa-500px"></i><span> Catalog</span></a>
+    <a href="evidentaTeme.php"><i class="fab fa-500px"></i><span> Evidenta teme</span></a>
+    <a href="acceptProfi.php"><i class="fab fa-500px"></i><span> Lista asteptare profesori</span></a>
+    <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
 </div>
 
 <div class="content">
@@ -118,8 +117,6 @@
       <div class="dropdown">
         <button id ="export" class="dropbtn">Format</button>
         <div class="dropdown-content">
-        <a href="#" onclick="PDF()">PDF</a>
-        <a href="#" onclick="CSV()">CSV</a>
         <a href="#" onclick="XML()">XML</a>
         </div>
       </div>

@@ -168,7 +168,7 @@ function delete_cookie(name) {
 }
 
 
-if (jwt_stocat == null) {
+/* if (jwt_stocat == null) {
     alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!")
     window.location.replace("http://localhost/testingWeb/html+php/index.html");
     delete_cookie("prof");
@@ -182,10 +182,10 @@ if (jwt_stocat == null) {
     window.location.replace("http://localhost/testingWeb/html+php/index.html");
   }
   else{
-  //alert(jwt_stocat);
-  /* ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
-  ajax.send(); */
-  }
+  alert(jwt_stocat);
+  ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
+  ajax.send();
+  } */
 
 
 

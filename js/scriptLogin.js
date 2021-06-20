@@ -53,7 +53,7 @@ function checkInputs() {
                 console.log(this.responseText);
                 var myResponse = this.responseText;
                 console.log(myResponse.jwt);
-                localStorage.setItem("jwt", this.responseText);
+                //localStorage.setItem("jwt", this.responseText);
                 //alert(this.responseText);
                 setCookie('jwt',this.responseText,7);
                 //alert(this.responseText.length);

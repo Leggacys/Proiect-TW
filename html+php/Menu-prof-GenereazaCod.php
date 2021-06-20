@@ -174,7 +174,7 @@ function delete_cookie(name) {
 
     var jwt_stocat = window.localStorage.getItem("jwt");
 
-    if (jwt_stocat == null) {
+    /* if (jwt_stocat == null) {
       alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!");
       delete_cookie("jwt");
       window.location.replace("http://localhost/testingWeb/html+php/index.html");
@@ -188,14 +188,14 @@ function delete_cookie(name) {
       window.localStorage.removeItem("jwt");
       window.location.replace("http://localhost/testingWeb/html+php/index.html");
     }
-    /* else if (jwt_stocat.length > 2900) {
+    else if (jwt_stocat.length > 2900) {
       setTimeout(() => { window.location.replace("http://localhost/testingWeb/html+php/Menu-prof.html"); }, 0.001);
-    } */
-  /*  else {
+    }
+   else {
       //alert(jwt_stocat);
       ajax.setRequestHeader("Authorization", "Bearer " + jwt_stocat);
       ajax.send();
-    }*/
+    } */
 
 function BazeDeDate(){
    document.getElementById("materii").innerHTML = "Baze de Date";
