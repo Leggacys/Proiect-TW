@@ -4,10 +4,12 @@
   text-decoration: none;
   font-family: sans-serif;
   box-sizing: border-box;
+  
 }
 
 body{
   min-height: 100vh;
+  background-size: 100%;
   background-image: linear-gradient(90deg, rgba(88,24,69,1) 0%, rgba(144,12,63,1) 51%, rgba(199,0,57,1) 100%, rgba(87,0,63,1) 100%);
 }
 
@@ -70,4 +72,44 @@ body{
   text-align: center;
   font-size: 15px;
   font-family: fantasy;
+}
+
+@media(max-width:375px) {
+
+  body{
+        background-color: #af165d;
+        background-image: unset;
+  }
+
+  .login-form{
+    width: 260px;
+    background: #f1f1f1;
+    height: 510px;
+    padding: 80px 40px;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+}
+
+@media(max-height: 590px){
+  body{
+    background-color: #af165d;
+    background-image: unset;
+}
+
+.login-form{
+width: 260px;
+background: #f1f1f1;
+height: 510px;
+padding: 80px 40px;
+border-radius: 10px;
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%,-50%);
+}
 }

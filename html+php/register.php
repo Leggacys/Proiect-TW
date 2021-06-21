@@ -3,14 +3,25 @@ if(isset($_COOKIE["jwt"])){
   header("Location: http://localhost/testingWeb/html+php/Menu.php");
   return false;
   } 
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
-
 <head>
+<script>
+window.addEventListener('load', function () {
+      const loader = document.querySelector(".loading");
+      loader.className += " hidden";
+    });
+function show() {
+    var x = document.getElementById("stud-info");
+    x.style.display = "block";
+}
+function hide() {
+    var x = document.getElementById("stud-info");
+    x.style.display = "none";
+}
+</script>
+  <meta name="description" content="Class Manager.">
   <link rel="stylesheet" href="../css/register.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/svg" href="../images/CLaMa.svg">
@@ -20,7 +31,6 @@ if(isset($_COOKIE["jwt"])){
   <meta charset="utf-8">
   <title>Register</title>
 </head>
-
 <body>
   <div class="loading">
     <div class="obj"></div>
@@ -32,7 +42,6 @@ if(isset($_COOKIE["jwt"])){
     <div class="obj"></div>
     <div class="obj"></div>
   </div>
-
   <div class="container">
     <div class="header">
       <h2> <i class="fa fa-cloud" style="font-size:24px;"></i> Create Account  <i class="fa fa-cloud" style="font-size:24px;"></i> </h2>
@@ -45,7 +54,6 @@ if(isset($_COOKIE["jwt"])){
         <i class="fas fa-exclamation-circle"></i>
         <small>Error message!</small>
       </div>
-
       <div class="form-control">
         <label>Email</label>
         <input type="email" placeholder="email@email.com" id="email">
@@ -53,7 +61,6 @@ if(isset($_COOKIE["jwt"])){
         <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
         <small>Error message!</small>
       </div>
-
       <div class="form-control">
         <label>Firstname</label>
         <input type="text" placeholder="Firstname" id="firstname">
@@ -61,7 +68,6 @@ if(isset($_COOKIE["jwt"])){
         <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
         <small>Error message!</small>
       </div>
-
       <div class="form-control">
         <label>Lastname</label>
         <input type="text" placeholder="Lastname" id="lastname">
@@ -69,7 +75,6 @@ if(isset($_COOKIE["jwt"])){
         <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
         <small>Error message!</small>
       </div>
-
       <div class="form-control">
         <label>Password</label>
         <input type="password" placeholder="Password" id="password">
@@ -77,7 +82,6 @@ if(isset($_COOKIE["jwt"])){
         <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
         <small>Error message!</small>
       </div>
-
       <div class="form-control">
         <label>Password check</label>
         <input type="password" placeholder="Password two" id="password2">
@@ -94,7 +98,8 @@ if(isset($_COOKIE["jwt"])){
       </p>
       <div id="stud-info" class="hide margin-20">
         <hr />
-        <label for="years">Year and group:</label> 
+        <label for="years">Year and group:</label>
+        <input style="display:none" id="years">
 
         <select name="year" id="year">
             <option value="1">1</option>
@@ -127,45 +132,7 @@ if(isset($_COOKIE["jwt"])){
       </div>
     </form>
   </div>
-
-  <script>
-    window.addEventListener('load', function () {
-      const loader = document.querySelector(".loading");
-      loader.className += " hidden";
-    })
-  </script>
-
-
-
   <script src="../js/scriptRegister.js"></script>
-
-
 </body>
-
-<!-- <script>
-
-  var jwt_stocat = window.localStorage.getItem("jwt");
-  if(jwt_stocat.length>2900){
-    alert("Sunteti deja logat profesore! Veti fi redirectionati la meniul corespunzator!");
-    setTimeout(() => {  window.location.replace("http://localhost/testingWeb/html+php/Menu.html"); }, 0.001);
-  }
-  else if(jwt_stocat.length>0 && jwt_stocat.length<2900){
-    alert("Sunteti deja logat studentule! Veti fi redirectionati la meniul corespunzator!");
-    setTimeout(() => {  window.location.replace("http://localhost/testingWeb/html+php/Menu.html"); }, 0.001);
-  
-  }                                                      CE PUTEM SCOATE
-  </script> --> 
-  <script>
-function show() {
-    var x = document.getElementById("stud-info");
-    x.style.display = "block";
-}
-
-function hide() {
-    var x = document.getElementById("stud-info");
-    x.style.display = "none";
-}
-</script>
-
 </html>
 

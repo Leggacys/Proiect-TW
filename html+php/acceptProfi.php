@@ -30,6 +30,7 @@ function delete_cookie(name) {
 
 
     <meta charset="utf-8">
+    <meta name="description" content="Class Manager - AcceptaProfesori.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evidenta persoane </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -42,7 +43,6 @@ function delete_cookie(name) {
     <div class="left_area">
       <h3>Class <span>Manager</span> </h3>
     </div>
-    <div id="welcomeContainer"> Autentificare reușită</div>
     <div class="right_area">
       <a href="JWTf.php" onclick="logoutFunction()" class="logout_btn">Logout</a>
     </div>
@@ -95,37 +95,40 @@ function delete_cookie(name) {
     </h3>
     <a href="MenuAdmin.php"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
     <a href="utilizatoriInregistrati.php"><i class="fab fa-500px"></i><span> Utilizatori inregistrati</span></a>
-    <a href="upload.php"><i class="fab fa-500px"></i><span> Catalog</span></a>
+    <a href="catalogAdmin.php"><i class="fab fa-500px"></i><span> Catalog</span></a>
     <a href="evidentaTeme.php"><i class="fab fa-500px"></i><span> Evidenta teme</span></a>
     <a href="acceptProfi.php"><i class="fab fa-500px"></i><span> Lista asteptare profesori</span></a>
-    <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
-  </div>
+    <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a></div>
 
 <div class="content">
   <h1><span class="blue">&lt;</span>Accepta<span class="blue">&gt;</span> <span class="yellow">Profesori</span></h1>
  <table class="container">
+   <thead>
  		<tr>
- 			<th>Nume</th>
-      <th>Prenume</th>
+ 			<th>Nume profesor</th>
+      <th>Prenume profesor</th>
  			<th>Email</th>
-      <th>Rol</th>
-      <th>StergeProfesor</th>
-      <th>Accepta</th>
+      <th>Rolul utilizatorului</th>
+      <th>Sterge Profesor</th>
+      <th>Accepta curs BD</th>
+      <th>Accepta curs RC</th>
+      <th>Accepta curs TW</th>
  		</tr>
+      </thead>
   <?php
   $conn = mysqli_connect("localhost","root","","api_db");
   if($conn-> connect_error){
     die("Connect failed");
   }
 
-  $sql = "SELECT distinct u.id as id, u.email as email, u.firstname as firstname, u.lastname as lastname, u.rol as rolul FROM users u WHERE rol ='teacher2' ORDER BY rolul DESC;";
+  $sql = "SELECT distinct u.id as id, u.email as email, u.firstname as firstname, u.lastname as lastname, u.rol as rolul FROM users u WHERE rol ='teacher4' ORDER BY rolul DESC;";
   $result = $conn -> query($sql);
   if($result  -> num_rows >0)
   {
     while($row = $result -> fetch_assoc()){
       echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["email"] .
-      "</td><td>" . $row["rolul"]  . "<td> <a href = 'stergeProfesor.php?rn=$row[id]'> Sterge Profesor</td>" .
-      "<td> <a href = 'upgradeProf.php?rn=$row[id]'> Accepta Profesor</td>" . "</tr>";
+      "</td><td>" . "Profesor"  . "<td> <a href = 'stergeProfesor.php?rn=$row[id]'> Sterge Profesor</td>" .
+      "<td> <a href = 'upgradeProfBd.php?rn=$row[id]'> Accepta Profesor</td>" . "<td> <a href = 'upgradeProfRc.php?rn=$row[id]'> Accepta Profesor</td>" . "<td> <a href = 'upgradeProfTw.php?rn=$row[id]'> Accepta Profesor</td>" . "</tr>";
     }
     echo "</table>";
   }else {
@@ -169,7 +172,7 @@ function delete_cookie(name) {
     }
 }
 
-
+/* 
 if (jwt_stocat == null) {
     alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!")
     window.location.replace("http://localhost/testingWeb/html+php/index.html");
@@ -184,10 +187,10 @@ if (jwt_stocat == null) {
     window.location.replace("http://localhost/testingWeb/html+php/index.html");
   }
   else{
-  //alert(jwt_stocat);
-  /* ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
-  ajax.send(); */
-  }
+  alert(jwt_stocat);
+  ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
+  ajax.send();
+  } */
 
 
 

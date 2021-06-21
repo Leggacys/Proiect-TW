@@ -2,6 +2,8 @@
 <html lang="en" dir="ltr">
   <head>
     <script>
+
+
       function hidediv(){
         document.getElementById("welcomeContainer").style.visibility="hidden";
       }
@@ -18,30 +20,60 @@ function delete_cookie(name) {
         localStorage.removeItem("jwt");
         delete_cookie("prof");
       }
-  
+
       function startsWith ($string, $startString)
   {
       $len = strlen($startString);
       return (substr($string, 0, $len) === $startString);
   }
-  
+
+  function takeTheGradeFromDropdownMenu(row){
+  var nota = document.getElementById(row).value;
+  //var text = nota.options[e.selectedIndex].text;
+  return nota;
+}
+function insertIntoDBNormal(row,id_student,curs){
+  //alert("salut");
+if(row != null){
+    var valoare = takeTheGradeFromDropdownMenu(row);
+    // alert(valoare);
+    // alert(id_temaaa);
+    //ajax call
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      //console.log(this.responseText);
+      location.reload();
+    }
+    else if (this.readyState == 4 && this.status == 400) {
+          alert("Numar de note depasit!");
+          location.reload();
+      }
+    };
+    xmlhttp.open("GET", "http://localhost/TestingWeb/html+php/puneNotaNormal.php?id=" + row + "&idstudent=" + id_student + "&nota=" + valoare + "&curs=" + curs, true);
+    xmlhttp.send();
+return 1;
+}
+return 0;
+}
+
     </script>
 
-    
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Class Manager - MenuProfNote.">
     <title>Note</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../css/Menu-prof-Note.css">
     <link rel="shortcut icon" type="image/svg" href="../images/CLaMa.svg">
   </head>
-  <body>
+  <body> 
 
   <header>
     <div class="left_area">
       <h3>Class <span>Manager</span> </h3>
     </div>
-    <div id="welcomeContainer"> Salut. Ai fost autentificat cu succes in aplicatie!</div>
     <div class="right_area">
       <a href="JWTf.php" onclick="logoutFunction()" class="logout_btn">Logout</a>
     </div>
@@ -52,7 +84,7 @@ function delete_cookie(name) {
       <img src="../images/male.png" class="profile_image" alt="dummy male photo">
       <h3>
         <?php
-        
+
         include_once '../api/config/database.php';
         include_once '../api/objects/user.php';
         include_once '../api/libs/jwt_params.php';
@@ -66,18 +98,21 @@ function delete_cookie(name) {
         header("Location: http://localhost/testingWeb/html+php/index.php");
         echo "Comportament nepermis! Logati-va ca student ca sa puteti incarca documente.";
         return false;
-        } 
+        }
         else {$jwt = $_COOKIE['jwt'];}
-  
+
         //echo $jwt;
-  
-  
-        try{    
+
+
+        try{
           $jwt_decodificat = JWT::decode($jwt, JWT_KEY, array('HS256'));
           $rol = $jwt_decodificat->data->rol;
-        if($rol != "teacher"){
-          header("Location: http://localhost/testingWeb/html+php/Menu.php");
-        }
+          if($rol == "student"){
+            header("Location: http://localhost/testingWeb/html+php/Menu.php");
+          }
+          else if($rol == "admin"){
+            header("Location: http://localhost/testingWeb/html+php/MenuAdmin.php");
+          }
           //print_r($jwt_decodificat);
           //echo "\n\n\n\n";
           $id_utilizator = $jwt_decodificat->data->id;
@@ -89,13 +124,13 @@ function delete_cookie(name) {
           echo $nume . " ";
           //echo $rol;
           echo $prenume;
-        
+
           }catch (Exception $e){
              echo json_encode(["message"=>$e->getMessage()]);
              exit();
          }
-  
-  
+
+
         ?>
       </h3>
       <a href="Menu-prof.php"><i class="fab fa-500px"></i><span>   Profilul meu</span></a>
@@ -107,18 +142,212 @@ function delete_cookie(name) {
       <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
   </div>
 
+  <h1><span class="blue">&lt;</span>Notare<span class="blue">&gt;</span> <span class="yellow">Studenti</span></h1>
 <div class="content">
-  <table class="styled-table">
+
+<div class="container">
+      <select  id="saptamani">
+        <option value="0" >Alege Saptamana</option>
+       <option >1</option>
+       <option >2</option>
+       <option >3</option>
+       <option >4</option>
+       <option >5</option>
+       <option >6</option>
+       <option >7</option>
+       <option >8</option>
+       <option >9</option>
+       <option >10</option>
+       <option >11</option>
+       <option >12</option>
+       <option >13</option>
+     </select>
+
+
+      <p size="5px">
+        Numar maxim de note
+      </p>
+      <form class="form" id="form" action="" method="get">
+        <input type="text" STYLE="color: #FFFFFF; font-family: Verdana; font-weight: bold; font-size: 12px; background-color: #72A4D2;" size="5" maxlength="5" type="text" class="Durata"
+        placeholder="Nr_note" name="Nr_note" id="Nr_note" />
+        <input type="text" STYLE="color: #FFFFFF; font-family: Verdana; font-weight: bold; font-size: 12px; background-color: #72A4D2;" size="20" maxlength="20" type="text" class="Formula"
+        placeholder="Formula" name="Formula" id="Formula" />
+      <div class="form-control">
+      </div>
+      <button id="submit" >Submit</button>
+
+    </form>
+
+    <?php
+    error_reporting(0);
+    if(isset($_GET['Nr_note'])&&$_GET['Formula']){
+    $numar_note = $_GET['Nr_note'];
+    $formula=$_GET['Formula'];
+    $conn = mysqli_connect("localhost","root","","api_db");
+    if($conn-> connect_error){
+        die("Connect failed");
+    }
+
+    $conn1 = mysqli_connect("localhost","root","","api_db");
+    if($conn-> connect_error){
+        die("Connect failed");
+    }
+
+    if($rol == 'teacher1'){
+      $queryInsert = "UPDATE stabileste_note_cursuri SET nr_note = '$numar_note' WHERE id_curs = '1'";
+      $queryInsert1 = "UPDATE media_formule SET formula = '$formula' WHERE id_curs = '1'";
+
+
+      $data=mysqli_query($conn,$queryInsert);
+      $data1=mysqli_query($conn,$queryInsert1);
+      //echo $data;
+      if($data)
+      {header("Location: http://localhost/testingWeb/html+php/Menu-prof-Note.php");
+        //echo "Reusit";
+      }else {
+        echo "Eroare1";
+      }
+      header("Location: http://localhost/testingWeb/html+php/Menu-prof-Note.php");
+  }
+  else if($rol == 'teacher2'){
+    $queryInsert = "UPDATE stabileste_note_cursuri SET nr_note = '$numar_note' WHERE id_curs = '2'";
+    $queryInsert1 = "UPDATE media_formule SET formula = '$formula' WHERE id_curs = '2'";
+
+    $data=mysqli_query($conn,$queryInsert);
+    $data1=mysqli_query($conn,$queryInsert1);
+    echo $data;
+    if($data)
+    {header("Location: http://localhost/testingWeb/html+php/Menu-prof-Note.php");
+      //echo "Reusit";
+    }else {
+      echo "Eroare1";
+    }
+    header("Location: http://localhost/testingWeb/html+php/Menu-prof-Note.php");
+}
+
+else if($rol == 'teacher3'){
+  $queryInsert = "UPDATE stabileste_note_cursuri SET nr_note = '$numar_note' WHERE id_curs = '3'";
+  $queryInsert1 = "UPDATE media_formule SET formula = '$formula' WHERE id_curs = '3'";
+
+  $data=mysqli_query($conn,$queryInsert);
+  $data1=mysqli_query($conn,$queryInsert1);
+  echo $data;
+  if($data)
+  {header("Location: http://localhost/testingWeb/html+php/Menu-prof-Note.php");
+    //echo "Reusit";
+  }else {
+    echo "Eroare1";
+  }
+  header("Location: http://localhost/testingWeb/html+php/Menu-prof-Note.php");
+}
+  }
+    ?>
+    </div>
+
+
+
+  <div class="container1">
+     <div class="btn">
+
+<?php
+
+
+$conn = mysqli_connect("localhost","root","","api_db");
+if($conn-> connect_error){
+  die("Connect failed");
+}
+
+if($rol == 'teacher1'){
+  $sql2 = "SELECT formula from media_formule  WHERE id_curs='1';";
+}
+else if($rol == 'teacher2'){
+  $sql2 = "SELECT formula from media_formule  WHERE id_curs='2';";
+}
+else if($rol == 'teacher3'){
+  $sql2 = "SELECT formula from media_formule  WHERE id_curs='3';";
+}
+$result = $conn -> query($sql2);
+if($result  -> num_rows > 0)
+{
+  $row = $result -> fetch_assoc();
+  $formula = $row['formula'];
+  echo '<div class="shop-now" id="formula">'
+  . $formula . "</div>";
+}
+
+else {
+  echo '<div class="shop-now" id="formula">'
+  . "Da". "</div>";
+}
+/*
+//  $formula=$row['formula'];
+
+echo "<div class='shop-now'>"
+. "Da". "</div>" */
+ ?>
+
+        <div class="snowflake-grid to-left">
+           <div class="snowflake-item border-bottom border-right">
+              <div class="sub-items border-right border-bottom pull-down">
+                 <div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+              </div>
+           </div>
+           <div class="snowflake-item border-bottom border-left">
+              <div
+                 class="sub-items border-right border-bottom r-90 pull-down-right"
+                 >
+                 <div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+              </div>
+           </div>
+           <div class="snowflake-item border-top border-right">
+              <div class="sub-items border-right border-bottom r-270 pull-right">
+                 <div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+              </div>
+           </div>
+           <div class="snowflake-item border-top border-left">
+              <div class="sub-items border-right border-bottom r-180 pull-left">
+                 <div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+              </div>
+           </div>
+        </div>
+        <div class="snowflake-grid to-right">
+           <div class="snowflake-item border-bottom border-right">
+              <div class="sub-items border-right border-bottom pull-down">
+                 <div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+              </div>
+           </div>
+           <div class="snowflake-item border-bottom border-left">
+              <div
+                 class="sub-items border-right border-bottom r-90 pull-down-right"
+                 >
+                 <div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+              </div>
+           </div>
+           <div class="snowflake-item border-top border-right">
+              <div class="sub-items border-right border-bottom r-270 pull-right">
+                 <div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+              </div>
+           </div>
+           <div class="snowflake-item border-top border-left">
+              <div class="sub-items border-right border-bottom r-180 pull-left">
+                 <div class="m-w-15 m-h-15 border-right border-bottom m-3"></div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+
+
+  <table class="styled-table" id="myTable">
       <thead>
           <tr>
               <th>Nr matricol</th>
               <th>Nume</th>
               <th>Prenume</th>
-              <th>Nota I</th>
-              <th>Nota II</th>
-              <th>Nota III</th>
-              <th>Titlu curs</th>
-              <th>Media</th>
+              <th>Note curente</th>
+              <th>Noteaza</th>
+              <th>Submit</th>
+              <th>Medie</th>
           </tr>
       </thead>
       <tbody>
@@ -129,23 +358,769 @@ function delete_cookie(name) {
             die("Connect failed");
           }
 
-          $sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, n.valoare AS note, n.valoare2 AS note2, n.valoare3 AS note3, n.id_curs AS curs, (n.valoare+n.valoare2+n.valoare3)/3 as media FROM users u JOIN note n ON u.id=n.id_stud WHERE u.rol=0";
-          $result = $conn -> query($sql);
-          if($result  -> num_rows >0)
+          //paths = CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id)
+          //$sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, f.name AS nume_tema, CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id) as paths, f.new_name AS new_name, nota, f.id AS id_tema FROM users u JOIN uploaded_files f ON u.id=f.id_stud WHERE u.rol=0";
+
+          $conn2 = mysqli_connect("localhost","root","","api_db");
+          if($conn2-> connect_error){
+          die("Connect failed");
+          }
+          if($rol == "teacher1"){
+
+
+            $sql = "SELECT s.id_stud as nrmatricol, s.nume as nume, s.prenume as prenume from studenti s WHERE id_curs='1';";
+            $result = $conn -> query($sql);
+            $counter_row = 1;
+
+
+            if($result  -> num_rows >0)
           {
             while($row = $result -> fetch_assoc()){
-              echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
-              "</td><td>" . $row["note"] .  "</td><td>" . $row["note2"]  . "</td><td>" . $row["note3"]  . "</td><td>" . $row["curs"]  . "</td><td>" . $row["media"]  . "</td></tr>";
+
+              $id_student = $row['nrmatricol'];
+              $id_curs = '1';
+              $id_student_curs = $id_student . " " .$id_curs;
+
+
+
+              $sqlGetNote = "SELECT GROUP_CONCAT(valoare) as val
+              FROM note WHERE id_stud = '$id_student' and id_curs='1';";
+              $resultGetNote = $conn2 -> query($sqlGetNote);
+              $row2 = $resultGetNote -> fetch_assoc();
+              //echo $row['val'];
+              //echo $resultGetNote;
+              //echo $sqlGetNote;
+              //echo $id_student;
+
+                echo "<tr><td id = \"nr_matricol$counter_row\">" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] . "</td><td id = \"Note$counter_row\" >" . $row2['val'] .
+
+
+                "</td>
+                <td align=\"center\">
+                   <select id=\"$counter_row\">
+                        <option>--</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        </select>"  ."</td><td>" . "<input type=\"submit\" value=\"Submit\" id = \"$counter_row\" onclick=\"insertIntoDBNormal($counter_row, $id_student, $id_curs)\">". "</td><td id =\"medie$counter_row\"> Medie </td><tr>" ;
+                    // if(insertIntoDB($ids, $id_tema) == 1){
+
+                    // }
+                   $counter_row++;
+
+
             }
+            echo "</tbody>";
             echo "</table>";
-          }else {
+          }else
+          {
             {
               echo "0 results";
             }
           }
+
+
+
+
+          echo "<script> function callCulateMedie(noteId,medieId,nr_matricolId)
+          {
+            //var x = document.getElementById(\"myTable\").rows.length;
+            var str_array= document.getElementById(noteId).innerHTML;
+            var numberOfP = document.getElementById(\"formula\").innerHTML.split(\"p\").length-1;
+            var matricola = document.getElementById(nr_matricolId).innerHTML;
+            console.log(numberOfP);
+            var rezultatMedie;
+            if(numberOfP==5)
+              {
+                var rowsYeyo = str_array.split(',');
+               p1=parseInt(rowsYeyo[0]);
+               p2=parseInt(rowsYeyo[1]);
+               p3=parseInt(rowsYeyo[2]);
+               p4=parseInt(rowsYeyo[3]);
+               p5=parseInt(rowsYeyo[4]);
+               let formula=document.getElementById(\"formula\").innerHTML;
+               if(formula[0]==\"f\")
+               {
+                 var formulaTrunch=formula.split(\"floor\");
+                 rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"r\") {
+                var formulaTrunch=formula.split(\"round\");
+                rezultatMedie = Math.round(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else if(formula[0]==\"c\")
+             {
+               var formulaTrunch=formula.split(\"ceil\");
+               rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else{
+               rezultatMedie = eval(formula);
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+             }
+                }else if(numberOfP==4){
+                 var rowsYeyo = str_array.split(',');
+               p1=parseInt(rowsYeyo[0]);
+               p2=parseInt(rowsYeyo[1]);
+               p3=parseInt(rowsYeyo[2]);
+               p4=parseInt(rowsYeyo[3]);
+                let formula=document.getElementById(\"formula\").innerHTML;
+                if(formula[0]==\"f\")
+                {
+                  var formulaTrunch=formula.split(\"floor\");
+                  rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                 document.getElementById(medieId).innerHTML = rezultatMedie;
+               }else if(formula[0]==\"r\") {
+                 var formulaTrunch=formula.split(\"round\");
+                 rezultatMedie = Math.round(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"c\")
+              {
+                var formulaTrunch=formula.split(\"ceil\");
+                rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else{
+                rezultatMedie = eval(formula);
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+              }
+        
+             }else if(numberOfP==3)
+             {
+                 var rowsYeyo = str_array.split(',');
+               p1=parseInt(rowsYeyo[0]);
+               p2=parseInt(rowsYeyo[1]);
+               p3=parseInt(rowsYeyo[2]);
+               let formula=document.getElementById(\"formula\").innerHTML;
+               if(formula[0]==\"f\")
+               {
+                 var formulaTrunch=formula.split(\"floor\");
+                 rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"r\") {
+                var formulaTrunch=formula.split(\"round\");
+                rezultatMedie = Math.round(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else if(formula[0]==\"c\")
+             {
+               var formulaTrunch=formula.split(\"ceil\");
+               rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else{
+               rezultatMedie = eval(formula);
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+             }
+             }else if(numberOfP==2){
+                 var rowsYeyo = str_array.split(',');
+               p1=parseInt(rowsYeyo[0]);
+               p2=parseInt(rowsYeyo[1]);
+               let formula=document.getElementById(\"formula\").innerHTML;
+               if(formula[0]==\"f\")
+               {
+                 var formulaTrunch=formula.split(\"floor\");
+                 rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"r\") {
+                var formulaTrunch=formula.split(\"round\");
+                rezultatMedie = Math.round(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else if(formula[0]==\"c\")
+             {
+               var formulaTrunch=formula.split(\"ceil\");
+               rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+            }else{
+              rezultatMedie = eval(formula);
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+            }
+             }else
+             document.getElementById(medieId).innerHTML = \"NA\";
+        
+        
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+              console.log(this.responseText);
+              //location.reload();
+            }
+            else if (this.readyState == 4 && this.status == 400) {
+                  alert(\"Numar de note depasit!\");
+                  location.reload();
+              }
+            };
+            xmlhttp.open(\"GET\", \"http://localhost/TestingWeb/html+php/insereazaMedie.php?id=\" + \"1\" + \"&idstudent=\" + matricola + \"&nota=\" + rezultatMedie, true);
+            xmlhttp.send();
+          }
+        
+          function schimba()
+          {
+            var oRows = document.getElementById(\"myTable\").getElementsByTagName('tr');
+            var iRowCount = (oRows.length-1)/2;
+            for(let i=1;i<=iRowCount;i++)
+            {
+              var note = \"Note\";
+              var noteId=note.concat(i);
+              var medie = \"medie\";
+              var medieId = medie.concat(i);
+              var nr_matricol = \"nr_matricol\";
+              var nr_matricolId = nr_matricol.concat(i);
+              callCulateMedie(noteId,medieId, nr_matricolId);
+            }
+          } 
+          schimba();
+          </script>";
+
+
+
+
+
+
+          }
+          else if($rol == "teacher2"){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            $sql = "SELECT s.id_stud as nrmatricol, s.nume as nume, s.prenume as prenume from studenti s WHERE id_curs='2';";
+            $result = $conn -> query($sql);
+            $counter_row = 1;
+
+
+            if($result  -> num_rows >0)
+          {
+            while($row = $result -> fetch_assoc()){
+
+              $id_student = $row['nrmatricol'];
+              $id_curs = '2';
+              $id_student_curs = $id_student . " " .$id_curs;
+
+
+
+              $sqlGetNote = "SELECT GROUP_CONCAT(valoare) as val
+              FROM note WHERE id_stud = '$id_student' and id_curs='2';";
+              $resultGetNote = $conn2 -> query($sqlGetNote);
+              $row2 = $resultGetNote -> fetch_assoc();
+              //echo $row['val'];
+              //echo $resultGetNote;
+              //echo $sqlGetNote;
+              //echo $id_student;
+
+              echo "<tr><td id = \"nr_matricol$counter_row\">" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] . "</td><td id = \"Note$counter_row\" >" . $row2['val'] .
+
+
+                "</td>
+                <td align=\"center\">
+                   <select id=\"$counter_row\">
+                        <option>--</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        </select>"  ."</td><td>" . "<input type=\"submit\" value=\"Submit\" id = \"$counter_row\" onclick=\"insertIntoDBNormal($counter_row, $id_student, $id_curs)\">". "</td><td id =\"medie$counter_row\"> Medie </td><tr>" ;
+                    // if(insertIntoDB($ids, $id_tema) == 1){
+
+                    // }
+                   $counter_row++;
+
+
+            }
+            echo "</tbody>";
+            echo "</table>";
+          }else
+          {
+            {
+              echo "0 results";
+            }
+          }
+
+
+
+
+
+          
+
+
+          echo "<script> function callCulateMedie(noteId,medieId,nr_matricolId)
+          {
+            //var x = document.getElementById(\"myTable\").rows.length;
+            var str_array= document.getElementById(noteId).innerHTML;
+            var numberOfP = document.getElementById(\"formula\").innerHTML.split(\"p\").length-1;
+            var matricola = document.getElementById(nr_matricolId).innerHTML;
+            console.log(numberOfP);
+            var rezultatMedie;
+            if(numberOfP==5)
+              {
+                var rowsYeyo = str_array.split(',');
+               p1=parseInt(rowsYeyo[0]);
+               p2=parseInt(rowsYeyo[1]);
+               p3=parseInt(rowsYeyo[2]);
+               p4=parseInt(rowsYeyo[3]);
+               p5=parseInt(rowsYeyo[4]);
+               let formula=document.getElementById(\"formula\").innerHTML;
+               if(formula[0]==\"f\")
+               {
+                 var formulaTrunch=formula.split(\"floor\");
+                 rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"r\") {
+                var formulaTrunch=formula.split(\"round\");
+                rezultatMedie = Math.round(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else if(formula[0]==\"c\")
+             {
+               var formulaTrunch=formula.split(\"ceil\");
+               rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else{
+               rezultatMedie = eval(formula);
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+             }
+                }else if(numberOfP==4){
+                 var rowsYeyo = str_array.split(',');
+               p1=parseInt(rowsYeyo[0]);
+               p2=parseInt(rowsYeyo[1]);
+               p3=parseInt(rowsYeyo[2]);
+               p4=parseInt(rowsYeyo[3]);
+                let formula=document.getElementById(\"formula\").innerHTML;
+                if(formula[0]==\"f\")
+                {
+                  var formulaTrunch=formula.split(\"floor\");
+                  rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                 document.getElementById(medieId).innerHTML = rezultatMedie;
+               }else if(formula[0]==\"r\") {
+                 var formulaTrunch=formula.split(\"round\");
+                 rezultatMedie = Math.round(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"c\")
+              {
+                var formulaTrunch=formula.split(\"ceil\");
+                rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else{
+                rezultatMedie = eval(formula);
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+              }
+        
+             }else if(numberOfP==3)
+             {
+                 var rowsYeyo = str_array.split(',');
+               p1=parseInt(rowsYeyo[0]);
+               p2=parseInt(rowsYeyo[1]);
+               p3=parseInt(rowsYeyo[2]);
+               let formula=document.getElementById(\"formula\").innerHTML;
+               if(formula[0]==\"f\")
+               {
+                 var formulaTrunch=formula.split(\"floor\");
+                 rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"r\") {
+                var formulaTrunch=formula.split(\"round\");
+                rezultatMedie = Math.round(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else if(formula[0]==\"c\")
+             {
+               var formulaTrunch=formula.split(\"ceil\");
+               rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else{
+               rezultatMedie = eval(formula);
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+             }
+             }else if(numberOfP==2){
+                 var rowsYeyo = str_array.split(',');
+               p1=parseInt(rowsYeyo[0]);
+               p2=parseInt(rowsYeyo[1]);
+               let formula=document.getElementById(\"formula\").innerHTML;
+               if(formula[0]==\"f\")
+               {
+                 var formulaTrunch=formula.split(\"floor\");
+                 rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"r\") {
+                var formulaTrunch=formula.split(\"round\");
+                rezultatMedie = Math.round(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else if(formula[0]==\"c\")
+             {
+               var formulaTrunch=formula.split(\"ceil\");
+               rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+            }else{
+              rezultatMedie = eval(formula);
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+            }
+             }else
+             document.getElementById(medieId).innerHTML = \"NA\";
+        
+        
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+              console.log(this.responseText);
+              //location.reload();
+            }
+            else if (this.readyState == 4 && this.status == 400) {
+                  alert(\"Numar de note depasit!\");
+                  location.reload();
+              }
+            };
+            xmlhttp.open(\"GET\", \"http://localhost/TestingWeb/html+php/insereazaMedie.php?id=\" + \"2\" + \"&idstudent=\" + matricola + \"&nota=\" + rezultatMedie, true);
+            xmlhttp.send();
+          }
+        
+          function schimba()
+          {
+            var oRows = document.getElementById(\"myTable\").getElementsByTagName('tr');
+            var iRowCount = (oRows.length-1)/2;
+            for(let i=1;i<=iRowCount;i++)
+            {
+              var note = \"Note\";
+              var noteId=note.concat(i);
+              var medie = \"medie\";
+              var medieId = medie.concat(i);
+              var nr_matricol = \"nr_matricol\";
+              var nr_matricolId = nr_matricol.concat(i);
+              callCulateMedie(noteId,medieId, nr_matricolId);
+            }
+          } 
+          schimba();
+          </script>";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          }
+          else if($rol == "teacher3"){
+
+
+
+
+
+
+            $sql = "SELECT s.id_stud as nrmatricol, s.nume as nume, s.prenume as prenume from studenti s WHERE id_curs='3';";
+            $result = $conn -> query($sql);
+            $counter_row = 1;
+
+
+            if($result  -> num_rows >0)
+          {
+            while($row = $result -> fetch_assoc()){
+
+              $id_student = $row['nrmatricol'];
+              $id_curs = '3';
+              $id_student_curs = $id_student . " " .$id_curs;
+
+
+
+              $sqlGetNote = "SELECT GROUP_CONCAT(valoare) as val
+              FROM note WHERE id_stud = '$id_student' and id_curs='3';";
+              $resultGetNote = $conn2 -> query($sqlGetNote);
+              $row2 = $resultGetNote -> fetch_assoc();
+              //echo $row['val'];
+              //echo $resultGetNote;
+              //echo $sqlGetNote;
+              //echo $id_student;
+
+              echo "<tr><td id = \"nr_matricol$counter_row\">" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] . "</td><td id = \"Note$counter_row\" >" . $row2['val'] .
+
+
+                "</td>
+                <td align=\"center\">
+                   <select id=\"$counter_row\">
+                        <option>--</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        </select>"  ."</td><td>" . "<input type=\"submit\" value=\"Submit\" id = \"$counter_row\" onclick=\"insertIntoDBNormal($counter_row, $id_student, $id_curs)\">". "</td><td id =\"medie$counter_row\"> Medie </td><tr>" ;
+                    // if(insertIntoDB($ids, $id_tema) == 1){
+
+                    // }
+                   $counter_row++;
+
+
+            }
+            echo "</tbody>";
+            echo "</table>";
+          }else
+          {
+            {
+              echo "0 results";
+            }
+          }
+
+
+
+
+
+
+          echo "<script> function callCulateMedie(noteId,medieId,nr_matricolId)
+          {
+            //var x = document.getElementById(\"myTable\").rows.length;
+            var str_array= document.getElementById(noteId).innerHTML;
+            var numberOfP = document.getElementById(\"formula\").innerHTML.split(\"p\").length-1;
+            var matricola = document.getElementById(nr_matricolId).innerHTML;
+            console.log(numberOfP);
+            var rezultatMedie;
+            if(numberOfP==5)
+              {
+                var rowsYeyo = str_array.split(',');
+               p1=parseInt(rowsYeyo[0]);
+               p2=parseInt(rowsYeyo[1]);
+               p3=parseInt(rowsYeyo[2]);
+               p4=parseInt(rowsYeyo[3]);
+               p5=parseInt(rowsYeyo[4]);
+               let formula=document.getElementById(\"formula\").innerHTML;
+               if(formula[0]==\"f\")
+               {
+                 var formulaTrunch=formula.split(\"floor\");
+                 rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"r\") {
+                var formulaTrunch=formula.split(\"round\");
+                rezultatMedie = Math.round(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else if(formula[0]==\"c\")
+             {
+               var formulaTrunch=formula.split(\"ceil\");
+               rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else{
+               rezultatMedie = eval(formula);
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+             }
+                }else if(numberOfP==4){
+                 var rowsYeyo = str_array.split(',');
+               p1=parseInt(rowsYeyo[0]);
+               p2=parseInt(rowsYeyo[1]);
+               p3=parseInt(rowsYeyo[2]);
+               p4=parseInt(rowsYeyo[3]);
+                let formula=document.getElementById(\"formula\").innerHTML;
+                if(formula[0]==\"f\")
+                {
+                  var formulaTrunch=formula.split(\"floor\");
+                  rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                 document.getElementById(medieId).innerHTML = rezultatMedie;
+               }else if(formula[0]==\"r\") {
+                 var formulaTrunch=formula.split(\"round\");
+                 rezultatMedie = Math.round(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"c\")
+              {
+                var formulaTrunch=formula.split(\"ceil\");
+                rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else{
+                rezultatMedie = eval(formula);
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+              }
+        
+             }else if(numberOfP==3)
+             {
+                 var rowsYeyo = str_array.split(',');
+               p1=parseInt(rowsYeyo[0]);
+               p2=parseInt(rowsYeyo[1]);
+               p3=parseInt(rowsYeyo[2]);
+               let formula=document.getElementById(\"formula\").innerHTML;
+               if(formula[0]==\"f\")
+               {
+                 var formulaTrunch=formula.split(\"floor\");
+                 rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"r\") {
+                var formulaTrunch=formula.split(\"round\");
+                rezultatMedie = Math.round(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else if(formula[0]==\"c\")
+             {
+               var formulaTrunch=formula.split(\"ceil\");
+               rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else{
+               rezultatMedie = eval(formula);
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+             }
+             }else if(numberOfP==2){
+                 var rowsYeyo = str_array.split(',');
+               p1=parseInt(rowsYeyo[0]);
+               p2=parseInt(rowsYeyo[1]);
+               let formula=document.getElementById(\"formula\").innerHTML;
+               if(formula[0]==\"f\")
+               {
+                 var formulaTrunch=formula.split(\"floor\");
+                 rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"r\") {
+                var formulaTrunch=formula.split(\"round\");
+                rezultatMedie = Math.round(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else if(formula[0]==\"c\")
+             {
+               var formulaTrunch=formula.split(\"ceil\");
+               rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+            }else{
+              rezultatMedie = eval(formula);
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+            }
+             }else
+             document.getElementById(medieId).innerHTML = \"NA\";
+        
+        
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+              console.log(this.responseText);
+              //location.reload();
+            }
+            else if (this.readyState == 4 && this.status == 400) {
+                  alert(\"Numar de note depasit!\");
+                  location.reload();
+              }
+            };
+            xmlhttp.open(\"GET\", \"http://localhost/TestingWeb/html+php/insereazaMedie.php?id=\" + \"3\" + \"&idstudent=\" + matricola + \"&nota=\" + rezultatMedie, true);
+            xmlhttp.send();
+          }
+        
+          function schimba()
+          {
+            var oRows = document.getElementById(\"myTable\").getElementsByTagName('tr');
+            var iRowCount = (oRows.length-1)/2;
+            for(let i=1;i<=iRowCount;i++)
+            {
+              var note = \"Note\";
+              var noteId=note.concat(i);
+              var medie = \"medie\";
+              var medieId = medie.concat(i);
+              var nr_matricol = \"nr_matricol\";
+              var nr_matricolId = nr_matricol.concat(i);
+              callCulateMedie(noteId,medieId, nr_matricolId);
+            }
+          } 
+          schimba();
+          </script>";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          }
+
           $conn-> close();
            ?>
-
 
  </div>
 <script>
@@ -181,7 +1156,7 @@ document.getElementById("medie").innerHTML = secondGrade;
         return null;
     }
 
-    
+
     function deleteAllCookies() {
     var cookies = document.cookie.split(";");
 
@@ -193,7 +1168,7 @@ document.getElementById("medie").innerHTML = secondGrade;
     }
 }
 
-
+/* 
 if (jwt_stocat == null) {
     alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!")
     window.location.replace("http://localhost/testingWeb/html+php/index.html");
@@ -209,11 +1184,89 @@ if (jwt_stocat == null) {
   }
   else{
   //alert(jwt_stocat);
-  /* ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
-  ajax.send(); */
+   ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
+  ajax.send(); 
+  } */
+
+  function callCulateMedie(noteId,medieId,nr_matricolId)
+  {
+    //var x = document.getElementById("myTable").rows.length;
+    var str_array= document.getElementById(noteId).innerHTML;
+    var numberOfP = document.getElementById("formula").innerHTML.split("p").length-1;
+    var matricola = document.getElementById(nr_matricolId).innerHTML;
+    console.log(numberOfP);
+    var rezultatMedie;
+    if(numberOfP==5)
+      {
+        var rowsYeyo = str_array.split(',');
+       p1=parseInt(rowsYeyo[0]);
+       p2=parseInt(rowsYeyo[1]);
+       p3=parseInt(rowsYeyo[2]);
+       p4=parseInt(rowsYeyo[3]);
+       p5=parseInt(rowsYeyo[4]);
+       var formula=document.getElementById("formula").innerHTML;
+       document.getElementById(medieId).innerHTML = eval(formula);
+       rezultatMedie = eval(formula);
+     }else if(numberOfP==4){
+         var rowsYeyo = str_array.split(',');
+       p1=parseInt(rowsYeyo[0]);
+       p2=parseInt(rowsYeyo[1]);
+       p3=parseInt(rowsYeyo[2]);
+       p4=parseInt(rowsYeyo[3]);
+       var formula=document.getElementById("formula").innerHTML;
+       document.getElementById(medieId).innerHTML = eval(formula);
+       rezultatMedie = eval(formula);
+     }else if(numberOfP==3)
+     {
+         var rowsYeyo = str_array.split(',');
+       p1=parseInt(rowsYeyo[0]);
+       p2=parseInt(rowsYeyo[1]);
+       p3=parseInt(rowsYeyo[2]);
+       var formula=document.getElementById("formula").innerHTML;
+       document.getElementById(medieId).innerHTML = eval(formula);
+       rezultatMedie = eval(formula);
+     }else if(numberOfP==2){
+         var rowsYeyo = str_array.split(',');
+       p1=parseInt(rowsYeyo[0]);
+       p2=parseInt(rowsYeyo[1]);
+       var formula=document.getElementById("formula").innerHTML;
+       document.getElementById(medieId).innerHTML = eval(formula);
+       rezultatMedie = eval(formula);
+     }else
+     document.getElementById(medieId).innerHTML = "NA";
+
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText);
+      //location.reload();
+    }
+    else if (this.readyState == 4 && this.status == 400) {
+          alert("Numar de note depasit!");
+          location.reload();
+      }
+    };
+    xmlhttp.open("GET", "http://localhost/TestingWeb/html+php/insereazaMedie.php?id=" + "1" + "&idstudent=" + matricola + "&nota=" + rezultatMedie, true);
+    xmlhttp.send();
   }
 
-
+  function schimba()
+  {
+    var oRows = document.getElementById("myTable").getElementsByTagName('tr');
+    var iRowCount = (oRows.length-1)/2;
+    for(let i=1;i<=iRowCount;i++)
+    {
+      var note = "Note";
+      var noteId=note.concat(i);
+      var medie = "medie";
+      var medieId = medie.concat(i);
+      var nr_matricol = "nr_matricol";
+      var nr_matricolId = nr_matricol.concat(i);
+      callCulateMedie(noteId,medieId, nr_matricolId);
+    }
+  }
+  //schimba();
 
   </script>
 </html>

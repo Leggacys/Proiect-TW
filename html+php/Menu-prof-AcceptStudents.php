@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+  <meta name="description" content="Class Manager - AcceptStudents.">
     <script>
       function hidediv(){
         document.getElementById("welcomeContainer").style.visibility="hidden";
@@ -42,7 +43,6 @@ function delete_cookie(name) {
     <div class="left_area">
       <h3>Class <span>Manager</span> </h3>
     </div>
-    <div id="welcomeContainer"> Autentificare reușită</div>
     <div class="right_area">
       <a href="JWTf.php" onclick="logoutFunction()" class="logout_btn">Logout</a>
     </div>
@@ -76,9 +76,12 @@ function delete_cookie(name) {
         try{    
           $jwt_decodificat = JWT::decode($jwt, JWT_KEY, array('HS256'));
           $rol = $jwt_decodificat->data->rol;
-        if($rol != "teacher"){
-          header("Location: http://localhost/testingWeb/html+php/Menu.php");
-        }
+          if($rol == "student"){
+            header("Location: http://localhost/testingWeb/html+php/Menu.php");
+          }
+          else if($rol == "admin"){
+            header("Location: http://localhost/testingWeb/html+php/MenuAdmin.php");
+          }
           //print_r($jwt_decodificat);
           //echo "\n\n\n\n";
           $id_utilizator = $jwt_decodificat->data->id;
@@ -111,6 +114,7 @@ function delete_cookie(name) {
 <div class="content">
   <h1><span class="blue">&lt;</span>Request<span class="blue">&gt;</span> <span class="yellow">Table</span></h1>
  <table class="container">
+   <thead>
  		<tr>
  			<th>Nume</th>
       <th>Prenume</th>
@@ -119,21 +123,44 @@ function delete_cookie(name) {
       <th>Accepta</th>
       <th>Respinge</th>
  		</tr>
+        </thead>
   <?php
   $conn = mysqli_connect("localhost","root","","api_db");
   if($conn-> connect_error){
     die("Connect failed");
   }
 
-  $sql = "SELECT distinct u.id as id, u.firstname as firstname, u.lastname as lastname FROM users2 u ;";
+  if($rol == "teacher1"){
+      $sql = "SELECT distinct u.id_stud as id, u.nume as firstname, u.prenume as lastname, u.id_curs as curs, u.an as an, u.semian as semian, u.grupa as grupa  FROM studentiAcceptare u WHERE id_curs='1';";
+  }
+  else if($rol == "teacher2"){
+    $sql = "SELECT distinct u.id_stud as id, u.nume as firstname, u.prenume as lastname, u.id_curs as curs, u.an as an, u.semian as semian, u.grupa as grupa  FROM studentiAcceptare u WHERE id_curs='2';";
+  }
+  else if($rol == "teacher3"){
+    $sql = "SELECT distinct u.id_stud as id, u.nume as firstname, u.prenume as lastname, u.id_curs as curs, u.an as an, u.semian as semian, u.grupa as grupa  FROM studentiAcceptare u WHERE id_curs='3';";
+}
   $result = $conn -> query($sql);
   if($result  -> num_rows >0)
   {
     while($row = $result -> fetch_assoc()){
-      echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["id"] .
-      "</td><td>" . "1, 2, 3".  "</td><td><a href = 'accepta.php?id=$row[id]&
-      class=lastname=$row[lastname]&firstname=$row[firstname]'> Accepta</td>" . "<td>
-      <a href = 'respinge.php?rn=$row[id]'> Respinge</td>" . "</tr>";
+      if($row['curs']==1){
+        echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["id"] .
+        "</td><td>" . "1, 2, 3".  "</td><td><a href = 'acceptaBD.php?id=$row[id]&
+        class=lastname=$row[lastname]&firstname=$row[firstname]&curs=$row[curs]'> Accepta</td>" . "<td>
+        <a href = 'respingeBD.php?rn=$row[id]&curs=$row[curs]'> Respinge</td>" . "</tr>";
+      }
+      else if($row['curs']==2){
+        echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["id"] .
+        "</td><td>" . "1, 2, 3".  "</td><td><a href = 'acceptaRC.php?id=$row[id]&
+        class=lastname=$row[lastname]&firstname=$row[firstname]&curs=$row[curs]'> Accepta</td>" . "<td>
+        <a href = 'respingeRC.php?rn=$row[id]&curs=$row[curs]'> Respinge</td>" . "</tr>";
+      }
+      else if($row['curs']==3){
+        echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["id"] .
+        "</td><td>" . "1, 2, 3".  "</td><td><a href = 'acceptaTW.php?id=$row[id]&
+        class=lastname=$row[lastname]&firstname=$row[firstname]&curs=$row[curs]'> Accepta</td>" . "<td>
+        <a href = 'respingeTW.php?rn=$row[id]&curs=$row[curs]'> Respinge</td>" . "</tr>";
+      }
     }
     echo "</table>";
   }else {
@@ -178,7 +205,7 @@ function delete_cookie(name) {
 }
 
 
-if (jwt_stocat == null) {
+/* if (jwt_stocat == null) {
     alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!")
     window.location.replace("http://localhost/testingWeb/html+php/index.html");
     delete_cookie("prof");
@@ -192,10 +219,10 @@ if (jwt_stocat == null) {
     window.location.replace("http://localhost/testingWeb/html+php/index.html");
   }
   else{
-  //alert(jwt_stocat);
-  /* ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
-  ajax.send(); */
-  }
+  alert(jwt_stocat);
+  ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
+  ajax.send();
+  } */
 
 
 

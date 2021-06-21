@@ -186,7 +186,7 @@ function myFunction() {
   }else if(document.getElementById('teacher').checked) {
     rolValueX = document.getElementById('teacher').value.trim();
     //alert("profesor");
-    rolValue = rolValueX.concat('2');
+    rolValue = rolValueX.concat('4');
     alert(rolValue);
   }
 

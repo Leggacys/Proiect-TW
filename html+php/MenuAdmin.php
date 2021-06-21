@@ -4,7 +4,7 @@
 <head>
   <script src="../js/jwtVerification.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="description" content="Class Manager - AdminHomePage.">
   <script>
     function hidediv() {
       document.getElementById("welcomeContainer").style.visibility = "hidden";
@@ -42,7 +42,6 @@
     <div class="left_area">
       <h3>Class <span>Manager</span> </h3>
     </div>
-    <div id="welcomeContainer"> Salut. Ai fost autentificat cu succes in aplicatie!</div>
     <div class="right_area">
 
       <a href="JWTf.php" onclick="logoutFunction()" class="logout_btn">Logout</a>
@@ -82,6 +81,7 @@
         $id_utilizator = $jwt_decodificat->data->id;
         $nume = $jwt_decodificat->data->lastname;
         $prenume = $jwt_decodificat->data->firstname;
+        $mail = $jwt_decodificat->data->email;
         //echo $id_utilizator;
         echo $nume . " ";
         //echo $rol;
@@ -98,13 +98,132 @@
 
     <a href="MenuAdmin.php"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
     <a href="utilizatoriInregistrati.php"><i class="fab fa-500px"></i><span> Utilizatori inregistrati</span></a>
-    <a href="upload.php"><i class="fab fa-500px"></i><span> Catalog</span></a>
+    <a href="catalogAdmin.php"><i class="fab fa-500px"></i><span> Catalog</span></a>
     <a href="evidentaTeme.php"><i class="fab fa-500px"></i><span> Evidenta teme</span></a>
     <a href="acceptProfi.php"><i class="fab fa-500px"></i><span> Lista asteptare profesori</span></a>
     <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
   </div>
 
   <div class="content">
+
+       <h2 class="student_info">
+
+       <?php 
+      
+      echo "Salut administratorule! Vei regasi mai jos mai multe informatii:";
+
+      ?>
+      </h2>
+
+  <h2 class="student_info">
+  <?php 
+      $conn_noteStud = mysqli_connect("localhost","root","","api_db");
+      if($conn_noteStud-> connect_error){
+        die("Connect failed");
+      }
+
+      echo "Nume: " .$nume . ". </br>";
+      echo "Prenume: " .$prenume . ". </br>";
+      echo "Email: " . $mail . ". </br>";
+
+
+      $sql = "SELECT count(id) as nrUsers 
+      FROM users;";
+      $result1 = $conn_noteStud -> query($sql);
+      $row2 = $result1 -> fetch_assoc();
+      echo "Numar total de utilizatori inregistrati: " . $row2['nrUsers'] . ". </br>";
+
+
+      $sql2 = "SELECT count(distinct id_stud) as nrStud 
+      FROM studenti;";
+      $result2 = $conn_noteStud -> query($sql2);
+      $row3 = $result2 -> fetch_assoc();
+      echo "Numar total de studenti inregistrati: " . $row3['nrStud'] . ". </br>";
+
+
+
+      $sql3 = "SELECT count(distinct id) as nrProfs 
+      FROM users WHERE rol='teacher1' OR rol='teacher2' OR rol='teacher3';";
+      $result3 = $conn_noteStud -> query($sql3);
+      $row4 = $result3 -> fetch_assoc();
+
+
+      $sql4 = "SELECT count(distinct id) as nrProfs2 
+      FROM users WHERE rol='teacher'";
+      $result4 = $conn_noteStud -> query($sql4);
+      $row5 = $result4 -> fetch_assoc();
+      echo "Numar total de profesori inregistrati: " .  $row4['nrProfs'] . ". </br>";
+      echo "In asteptare de a primi permisiune sunt " . $row5['nrProfs2'] . " profesori. </br>";
+      
+      $sql5 = "SELECT count(id) as numarTeme 
+      FROM uploaded_files";
+      $result5 = $conn_noteStud -> query($sql5);
+      $row6 = $result5 -> fetch_assoc();
+
+      $sql6 = "SELECT count(id) as numarTeme2 
+      FROM uploaded_files WHERE nota IS NOT NULL";
+      $result6 = $conn_noteStud -> query($sql6);
+      $row7 = $result6 -> fetch_assoc();
+      
+      echo "In total sunt " . $row6['numarTeme'] . " teme inregistrate dintre care " . $row7['numarTeme2'] . " sunt notate. </br>"
+      ?>
+
+</h2>
+
+
+
+  <div class="card">
+        <div class="card-header">
+            <img src="../images/student.jpg" alt="Profile Image" class="profile-img">
+        </div>
+        <div class="card-body">
+            <p class="name">
+
+            <?php
+              echo $nume . " " . $prenume;
+            ?>
+
+            </p>
+            <a href="#" class="mail">
+              
+            <?php
+              echo $mail;
+            ?>
+
+            </a>
+            <p class="job"> <?php
+              echo "Administrator";
+            ?></p>
+        </div>
+
+        
+
+        <div class="card-footer">
+            <p class="count">
+
+            <?php
+              echo "Admin | FII";
+            ?>
+
+            </p>
+        </div>
+    </div>
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   </div>

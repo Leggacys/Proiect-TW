@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+  <meta name="description" content="Class Manager - Pune Note Pe Teme Profesor.">
     <script>
       function hidediv(){
         document.getElementById("welcomeContainer").style.visibility="hidden";
@@ -39,6 +40,7 @@ function insertIntoDB(row, id_tema){
 }
 
 
+
 function delete_cookie(name) {
       document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
@@ -59,6 +61,7 @@ function delete_cookie(name) {
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Class Manager - PuneNote.">
     <title>Note</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../css/puneNote.css">
@@ -103,9 +106,12 @@ function delete_cookie(name) {
         try{    
           $jwt_decodificat = JWT::decode($jwt, JWT_KEY, array('HS256'));
           $rol = $jwt_decodificat->data->rol;
-        if($rol != "teacher"){
-          header("Location: http://localhost/testingWeb/html+php/Menu.php");
-        }
+          if($rol == "student"){
+            header("Location: http://localhost/testingWeb/html+php/Menu.php");
+          }
+          else if($rol == "admin"){
+            header("Location: http://localhost/testingWeb/html+php/MenuAdmin.php");
+          }
           //print_r($jwt_decodificat);
           //echo "\n\n\n\n";
           $id_utilizator = $jwt_decodificat->data->id;
@@ -136,6 +142,7 @@ function delete_cookie(name) {
   </div>
 
 <div class="content">
+<h1><span class="blue">&lt;</span>Vizualizare<span class="blue">&gt;</span> <span class="yellow">Teme</span></h1>
   <table class="styled-table">
       <thead>
           <tr>
@@ -155,8 +162,23 @@ function delete_cookie(name) {
             die("Connect failed");
           }
 
+
+          if($rol == "teacher1"){
+            $course = "BD";
+            $id_curs = 1;
+          }
+          else if($rol == "teacher2"){
+            $course = "RC";
+            $id_curs = 2;
+          }
+          else if($rol == "teacher3"){
+            $course = "TW";
+            $id_curs = 3;
+          }
+
+
           //paths = CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id)
-          $sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, f.name AS nume_tema, CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id) as paths, f.new_name AS new_name, nota, f.id AS id_tema FROM users u JOIN uploaded_files f ON u.id=f.id_stud WHERE u.rol=0";
+          $sql = "SELECT u.id AS nrmatricol, u.lastname AS nume, u.firstname AS prenume, f.name AS nume_tema, CONCAT('http://localhost/TestingWeb/html+php/download.php?id=',f.id) as paths, f.new_name AS new_name, nota, f.id AS id_tema FROM users u JOIN uploaded_files f ON u.id=f.id_stud WHERE u.rol=0 AND course='$course' ORDER BY nota ASC";
           $result = $conn -> query($sql);
           $counter_row = 1;
           if($result  -> num_rows >0)
@@ -169,11 +191,26 @@ function delete_cookie(name) {
               if($nota != 0){
                     echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
                     "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td align=\"center\"> ". $nota. "</td><td  align=\"center\"> ". "Submitted" ."</td></tr>";
-              }else{
+                    
+                  }
+              else{
                 ?>
 
 
                 <?php
+                
+                $id_student = $row['nrmatricol'];
+                $querySelect1 = "SELECT count(id_stud) as counter1 FROM note WHERE id_curs = '$id_curs' AND id_stud = '$id_student';";
+                $result1 = $conn -> query($querySelect1);
+                $row1 = $result1 -> fetch_assoc();
+                $nb_note=$row1['counter1'];
+
+                $querySelect2 = "SELECT nr_note as counter2 FROM stabileste_note_cursuri WHERE id_curs = '$id_curs';";
+                $result2 = $conn -> query($querySelect2);
+                $row2 = $result2 -> fetch_assoc();
+                $nb_note_max=$row2['counter2'];
+
+                if($nb_note < $nb_note_max){
 
                 echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
                 "</td><td><a href = '" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td >   
@@ -195,11 +232,16 @@ function delete_cookie(name) {
 
                     // }
                    $counter_row++;
-
+                    }
+                    else{
+                      echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
+                      "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td align=\"center\"> ". '-1'. "</td><td  align=\"center\"> ". "Numar maxim de note atins" ."</td></tr>";
+                    }
               } 
             }
             echo "</tbody>";
             echo "</table>";
+            echo "</br></br>";
           }else 
           {
             {

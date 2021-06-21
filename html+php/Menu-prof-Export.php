@@ -41,7 +41,6 @@
     <div class="left_area">
       <h3>Class <span>Manager</span> </h3>
     </div>
-    <div id="welcomeContainer"> Salut. Ai fost autentificat cu succes in aplicatie!</div>
     <div class="right_area">
       <a href="JWTf.php" onclick="logoutFunction()" class="logout_btn">Logout</a>
     </div>
@@ -75,8 +74,11 @@
       try{    
         $jwt_decodificat = JWT::decode($jwt, JWT_KEY, array('HS256'));
         $rol = $jwt_decodificat->data->rol;
-        if($rol != "teacher"){
+        if($rol == "student"){
           header("Location: http://localhost/testingWeb/html+php/Menu.php");
+        }
+        else if($rol == "admin"){
+          header("Location: http://localhost/testingWeb/html+php/MenuAdmin.php");
         }
         //print_r($jwt_decodificat);
         //echo "\n\n\n\n";
@@ -108,9 +110,10 @@
 </div>
 
 <div class="content">
+  <h1><span class="blue">&lt;</span>Export<span class="blue">&gt;</span> <span class="yellow">Catalog</span></h1>
 <div class="card card-1">
   <h3>
-    Previzualizare  Export Catalog
+    Export Catalog
     <div class="container">
       <div class="dropdown">
         <button id ="export" class="dropbtn">Format</button>
@@ -135,15 +138,17 @@
   <script>
     function PDF(){
    document.getElementById("export").innerHTML = "PDF";
-   window.location.replace("http://localhost/testingWeb/fromSQLtoCSV/toPDF.php");
-}
+   window.location.replace("http://localhost/testingWeb/html+php/fromSQLtoCSV/toPDF.php");
+  exit();
+  }
 function CSV(){
    document.getElementById("export").innerHTML = "CSV";
-   window.location.replace("http://localhost/testingWeb/fromSQLtoCSV/toCSV.php");
-}
+   window.location.replace("http://localhost/testingWeb/html+php/fromSQLtoCSV/toCSV.php");
+  exit();
+  }
 function XML(){
    document.getElementById("export").innerHTML = "XML";
-   window.location.replace("http://localhost/testingWeb/XML-stufff/dbxml.php");
+   window.location.replace("http://localhost/testingWeb/html+php/XML-stufff/dbxml.php");
 }
   </script>
 
@@ -178,24 +183,7 @@ function XML(){
     }
 }
 
-if (jwt_stocat == null) {
-    alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!")
-    window.location.replace("http://localhost/testingWeb/html+php/index.html");
-    delete_cookie("prof");
-  }
-  else if (jwt_stocat == "  " || jwt_stocat == "   " || jwt_stocat.length==847) {
-    //678 reprezinta cazul de eroare, in momentul in care numele utilizatorului nu e in baza de date
-    alert("Username sau parola gresita!")
-    delete_cookie("jwt");
-    deleteAllCookies();
-    window.localStorage.removeItem("jwt");
-    window.location.replace("http://localhost/testingWeb/html+php/index.html");
-  }
-  else{
-  //alert(jwt_stocat);
-  /* ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
-  ajax.send(); */
-  }
+
 
 </script>
 </html>

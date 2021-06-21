@@ -64,9 +64,12 @@
         try{    
           $jwt_decodificat = JWT::decode($jwt, JWT_KEY, array('HS256'));
           $rol = $jwt_decodificat->data->rol;
-        if($rol != "teacher"){
-          header("Location: http://localhost/testingWeb/html+php/Menu.php");
-        }
+          if($rol == "student"){
+            header("Location: http://localhost/testingWeb/html+php/Menu.php");
+          }
+          else if($rol == "admin"){
+            header("Location: http://localhost/testingWeb/html+php/MenuAdmin.php");
+          }
           //print_r($jwt_decodificat);
           //echo "\n\n\n\n";
           $id_utilizator = $jwt_decodificat->data->id;
@@ -97,6 +100,7 @@
   </div>
 
 <div class="content">
+<h1><span class="blue">&lt;</span>Genereaza<span class="blue">&gt;</span> <span class="yellow">Cod Prezenta</span></h1>
     <div class="header">
     </div>
     <div class="container">
@@ -120,9 +124,9 @@
       <div class="dropdown">
         <button id ="materii" class="dropbtn">Materii Disponibile</button>
         <div class="dropdown-content">
-        <a href="#" onclick="BazeDeDate()">Baze De Date</a>
-        <a href="#" onclick="ReteleDeCalculatoare()">Retele</a>
-        <a href="#" onclick="TehnologiiWeb()">Tehnologii Web</a>
+        <a  onclick="BazeDeDate()">Baze De Date</a>
+        <a  onclick="ReteleDeCalculatoare()">Retele</a>
+        <a  onclick="TehnologiiWeb()">Tehnologii Web</a>
         </div>
       </div>
       <p size="5px">
@@ -134,7 +138,7 @@
       <div class="form-control">
         <label id="COD">Codul pentru prezenta</label>
       </div>
-      <button onclick="myFunction()" >Generate code</button>
+      <a href="#"  onclick="myFunction()" >Generate code</a>
     </form>
 
   </div>
@@ -171,7 +175,7 @@ function delete_cookie(name) {
 
     var jwt_stocat = window.localStorage.getItem("jwt");
 
-    if (jwt_stocat == null) {
+    /* if (jwt_stocat == null) {
       alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!");
       delete_cookie("jwt");
       window.location.replace("http://localhost/testingWeb/html+php/index.html");
@@ -185,14 +189,14 @@ function delete_cookie(name) {
       window.localStorage.removeItem("jwt");
       window.location.replace("http://localhost/testingWeb/html+php/index.html");
     }
-    /* else if (jwt_stocat.length > 2900) {
+    else if (jwt_stocat.length > 2900) {
       setTimeout(() => { window.location.replace("http://localhost/testingWeb/html+php/Menu-prof.html"); }, 0.001);
-    } */
-  /*  else {
+    }
+   else {
       //alert(jwt_stocat);
       ajax.setRequestHeader("Authorization", "Bearer " + jwt_stocat);
       ajax.send();
-    }*/
+    } */
 
 function BazeDeDate(){
    document.getElementById("materii").innerHTML = "Baze de Date";
@@ -217,7 +221,7 @@ function myFunction() {
   case "Baze de Date":
     idCurs = 1;
     break;
-  case "Retele de Calculatoare":
+  case "Retele":
       idCurs = 2;
     break;
   case "Tehnologii Web":
