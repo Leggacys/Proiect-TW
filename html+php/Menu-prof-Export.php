@@ -41,7 +41,6 @@
     <div class="left_area">
       <h3>Class <span>Manager</span> </h3>
     </div>
-    <div id="welcomeContainer"> Salut. Ai fost autentificat cu succes in aplicatie!</div>
     <div class="right_area">
       <a href="JWTf.php" onclick="logoutFunction()" class="logout_btn">Logout</a>
     </div>
@@ -138,15 +137,17 @@
   <script>
     function PDF(){
    document.getElementById("export").innerHTML = "PDF";
-   window.location.replace("http://localhost/testingWeb/fromSQLtoCSV/toPDF.php");
-}
+   window.location.replace("http://localhost/testingWeb/html+php/fromSQLtoCSV/toPDF.php");
+  exit();
+  }
 function CSV(){
    document.getElementById("export").innerHTML = "CSV";
-   window.location.replace("http://localhost/testingWeb/fromSQLtoCSV/toCSV.php");
-}
+   window.location.replace("http://localhost/testingWeb/html+php/fromSQLtoCSV/toCSV.php");
+  exit();
+  }
 function XML(){
    document.getElementById("export").innerHTML = "XML";
-   window.location.replace("http://localhost/testingWeb/XML-stufff/dbxml.php");
+   window.location.replace("http://localhost/testingWeb/html+php/XML-stufff/dbxml.php");
 }
   </script>
 

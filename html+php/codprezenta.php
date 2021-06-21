@@ -213,7 +213,7 @@ function startsWith($string, $startString) {
       }
     }
 
-    //alert(jwt_stocat);
+    /* //alert(jwt_stocat);
     if (jwt_stocat == null) {
       //alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!");
       delete_cookie("jwt");
@@ -232,7 +232,7 @@ function startsWith($string, $startString) {
       //alert(jwt_stocat);
       ajax.setRequestHeader("Authorization", "Bearer " + jwt_stocat);
       ajax.send();
-    }
+    } */
   </script>
 
 

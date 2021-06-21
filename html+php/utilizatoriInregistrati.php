@@ -31,6 +31,7 @@ function delete_cookie(name) {
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Class Manager - utilizatoriInregistrati.">
     <title>Evidenta persoane </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../css/utilizatoriInregistrati.css">
@@ -42,7 +43,6 @@ function delete_cookie(name) {
     <div class="left_area">
       <h3>Class <span>Manager</span> </h3>
     </div>
-    <div id="welcomeContainer"> Autentificare reușită</div>
     <div class="right_area">
       <a href="JWTf.php" onclick="logoutFunction()" class="logout_btn">Logout</a>
     </div>
@@ -95,15 +95,15 @@ function delete_cookie(name) {
     </h3>
     <a href="MenuAdmin.php"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
     <a href="utilizatoriInregistrati.php"><i class="fab fa-500px"></i><span> Utilizatori inregistrati</span></a>
-    <a href="upload.php"><i class="fab fa-500px"></i><span> Catalog</span></a>
+    <a href="catalogAdmin.php"><i class="fab fa-500px"></i><span> Catalog</span></a>
     <a href="evidentaTeme.php"><i class="fab fa-500px"></i><span> Evidenta teme</span></a>
     <a href="acceptProfi.php"><i class="fab fa-500px"></i><span> Lista asteptare profesori</span></a>
-    <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
-  </div>
+    <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a></div>
 
 <div class="content">
   <h1><span class="blue">&lt;</span>Vizualizare<span class="blue">&gt;</span> <span class="yellow">Utilizatori</span></h1>
  <table class="container">
+   <thead>
  		<tr>
  			<th>Nume</th>
       <th>Prenume</th>
@@ -111,6 +111,7 @@ function delete_cookie(name) {
       <th>Rol</th>
       <th>Sterge</th>
  		</tr>
+      </thead>
   <?php
   $conn = mysqli_connect("localhost","root","","api_db");
   if($conn-> connect_error){
@@ -168,7 +169,7 @@ function delete_cookie(name) {
 }
 
 
-if (jwt_stocat == null) {
+/* if (jwt_stocat == null) {
     alert("JWT-ul nu se mai regaseste. Vei fi delogat din aplicatie!")
     window.location.replace("http://localhost/testingWeb/html+php/index.html");
     delete_cookie("prof");
@@ -182,10 +183,10 @@ if (jwt_stocat == null) {
     window.location.replace("http://localhost/testingWeb/html+php/index.html");
   }
   else{
-  //alert(jwt_stocat);
-  /* ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
-  ajax.send(); */
-  }
+  alert(jwt_stocat);
+  ajax.setRequestHeader("Authorization","Bearer "+ jwt_stocat);
+  ajax.send();
+  } */
 
 
 

@@ -4,7 +4,7 @@
 <head>
   <script src="../js/jwtVerification.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Class Manager.">
+  <meta name="description" content="Class Manager - StudentHomePage.">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menu </title>
@@ -104,12 +104,11 @@
 
   <div class="content">
   
-
   <h2 class="student_info">
 
        <?php 
       
-      echo "Salut studentule! Vei regasi mai jos mai multe informatii:";
+      echo "Salut, studentule! Vei regasi mai jos mai multe informatii:";
 
       ?>
       </h2>

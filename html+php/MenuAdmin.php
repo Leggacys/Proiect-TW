@@ -4,7 +4,7 @@
 <head>
   <script src="../js/jwtVerification.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="description" content="Class Manager - AdminHomePage.">
   <script>
     function hidediv() {
       document.getElementById("welcomeContainer").style.visibility = "hidden";
@@ -42,7 +42,6 @@
     <div class="left_area">
       <h3>Class <span>Manager</span> </h3>
     </div>
-    <div id="welcomeContainer"> Salut. Ai fost autentificat cu succes in aplicatie!</div>
     <div class="right_area">
 
       <a href="JWTf.php" onclick="logoutFunction()" class="logout_btn">Logout</a>
@@ -99,7 +98,7 @@
 
     <a href="MenuAdmin.php"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
     <a href="utilizatoriInregistrati.php"><i class="fab fa-500px"></i><span> Utilizatori inregistrati</span></a>
-    <a href="upload.php"><i class="fab fa-500px"></i><span> Catalog</span></a>
+    <a href="catalogAdmin.php"><i class="fab fa-500px"></i><span> Catalog</span></a>
     <a href="evidentaTeme.php"><i class="fab fa-500px"></i><span> Evidenta teme</span></a>
     <a href="acceptProfi.php"><i class="fab fa-500px"></i><span> Lista asteptare profesori</span></a>
     <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>

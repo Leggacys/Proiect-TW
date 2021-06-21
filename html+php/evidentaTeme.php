@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+  <meta name="description" content="Class Manager - EvidentaTeme.">
     <script>
       function hidediv(){
         document.getElementById("welcomeContainer").style.visibility="hidden";
@@ -120,15 +121,15 @@ function delete_cookie(name) {
 
       ?>
     </h3>
-      <a href="MenuAdmin.php"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
+    <a href="MenuAdmin.php"><i class="fab fa-500px"></i><span> Profilul meu</span></a>
     <a href="utilizatoriInregistrati.php"><i class="fab fa-500px"></i><span> Utilizatori inregistrati</span></a>
-    <a href="upload.php"><i class="fab fa-500px"></i><span> Catalog</span></a>
+    <a href="catalogAdmin.php"><i class="fab fa-500px"></i><span> Catalog</span></a>
     <a href="evidentaTeme.php"><i class="fab fa-500px"></i><span> Evidenta teme</span></a>
     <a href="acceptProfi.php"><i class="fab fa-500px"></i><span> Lista asteptare profesori</span></a>
-    <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
-  </div>
+    <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a></div>
 
 <div class="content">
+  <h1 class="titluTabela">Tabela de teme</h1>
   <table class="styled-table">
       <thead>
           <tr>

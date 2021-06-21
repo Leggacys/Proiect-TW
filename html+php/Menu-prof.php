@@ -4,6 +4,7 @@
 
     <script src="../js/jwtVerification.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Class Manager - TeacherHomePage.">
 
     <script>
       function hidediv(){
@@ -43,7 +44,6 @@ function delete_cookie(name) {
     <div class="left_area">
       <h3>Class <span>Manager</span> </h3>
     </div>
-    <div id="welcomeContainer"> Autentificare reușită</div>
     <div class="right_area">
 
       <a href="JWTf.php" onclick="logoutFunction()" class="logout_btn">Logout</a>
@@ -125,24 +125,16 @@ function delete_cookie(name) {
   </div>
 
 <div class="content">
-         <h2 class="student_info">
 
-       <?php 
-      
-      echo "Salut profesore! Vei regasi mai jos mai multe informatii:";
-
-      ?>
-      </h2>
 
   <h2 class="student_info">
-
       <?php 
       $conn_noteStud = mysqli_connect("localhost","root","","api_db");
       if($conn_noteStud-> connect_error){
         die("Connect failed");
       }
-
-
+      
+      echo "Salut profesore! Vei regasi mai jos mai multe informatii:</br></br>";
 
       echo "Nume: " .$nume . ".</br>";
       echo "Prenume: " .$prenume . ".</br>";
