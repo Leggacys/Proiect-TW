@@ -1,5 +1,8 @@
 # CLaMa - Class Manager
 
+## Videoclip de prezentare
+> https://www.youtube.com/watch?v=8t2uV6g9_a8&ab_channel=GeorgeGabrielConstantinescu
+
 ## Cerințe
 >Se dorește realizarea unui utilitar pentru managementul unei grupe de studenți. Soluția Web trebuie să permită minimal:
 
