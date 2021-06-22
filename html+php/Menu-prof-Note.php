@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <script>
-
-
-      function hidediv(){
-        document.getElementById("welcomeContainer").style.visibility="hidden";
-      }
-      setTimeout("hidediv()",1500);
-    </script>
+  <meta charset="utf-8">
+  
 
 <script>
 
@@ -60,21 +54,19 @@ return 0;
     </script>
 
 
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Class Manager - MenuProfNote.">
     <title>Note</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../css/Menu-prof-Note.css">
-    <link rel="stylesheet" href="../css/Menu-prof-GenereazaCod.css">
     <link rel="shortcut icon" type="image/svg" href="../images/CLaMa.svg">
   </head>
-  <body>
+  <body> 
 
   <header>
     <div class="left_area">
       <h3>Class <span>Manager</span> </h3>
     </div>
-    <div id="welcomeContainer"> Salut. Ai fost autentificat cu succes in aplicatie!</div>
     <div class="right_area">
       <a href="JWTf.php" onclick="logoutFunction()" class="logout_btn">Logout</a>
     </div>
@@ -121,10 +113,19 @@ return 0;
           $prenume = $jwt_decodificat->data->firstname;
           $rol = $jwt_decodificat->data->rol;
           //echo $id_utilizator;
-          echo $rol . " ";
+          echo "Profesor ";
           echo $nume . " ";
-          //echo $rol;
-          echo $prenume;
+          echo $prenume . " ";
+          echo "<br /> ";
+          if($rol == "teacher1"){
+            echo "Baze de date";
+          }
+          else if($rol == "teacher2"){
+            echo "Retele de calculatoare";
+          }
+          else if($rol == "teacher3"){
+            echo "Tehnologii Web";
+          }
 
           }catch (Exception $e){
              echo json_encode(["message"=>$e->getMessage()]);
@@ -143,34 +144,19 @@ return 0;
       <a href="ScholarlyHTML.html"><i class="fab fa-500px"></i><span> ScholarlyHTML </span></a>
   </div>
 
+  <h1><span class="blue">&lt;</span>Notare<span class="blue">&gt;</span> <span class="yellow">Studenti</span></h1>
 <div class="content">
 
 <div class="container">
-      <select  id="saptamani">
-        <option value="0" >Alege Saptamana</option>
-       <option >1</option>
-       <option >2</option>
-       <option >3</option>
-       <option >4</option>
-       <option >5</option>
-       <option >6</option>
-       <option >7</option>
-       <option >8</option>
-       <option >9</option>
-       <option >10</option>
-       <option >11</option>
-       <option >12</option>
-       <option >13</option>
-     </select>
 
 
-      <p size="5px">
+      <p>
         Numar maxim de note
       </p>
-      <form class="form" id="form" action="" method="get">
-        <input type="text" STYLE="color: #FFFFFF; font-family: Verdana; font-weight: bold; font-size: 12px; background-color: #72A4D2;" size="5" maxlength="5" type="text" class="Durata"
+      <form class="form" id="form" action="#" method="get">
+        <input type="text" STYLE="color: #FFFFFF; font-family: Verdana; font-weight: bold; font-size: 12px; background-color: #72A4D2;" size="5" maxlength="5" class="Durata"
         placeholder="Nr_note" name="Nr_note" id="Nr_note" />
-        <input type="text" STYLE="color: #FFFFFF; font-family: Verdana; font-weight: bold; font-size: 12px; background-color: #72A4D2;" size="20" maxlength="20" type="text" class="Formula"
+        <input type="text" STYLE="color: #FFFFFF; font-family: Verdana; font-weight: bold; font-size: 12px; background-color: #72A4D2;" size="20" maxlength="20" class="Formula"
         placeholder="Formula" name="Formula" id="Formula" />
       <div class="form-control">
       </div>
@@ -211,8 +197,10 @@ return 0;
   }
   else if($rol == 'teacher2'){
     $queryInsert = "UPDATE stabileste_note_cursuri SET nr_note = '$numar_note' WHERE id_curs = '2'";
+    $queryInsert1 = "UPDATE media_formule SET formula = '$formula' WHERE id_curs = '2'";
 
     $data=mysqli_query($conn,$queryInsert);
+    $data1=mysqli_query($conn,$queryInsert1);
     echo $data;
     if($data)
     {header("Location: http://localhost/testingWeb/html+php/Menu-prof-Note.php");
@@ -225,8 +213,10 @@ return 0;
 
 else if($rol == 'teacher3'){
   $queryInsert = "UPDATE stabileste_note_cursuri SET nr_note = '$numar_note' WHERE id_curs = '3'";
+  $queryInsert1 = "UPDATE media_formule SET formula = '$formula' WHERE id_curs = '3'";
 
   $data=mysqli_query($conn,$queryInsert);
+  $data1=mysqli_query($conn,$queryInsert1);
   echo $data;
   if($data)
   {header("Location: http://localhost/testingWeb/html+php/Menu-prof-Note.php");
@@ -253,8 +243,15 @@ if($conn-> connect_error){
   die("Connect failed");
 }
 
-$sql2 = "SELECT formula from media_formule  WHERE id_curs='1';";
-
+if($rol == 'teacher1'){
+  $sql2 = "SELECT formula from media_formule  WHERE id_curs='1';";
+}
+else if($rol == 'teacher2'){
+  $sql2 = "SELECT formula from media_formule  WHERE id_curs='2';";
+}
+else if($rol == 'teacher3'){
+  $sql2 = "SELECT formula from media_formule  WHERE id_curs='3';";
+}
 $result = $conn -> query($sql2);
 if($result  -> num_rows > 0)
 {
@@ -385,7 +382,7 @@ echo "<div class='shop-now'>"
 
 
                 "</td>
-                <td align=\"center\">
+                <td>
                    <select id=\"$counter_row\">
                         <option>--</option>
                         <option>1</option>
@@ -398,7 +395,7 @@ echo "<div class='shop-now'>"
                         <option>8</option>
                         <option>9</option>
                         <option>10</option>
-                        </select>"  ."</td><td>" . "<input type=\"submit\" value=\"Submit\" id = \"$counter_row\" onclick=\"insertIntoDBNormal($counter_row, $id_student, $id_curs)\">". "</td><td id =\"medie$counter_row\"> Medie </td><tr>" ;
+                        </select>"  ."</td><td>" . "<input type=\"submit\" value=\"Submit\"  onclick=\"insertIntoDBNormal($counter_row, $id_student, $id_curs)\">". "</td><td id =\"medie$counter_row\"> Medie </td><tr>" ;
                     // if(insertIntoDB($ids, $id_tema) == 1){
 
                     // }
@@ -424,7 +421,6 @@ echo "<div class='shop-now'>"
             var str_array= document.getElementById(noteId).innerHTML;
             var numberOfP = document.getElementById(\"formula\").innerHTML.split(\"p\").length-1;
             var matricola = document.getElementById(nr_matricolId).innerHTML;
-            console.log(numberOfP);
             var rezultatMedie;
             if(numberOfP==5)
               {
@@ -434,34 +430,103 @@ echo "<div class='shop-now'>"
                p3=parseInt(rowsYeyo[2]);
                p4=parseInt(rowsYeyo[3]);
                p5=parseInt(rowsYeyo[4]);
-               var formula=document.getElementById(\"formula\").innerHTML;
-               document.getElementById(medieId).innerHTML = eval(formula);
+               let formula=document.getElementById(\"formula\").innerHTML;
+               if(formula[0]==\"f\")
+               {
+                 var formulaTrunch=formula.split(\"floor\");
+                 rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"r\") {
+                var formulaTrunch=formula.split(\"round\");
+                rezultatMedie = Math.round(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else if(formula[0]==\"c\")
+             {
+               var formulaTrunch=formula.split(\"ceil\");
+               rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else{
                rezultatMedie = eval(formula);
-             }else if(numberOfP==4){
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+             }
+                }else if(numberOfP==4){
                  var rowsYeyo = str_array.split(',');
                p1=parseInt(rowsYeyo[0]);
                p2=parseInt(rowsYeyo[1]);
                p3=parseInt(rowsYeyo[2]);
                p4=parseInt(rowsYeyo[3]);
-               var formula=document.getElementById(\"formula\").innerHTML;
-               document.getElementById(medieId).innerHTML = eval(formula);
-               rezultatMedie = eval(formula);
+                let formula=document.getElementById(\"formula\").innerHTML;
+                if(formula[0]==\"f\")
+                {
+                  var formulaTrunch=formula.split(\"floor\");
+                  rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                 document.getElementById(medieId).innerHTML = rezultatMedie;
+               }else if(formula[0]==\"r\") {
+                 var formulaTrunch=formula.split(\"round\");
+                 rezultatMedie = Math.round(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"c\")
+              {
+                var formulaTrunch=formula.split(\"ceil\");
+                rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else{
+                rezultatMedie = eval(formula);
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+              }
+        
              }else if(numberOfP==3)
              {
                  var rowsYeyo = str_array.split(',');
                p1=parseInt(rowsYeyo[0]);
                p2=parseInt(rowsYeyo[1]);
                p3=parseInt(rowsYeyo[2]);
-               var formula=document.getElementById(\"formula\").innerHTML;
-               document.getElementById(medieId).innerHTML = eval(formula);
+               let formula=document.getElementById(\"formula\").innerHTML;
+               if(formula[0]==\"f\")
+               {
+                 var formulaTrunch=formula.split(\"floor\");
+                 rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"r\") {
+                var formulaTrunch=formula.split(\"round\");
+                rezultatMedie = Math.round(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else if(formula[0]==\"c\")
+             {
+               var formulaTrunch=formula.split(\"ceil\");
+               rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else{
                rezultatMedie = eval(formula);
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+             }
              }else if(numberOfP==2){
                  var rowsYeyo = str_array.split(',');
                p1=parseInt(rowsYeyo[0]);
                p2=parseInt(rowsYeyo[1]);
-               var formula=document.getElementById(\"formula\").innerHTML;
-               document.getElementById(medieId).innerHTML = eval(formula);
-               rezultatMedie = eval(formula);
+               let formula=document.getElementById(\"formula\").innerHTML;
+               if(formula[0]==\"f\")
+               {
+                 var formulaTrunch=formula.split(\"floor\");
+                 rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"r\") {
+                var formulaTrunch=formula.split(\"round\");
+                rezultatMedie = Math.round(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else if(formula[0]==\"c\")
+             {
+               var formulaTrunch=formula.split(\"ceil\");
+               rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+            }else{
+              rezultatMedie = eval(formula);
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+            }
              }else
              document.getElementById(medieId).innerHTML = \"NA\";
         
@@ -469,7 +534,6 @@ echo "<div class='shop-now'>"
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-              console.log(this.responseText);
               //location.reload();
             }
             else if (this.readyState == 4 && this.status == 400) {
@@ -580,7 +644,7 @@ echo "<div class='shop-now'>"
 
 
                 "</td>
-                <td align=\"center\">
+                <td>
                    <select id=\"$counter_row\">
                         <option>--</option>
                         <option>1</option>
@@ -593,7 +657,7 @@ echo "<div class='shop-now'>"
                         <option>8</option>
                         <option>9</option>
                         <option>10</option>
-                        </select>"  ."</td><td>" . "<input type=\"submit\" value=\"Submit\" id = \"$counter_row\" onclick=\"insertIntoDBNormal($counter_row, $id_student, $id_curs)\">". "</td><td id =\"medie$counter_row\"> Medie </td><tr>" ;
+                        </select>"  ."</td><td>" . "<input type=\"submit\" value=\"Submit\" onclick=\"insertIntoDBNormal($counter_row, $id_student, $id_curs)\">". "</td><td id =\"medie$counter_row\"> Medie </td><tr>" ;
                     // if(insertIntoDB($ids, $id_tema) == 1){
 
                     // }
@@ -623,7 +687,6 @@ echo "<div class='shop-now'>"
             var str_array= document.getElementById(noteId).innerHTML;
             var numberOfP = document.getElementById(\"formula\").innerHTML.split(\"p\").length-1;
             var matricola = document.getElementById(nr_matricolId).innerHTML;
-            console.log(numberOfP);
             var rezultatMedie;
             if(numberOfP==5)
               {
@@ -633,34 +696,103 @@ echo "<div class='shop-now'>"
                p3=parseInt(rowsYeyo[2]);
                p4=parseInt(rowsYeyo[3]);
                p5=parseInt(rowsYeyo[4]);
-               var formula=document.getElementById(\"formula\").innerHTML;
-               document.getElementById(medieId).innerHTML = eval(formula);
+               let formula=document.getElementById(\"formula\").innerHTML;
+               if(formula[0]==\"f\")
+               {
+                 var formulaTrunch=formula.split(\"floor\");
+                 rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"r\") {
+                var formulaTrunch=formula.split(\"round\");
+                rezultatMedie = Math.round(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else if(formula[0]==\"c\")
+             {
+               var formulaTrunch=formula.split(\"ceil\");
+               rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else{
                rezultatMedie = eval(formula);
-             }else if(numberOfP==4){
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+             }
+                }else if(numberOfP==4){
                  var rowsYeyo = str_array.split(',');
                p1=parseInt(rowsYeyo[0]);
                p2=parseInt(rowsYeyo[1]);
                p3=parseInt(rowsYeyo[2]);
                p4=parseInt(rowsYeyo[3]);
-               var formula=document.getElementById(\"formula\").innerHTML;
-               document.getElementById(medieId).innerHTML = eval(formula);
-               rezultatMedie = eval(formula);
+                let formula=document.getElementById(\"formula\").innerHTML;
+                if(formula[0]==\"f\")
+                {
+                  var formulaTrunch=formula.split(\"floor\");
+                  rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                 document.getElementById(medieId).innerHTML = rezultatMedie;
+               }else if(formula[0]==\"r\") {
+                 var formulaTrunch=formula.split(\"round\");
+                 rezultatMedie = Math.round(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"c\")
+              {
+                var formulaTrunch=formula.split(\"ceil\");
+                rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else{
+                rezultatMedie = eval(formula);
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+              }
+        
              }else if(numberOfP==3)
              {
                  var rowsYeyo = str_array.split(',');
                p1=parseInt(rowsYeyo[0]);
                p2=parseInt(rowsYeyo[1]);
                p3=parseInt(rowsYeyo[2]);
-               var formula=document.getElementById(\"formula\").innerHTML;
-               document.getElementById(medieId).innerHTML = eval(formula);
+               let formula=document.getElementById(\"formula\").innerHTML;
+               if(formula[0]==\"f\")
+               {
+                 var formulaTrunch=formula.split(\"floor\");
+                 rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"r\") {
+                var formulaTrunch=formula.split(\"round\");
+                rezultatMedie = Math.round(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else if(formula[0]==\"c\")
+             {
+               var formulaTrunch=formula.split(\"ceil\");
+               rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else{
                rezultatMedie = eval(formula);
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+             }
              }else if(numberOfP==2){
                  var rowsYeyo = str_array.split(',');
                p1=parseInt(rowsYeyo[0]);
                p2=parseInt(rowsYeyo[1]);
-               var formula=document.getElementById(\"formula\").innerHTML;
-               document.getElementById(medieId).innerHTML = eval(formula);
-               rezultatMedie = eval(formula);
+               let formula=document.getElementById(\"formula\").innerHTML;
+               if(formula[0]==\"f\")
+               {
+                 var formulaTrunch=formula.split(\"floor\");
+                 rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"r\") {
+                var formulaTrunch=formula.split(\"round\");
+                rezultatMedie = Math.round(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else if(formula[0]==\"c\")
+             {
+               var formulaTrunch=formula.split(\"ceil\");
+               rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+            }else{
+              rezultatMedie = eval(formula);
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+            }
              }else
              document.getElementById(medieId).innerHTML = \"NA\";
         
@@ -668,7 +800,6 @@ echo "<div class='shop-now'>"
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-              console.log(this.responseText);
               //location.reload();
             }
             else if (this.readyState == 4 && this.status == 400) {
@@ -767,7 +898,7 @@ echo "<div class='shop-now'>"
 
 
                 "</td>
-                <td align=\"center\">
+                <td>
                    <select id=\"$counter_row\">
                         <option>--</option>
                         <option>1</option>
@@ -780,7 +911,7 @@ echo "<div class='shop-now'>"
                         <option>8</option>
                         <option>9</option>
                         <option>10</option>
-                        </select>"  ."</td><td>" . "<input type=\"submit\" value=\"Submit\" id = \"$counter_row\" onclick=\"insertIntoDBNormal($counter_row, $id_student, $id_curs)\">". "</td><td id =\"medie$counter_row\"> Medie </td><tr>" ;
+                        </select>"  ."</td><td>" . "<input type=\"submit\" value=\"Submit\" onclick=\"insertIntoDBNormal($counter_row, $id_student, $id_curs)\">". "</td><td id =\"medie$counter_row\"> Medie </td><tr>" ;
                     // if(insertIntoDB($ids, $id_tema) == 1){
 
                     // }
@@ -808,7 +939,6 @@ echo "<div class='shop-now'>"
             var str_array= document.getElementById(noteId).innerHTML;
             var numberOfP = document.getElementById(\"formula\").innerHTML.split(\"p\").length-1;
             var matricola = document.getElementById(nr_matricolId).innerHTML;
-            console.log(numberOfP);
             var rezultatMedie;
             if(numberOfP==5)
               {
@@ -818,34 +948,103 @@ echo "<div class='shop-now'>"
                p3=parseInt(rowsYeyo[2]);
                p4=parseInt(rowsYeyo[3]);
                p5=parseInt(rowsYeyo[4]);
-               var formula=document.getElementById(\"formula\").innerHTML;
-               document.getElementById(medieId).innerHTML = eval(formula);
+               let formula=document.getElementById(\"formula\").innerHTML;
+               if(formula[0]==\"f\")
+               {
+                 var formulaTrunch=formula.split(\"floor\");
+                 rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"r\") {
+                var formulaTrunch=formula.split(\"round\");
+                rezultatMedie = Math.round(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else if(formula[0]==\"c\")
+             {
+               var formulaTrunch=formula.split(\"ceil\");
+               rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else{
                rezultatMedie = eval(formula);
-             }else if(numberOfP==4){
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+             }
+                }else if(numberOfP==4){
                  var rowsYeyo = str_array.split(',');
                p1=parseInt(rowsYeyo[0]);
                p2=parseInt(rowsYeyo[1]);
                p3=parseInt(rowsYeyo[2]);
                p4=parseInt(rowsYeyo[3]);
-               var formula=document.getElementById(\"formula\").innerHTML;
-               document.getElementById(medieId).innerHTML = eval(formula);
-               rezultatMedie = eval(formula);
+                let formula=document.getElementById(\"formula\").innerHTML;
+                if(formula[0]==\"f\")
+                {
+                  var formulaTrunch=formula.split(\"floor\");
+                  rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                 document.getElementById(medieId).innerHTML = rezultatMedie;
+               }else if(formula[0]==\"r\") {
+                 var formulaTrunch=formula.split(\"round\");
+                 rezultatMedie = Math.round(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"c\")
+              {
+                var formulaTrunch=formula.split(\"ceil\");
+                rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else{
+                rezultatMedie = eval(formula);
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+              }
+        
              }else if(numberOfP==3)
              {
                  var rowsYeyo = str_array.split(',');
                p1=parseInt(rowsYeyo[0]);
                p2=parseInt(rowsYeyo[1]);
                p3=parseInt(rowsYeyo[2]);
-               var formula=document.getElementById(\"formula\").innerHTML;
-               document.getElementById(medieId).innerHTML = eval(formula);
+               let formula=document.getElementById(\"formula\").innerHTML;
+               if(formula[0]==\"f\")
+               {
+                 var formulaTrunch=formula.split(\"floor\");
+                 rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"r\") {
+                var formulaTrunch=formula.split(\"round\");
+                rezultatMedie = Math.round(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else if(formula[0]==\"c\")
+             {
+               var formulaTrunch=formula.split(\"ceil\");
+               rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else{
                rezultatMedie = eval(formula);
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+             }
              }else if(numberOfP==2){
                  var rowsYeyo = str_array.split(',');
                p1=parseInt(rowsYeyo[0]);
                p2=parseInt(rowsYeyo[1]);
-               var formula=document.getElementById(\"formula\").innerHTML;
-               document.getElementById(medieId).innerHTML = eval(formula);
-               rezultatMedie = eval(formula);
+               let formula=document.getElementById(\"formula\").innerHTML;
+               if(formula[0]==\"f\")
+               {
+                 var formulaTrunch=formula.split(\"floor\");
+                 rezultatMedie = Math.floor(eval(formulaTrunch[1]));
+                document.getElementById(medieId).innerHTML = rezultatMedie;
+              }else if(formula[0]==\"r\") {
+                var formulaTrunch=formula.split(\"round\");
+                rezultatMedie = Math.round(eval(formulaTrunch[1]));
+               document.getElementById(medieId).innerHTML = rezultatMedie;
+             }else if(formula[0]==\"c\")
+             {
+               var formulaTrunch=formula.split(\"ceil\");
+               rezultatMedie = Math.ceil(eval(formulaTrunch[1]));
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+            }else{
+              rezultatMedie = eval(formula);
+              document.getElementById(medieId).innerHTML = rezultatMedie;
+        
+            }
              }else
              document.getElementById(medieId).innerHTML = \"NA\";
         
@@ -853,7 +1052,6 @@ echo "<div class='shop-now'>"
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-              console.log(this.responseText);
               //location.reload();
             }
             else if (this.readyState == 4 && this.status == 400) {
@@ -917,9 +1115,8 @@ soum=soum/3;
 document.getElementById("medie").innerHTML = secondGrade;
 }
 </script>
-  </body>
 
-  <script>
+<script>
     var jwt_stocat = window.localStorage.getItem("jwt");
     //alert(jwt_stocat);
 
@@ -976,7 +1173,7 @@ if (jwt_stocat == null) {
     var str_array= document.getElementById(noteId).innerHTML;
     var numberOfP = document.getElementById("formula").innerHTML.split("p").length-1;
     var matricola = document.getElementById(nr_matricolId).innerHTML;
-    console.log(numberOfP);
+    //console.log(numberOfP);
     var rezultatMedie;
     if(numberOfP==5)
       {
@@ -1021,7 +1218,7 @@ if (jwt_stocat == null) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      console.log(this.responseText);
+      //console.log(this.responseText);
       //location.reload();
     }
     else if (this.readyState == 4 && this.status == 400) {
@@ -1051,4 +1248,7 @@ if (jwt_stocat == null) {
   //schimba();
 
   </script>
+  </body>
+
+  
 </html>

@@ -7,6 +7,7 @@ body{
 
   font-family: Arial, Helvetica, sans-serif;
   width: fit-content;
+  overflow-x:hidden;
 }
 
 header{
@@ -84,6 +85,14 @@ body .sidebar{
   animation: transitionIn 0.15s;
 }
 
+h2{
+  animation: transitionIn 0.15s;
+}
+
+h3{
+  animation: transitionIn 0.15s;
+}
+
 .sidebar a{
   color:#fff;
   display: block;
@@ -100,6 +109,13 @@ body .sidebar{
   background: #19B3D3;
 }
 
+h2{
+  animation: transitionIn 0.15s;
+}
+
+h3{
+  animation: transitionIn 0.15s;
+}
 
 .sidebar i{
   padding-right: 10px;
@@ -194,6 +210,11 @@ body .sidebar{
     border-radius: 5px 5px 0 0;
 }
 
+.need-white{
+  background-color:#fff;
+  text-align: center;
+}
+
 .file__upload .header-box p {
     color: #FFF;
 }
@@ -218,11 +239,12 @@ body .sidebar{
     border-radius: 0 0 5px 5px;
     align-items: center;
     text-align: center;
-
+  
 }
 
 .file__upload .body-formular input[type="file"] {
     opacity: 0;
+    word-break: break-all;
 }
 
 .file__upload .body-formular i.fa {
@@ -279,6 +301,11 @@ body .sidebar{
   display: block;
 }
 
+.input [id="upload"] {
+  display: inline-block;
+}
+
+
 label[for="link_checkbox"] {
   padding: 2px 2px;
   background: #2E8B57;
@@ -296,6 +323,8 @@ label[for="link_checkbox"] {
   font-family: sans-serif;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   animation: transitionIn 0.15s;
+  margin-top:25px;
+  word-wrap: break-word;
 
 }
 
@@ -377,7 +406,6 @@ label[for="link_checkbox"] {
       border-radius: 100px;
       margin-bottom:10px;
       margin-left: 30px;
-      align-self: left;
       margin-right: auto /* am centrat imaginea*/
   }
     
@@ -406,7 +434,7 @@ label[for="link_checkbox"] {
 
   .tabel-prezenta {
     margin-left: 15px;
-    float: left;
+    display: inline;
     border-collapse: collapse;
     font-size: 0.9em;
     font-family: sans-serif;
@@ -418,14 +446,14 @@ label[for="link_checkbox"] {
   h3.la-note{
     color: #fff;
     margin-left: 15px;
-    margin-top: 650px;
-    position: absolute;
+    display: none;
   }
 
   .tabel-note-teme {
-    margin-top: 730px;
+    margin-top: 30px;
     margin-left: 15px;
     width: 30vw;
+    display: inline;
     height: fit-content;
     border-collapse: collapse;
     font-size: 0.9em;
@@ -439,7 +467,7 @@ label[for="link_checkbox"] {
    
     padding-bottom: 70px;
     margin-left: 15px;
-    width: 170px;
+    width: 300px;
     height: fit-content;
     border-collapse: collapse;
     font-size: 0.9em;
@@ -449,7 +477,14 @@ label[for="link_checkbox"] {
   
 }
 
-@media(max-width:700px) {
+@media (max-width: 1000px){
+  .tabel-note-teme {
+      padding-bottom: 50px;
+      box-shadow: none;
+  }
+}
+
+@media(max-width:500px) {
 
   .tabel-note-teme{
     box-shadow: none;
@@ -460,7 +495,7 @@ label[for="link_checkbox"] {
 
 	.tabel-note-teme, .tabel-note-teme tbody, .tabel-note-teme tr, .tabel-note-teme td{
 		display: block;
-		width: 250px;
+		width: 150px;
 	}
 	.tabel-note-teme tr{
 		margin-bottom:15px;
@@ -482,9 +517,12 @@ label[for="link_checkbox"] {
 		text-align: left;
 	}
 
+  .file__upload{
+    margin-top: 60px;
+    width: 280px;
+  }
+
 }
-
-
 
 
 @keyframes transitionIn{

@@ -2,12 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <script>
-      function hidediv(){
-        document.getElementById("welcomeContainer").style.visibility="hidden";
-      }
-      setTimeout("hidediv()",5000);
-    </script>
+  <meta charset="utf-8">
 
 <script>
 
@@ -29,7 +24,6 @@ function delete_cookie(name) {
     </script>
 
 
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Class Manager - utilizatoriInregistrati.">
     <title>Evidenta persoane </title>
@@ -118,26 +112,48 @@ function delete_cookie(name) {
     die("Connect failed");
   }
 
-  $sql = "SELECT distinct u.id as id, u.email as email, u.firstname as firstname, u.lastname as lastname, u.rol as rolul FROM users u WHERE rol ='student' OR rol ='teacher' ORDER BY rolul DESC;";
+  $sql = "SELECT distinct u.id as id, u.email as email, u.firstname as firstname, u.lastname as lastname, u.rol as rolul FROM users u WHERE rol ='student' OR rol ='teacher1' OR rol='teacher2' OR rol='teacher3' OR rol='teacher4' ORDER BY rolul DESC;";
   $result = $conn -> query($sql);
   if($result  -> num_rows >0)
   {
     while($row = $result -> fetch_assoc()){
-      echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["email"] .
-      "</td><td>" . $row["rolul"]  . "<td> <a href = 'stergeUtilizator.php?rn=$row[id]'> Sterge Utilizator</td>" . "</tr>";
+      if($row["rolul"] == "teacher1"){
+        echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["email"] .
+        "</td><td>" . "Profesor BD" . "<td> <a href = 'stergeUtilizator.php?rn=$row[id]'> Sterge Utilizator </a></td>" . "</tr>";
+      }
+      else if($row["rolul"] == "teacher2"){
+        echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["email"] .
+        "</td><td>" . "Profesor RC" . "<td> <a href = 'stergeUtilizator.php?rn=$row[id]'> Sterge Utilizator</a></td>" . "</tr>";
+      }
+      else if($row["rolul"] == "teacher3"){
+        echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["email"] .
+        "</td><td>" . "Profesor TW" . "<td> <a href = 'stergeUtilizator.php?rn=$row[id]'> Sterge Utilizator</a></td>" . "</tr>";
+      }
+      else if($row["rolul"] == "teacher4"){
+        echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["email"] .
+        "</td><td>" . "Profesor in asteptare" . "<td> <a href = 'stergeUtilizator.php?rn=$row[id]'> Sterge Utilizator</a></td>" . "</tr>";
+      }
+      else{
+        echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["email"] .
+        "</td><td>" . "Student" . "<td> <a href = 'stergeUtilizator.php?rn=$row[id]'> Sterge Utilizator</a></td>" . "</tr>";
+      }
     }
-    echo "</table>";
+    ?>
+    </table>
+    <?php
   }else {
     {
-      echo "0 results";
+      //echo "0 results";
     }
+    ?>
+    </table>
+    <?php
   }
   $conn-> close();
    ?>
  </div>
-  </body>
 
-  <script>
+ <script>
     var jwt_stocat = window.localStorage.getItem("jwt");
     //alert(jwt_stocat);
 
@@ -191,6 +207,9 @@ function delete_cookie(name) {
 
 
   </script>
+  </body>
+
+
 
 
 </html>

@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <script>
-      function hidediv(){
-        document.getElementById("welcomeContainer").style.visibility="hidden";
-      }
-      setTimeout("hidediv()",1500);
-    </script>
+  <meta charset="utf-8">
+  <meta name="description" content="Class Manager - ExportListaStudenti.">
+    
     <script>
 
       function delete_cookie(name) {
@@ -28,7 +25,6 @@
 
 
 
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Export </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -87,10 +83,20 @@
         $prenume = $jwt_decodificat->data->firstname;
         $rol = $jwt_decodificat->data->rol;
         //echo $id_utilizator;
-        echo $rol . " ";
+        echo "Profesor ";
         echo $nume . " ";
-        //echo $rol;
-        echo $prenume;
+        echo $prenume . " ";
+        echo "<br /> ";
+        if($rol == "teacher1"){
+          echo "Baze de date";
+        }
+        else if($rol == "teacher2"){
+          echo "Retele de calculatoare";
+        }
+        else if($rol == "teacher3"){
+          echo "Tehnologii Web";
+        }
+
       
         }catch (Exception $e){
            echo json_encode(["message"=>$e->getMessage()]);
@@ -110,9 +116,11 @@
 </div>
 
 <div class="content">
+  <h1><span class="blue">&lt;</span>Export<span class="blue">&gt;</span> <span class="yellow">Catalog</span></h1>
 <div class="card card-1">
   <h3>
-    Previzualizare  Export Catalog
+    Export Catalog
+    </h3>
     <div class="container">
       <div class="dropdown">
         <button id ="export" class="dropbtn">Format</button>
@@ -122,7 +130,7 @@
         <a href="#" onclick="XML()">XML</a>
         </div>
       </div>
-  </h3>
+
    </div>
    <nav>
    <ul id="medie">
@@ -131,10 +139,10 @@
  </nav>
 
  </div>
+      </div>
 
-  </body>
 
-  <script>
+ <script>
     function PDF(){
    document.getElementById("export").innerHTML = "PDF";
    window.location.replace("http://localhost/testingWeb/html+php/fromSQLtoCSV/toPDF.php");
@@ -185,4 +193,5 @@ function XML(){
 
 
 </script>
+  </body>
 </html>

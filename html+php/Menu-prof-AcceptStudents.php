@@ -2,13 +2,9 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+  <meta charset="utf-8">
   <meta name="description" content="Class Manager - AcceptStudents.">
-    <script>
-      function hidediv(){
-        document.getElementById("welcomeContainer").style.visibility="hidden";
-      }
-      setTimeout("hidediv()",5000);
-    </script>
+    
 
 <script>
 
@@ -30,7 +26,6 @@ function delete_cookie(name) {
     </script>
 
 
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AcceptStudents </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -89,10 +84,19 @@ function delete_cookie(name) {
           $prenume = $jwt_decodificat->data->firstname;
           $rol = $jwt_decodificat->data->rol;
           //echo $id_utilizator;
-          echo $rol . " ";
+          echo "Profesor ";
           echo $nume . " ";
-          //echo $rol;
-          echo $prenume;
+          echo $prenume . " ";
+          echo "<br /> ";
+          if($rol == "teacher1"){
+            echo "Baze de date";
+          }
+          else if($rol == "teacher2"){
+            echo "Retele de calculatoare";
+          }
+          else if($rol == "teacher3"){
+            echo "Tehnologii Web";
+          }
         
           }catch (Exception $e){
              echo json_encode(["message"=>$e->getMessage()]);
@@ -145,35 +149,38 @@ function delete_cookie(name) {
     while($row = $result -> fetch_assoc()){
       if($row['curs']==1){
         echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["id"] .
-        "</td><td>" . "1, 2, 3".  "</td><td><a href = 'acceptaBD.php?id=$row[id]&
-        class=lastname=$row[lastname]&firstname=$row[firstname]&curs=$row[curs]'> Accepta</td>" . "<td>
-        <a href = 'respingeBD.php?rn=$row[id]&curs=$row[curs]'> Respinge</td>" . "</tr>";
+        "</td><td>" . "Baze de Date".  "</td><td><a href = 'acceptaBD.php?id=$row[id]&class=lastname=$row[lastname]&firstname=$row[firstname]&curs=$row[curs]'> Accepta</a></td>" . "<td>
+        <a href = 'respingeBD.php?rn=$row[id]&curs=$row[curs]'> Respinge</a></td>" . "</tr>";
       }
       else if($row['curs']==2){
         echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["id"] .
-        "</td><td>" . "1, 2, 3".  "</td><td><a href = 'acceptaRC.php?id=$row[id]&
-        class=lastname=$row[lastname]&firstname=$row[firstname]&curs=$row[curs]'> Accepta</td>" . "<td>
-        <a href = 'respingeRC.php?rn=$row[id]&curs=$row[curs]'> Respinge</td>" . "</tr>";
+        "</td><td>" . "Retele de calculatoare".  "</td><td><a href = 'acceptaRC.php?id=$row[id]&class=lastname=$row[lastname]&firstname=$row[firstname]&curs=$row[curs]'> Accepta</a></td>" . "<td>
+        <a href = 'respingeRC.php?rn=$row[id]&curs=$row[curs]'> Respinge</a></td>" . "</tr>";
       }
       else if($row['curs']==3){
         echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["id"] .
-        "</td><td>" . "1, 2, 3".  "</td><td><a href = 'acceptaTW.php?id=$row[id]&
-        class=lastname=$row[lastname]&firstname=$row[firstname]&curs=$row[curs]'> Accepta</td>" . "<td>
-        <a href = 'respingeTW.php?rn=$row[id]&curs=$row[curs]'> Respinge</td>" . "</tr>";
+        "</td><td>" . "Tehnologii WEB".  "</td><td><a href = 'acceptaTW.php?id=$row[id]&class=lastname=$row[lastname]&firstname=$row[firstname]&curs=$row[curs]'> Accepta</a></td>" . "<td>
+        <a href = 'respingeTW.php?rn=$row[id]&curs=$row[curs]'> Respinge</a></td>" . "</tr>";
       }
     }
-    echo "</table>";
+    ?>
+  </table>
+    <?php 
+
+    
   }else {
     {
-      echo "0 results";
+      //echo "0 results";
     }
+    ?>
+  </table>
+    <?php 
   }
   $conn-> close();
    ?>
  </div>
-  </body>
 
-  <script>
+ <script>
     var jwt_stocat = window.localStorage.getItem("jwt");
     //alert(jwt_stocat);
 
@@ -227,6 +234,9 @@ function delete_cookie(name) {
 
 
   </script>
+  </body>
+
+
 
 
 </html>

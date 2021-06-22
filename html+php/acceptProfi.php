@@ -2,12 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <script>
-      function hidediv(){
-        document.getElementById("welcomeContainer").style.visibility="hidden";
-      }
-      setTimeout("hidediv()",5000);
-    </script>
+  <meta charset="utf-8">
 
 <script>
 
@@ -29,7 +24,6 @@ function delete_cookie(name) {
     </script>
 
 
-    <meta charset="utf-8">
     <meta name="description" content="Class Manager - AcceptaProfesori.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evidenta persoane </title>
@@ -127,21 +121,25 @@ function delete_cookie(name) {
   {
     while($row = $result -> fetch_assoc()){
       echo "<tr><td>" . $row["lastname"] ."</td><td>" . $row["firstname"] . "</td><td>" . $row["email"] .
-      "</td><td>" . "Profesor"  . "<td> <a href = 'stergeProfesor.php?rn=$row[id]'> Sterge Profesor</td>" .
-      "<td> <a href = 'upgradeProfBd.php?rn=$row[id]'> Accepta Profesor</td>" . "<td> <a href = 'upgradeProfRc.php?rn=$row[id]'> Accepta Profesor</td>" . "<td> <a href = 'upgradeProfTw.php?rn=$row[id]'> Accepta Profesor</td>" . "</tr>";
+      "</td><td>" . "Profesor"  . "<td> <a href = 'stergeProfesor.php?rn=$row[id]'> Sterge Profesor</a></td>" .
+      "<td> <a href = 'upgradeProfBd.php?rn=$row[id]'> Accepta Profesor</a></td>" . "<td> <a href = 'upgradeProfRc.php?rn=$row[id]'> Accepta Profesor</a></td>" . "<td> <a href = 'upgradeProfTw.php?rn=$row[id]'> Accepta Profesor</a></td>" . "</tr>";
     }
-    echo "</table>";
+    ?>
+    </table>
+    <?php
   }else {
     {
       echo "0 results";
     }
+    ?>
+    </table>
+    <?php
   }
   $conn-> close();
    ?>
  </div>
-  </body>
 
-  <script>
+ <script>
     var jwt_stocat = window.localStorage.getItem("jwt");
     //alert(jwt_stocat);
 
@@ -195,6 +193,7 @@ if (jwt_stocat == null) {
 
 
   </script>
+  </body>
 
 
 </html>

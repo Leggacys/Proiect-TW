@@ -16,10 +16,10 @@
         return $db;
     }
 
-    function record_users($uid, $ulastname, $ufirstname, $uemail){
+    function record_users($uid, $ulastname, $ufirstname, $uemail, $urol){
             $db = connect_db();
             if($db){
-                $sql = "INSERT INTO users (id, lastname, firstname, email) VALUES (\"$uid\", \"$ulastname\", \"$ufirstname\", \"$uemail\");";
+                $sql = "INSERT INTO users (id, lastname, firstname, email, rol) VALUES (\"$uid\", \"$ulastname\", \"$ufirstname\", \"$uemail\", \"$urol\");";
 
                 try{
                     echo "<p>".$sql."</p>";

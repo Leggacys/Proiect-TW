@@ -38,10 +38,11 @@ try{
   $id_utilizator = $jwt_decodificat->data->id;
   $rol = $jwt_decodificat->data->rol;
   if($rol == "teacher4"){
+    echo "<script>alert('Asteapta ca administratorul sa iti ofere drepturi de profesor.')</script>";
     header("Location: http://localhost/testingWeb/html+php/JWTf.php");
     exit();
   }
-  if($rol = "teacher1"){
+  if($rol == "teacher1" || $rol == "teacher2" || $rol == "teacher3" ){
     header("Location: http://localhost/testingWeb/html+php/Menu-prof.php");
     exit();
   }
@@ -49,7 +50,7 @@ try{
     header("Location: http://localhost/testingWeb/html+php/Menu.php");
     exit();
   }
-  else if($rol = "admin"){
+  else if($rol == "admin"){
     header("Location: http://localhost/testingWeb/html+php/MenuAdmin.php");
     exit();
   }

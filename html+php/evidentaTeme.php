@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+  <meta charset="utf-8">
   <meta name="description" content="Class Manager - EvidentaTeme.">
-    <script>
-      function hidediv(){
-        document.getElementById("welcomeContainer").style.visibility="hidden";
-      }
-      setTimeout("hidediv()",1500);
-    </script>
+    
 
 <script>
 
@@ -58,7 +54,6 @@ function delete_cookie(name) {
     </script>
 
     
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Note</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -162,20 +157,26 @@ function delete_cookie(name) {
 
               if($nota != 0){
                     echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
-                    "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td align=\"center\"> ". $row["nota"]. "</td><td align=\"center\"> ". $row["dataNotare"]. "</td></tr>";
+                    "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td> ". $row["nota"]. "</td><td> ". $row["dataNotare"]. "</td></tr>";
               }
               else{
                 echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
-                    "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td align=\"center\"> "."Not marked yet.". "</td><td align=\"center\"> ". $row["dataNotare"]. "</td></tr>";
+                    "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td> "."Not marked yet.". "</td><td> ". $row["dataNotare"]. "</td></tr>";
               }
             }
-            echo "</tbody>";
-            echo "</table>";
+            ?>
+            </tbody>
+            </table>
+            <?php
           }else 
           {
             {
-              echo "0 results";
+              //echo "0 results";
             }
+            ?>
+            </tbody>
+            </table>
+            <?php
           }
           $conn-> close();
            ?> 
@@ -196,9 +197,9 @@ soum=soum/3;
 document.getElementById("medie").innerHTML = secondGrade;
 }
 </script>
-  </body>
 
-  <script>
+
+<script>
     var jwt_stocat = window.localStorage.getItem("jwt");
     //alert(jwt_stocat);
 
@@ -252,4 +253,5 @@ document.getElementById("medie").innerHTML = secondGrade;
 
 
   </script>
+  </body>
 </html>
