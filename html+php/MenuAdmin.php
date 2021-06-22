@@ -2,16 +2,10 @@
 <html lang="en" dir="ltr">
 
 <head>
+<meta charset="utf-8">
   <script src="../js/jwtVerification.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Class Manager - AdminHomePage.">
-  <script>
-    function hidediv() {
-      document.getElementById("welcomeContainer").style.visibility = "hidden";
-    }
-    setTimeout("hidediv()", 1500);
-  </script>
-  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menu </title>
   <script>
@@ -122,23 +116,23 @@
         die("Connect failed");
       }
 
-      echo "Nume: " .$nume . ". </br>";
-      echo "Prenume: " .$prenume . ". </br>";
-      echo "Email: " . $mail . ". </br>";
+      echo "Nume: " .$nume . ". <br />";
+      echo "Prenume: " .$prenume . ". <br />";
+      echo "Email: " . $mail . ". <br />";
 
 
       $sql = "SELECT count(id) as nrUsers 
       FROM users;";
       $result1 = $conn_noteStud -> query($sql);
       $row2 = $result1 -> fetch_assoc();
-      echo "Numar total de utilizatori inregistrati: " . $row2['nrUsers'] . ". </br>";
+      echo "Numar total de utilizatori inregistrati: " . $row2['nrUsers'] . ". <br />";
 
 
       $sql2 = "SELECT count(distinct id_stud) as nrStud 
       FROM studenti;";
       $result2 = $conn_noteStud -> query($sql2);
       $row3 = $result2 -> fetch_assoc();
-      echo "Numar total de studenti inregistrati: " . $row3['nrStud'] . ". </br>";
+      echo "Numar total de studenti inregistrati: " . $row3['nrStud'] . ". <br />";
 
 
 
@@ -152,8 +146,8 @@
       FROM users WHERE rol='teacher'";
       $result4 = $conn_noteStud -> query($sql4);
       $row5 = $result4 -> fetch_assoc();
-      echo "Numar total de profesori inregistrati: " .  $row4['nrProfs'] . ". </br>";
-      echo "In asteptare de a primi permisiune sunt " . $row5['nrProfs2'] . " profesori. </br>";
+      echo "Numar total de profesori inregistrati: " .  $row4['nrProfs'] . ". <br />";
+      echo "In asteptare de a primi permisiune sunt " . $row5['nrProfs2'] . " profesori. <br />";
       
       $sql5 = "SELECT count(id) as numarTeme 
       FROM uploaded_files";
@@ -165,7 +159,7 @@
       $result6 = $conn_noteStud -> query($sql6);
       $row7 = $result6 -> fetch_assoc();
       
-      echo "In total sunt " . $row6['numarTeme'] . " teme inregistrate dintre care " . $row7['numarTeme2'] . " sunt notate. </br>"
+      echo "In total sunt " . $row6['numarTeme'] . " teme inregistrate dintre care " . $row7['numarTeme2'] . " sunt notate. <br />"
       ?>
 
 </h2>
@@ -212,21 +206,6 @@
 
   </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  </div>
   <script>
     var ajax = new XMLHttpRequest();
     var url = "jwtVerification.php";
@@ -237,7 +216,7 @@
       if (this.readyState == 4 && this.status == 200) {
         //var myArr = JSON.parse(this.responseText);
         //alert(this.responseText);
-        console.log(this.responseText);
+        //console.log(this.responseText);
       }
       if (this.readyState == 4 && this.status == 401) {
         //alert(this.responseText);

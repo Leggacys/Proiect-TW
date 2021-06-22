@@ -99,8 +99,8 @@ function delete_cookie(name) {
         echo $nume . " ";
         //echo $rol;
         echo $prenume . "\n";
-        echo $an . $semian . $grupa;
         echo "\r\n";
+        echo "<br />";
         echo $rol;
       
         }catch (Exception $e){
@@ -131,7 +131,17 @@ function delete_cookie(name) {
     FROM note WHERE id_stud = '$id_utilizator' and id_curs='1';";
     $resultGetNote = $conn_noteStud -> query($sqlGetNote);
     $row2 = $resultGetNote -> fetch_assoc();
-    echo $row2['val'];
+    echo $row2['val'] . ".<br />";
+
+    $sqlGetMedieBD = "SELECT medie as media FROM studenti WHERE id_stud = '$id_utilizator' and id_curs='1';";
+      $resultGetMedieBD = $conn_noteStud -> query($sqlGetMedieBD);
+      $row3BD = $resultGetMedieBD -> fetch_assoc();
+      if($row3BD['media'] == '0'){
+        echo "Media la Baze de Date: " . "inca nu au fost puse toate notele pentru a se stabili o medie" . ". <br />";
+      }
+      else{
+      echo "Media la Baze de Date: " . $row3RC['media'] . ". <br />";
+      }
 
 ?>
 
@@ -201,19 +211,23 @@ try{
               echo "<tr><td>".$i."</td><td>ABSENT</td></tr>";
       }
     }
-      
-      echo "</table>";
+      ?>
+
+      </table>
+    <?php
     }else {
       {
         for($i=1; $i <= 13; $i++){
           echo "<tr><td>".$i."</td><td>ABSENT</td></tr>";
         }
       }
+      ?>
+      </table>
+      <?php
     }
     $conn-> close();
       ?>
 
-  </br></br>
   
   
     <?php
@@ -231,12 +245,9 @@ try{
       if($row2['mycounter'] == 0){
 
       }
-      else{
-        echo "<h3>Lista personala de teme</h3>";
-      }
 
     ?>
-
+  <h3>Lista personala de teme</h3>
   <table class="tabel-note-teme">
       <thead>
           <tr>
@@ -279,6 +290,9 @@ try{
 
               if($row["nota"] != null){
               $link_to_hw = "uploads/" . $row["new_name"];
+              if($row["nota"] == -1)
+                echo "<tr><td>" . $row["data"] ."</td><td>" . $row["nume_tema"] . "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td> " . "Note destule"  . "</td></tr>";
+              else
                 echo "<tr><td>" . $row["data"] ."</td><td>" . $row["nume_tema"] . "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td> " . $row["nota"]  . "</td></tr>";    
               }else{
                 $link_to_hw = "uploads/" . $row["new_name"];
@@ -288,11 +302,16 @@ try{
                 echo "<tr><td>" . $row["data"] ."</td><td>" . $row["nume_tema"] . "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td> " . "Not marked yet"  . "</td></tr>";
               }
             }
-            echo "</table>";
+            ?>
+            </table>
+            <?php
           }else {
             {
               //echo "0 results";
             }
+            ?>
+            </table>
+            <?php
           }
           $conn-> close();
            ?>
@@ -354,6 +373,8 @@ if(isset($_POST['upload'])){ //if upload button isset or not
         $link_status = "display: block;";
       }
 
+      header("Refresh:0");
+
     }else{
         echo "<script>alert('Please try again')</script>";
     }
@@ -379,12 +400,16 @@ if(isset($_POST['upload'])){ //if upload button isset or not
 			<input type="file" name="file" id="upload" required>
 			<label for="upload">
 				<i class="fa fa-file-text-o fa-3x"></i>
-                <br>
+        <br />
 					Poți trage fișierul direct aici.
-                <br>
+          <br />
                     Îl poți căuta și de <span><strong>aici</strong></span>.
 			</label>
-      <button name="upload" class="btn">Încarcă</button>
+      <button name="upload" class="btn">Încarcă
+        <?php 
+        
+        ?>
+      </button>
 		</form>
     </div>
 	</div>

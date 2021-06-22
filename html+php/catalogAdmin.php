@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <script>
-      function hidediv(){
-        document.getElementById("welcomeContainer").style.visibility="hidden";
-      }
-      setTimeout("hidediv()",1500);
-    </script>
+  <meta charset="utf-8">
     <script>
 
       function delete_cookie(name) {
@@ -28,7 +23,6 @@
 
 
 
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Class Manager - AdminExport.">
     <title>Export </title>
@@ -89,10 +83,9 @@
         $prenume = $jwt_decodificat->data->firstname;
         $rol = $jwt_decodificat->data->rol;
         //echo $id_utilizator;
-        echo $rol . " ";
         echo $nume . " ";
         //echo $rol;
-        echo $prenume;
+        echo $prenume . " \n" . "Administrator";
       
         }catch (Exception $e){
            echo json_encode(["message"=>$e->getMessage()]);
@@ -113,7 +106,8 @@
 <div class="content">
 <div class="card card-1">
   <h3>
-    Previzualizare  Export Catalog
+    Export Catalog
+    </h3> 
     <div class="container">
       <div class="dropdown">
         <button id ="export" class="dropbtn">Format</button>
@@ -121,7 +115,6 @@
         <a href="#" onclick="XML()">XML</a>
         </div>
       </div>
-  </h3>
    </div>
    <nav>
    <ul id="medie">
@@ -130,10 +123,8 @@
  </nav>
 
  </div>
-
-  </body>
-
-  <script>
+      </div>
+ <script>
     function PDF(){
    document.getElementById("export").innerHTML = "PDF";
    window.location.replace("http://localhost/testingWeb/html+php/fromSQLtoCSV/toPDF.php");
@@ -184,4 +175,7 @@ function XML(){
 
 
 </script>
+  </body>
+
+
 </html>

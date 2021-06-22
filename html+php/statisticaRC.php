@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 include 'uploadConfig.php';
 
 if(!isset($_COOKIE["jwt"])){
@@ -98,8 +99,8 @@ function delete_cookie(name) {
         echo $nume . " ";
         //echo $rol;
         echo $prenume . "\n";
-        echo $an . $semian . $grupa;
         echo "\r\n";
+        echo "<br />";
         echo $rol;
       
         }catch (Exception $e){
@@ -130,9 +131,19 @@ function delete_cookie(name) {
     FROM note WHERE id_stud = '$id_utilizator' and id_curs='2';";
     $resultGetNote = $conn_noteStud -> query($sqlGetNote);
     $row2 = $resultGetNote -> fetch_assoc();
-    echo $row2['val'];
+    echo $row2['val'] . ".<br />";
 
-?>
+    $sqlGetMedieRC = "SELECT medie as media FROM studenti WHERE id_stud = '$id_utilizator' and id_curs='2';";
+      $resultGetMedieRC = $conn_noteStud -> query($sqlGetMedieRC);
+      $row3RC = $resultGetMedieRC -> fetch_assoc();
+      if($row3RC['media'] == '0'){
+        echo "Media la Retele de calculatoare: " . "inca nu au fost puse toate notele pentru a se stabili o medie" . ". <br />";
+      }
+      else{
+      echo "Media la Retele de calculatoare: " . $row3RC['media'] . ". <br />";
+      }
+
+?> </h3>
   <h3>Lista personala de prezente</h3>
   <table class="tabel-prezenta">
       <thead>
@@ -198,18 +209,25 @@ try{
       }
     }
       
-      echo "</table>";
+    ?>
+
+    </table>
+  <?php
     }else {
       for($i=1; $i <= 13; $i++){
         echo "<tr><td>".$i."</td><td>ABSENT</td></tr>";
       }
+      ?>
+      </table>
+      <?php
     }
     $conn-> close();
       ?>
 
-        <br/><br/><br/><br/>
+      
 
-  <h3 class = "la-note">Note la teme</h3>
+   
+<h3>Lista personala de teme</h3>
   <table class="tabel-note-teme">
       <thead>
           <tr>
@@ -264,11 +282,16 @@ $conn = mysqli_connect("localhost","root","","api_db");
                 echo "<tr><td>" . $row["data"] ."</td><td>" . $row["nume_tema"] . "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td> " . "Not marked yet"  . "</td></tr>";
               }
             }
-            echo "</table>";
+            ?>
+            </table>
+            <?php
           }else {
             {
               //echo "0 results";
             }
+            ?>
+            </table>
+            <?php
           }
           $conn-> close();
            ?>
@@ -329,7 +352,7 @@ if(isset($_POST['upload'])){ //if upload button isset or not
         $link = $base_url . "download.php?id=" . $row["id"];
         $link_status = "display: block;";
       }
-
+      header("Refresh:0");
     }else{
         echo "<script>alert('Please try again')</script>";
     }
@@ -342,6 +365,7 @@ if(isset($_POST['upload'])){ //if upload button isset or not
 
 <h3>Incarcare teme</h3>
 <div class="file__upload">
+<div class="need-white">
 		<div class="header-box">
 			<p><i class="fa fa-cloud-upload fa-2x"></i><span><span>HW</span> upload</span></p>			
 		</div>
@@ -354,14 +378,15 @@ if(isset($_POST['upload'])){ //if upload button isset or not
 			<input type="file" name="file" id="upload" required>
 			<label for="upload">
 				<i class="fa fa-file-text-o fa-3x"></i>
-                <br>
+        <br />
 					Poți trage fișierul direct aici.
-                <br>
+          <br />
                     Îl poți căuta și de <span><strong>aici</strong></span>.
 			</label>
       <button name="upload" class="btn">Încarcă</button>
 		</form>
 	</div>
+  </div>
 
 
 

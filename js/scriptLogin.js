@@ -52,7 +52,7 @@ function checkInputs() {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(this.responseText);
                 var myResponse = this.responseText;
-                console.log(myResponse.jwt);
+                //console.log(myResponse.jwt);
                 //localStorage.setItem("jwt", this.responseText);
                 //alert(this.responseText);
                 setCookie('jwt',this.responseText,7);

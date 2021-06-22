@@ -24,20 +24,20 @@ $database = new Database();
 $db = $database->getConnection();
 if (isset($_SERVER['HTTP_AUTHORIZATION']))
     {   $JWT_receptionat =  $_SERVER['HTTP_AUTHORIZATION'];
-        echo $JWT_receptionat;
-        echo "\n\n\n\n";
+        //echo $JWT_receptionat;
+        //echo "\n\n\n\n";
         
         /* $JWT_receptionat = str_replace('["', '', $JWT_receptionat);
         $JWT_receptionat = str_replace('"]', '', $JWT_receptionat); */
         $JWT_receptionat = json_encode([$JWT_receptionat]);
         //echo $JWT_receptionat."TEST1";
         
-        echo $JWT_receptionat;
-        echo "\n\n\n\n";
+        //echo $JWT_receptionat;
+        //echo "\n\n\n\n";
         //console.log($JWT_receptionat); 
         if (preg_match('/\s(\S+)/', $JWT_receptionat, $matches)) {
             $JWT_receptionat = $matches[1];
-            echo $JWT_receptionat;
+            //echo $JWT_receptionat;
             //echo $JWT_receptionat;  
         }   
     }
@@ -49,12 +49,12 @@ if (isset($_SERVER['HTTP_AUTHORIZATION']))
     }
     
     //echo $JWT_receptionat;
-    echo "\n\n\n\n";
+    //echo "\n\n\n\n";
     //echo $jwt_decodificat;
     if (!empty($JWT_receptionat)){
      try{    
      $jwt_decodificat = JWT::decode($JWT_receptionat, JWT_KEY, array('HS256'));
-     print_r($jwt_decodificat);
+     //print_r($jwt_decodificat);
      /* echo "\n\n\n\n";
      $id_utilizator = $jwt_decodificat->data->id;
      $rol = $jwt_decodificat->data->rol;
@@ -64,7 +64,7 @@ if (isset($_SERVER['HTTP_AUTHORIZATION']))
 
 
      }catch (Exception $e){
-        echo json_encode(["message"=>$e->getMessage()]);
+        //echo json_encode(["message"=>$e->getMessage()]);
         exit();
     }
 

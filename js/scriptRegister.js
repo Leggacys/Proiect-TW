@@ -187,7 +187,7 @@ function myFunction() {
     rolValueX = document.getElementById('teacher').value.trim();
     //alert("profesor");
     rolValue = rolValueX.concat('4');
-    alert(rolValue);
+    //alert(rolValue);
   }
 
   
@@ -206,9 +206,14 @@ function myFunction() {
   //let obj = { "firstname": usernameValue, "lastname": passwordValue, "email": emailValue, "parola":password2Value };
   let obj = { "username": usernameValue , "firstname": firstnameValue, "lastname": lastnameValue, "email": emailValue, "parola":passwordValue, "rol":rolValue, "year":yearValue, "semian":semianValue, "grup":groupValue};
   let json = JSON.stringify(obj);
-  alert(json);
   ajax.send(json);
-  location.replace("");
+  if(rolValue == "teacher4"){
+    alert("Ai fost inregistrat cu succes! Ca sa poti accesa contul, trebuie sa astepti confirmare de la un administrator.");
+  }
+  else{
+    alert("Ai fost inregistrat cu succes!");
+  }
+  location.replace("http://localhost/testingWeb/html+php/index.php");
 } 
 
 

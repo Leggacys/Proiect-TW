@@ -21,6 +21,7 @@ function hide() {
     x.style.display = "none";
 }
 </script>
+
   <meta name="description" content="Class Manager.">
   <link rel="stylesheet" href="../css/register.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">

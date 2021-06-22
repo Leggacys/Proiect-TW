@@ -1,69 +1,74 @@
+html{
+  background-color: #753a88;
+  background-image: -webkit-linear-gradient(right, #348aa7 ,#525174);
 
+}
 body{
-  margin: 0;
-  padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  width:100%;
 
+  font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
 }
 
 header{
+  top:0%;
+  left: 0%;
   position: fixed;
   background: #22242A;
   padding: 20px;
   width:100%;
-  height: 30px;
+  height: 5vh;
+}
+
+h1{
   animation: transitionIn 0.15s;
 }
-
-.left_area h3{
- color: #fff;
- margin:0;
- text-transform: uppercase;
- font-size: 22px;
- font-weight: 900;
- animation: transitionIn 0.15s;
+header .left_area h3{
+  color: #fff;
+  margin:0;
+  text-transform: uppercase;
+  font-size: 22px;
+  font-weight: 900;
+  float: left;
 }
 
 
-.left_area span{
+header .left_area span{
   color: #348aa7;
 }
 
-.logout_btn{
-  padding: 5px;
-  background-image: linear-gradient(to right, #348aa7 ,#525174);
-  text-decoration: none;
-  float: right;
-  margin-top: -30px;
-  margin-right:40px;
-  font-size: 20px;
-  font-weight:600;
-  color:#fff;
-  transition: 0.5s;
-  border-radius: 20px;
+header .right_area{
+  margin-top: -2.5vh;
+  margin-bottom: auto;
 }
 
-.logout_btn:hover{
-  background: #0D9DBB;
+header .right_area .logout_btn{
+padding: 3px;
+background:linear-gradient(to right, #348aa7 ,#753a88);
+text-decoration: none;
+float: right;
+margin-right: 25px;
+font-size: 20px;
+font-weight:600;
+color:#fff;
+transition: 0.5s;
+border-radius: 20px;
 }
 
-label #sidebar_btn{
-  z-index: 1;
-  color: #fff;
+header .right_area .logout_btn:hover{
+  background: #348aa7;
 }
 
-.sidebar{
-  background: #2F323A;
-  margin-top: 70px;
+
+body .sidebar{
+  background: #22242A;
+  margin-top: 60px;
   padding-top: 30px;
   position: fixed;
   left:0;
-  width: 270px;
   height: 100%;
+  width: 270px;
   align-items: center;
   overflow-y: auto;
-  animation: transitionIn 0.15s;
 }
 
 .sidebar .profile_image{
@@ -81,7 +86,6 @@ label #sidebar_btn{
   text-align: center; /* am centrat imaginea*/
   animation: transitionIn 0.15s;
 }
-
 
 .sidebar a{
   color:#fff;
@@ -105,185 +109,272 @@ label #sidebar_btn{
 }
 
 .content{
+  
   z-index: -99;
   position: absolute;
   height:100%;
-  width:100%;
-  background-image: linear-gradient(to right, #348aa7 ,#525174);
+  width:90%;
   background-position: center;
+  padding-bottom: 100px;
 }
 
-/* /* .presence{
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 15vh;
-    background-color: #ffc400;
-    margin-top: 30px;
-    margin-left: 50px;
+.container{
+    position: relative;
+    background-color: #fff;
     border-radius: 5px;
-    width: 25vw;
     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    width: 300px;
+    max-width: 100%;
+    left: 280px;
+    top: 60px;
+    animation: transitionIn 0.15s;
+    padding-top: 5px;
+    padding-left: 5px;
 }
 
-.presenceform-group{
-  margin-bottom: 1em;
-  transition:all .3s;
+
+.header{
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 20px 40px;
+    display: none;
+  }
+
+.header h2 {
+    margin: 0;
+  }
+
+.form {
+    padding: 30px 40px;
 }
 
-.form-label{
-  margin-left: 30px;
-  font-size:1em;
-  color:rgb(0, 0, 0);
-  display: inline-block;
-  opacity: 1;
-  transform: translateY(-1.25em);
-  transform-origin:0;
-  transition:all .3s;
-  margin:auto;
+  .form-control {
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    position: relative;
+  }
+
+  .form-control label {
+    display : inline-block;
+    margin-bottom: 5px;
+  }
+
+  .form-control input {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px;
+    width: 100%;
+  }
+
+  .form a{
+    background-image: linear-gradient(to right, #348aa7 ,#525174);
+    border-radius: 4px;
+    color: #fff;
+    display: block;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 10px;
+    width: 80%;
+    outline: none;
+    cursor: pointer;
+    transition: 0.5s;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .form button:hover{
+    background: white;
+    background-color: rgb(0, 162, 255);
+  }
+
+  .dropbtn {
+  background-color: #348aa7;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: 30px;
+  cursor: pointer;
 }
 
-.form-control{
-  box-shadow: none;
-  background-color: rgba(12, 9, 182, 0.02);
-  border-radius: 0px;
-  border-color: #ccc;
-  border-style: none none solid none;
-  width: 150%;
-  transition:all .5s;
-  padding:5px;
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: block;
+  margin-top: 10px;
 }
 
-.form-control::placeholder{
-  color:blue; */
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #323C50;
+}
+
+
+
+h1 {
+  font-size:3em;
+  font-weight: 300;
+  line-height:1em;
+  text-align: left;
+  margin-left:285px;
+  color: #4DC3FA;
+}
+
+@media(max-width:650px) {
+  html{
+    background-color: #348aa7;
+    background-image: unset;
+}
+
+body{
+    overflow: visible;
+}
+
+.content{
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  
+}
+
+body .sidebar {
+  height: auto;
+  width: 150vw;
+  position: inherit;
+  margin-left: -10px;
+  margin-right: -50px;
+}
+.sidebar a {
+  float: left;
+  text-align: left;
+  float: none;
+}
+div.content {margin-left: 0;}
+
+.sidebar .profile_image{
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    margin-bottom:10px;
+    margin-left: 30px;
+    margin-right: auto /* am centrat imaginea*/
+}
+  
+.sidebar h3{
+    color:#ccc;
+    margin-top: 0;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    text-align: left; /* am centrat imaginea*/
+    animation: transitionIn 0.15s;
+}
+
+.content h1{
+  padding: unset;
+}
+
+h1 {
+  font-size:3em;
+  font-weight: 300;
+  line-height:1em;
+  text-align: left;
+  color: #4DC3FA;
+  margin-left:15px;
+  display: block;
+}
+
+.container {
+  overflow: hidden;
+  width: 80vw;
+  display: table;
+  padding-top: 5px;
+  padding-left: 5px;
+  margin-left: 0px;
+  animation: transitionIn 0.15s;
+}
+
+.header{
+  display: none;
+}
+
+.container{
+  left:15px;
+  top: 15px;
+}
+
+}
+
+
+
+@media(max-width:370px) {
 
   .container{
-    position: relative;
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-      width: 300px;
-      max-width: 100%;
-      left: 350px;
-      top: 50px;
-      animation: transitionIn 0.15s;
-    }
-
-
-    .header{
-      background-color: #f7f7f7;
-      border-bottom: 1px solid #f0f0f0;
-      padding: 20px 40px;
-    }
-
-    .header h2 {
-      margin: 0;
-    }
-
-    .form {
-      padding: 30px 40px;
-    }
-
-    .form-control {
-      margin-bottom: 10px;
-      padding-bottom: 20px;
-      position: relative;
-    }
-
-    .form-control label {
-      display : inline-block;
-      margin-bottom: 5px;
-    }
-
-    .form-control input {
-      border: 2px solid #f0f0f0;
-      border-radius: 4px;
-      display: block;
-      font-family: inherit;
-      font-size: 14px;
-      padding: 10px;
-      width: 100%;
-    }
-
-    .form a{
-      background-image: linear-gradient(to right, #348aa7 ,#525174);
-      border-radius: 4px;
-      color: #fff;
-      display: block;
-      font-family: inherit;
-      font-size: 16px;
-      padding: 10px;
-      width: 80%;
-      outline: none;
-      cursor: pointer;
-      transition: 0.5s;
-      text-decoration: none;
-      text-align: center;
-      display: center;
-    }
-
-    .form button:hover{
-      background: white;
-      background-color: rgb(0, 162, 255);
-    }
-
-    .dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: 30px;
-    cursor: pointer;
+    box-shadow: none;
+    width: 8px;
   }
 
-  /* The container <div> - needed to position the dropdown content */
-  .dropdown {
-    position: relative;
+}
+  
 
-    display: inline-block;
+@media(max-width:550px){
+  body .sidebar {
+    height: auto;
+    width: 600px;
+    position: inherit;
   }
 
-  /* Dropdown Content (Hidden by Default) */
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+  h1{
+    text-align: left;
   }
+  
+}
 
-  /* Links inside the dropdown */
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+
+
+@keyframes transitionIn{
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
 
-  /* Change color of dropdown links on hover */
-  .dropdown-content a:hover {background-color: #f1f1f1}
-
-  /* Show the dropdown menu on hover */
-  .dropdown:hover .dropdown-content {
-    display: block;
   }
+}
 
-  /* Change the background color of the dropdown button when the dropdown content is shown */
-  .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-  }
+.blue { color: #3d056b; }
+.yellow { color: #FFF842; }
 
-
-  @keyframes transitionIn{
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0px);
-
-    }
-  }
+.content h1{
+  padding-top: 100px;
+}

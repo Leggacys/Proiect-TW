@@ -84,7 +84,7 @@
         //echo $rol;
         echo $prenume . "\n";
         echo "\r\n";
-        echo "<br/>";
+        echo "<br />";
         echo $rol;
       
         }catch (Exception $e){
@@ -140,20 +140,30 @@
       
 
 
-      echo "Nume: " .$nume . "</br>";
-      echo "Prenume: " .$prenume . "</br>";
-      echo "Email: " . $mail . "</br>";
-      echo "Numar matricol: " .$id_utilizator . "</br>";
+      echo "Nume: " .$nume . "<br />";
+      echo "Prenume: " .$prenume . "<br />";
+      echo "Email: " . $mail . "<br />";
+      echo "Numar matricol: " .$id_utilizator . "<br />";
       
       if($row2isBDStudent!=NULL){
       $sqlGetNoteBD = "SELECT GROUP_CONCAT(valoare) as val 
       FROM note WHERE id_stud = '$id_utilizator' and id_curs='1';";
       $resultGetNoteBD = $conn_noteStud -> query($sqlGetNoteBD);
       $row2BD = $resultGetNoteBD -> fetch_assoc();
-      echo "Note la Baze de Date: " . $row2BD['val'] . ". </br>";
+      echo "Note la Baze de Date: " . $row2BD['val'] . ". ";
+
+      $sqlGetMedieBD = "SELECT medie as media FROM studenti WHERE id_stud = '$id_utilizator' and id_curs='1';";
+      $resultGetMedieBD = $conn_noteStud -> query($sqlGetMedieBD);
+      $row3BD = $resultGetMedieBD -> fetch_assoc();
+      if($row3BD['media'] == '0'){
+        echo "Media la Baze de Date: " . "inca nu au fost puse toate notele pentru a se stabili o medie" . ". <br />";
       }
       else{
-        echo "Inca nu esti inregistrat/nu ai fost acceptat la cursul Baze de Date. </br>";
+      echo "Media la Baze de Date: " . $row3BD['media'] . ". <br />";
+      }
+      }
+      else{
+        echo "Inca nu esti inregistrat/nu ai fost acceptat la cursul Baze de Date. <br />";
       }
 
       if($row2isRCStudent!=NULL){
@@ -161,10 +171,20 @@
       FROM note WHERE id_stud = '$id_utilizator' and id_curs='2';";
       $resultGetNoteRC = $conn_noteStud -> query($sqlGetNoteRC);
       $row2RC = $resultGetNoteRC -> fetch_assoc();
-      echo "Note la Retele de calculatoare: " . $row2RC['val'] . ". </br>";
+      echo "Note la Retele de calculatoare: " . $row2RC['val'] . ". ";
+
+      $sqlGetMedieRC = "SELECT medie as media FROM studenti WHERE id_stud = '$id_utilizator' and id_curs='2';";
+      $resultGetMedieRC = $conn_noteStud -> query($sqlGetMedieRC);
+      $row3RC = $resultGetMedieRC -> fetch_assoc();
+      if($row3RC['media'] == '0'){
+        echo "Media la Retele de calculatoare: " . "inca nu au fost puse toate notele pentru a se stabili o medie" . ". <br />";
       }
       else{
-        echo "Inca nu esti inregistrat/nu ai fost acceptat la cursul Retele de calculatoare. </br>";
+      echo "Media la Retele de calculatoare: " . $row3RC['media'] . ". <br />";
+      }
+    }
+      else{
+        echo "Inca nu esti inregistrat/nu ai fost acceptat la cursul Retele de calculatoare. <br />";
       }
 
       if($row2isTWStudent!=NULL){
@@ -172,10 +192,20 @@
       FROM note WHERE id_stud = '$id_utilizator' and id_curs='3';";
       $resultGetNoteTW = $conn_noteStud -> query($sqlGetNoteTW);
       $row2TW = $resultGetNoteTW -> fetch_assoc();
-      echo "Note la Tehnologii Web: " . $row2TW['val'] . ". </br>";
+      echo "Note la Tehnologii Web: " . $row2TW['val'] . ". ";
+
+      $sqlGetMedieTW = "SELECT medie as media FROM studenti WHERE id_stud = '$id_utilizator' and id_curs='3';";
+      $resultGetMedieTW = $conn_noteStud -> query($sqlGetMedieTW);
+      $row3TW = $resultGetMedieTW -> fetch_assoc();
+      if($row3TW['media'] == '0'){
+        echo "Media la Tehnologii WEB: " . "inca nu au fost puse toate notele pentru a se stabili o medie" . ". <br />";
       }
       else{
-        echo "Inca nu esti inregistrat/nu ai fost acceptat la cursul Tehnologii WEB. </br>";
+      echo "Media la Tehnologii WEB: " . $row3TW['media'] . ". <br />";
+      }
+      }
+      else{
+        echo "Inca nu esti inregistrat/nu ai fost acceptat la cursul Tehnologii WEB. <br />";
       }
 
 
@@ -188,7 +218,7 @@
       FROM uploaded_files WHERE id_stud = '$id_utilizator' and nota is NULL;";
       $resultGetNumarTemeNotate = $conn_noteStud -> query($sqlGetNumarTemeNotate);
       $row2NrTemeNotate = $resultGetNumarTemeNotate -> fetch_assoc();
-      echo "Numar de teme inregistrate: " . $row2NrTeme['nrNote'] . ", dintre care " . $row2NrTemeNotate['nrNote2'] . " nu au fost notate. </br>";
+      echo "Numar de teme inregistrate: " . $row2NrTeme['nrNote'] . ", dintre care " . $row2NrTemeNotate['nrNote2'] . " nu au fost notate. <br />";
 
 
  
@@ -246,7 +276,7 @@
       if (this.readyState == 4 && this.status == 200) {
         //var myArr = JSON.parse(this.responseText);
         //alert(this.responseText);
-        console.log(this.responseText);
+        //console.log(this.responseText);
       }
       if (this.readyState == 4 && this.status == 401) {
         //alert(this.responseText);

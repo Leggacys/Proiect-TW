@@ -137,6 +137,7 @@ html{
   
   .card-1 h3{
     margin: 100px;
+    text-align: center;
   }
   
   
@@ -264,7 +265,7 @@ html{
   .dropbtn {
   background-color: #d76d77;
   color: white;
-  padding: 16px;
+  padding: 10px 66px;
   font-size: 16px;
   border: 20px;
   cursor: pointer;
@@ -347,7 +348,6 @@ html{
       border-radius: 100px;
       margin-bottom:10px;
       margin-left: 30px;
-      align-self: left;
       margin-right: auto /* am centrat imaginea*/
   }
     
@@ -376,7 +376,6 @@ html{
     overflow: visible;
     width: 80vw;
     display: table;
-    padding-left: 5px;
     margin-left: 0px;
     animation: transitionIn 0.15s;
     align-items: center;
@@ -408,7 +407,7 @@ html{
   
       .container, .container tbody, .container tr, .container td{
           display: block;
-          width: 150px;
+          width: 100%;
       }
       .container tr{
           margin-bottom:15px;

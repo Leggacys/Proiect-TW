@@ -105,6 +105,17 @@ body .sidebar{
   padding-right: 10px;
 }
 
+h1 {
+  font-size:3em;
+  font-weight: 300;
+  line-height:1em;
+  text-align: left;
+  color: #4DC3FA;
+  margin-top: 120px;
+  margin-left: 285px;
+  animation: transitionIn 0.15s;
+}
+
 .content{
   
   z-index: -99;
@@ -135,6 +146,7 @@ body .sidebar{
   .styled-table th,
   .styled-table td {
       padding: 12px 15px;
+      text-align: center;
   }
   
   .styled-table tbody tr {
@@ -153,9 +165,13 @@ body .sidebar{
       font-weight: bold;
       color: #009879;
   }
-
+  .blue { color: #3d056b; }
+  .yellow { color: #FFF842; }
 @media(max-width:1250px) {
 
+  h1{
+    margin-left: 15px;
+  }
 html{
     background-color: #348aa7;
     background-image: unset;
@@ -193,7 +209,6 @@ div.content {margin-left: 0;}
     border-radius: 100px;
     margin-bottom:10px;
     margin-left: 30px;
-    align-self: left;
     margin-right: auto /* am centrat imaginea*/
 }
   

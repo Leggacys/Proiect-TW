@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 <users>
  <user>
-  <id>1000</id>
-  <lastname>Mihaita</lastname>
-  <firstname>Mike</firstname>
-  <email>cezarBoos@gmail.com</email>
- </user>
+    <id>1000</id>
+    <lastname>Constantinescu</lastname>
+    <firstname>Gavril</firstname>
+    <email>gabi_steam@yahoo.com</email>
+    <rol>ProfesorBD</rol>
+</user>
  <!-- <user>
   <id>2</id>
   <lastname>George</lastname>

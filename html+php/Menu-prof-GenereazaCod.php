@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="description" content="Class Manager - GenereazaCODPrezenta.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cod prezenta </title>
     <script>
@@ -77,10 +78,19 @@
           $prenume = $jwt_decodificat->data->firstname;
           $rol = $jwt_decodificat->data->rol;
           //echo $id_utilizator;
-          echo $rol . " ";
+          echo "Profesor ";
           echo $nume . " ";
-          //echo $rol;
-          echo $prenume;
+          echo $prenume . " ";
+          echo "<br /> ";
+          if($rol == "teacher1"){
+            echo "Baze de date";
+          }
+          else if($rol == "teacher2"){
+            echo "Retele de calculatoare";
+          }
+          else if($rol == "teacher3"){
+            echo "Tehnologii Web";
+          }
         
           }catch (Exception $e){
              echo json_encode(["message"=>$e->getMessage()]);
@@ -100,6 +110,7 @@
   </div>
 
 <div class="content">
+<h1><span class="blue">&lt;</span>Genereaza<span class="blue">&gt;</span> <span class="yellow">Cod Prezenta</span></h1>
     <div class="header">
     </div>
     <div class="container">
@@ -128,16 +139,17 @@
         <a  onclick="TehnologiiWeb()">Tehnologii Web</a>
         </div>
       </div>
-      <p size="5px">
+      <label>
         Durata
-      </p>
-        <input type="text" STYLE="color: #FFFFFF; font-family: Verdana; font-weight: bold; font-size: 12px; background-color: #72A4D2;" size="5" maxlength="5" type="text" name="field[]" class="Durata"
+        <br />
+        <input type="text" STYLE="color: #FFFFFF; font-family: Verdana; font-weight: bold; font-size: 12px; background-color: #72A4D2;" size="5" maxlength="5" name="field[]" class="Durata"
          id="Durata" />
+        </label>
     <form class="form" id="form">
       <div class="form-control">
         <label id="COD">Codul pentru prezenta</label>
       </div>
-      <a href="#"  onclick="myFunction()" >Generate code</a>
+      <a href="#"  onclick="myFunction()" >Genereaza cod</a>
     </form>
 
   </div>

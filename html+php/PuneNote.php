@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+  <meta charset="utf-8">
   <meta name="description" content="Class Manager - Pune Note Pe Teme Profesor.">
-    <script>
-      function hidediv(){
-        document.getElementById("welcomeContainer").style.visibility="hidden";
-      }
-      setTimeout("hidediv()",1500);
-    </script>
+    
 
 <script>
 
@@ -58,10 +54,8 @@ function delete_cookie(name) {
   
     </script>
 
-    
-    <meta charset="utf-8">
+  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Class Manager - PuneNote.">
     <title>Note</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../css/puneNote.css">
@@ -119,10 +113,19 @@ function delete_cookie(name) {
           $prenume = $jwt_decodificat->data->firstname;
           $rol = $jwt_decodificat->data->rol;
           //echo $id_utilizator;
-          echo $rol . " ";
+          echo "Profesor ";
           echo $nume . " ";
-          //echo $rol;
-          echo $prenume;
+          echo $prenume . " ";
+          echo "<br /> ";
+          if($rol == "teacher1"){
+            echo "Baze de date";
+          }
+          else if($rol == "teacher2"){
+            echo "Retele de calculatoare";
+          }
+          else if($rol == "teacher3"){
+            echo "Tehnologii Web";
+          }
         
           }catch (Exception $e){
              echo json_encode(["message"=>$e->getMessage()]);
@@ -142,6 +145,7 @@ function delete_cookie(name) {
   </div>
 
 <div class="content">
+<h1><span class="blue">&lt;</span>Vizualizare<span class="blue">&gt;</span> <span class="yellow">Teme</span></h1>
   <table class="styled-table">
       <thead>
           <tr>
@@ -189,7 +193,7 @@ function delete_cookie(name) {
 
               if($nota != 0){
                     echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
-                    "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td align=\"center\"> ". $nota. "</td><td  align=\"center\"> ". "Submitted" ."</td></tr>";
+                    "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td > ". $nota. "</td><td  > ". "Submitted" ."</td></tr>";
                     
                   }
               else{
@@ -213,7 +217,7 @@ function delete_cookie(name) {
 
                 echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
                 "</td><td><a href = '" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td >   
-                <td align=\"center\">
+                <td >
                    <select id=\"$counter_row\">
                         <option>--</option>        
                         <option>1</option>
@@ -226,7 +230,7 @@ function delete_cookie(name) {
                         <option>8</option>
                         <option>9</option>
                         <option>10</option>
-                   </select>"  ."</td><td>" . "<input type=\"submit\" value=\"Submit\" id = \"$counter_row\" onclick=\"insertIntoDB($counter_row, $id_tema)\">". "</td><tr>" ;
+                   </select>"  ."</td><td>" . "<input type=\"submit\" value=\"Submit\" onclick=\"insertIntoDB($counter_row, $id_tema)\">". "</td></tr>" ;
                     // if(insertIntoDB($ids, $id_tema) == 1){
 
                     // }
@@ -234,13 +238,13 @@ function delete_cookie(name) {
                     }
                     else{
                       echo "<tr><td>" . $row["nrmatricol"] ."</td><td>" . $row["nume"] . "</td><td>" . $row["prenume"] .
-                      "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td align=\"center\"> ". '-1'. "</td><td  align=\"center\"> ". "Numar maxim de note atins" ."</td></tr>";
+                      "</td><td><a href ='" . $link_to_hw . "'>". $row["nume_tema"] . "</a></td><td > ". '-1'. "</td><td  > ". "Numar maxim de note atins" ."</td></tr>";
                     }
               } 
             }
             echo "</tbody>";
             echo "</table>";
-            echo "</br></br>";
+            echo "<br /><br />";
           }else 
           {
             {
@@ -266,9 +270,8 @@ soum=soum/3;
 document.getElementById("medie").innerHTML = secondGrade;
 }
 </script>
-  </body>
 
-  <script>
+<script>
     var jwt_stocat = window.localStorage.getItem("jwt");
     //alert(jwt_stocat);
 
@@ -322,4 +325,7 @@ document.getElementById("medie").innerHTML = secondGrade;
 
 
   </script>
+  </body>
+
+  
 </html>

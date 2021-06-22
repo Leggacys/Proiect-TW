@@ -6,12 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Class Manager - TeacherHomePage.">
 
-    <script>
-      function hidediv(){
-        document.getElementById("welcomeContainer").style.visibility="hidden";
-      }
-      setTimeout("hidediv()",5000);
-    </script>
+    
 
     <script>
 
@@ -96,7 +91,7 @@ function delete_cookie(name) {
           echo "Profesor ";
           echo $nume . " ";
           echo $prenume . " ";
-          echo "<br/> ";
+          echo "<br /> ";
           if($rol == "teacher1"){
             echo "Baze de date";
           }
@@ -134,14 +129,14 @@ function delete_cookie(name) {
         die("Connect failed");
       }
       
-      echo "Salut profesore! Vei regasi mai jos mai multe informatii:</br></br>";
+      echo "Salut profesore! Vei regasi mai jos mai multe informatii:<br /><br />";
 
-      echo "Nume: " .$nume . ".</br>";
-      echo "Prenume: " .$prenume . ".</br>";
-      echo "Email: " . $mail . ".</br>";
+      echo "Nume: " .$nume . ".<br />";
+      echo "Prenume: " .$prenume . ".<br />";
+      echo "Email: " . $mail . ".<br />";
       if($rol == "teacher1"){
         $materie = "Baze de Date";
-        echo "Materie predata: $materie . </br>"; 
+        echo "Materie predata: $materie . <br />"; 
 
         $conn_noteStud = mysqli_connect("localhost","root","","api_db");
         if($conn_noteStud-> connect_error){
@@ -153,7 +148,7 @@ function delete_cookie(name) {
         $resultSql = $conn_noteStud -> query($sql);
         $row2 = $resultSql -> fetch_assoc();
 
-        echo "Numarul de studenti inscrisi la cursul dumneavoastra: " . $row2['nr_stud'] . "</br>";
+        echo "Numarul de studenti inscrisi la cursul dumneavoastra: " . $row2['nr_stud'] . "<br />";
         
         
 
@@ -167,12 +162,12 @@ function delete_cookie(name) {
       $resultGetNumarTemeNotate = $conn_noteStud -> query($sqlGetNumarTemeNotate);
       $row2NrTemeNotate = $resultGetNumarTemeNotate -> fetch_assoc();
 
-      echo "Numar de teme inregistrate: " . $row2NrTeme['nrTeme'] . ", dintre care " . $row2NrTemeNotate['nrTeme2'] . " nu au fost verificate. </br>";
+      echo "Numar de teme inregistrate: " . $row2NrTeme['nrTeme'] . ", dintre care " . $row2NrTemeNotate['nrTeme2'] . " nu au fost verificate. <br />";
 
       }
       else if($rol == "teacher2"){
         $materie = "Retele de calculatoare";
-        echo "Materie predata: $materie . </br>"; 
+        echo "Materie predata: $materie . <br />"; 
         
         $conn_noteStud = mysqli_connect("localhost","root","","api_db");
         if($conn_noteStud-> connect_error){
@@ -184,7 +179,7 @@ function delete_cookie(name) {
         $resultSql = $conn_noteStud -> query($sql);
         $row2 = $resultSql -> fetch_assoc();
 
-        echo "Numarul de studenti inscrisi la cursul dumneavoastra: " . $row2['nr_stud'] . "</br>";
+        echo "Numarul de studenti inscrisi la cursul dumneavoastra: " . $row2['nr_stud'] . "<br />";
         
         $sqlGetNumarTeme = "SELECT count(id) as nrTeme 
       FROM uploaded_files WHERE course = 'RC';";
@@ -196,11 +191,11 @@ function delete_cookie(name) {
       $resultGetNumarTemeNotate = $conn_noteStud -> query($sqlGetNumarTemeNotate);
       $row2NrTemeNotate = $resultGetNumarTemeNotate -> fetch_assoc();
 
-      echo "Numar de teme inregistrate: " . $row2NrTeme['nrTeme'] . ", dintre care " . $row2NrTemeNotate['nrTeme2'] . " nu au fost verificate. </br>";
+      echo "Numar de teme inregistrate: " . $row2NrTeme['nrTeme'] . ", dintre care " . $row2NrTemeNotate['nrTeme2'] . " nu au fost verificate. <br />";
       }
       else if($rol == "teacher3"){
         $materie = "Tehnologii WEB";
-        echo "Materie predata: $materie . </br>"; 
+        echo "Materie predata: $materie . <br />"; 
         
         $conn_noteStud = mysqli_connect("localhost","root","","api_db");
         if($conn_noteStud-> connect_error){
@@ -212,7 +207,7 @@ function delete_cookie(name) {
         $resultSql = $conn_noteStud -> query($sql);
         $row2 = $resultSql -> fetch_assoc();
 
-        echo "Numarul de studenti inscrisi la cursul dumneavoastra: " . $row2['nr_stud'] . "</br>";
+        echo "Numarul de studenti inscrisi la cursul dumneavoastra: " . $row2['nr_stud'] . "<br />";
         
         $sqlGetNumarTeme = "SELECT count(id) as nrTeme 
       FROM uploaded_files WHERE course = 'TW';";
@@ -224,10 +219,10 @@ function delete_cookie(name) {
       $resultGetNumarTemeNotate = $conn_noteStud -> query($sqlGetNumarTemeNotate);
       $row2NrTemeNotate = $resultGetNumarTemeNotate -> fetch_assoc();
 
-      echo "Numar de teme inregistrate: " . $row2NrTeme['nrTeme'] . ", dintre care " . $row2NrTemeNotate['nrTeme2'] . " nu au fost verificate. </br>";
+      echo "Numar de teme inregistrate: " . $row2NrTeme['nrTeme'] . ", dintre care " . $row2NrTemeNotate['nrTeme2'] . " nu au fost verificate. <br />";
       }
       else if($rol == "teacher4"){
-        echo "Inca nu ai fost acceptat ca profesor la un curs </br>";
+        echo "Inca nu ai fost acceptat ca profesor la un curs <br />";
         echo "Asteapta raspunsul administratorului";
       }
         
@@ -268,7 +263,7 @@ function delete_cookie(name) {
             </p>
         </div>
 
-
+    </div>
  </div>
 
  <script>
@@ -281,7 +276,7 @@ function delete_cookie(name) {
     if (this.readyState == 4 && this.status == 200) {
       //var myArr = JSON.parse(this.responseText);
       //alert(this.responseText);
-      console.log(this.responseText);
+      //console.log(this.responseText);
     }
     if (this.readyState == 4 && this.status == 401) {
       //alert(this.responseText);
@@ -329,7 +324,4 @@ function delete_cookie(name) {
 
   </body>
 
-  <script> 
-    if(getCookie("jwt") == "prof") deleteAllCookies();
-  </script>
 </html>
